@@ -48,8 +48,12 @@ export default function Chatting( props ) {
                     })
                 }
             </div>
-            <textarea value={msgInput} onChange= { (e)=>{ setMsgInput( e.target.value) }} > </textarea>
-            <button type="button" onClick={ onSend }> 전송 </button>
+            <textarea value={msgInput} onChange= { (e)=>{ setMsgInput( e.target.value ) }} > </textarea>
+            <button type="button" onClick={ onSend }> 전송 </button> <br/>
+            <button type="button" > 1번 채팅방 </button> <br/>
+            <button type="button" > 2번 채팅방 </button> <br/>
+            <button type="button" > 3번 채팅방 </button> <br/>
+            <button type="button" > 4번 채팅방 </button> <br/>
         </div>
     </>)
 
