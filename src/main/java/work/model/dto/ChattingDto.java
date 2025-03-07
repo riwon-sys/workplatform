@@ -2,11 +2,9 @@ package work.model.dto;
 
 import lombok.*;
 
-import java.util.Date;
-
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor
-public class ChatMessageDto {
+public class ChattingDto {
     private int rno;
     private String mname;
     private String mscontent;
