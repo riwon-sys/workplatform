@@ -7,8 +7,8 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import work.controller.ChatSocket;
 
-@Configuration
-@EnableWebSocket
+@Configuration // 스프링 컨테이너에 빈 드록
+@EnableWebSocket // 웹소켓 매핑
 public class WebSocketHandlers implements WebSocketConfigurer {
 
     private final ChatSocket chatSocket;
@@ -18,8 +18,10 @@ public class WebSocketHandlers implements WebSocketConfigurer {
         this.chatSocket = chatSocket;
     } // f end
 
-    @Override
+    @Override // 웹소켓 매핑 등록ㄴ
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry ){
+
+        // 웹소켓으로 요청된 url 을 핸들러 할 곳 지정
         registry.addHandler( chatSocket, "/chatConnect").setAllowedOrigins("*");
     } // f end
 
