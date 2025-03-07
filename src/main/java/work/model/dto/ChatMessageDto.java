@@ -7,9 +7,10 @@ import java.util.Date;
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor
 public class ChatMessageDto {
-    private String chatUrl;
+    private int rno;
     private String mname;
-    private String message;
-    private Date insertDate;
-    private MessageType type;
+    private String mscontent;
+    private String msDate;
+    private int mstype;
+    // 0 : 메세지 1 : 파일
 }
