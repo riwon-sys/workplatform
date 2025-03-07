@@ -14,7 +14,7 @@ public class WebSocketHandlers implements WebSocketConfigurer {
     private final ChatSocket chatSocket;
 
     @Autowired
-    public WebSocketHandlers( ChatSocket chatSocket ) {
+    public WebSocketHandlers(ChatSocket chatSocket ) {
         this.chatSocket = chatSocket;
     } // f end
 
