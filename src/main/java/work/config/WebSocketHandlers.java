@@ -7,9 +7,9 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import work.controller.ChatSocket;
 
-@Configuration // 스프링 컨테이너에 빈 드록
-@EnableWebSocket // 웹소켓 매핑
-public class WebSocketHandlers implements WebSocketConfigurer {
+// @Configuration // 스프링 컨테이너에 빈 등록
+// @EnableWebSocket // 웹소켓 매핑
+/*public class WebSocketHandlers implements WebSocketConfigurer {
 
     private final ChatSocket chatSocket;
 
@@ -18,7 +18,7 @@ public class WebSocketHandlers implements WebSocketConfigurer {
         this.chatSocket = chatSocket;
     } // f end
 
-    @Override // 웹소켓 매핑 등록ㄴ
+    @Override // 웹소켓 매핑 등록
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry ){
 
         // 웹소켓으로 요청된 url 을 핸들러 할 곳 지정
@@ -26,3 +26,4 @@ public class WebSocketHandlers implements WebSocketConfigurer {
     } // f end
 
 }
+*/

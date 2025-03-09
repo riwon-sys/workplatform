@@ -6,6 +6,7 @@ import lombok.*;
 @NoArgsConstructor @AllArgsConstructor
 public class ChattingDto {
     private int rno;
+    private int loginMno;
     private String mname;
     private String mscontent;
     private String msDate;
