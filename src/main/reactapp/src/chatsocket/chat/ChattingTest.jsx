@@ -31,6 +31,8 @@ const ChatApp = () => {
         console.log('서버로부터 받은 메시지:', receivedMessage);
         
         // 받은 메시지를 화면에 출력
+        
+        console.log(receivedMessage)
         setMessages((prevMessages) => [...prevMessages, receivedMessage]);
       };
   
@@ -77,9 +79,9 @@ const ChatApp = () => {
         // 보낸 메시지 바로 화면에 추가
         const sentMessage = {
           mname: 'test',
-          mscontent: message,
+          msg: message,
         };
-        
+
         setMessages((prevMessages) => [...prevMessages, sentMessage]);
         setMessage(''); // 입력창 비우기
       } else {
@@ -101,11 +103,14 @@ const ChatApp = () => {
         {selectedRoomId && (
           <div>
             <h3>선택된 채팅방: {`채팅방 ${selectedRoomId}`}</h3>
-            <div>
-              {messages.map((msg, index) => (
-                <div key={index}>{msg.mname}: {msg.mscontent}</div>
-              ))}
-            </div>
+            {/* 메시지 출력 영역 */}
+          <div>
+            {messages.map((msg, index) => (
+              <div key={index}>
+                {msg.mname}: {msg.mscontent}
+              </div>
+            ))}
+          </div>
             <div>
               <input
                 type="text"
