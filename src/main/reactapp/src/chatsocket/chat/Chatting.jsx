@@ -40,10 +40,10 @@ export default function Chatting( props ) {
     }
 
     // 방 입장
-    const onEnter1 = (  ) => {
+    const onEnter = ( props ) => {
         roomArr.forEach( data => {
-            setRoomArr = [ ...RoomArr, { room:1, id } ];
-            console.log( room ); console.log( id ); console.log( RoomArr );
+            setRoomArr = [ ...roomArr, { room: props, id } ];
+            console.log( room ); console.log( id ); console.log( roomArr );
         })
 
     } // f end
@@ -65,10 +65,10 @@ export default function Chatting( props ) {
             </div>
             <textarea value={msgInput} onChange= { (e)=>{ setMsgInput( e.target.value ) }} > </textarea>
             <button type="button" onClick={ onSend }> 전송 </button> <br/>
-            <button type="button" onClick={ onEnter1 } > 1번 채팅방 </button> <br/>
-            <button type="button" onClick={ onEnter2 } > 2번 채팅방 </button> <br/>
-            <button type="button" onClick={ onEnter3 } > 3번 채팅방 </button> <br/>
-            <button type="button" onClick={ onEnter4 } > 4번 채팅방 </button> <br/>
+            <button type="button" onClick={ onEnter(1) } > 1번 채팅방 </button> <br/>
+            <button type="button" onClick={ onEnter(2) } > 2번 채팅방 </button> <br/>
+            <button type="button" onClick={ onEnter(3) } > 3번 채팅방 </button> <br/>
+            <button type="button" onClick={ onEnter(4) } > 4번 채팅방 </button> <br/>
         </div>
     </>)
 
