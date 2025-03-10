@@ -135,7 +135,6 @@ public class ChatSocket extends TextWebSocketHandler {
         });
     }
 
-
     // 특정 rno에 접속한 클라이언트들에게 메시지를 전송
     private void broadcastMessage(int rno, ChattingDto message) throws Exception {
         // 해당 rno(채팅방 번호)에 속한 세션 목록을 가져옴
@@ -143,7 +142,7 @@ public class ChatSocket extends TextWebSocketHandler {
         if (sessions != null) { // 채팅방이 존재하는 경우
             // ChattingDto 객체를 JSON 문자열로 변환
             String jsonMessage = mapper.writeValueAsString(message);
-
+            System.out.println("메세지 보냄" + jsonMessage);
             // 채팅방에 속한 모든 사용자에게 메시지 전송
             for (WebSocketSession session : sessions) {
                 session.sendMessage(new TextMessage(jsonMessage));
