@@ -8,7 +8,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.util.List;
 import java.util.Vector;
-/*
+
 @Component
 public class ChatSocket extends TextWebSocketHandler {
 
@@ -41,4 +41,3 @@ public class ChatSocket extends TextWebSocketHandler {
     } // f end
 
 }
-*/

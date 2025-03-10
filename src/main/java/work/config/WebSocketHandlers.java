@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-import work.controller.ChatSocket;
+import work.controller.chatting.ChatSocket;
 
 @Configuration // 스프링 컨테이너에 빈 드록
 @EnableWebSocket // 웹소켓 매핑
