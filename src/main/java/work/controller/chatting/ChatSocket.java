@@ -1,4 +1,4 @@
-package work.controller;
+package work.controller.chatting;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;

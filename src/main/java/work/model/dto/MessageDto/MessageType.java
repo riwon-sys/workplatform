@@ -1,4 +1,4 @@
-package work.model.dto;
+package work.model.dto.MessageDto;
 
 public enum MessageType {
     OPEN,
