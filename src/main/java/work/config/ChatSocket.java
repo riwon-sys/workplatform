@@ -32,26 +32,18 @@ public class ChatSocket extends TextWebSocketHandler {
 
 
     // 채팅방에 클라이언트 추가하고 채팅 불러오기
-    public  void  addClient (int rno , WebSocketSession session){
+    public  List<MessageDto>  addClient (int rno , WebSocketSession session) {
 
         // 채팅방에 클라이언트 세션 추가
         chatRooms.putIfAbsent(rno, new HashSet<>());
         chatRooms.get(rno).add(session);
 
-        System.out.println(rno + "채팅방에  클라이언트 추가" );
+        System.out.println(rno + "채팅방에  클라이언트 추가");
 
         // 기존 채팅 불러오기
         List<MessageDto> msgList = roomMapper.findAll(rno); // 나중에 limit  지정하기
 
-        // 클라이언트에게 반환
-        for(MessageDto msg : msgList){
-            try {
-                String jsonMsg = mapper.writeValueAsString(msg);
-                session.sendMessage(new TextMessage(jsonMsg));
-            }catch (IOException e){
-                System.out.println(e);
-            }
-        }
+        return  msgList;
     }
 
     // 클라이언트 소켓 접속 성공 시
@@ -90,13 +82,32 @@ public class ChatSocket extends TextWebSocketHandler {
     // 클라이언트가 메시지를 보낼 때
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+
+
         // JSON 형식의 메시지를 ChattingDto 객체로 변환
         ChattingDto chattingDto = mapper.readValue(message.getPayload(), ChattingDto.class);
 
         int rno = chattingDto.getRno(); // 메시지가 전송된 채팅방 번호
 
-        // 메시지 타입이 2 (채팅방 입장)인 경우
-        if (chattingDto.getMstype() == 2) {  // 2: 채팅방 입장
+        System.out.println("방 번호 : " + chattingDto.getRno());
+        System.out.println("메세지 : " + chattingDto.getMsg());
+        System.out.println("회원 : " + chattingDto.getMno());
+        System.out.println("메세지 타입 : " + chattingDto.getMstype());
+
+        // mstype이 3인 경우 (기존 채팅 기록 요청)
+        if (chattingDto.getMstype() == 3) {
+            int rno2 = chattingDto.getRno(); // 요청된 채팅방 번호
+            List<MessageDto> msgList = addClient(rno2, session);
+            // 클라이언트에게 기존 메시지 전송
+            for (MessageDto msg : msgList) {
+                String jsonMsg = mapper.writeValueAsString(msg);
+                session.sendMessage(new TextMessage(jsonMsg));
+            }
+        }
+
+        // mstype이 2인 경우 (채팅방 입장)
+        else if (chattingDto.getMstype() == 2) {
+            // 채팅방 입장 메시지 처리
             System.out.println(chattingDto.getMname() + "님 " + rno + "에 입장");
 
             // 입장 메시지 전송 (다른 클라이언트들에게 입장 알리기)
@@ -108,14 +119,18 @@ public class ChatSocket extends TextWebSocketHandler {
             broadcastMessage(rno, joinMessage); // 현재 같은 채팅방에 있는 클라이언트에게 메세지 전송
         }
 
-        if(chattingDto.getMstype() == 0) { // 클라이언트가 보낸 메세지가 텍스트일 경우
-            broadcastMessage(rno, chattingDto); // 현재 같은 채팅방에 있는 클라이언트에게 메세지 전송
-            messageMapper.writeMessage(chattingDto);
-        }else if(chattingDto.getMstype() == 1){ // 클라이언트가 보낸 메세지가 파일일 경우
-            broadcastMessage(rno, chattingDto); // 현재 같은 채팅방에 있는 클라이언트에게 메세지 전송
-            messageMapper.writeFile(chattingDto);
+        // mstype이 0인 경우 (일반 텍스트 메시지)
+        else if (chattingDto.getMstype() == 0) {
+            broadcastMessage(rno, chattingDto); // 현재 같은 채팅방에 있는 클라이언트에게 메시지 전송
+            boolean result = messageMapper.writeMessage(chattingDto);
+            System.out.println("메시지 저장 결과: " + result);
         }
 
+        // mstype이 1인 경우 (파일 메시지)
+        else if (chattingDto.getMstype() == 1) {
+            broadcastMessage(rno, chattingDto); // 현재 같은 채팅방에 있는 클라이언트에게 파일 메시지 전송
+            messageMapper.writeFile(chattingDto);
+        }
     }
 
     // WebSocket 연결이 종료될 때 실행되는 메서드
@@ -136,17 +151,20 @@ public class ChatSocket extends TextWebSocketHandler {
     }
 
     // 특정 rno에 접속한 클라이언트들에게 메시지를 전송
+    // 서버 코드에서 채팅방에 접속한 모든 클라이언트에게 메시지를 보냄
     private void broadcastMessage(int rno, ChattingDto message) throws Exception {
-        // 해당 rno(채팅방 번호)에 속한 세션 목록을 가져옴
+        System.out.println("메시지를 보내는 채팅방 rno: " + rno);  // rno 출력
         Set<WebSocketSession> sessions = chatRooms.get(rno);
-        if (sessions != null) { // 채팅방이 존재하는 경우
-            // ChattingDto 객체를 JSON 문자열로 변환
+        if (sessions != null) {
             String jsonMessage = mapper.writeValueAsString(message);
-            System.out.println("메세지 보냄" + jsonMessage);
-            // 채팅방에 속한 모든 사용자에게 메시지 전송
             for (WebSocketSession session : sessions) {
                 session.sendMessage(new TextMessage(jsonMessage));
             }
+        } else {
+            System.out.println("해당 채팅방에 세션이 없습니다. rno: " + rno); // 세션이 없을 경우
         }
     }
+
+
+
 }
