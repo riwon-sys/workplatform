@@ -43,7 +43,7 @@ public class ChatSocket extends TextWebSocketHandler {
         // 기존 채팅 불러오기
         List<MessageDto> msgList = roomMapper.findAll(rno); // 나중에 limit  지정하기
 
-        return  msgList;
+        return msgList;
     }
 
     // 클라이언트 소켓 접속 성공 시
@@ -74,15 +74,11 @@ public class ChatSocket extends TextWebSocketHandler {
 
             }
         }
-
-
     }
-
 
     // 클라이언트가 메시지를 보낼 때
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-
 
         // JSON 형식의 메시지를 ChattingDto 객체로 변환
         ChattingDto chattingDto = mapper.readValue(message.getPayload(), ChattingDto.class);
