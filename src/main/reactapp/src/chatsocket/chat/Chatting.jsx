@@ -9,16 +9,16 @@ export default function Chatting( props ) {
     // test 랜덤 아이디 생성
     const [ id, setId ] = useState( Math.floor(Math.random() * 100) );
     // 방 번호 생성
-    const [ room, setRoom ] = useState( '' );
+    const [ rname, setRname ] = useState( '' );
     // 방 리스트
-    const [ roomArr, setRoomArr ] = useState( [ { room : '', id : '' } ] );
+    const [ room, setRoom ] = useState( [ { rname : '', id : '' } ] );
 
     let clientSocket = useRef( null );
     // 2. Ref 참조가 없으면 
     if( !clientSocket.current ){
         // ====== (클라이언트) 웹소켓 구현 ====================
             // 1. new WebSocket( 서버소켓url ); // 비동기 // 서버소켓에게 접속 요청
-        clientSocket.current = new WebSocket( 'ws://localhost:8080/chatConnect' );      console.log( clientSocket );     // 확인
+        clientSocket.current = new WebSocket( 'ws://localhost:8080/chatConnect' );      console.log( clientSocket );
         // onclose // onerror // onmessage // onopen : WebSocket객체내 포함된 메소드들
             // 2. 각 메소드 정의
                 // - 1. 클라이언트소켓이 close 발생했을때 콜백함수 정의
@@ -41,11 +41,13 @@ export default function Chatting( props ) {
 
     // 방 입장
     const onEnter = ( props ) => {
-        roomArr.forEach( data => {
-            setRoomArr = [ ...roomArr, { room: props, id } ];
-            console.log( room ); console.log( id ); console.log( roomArr );
-        })
-
+        setRoom( { ...room, rname, id } );
+        clientSocket.current.send( roomArr );
+        
+        console.log( props );
+        console.log( rname ); 
+        console.log( id ); 
+        console.log( room );
     } // f end
 
     // - 채팅 내용 입력창 
@@ -65,10 +67,10 @@ export default function Chatting( props ) {
             </div>
             <textarea value={msgInput} onChange= { (e)=>{ setMsgInput( e.target.value ) }} > </textarea>
             <button type="button" onClick={ onSend }> 전송 </button> <br/>
-            <button type="button" onClick={ onEnter(1) } > 1번 채팅방 </button> <br/>
-            <button type="button" onClick={ onEnter(2) } > 2번 채팅방 </button> <br/>
-            <button type="button" onClick={ onEnter(3) } > 3번 채팅방 </button> <br/>
-            <button type="button" onClick={ onEnter(4) } > 4번 채팅방 </button> <br/>
+            <button type="button" onClick={ () => onEnter(1) } > 1번 채팅방 </button> <br/>
+            <button type="button" onClick={ () => onEnter(2) } > 2번 채팅방 </button> <br/>
+            <button type="button" onClick={ () => onEnter(3) } > 3번 채팅방 </button> <br/>
+            <button type="button" onClick={ () => onEnter(4) } > 4번 채팅방 </button> <br/>
         </div>
     </>)
 

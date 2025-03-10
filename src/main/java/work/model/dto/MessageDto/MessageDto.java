@@ -23,5 +23,6 @@ public class MessageDto {
     private  String fname;
     private  String flocation;
     private   String fdate;
+    private MessageDto type;
 
 }
