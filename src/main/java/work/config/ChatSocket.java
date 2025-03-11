@@ -165,8 +165,5 @@ public class ChatSocket extends TextWebSocketHandler {
             System.out.println("해당 채팅방에 세션이 없습니다. rno: " + rno); // 세션이 없을 경우
         }
     }
-
-
-
 }
 */

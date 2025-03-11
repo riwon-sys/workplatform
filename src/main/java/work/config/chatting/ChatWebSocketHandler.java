@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
+    // 채팅방 별로 WebSocketSession을 저장하는 Map (Key: roomId, Value: 해당 방의 세션 목록)
     private static final Map<String, Set<WebSocketSession>> rooms = new HashMap<>();
 
     @Override
