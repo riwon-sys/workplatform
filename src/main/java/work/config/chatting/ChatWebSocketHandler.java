@@ -1,5 +1,6 @@
 package work.config.chatting;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -19,7 +20,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
         System.out.println(" 사용자 연결 , ID: " + session.getId());
-    }
+    } // f end
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage msg) throws IOException {
@@ -28,7 +29,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
         // JSON 데이터를 파싱하여 ChatMessage 객체로 변환
         ChattingDto chattingDto = parseMessage( payload );
-        String rid = chattingDto.getRid(); // 채팅방 ID 가져오기
+        String rid = chattingDto.getRid()+""; // 채팅방 ID 가져오기
 
         // 해당 채팅방이 존재하지 않으면 새로 생성
         rooms.putIfAbsent( rid, new HashSet<>() );
@@ -38,7 +39,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
         // 같은 채팅방에 있는 모든 사용자에게 메시지 전송
         roomMessage( rid, chattingDto );
-    }
+    } // f end
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) {
@@ -46,7 +47,7 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
         // 모든 채팅방에서 해당 사용자의 WebSocketSession 제거
         rooms.values().forEach(sessions -> sessions.remove(session));
-    }
+    } // f end
 
 
     //특정 채팅방(roomId)에 있는 모든 사용자에게 메시지를 전송하는 메소드
@@ -56,13 +57,22 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
             for (WebSocketSession session : sessions) {
                 if (session.isOpen()) { // 연결이 열려 있는 경우에만 메시지 전송
                     session.sendMessage(new TextMessage( msg.toJson() ));
+                    System.out.println( msg.toJson());
                 }
             }
         }
-    }
+    } // f end
 
     private ChattingDto parseMessage(String payload) {
-        // 여기서는 예제 데이터 반환 (실제로는 JSON을 파싱해야 함)
-        return new ChattingDto();
-    }
+        try {
+            // JSON 문자열을 ChattingDto 객체로 변환
+            ObjectMapper objectMapper = new ObjectMapper();
+            ChattingDto chattingDto = objectMapper.readValue(payload, ChattingDto.class);
+            System.out.println(chattingDto);
+            return chattingDto;
+        } catch (Exception e) {
+            System.out.println(e);
+            return null; // 변환 실패 시 null 반환 (예외 처리 필요)
+        }
+    } // f end
 }

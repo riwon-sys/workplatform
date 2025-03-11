@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 
 export default function Chatting( props ) {
@@ -37,13 +37,14 @@ export default function Chatting( props ) {
             // 특정 채팅방에 입장하는 메세지 전송
             const enterMsg = {
                 rid : id,
-                manme : id,
-                mcontent : id + '님이 입장하셨습니다.'
+                mname : id,
+                mscontent : id + '님이 입장하셨습니다.'
             }
 
             clientSocket.current.send( JSON.stringify(enterMsg) );
-
-            setMsgList( prev => [...prev, enterMsg.mcontent] );
+            console.log( enterMsg );
+            msgList.push( e.data ); 
+            setMsgList( [...msgList ] );
         } // f end
     }
 
@@ -54,19 +55,15 @@ export default function Chatting( props ) {
             manme : id,
             mcontent : msgInput
         }
+        console.log( sendMsg );
 
-        clientSocket.current.send( sendMsg ); // 입력받은 데이터를 서버소켓 에게 보내기.
+        clientSocket.current.send( JSON.stringify(sendMsg) ); // 입력받은 데이터를 서버소켓 에게 보내기.
     }
 
     // 방 입장
-    const onEnter = ( props ) => {
-        setRoom( { ...room, rname, id } );
-        
-        console.log( props );
-        console.log( rname ); 
-        console.log( id ); 
-        console.log( room );
-    } // f end
+    const onEnter = (props) => {
+        setRname(props);
+    };
 
     // - 채팅 내용 입력창 
     const [ msgInput , setMsgInput ] = useState('');
