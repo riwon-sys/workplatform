@@ -11,7 +11,7 @@ const root = createRoot(document.querySelector('#root'))
 // import ChatApp from './chatsocket/chat/ChattingTest'
 // root.render(<ChatApp/>)
 
-
 // 메인화면 jsx
-import App from './work/App'
-root.render( <App /> )
+
+import AppStart from './work/AppStart'
+root.render( <AppStart /> )
