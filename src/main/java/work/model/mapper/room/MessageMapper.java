@@ -9,7 +9,7 @@ public interface MessageMapper {
 
     // 메세지 등록
     @Insert("""
-            insert into message (mscontent, msdate, pno)
+            insert into message (msg, msdate, pno)
                     select #{msg}, NOW(), p.pno
                     from paritcipant p
                     join member m on m.mno = p.mno
