@@ -8,11 +8,10 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
-// 핸들러 : 매핑
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new ChatWebSocketHandler() ,"/chatConnect").setAllowedOrigins("*");
+        registry.addHandler(new ChatWebSocketHandler(), "/chatConnect").setAllowedOrigins("*");
     }
 
 }

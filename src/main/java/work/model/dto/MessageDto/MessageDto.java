@@ -12,7 +12,7 @@ import lombok.Setter;
 public class MessageDto {
 
     private int msno;
-    private String mscontent;
+    private String msg;
     private String msdate;
     private  String pdate;
     private int rno;
@@ -23,5 +23,6 @@ public class MessageDto {
     private  String fname;
     private  String flocation;
     private   String fdate;
+    private MessageDto type;
 
 }

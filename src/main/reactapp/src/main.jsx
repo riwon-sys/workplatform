@@ -5,7 +5,13 @@ import { createRoot } from 'react-dom/client'
 
 const root = createRoot(document.querySelector('#root'))
 
-import Chatting from './chatsocket/chat/Chatting.jsx'
-root.render( <Chatting /> )
+// import Chatting from './chatsocket/chat/Chatting.jsx'
+// root.render( <Chatting /> )
 
+// import ChatApp from './chatsocket/chat/ChattingTest'
+// root.render(<ChatApp/>)
 
+// 메인화면 jsx
+
+import AppStart from './work/AppStart'
+root.render( <AppStart /> )

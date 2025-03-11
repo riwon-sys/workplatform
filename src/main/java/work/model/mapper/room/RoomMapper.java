@@ -24,7 +24,7 @@ public interface RoomMapper {
 
     // [3] 채팅방 상세 조회
     @Select("""
-            ( select ms.msno, ms.mscontent ,ms.msdate as msdate,p.pdate,r.rno, r.rname, r.rtype,  m.mname, null fno,null fname, null flocation, null fdate               
+            ( select ms.msno, ms.msg ,ms.msdate as msdate,p.pdate,r.rno, r.rname, r.rtype,  m.mname, null fno,null fname, null flocation, null fdate               
                 from message ms join paritcipant p on ms.pno = p.pno join room r on p.rno = r.rno join member m on p.mno = m.mno
                 where r.rno = #{rno} )
             

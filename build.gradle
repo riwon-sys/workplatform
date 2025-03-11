@@ -33,7 +33,8 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     // [3] MYSQL JDBC 라이브러리
-    // untimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'com.mysql:mysql-connector-j'
+
     // [4] 마이바티스 라이브러리
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
 
@@ -42,6 +43,7 @@ dependencies {
 
     // webSocket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+
 }
 
 tasks.named('test') {
