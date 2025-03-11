@@ -31,18 +31,34 @@ export default function Chatting( props ) {
             setMsgList( [...msgList ] ); // setState 
         }
                 // - 4. 클라이언트소켓이 open 발생했을때 콜백함수 정의
-        clientSocket.current.onopen = (e)=>{ console.log(e); console.log('서버소켓연결성공'); }
+        clientSocket.current.onopen = (e)=>{ 
+            console.log(e); console.log('서버소켓연결성공'); 
+            
+            // 특정 채팅방에 입장하는 메세지 전송
+            const enterMsg = {
+                rid : id,
+                manme : id,
+                mcontent : id + '님이 입장하셨습니다.'
+            }
+
+            clientSocket.current.send( JSON.stringify(enterMsg) );
+        } // f end
     }
 
     const onSend = ( ) => {
         // 3. 연결된 서버소켓에게 메시지 보내기
-        clientSocket.current.send( msgInput ); // 입력받은 데이터를 서버소켓 에게 보내기.
+        const sendMsg = {
+            rid : id,
+            manme : id,
+            mcontent : msgInput
+        }
+
+        clientSocket.current.send( sendMsg ); // 입력받은 데이터를 서버소켓 에게 보내기.
     }
 
     // 방 입장
     const onEnter = ( props ) => {
         setRoom( { ...room, rname, id } );
-        clientSocket.current.send( roomArr );
         
         console.log( props );
         console.log( rname ); 
@@ -60,8 +76,8 @@ export default function Chatting( props ) {
             <h3> 채팅방 </h3>
             <div>
                 {
-                    msgList.map( (msg)=>{
-                        return <div> {msg} </div>
+                    msgList.map( (msg, index)=>{
+                        return <div key={index}> {msg} </div>
                     })
                 }
             </div>
