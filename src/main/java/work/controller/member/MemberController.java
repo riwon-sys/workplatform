@@ -23,4 +23,12 @@ public class MemberController {
         //    return true; // 성공시 true, 실패시 false
          return memberService.signUP(memberDto);
         }
+
+    // [2] 사원 로그인
+    @PostMapping("/login")
+        public void logIn(@RequestBody MemberDto memberDto){
+        // {"mno": "700055", "mpwd": "1234"}
+        System.out.println("memberDto = " + memberDto);
+        System.out.println("MemberController.logIn");
+    }
 }
