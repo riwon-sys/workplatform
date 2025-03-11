@@ -42,6 +42,8 @@ export default function Chatting( props ) {
             }
 
             clientSocket.current.send( JSON.stringify(enterMsg) );
+
+            setMsgList( prev => [...prev, enterMsg.mcontent] );
         } // f end
     }
 
