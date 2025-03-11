@@ -2,6 +2,7 @@ package work.service.room;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import work.model.dto.ChattingDto;
 import work.model.dto.MessageDto.MessageDto;
 import work.model.dto.room.RoomDto;
 import work.model.mapper.room.RoomMapper;
@@ -70,4 +71,14 @@ public class RoomService {
 
     }
 
+    // [6] 기존 채팅방에 회원추가
+    public boolean addMember(RoomDto roomDto){
+
+        for(int mno : roomDto.getMnoList()){
+            roomMapper.participantWrite(mno, roomDto.getRno());
+        }
+
+        return true;
+
+    }
 }
