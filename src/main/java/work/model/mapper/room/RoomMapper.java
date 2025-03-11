@@ -1,7 +1,9 @@
 package work.model.mapper.room;
 
 import org.apache.ibatis.annotations.*;
+import work.model.dto.ChattingDto;
 import work.model.dto.MessageDto.MessageDto;
+import work.model.dto.member.MemberDto;
 import work.model.dto.room.RoomDto;
 
 import java.util.List;
@@ -44,5 +46,13 @@ public interface RoomMapper {
     // [5] 채팅방 삭제
     @Update("update room set rstate = false where rno= #{rno}")
     boolean delete(int rno);
+
+    // [6] 기존 채팅방에 회원 추가
+    @Insert("INSERT INTO paritcipant (mno, rno) VALUES (#{roomDto.mno} , {roomDto.rno}")
+    boolean addMember(@Param("roomDto") RoomDto roomDto);
+
+    // 테스트용 회원조회
+    @Select("select * from member ")
+    List<MemberDto> findMember();
 
 }
