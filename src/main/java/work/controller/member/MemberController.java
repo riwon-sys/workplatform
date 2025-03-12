@@ -24,7 +24,7 @@ public class MemberController {
          return memberService.signUP(memberDto);
         }
 
-    // [2] 사원 로그인
+    // [2] 사원 로그인 2차 매핑테스트
     @PostMapping("/login")
         public void logIn(@RequestBody MemberDto memberDto){
         // {"mno": "700055", "mpwd": "1234"}
