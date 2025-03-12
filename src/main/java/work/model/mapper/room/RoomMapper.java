@@ -55,4 +55,7 @@ public interface RoomMapper {
     @Select("select * from member ")
     List<MemberDto> findMember();
 
+    // 새로 들어온 회원이름 조회
+    @Select("select mname from member where mno = #{mno}")
+    String findMname(int mno);
 }

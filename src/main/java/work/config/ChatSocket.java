@@ -23,6 +23,8 @@ public class ChatSocket extends TextWebSocketHandler {
     @Autowired
     private RoomMapper roomMapper;
 
+
+
     // 채팅방 번호(rno)를 키로 하고, 해당 채팅방에 접속한 WebSocket 세션(Set)을 값으로 가지는 맵
         // set 으로 클라이언트의 중복 접속 방지
     private final Map<Integer, Set<WebSocketSession>> chatRooms = new HashMap<>();
@@ -129,7 +131,19 @@ public class ChatSocket extends TextWebSocketHandler {
         // mstype이 1인 경우 (파일 메시지)
         else if (chattingDto.getMstype() == 1) {
             broadcastMessage(rno, chattingDto); // 현재 같은 채팅방에 있는 클라이언트에게 파일 메시지 전송
-            messageMapper.writeFile(chattingDto);
+            System.out.println(chattingDto.getFlocation());
+            System.out.println(chattingDto.getFname());
+            System.out.println(chattingDto.getRno());
+            System.out.println(chattingDto.getMno());
+            boolean result = messageMapper.writeFile(chattingDto);
+            System.out.println(result);
+        }
+        
+        // 채팅방 새로 참여한 사람 알람 클라이언트 소켓으로 보내기 (클라이언트에게 타입 받아야함) => 위치 옮기기~~
+        else if (chattingDto.getMstype() == 4) {
+            String mname = roomMapper.findMname(chattingDto.getMno());
+
+            System.out.println("새로온 사람 : " + mname);
         }
     }
 

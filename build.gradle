@@ -44,6 +44,9 @@ dependencies {
     // webSocket
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+
 }
 
 tasks.named('test') {
