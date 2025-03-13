@@ -15,6 +15,11 @@ public class MemberService {
         return memberMapper.signUP(memberDto);
 
     }
+    // [2] 사원 로그인
+    public boolean login(MemberDto memberDto ){
 
+        return true;
+
+    }
 
 }
