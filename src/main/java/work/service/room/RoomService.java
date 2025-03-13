@@ -38,7 +38,7 @@ public class RoomService {
         int rno = roomDto.getRno();
 
         // 현재 로그인된 회원번호 참여자 리스트 추가
-        roomDto.getMnoList().add(loginMno);
+        // roomDto.getMnoList().add(loginMno);
 
         for(int mno : roomDto.getMnoList()){
             roomMapper.participantWrite(mno, rno);

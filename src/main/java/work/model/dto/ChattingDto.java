@@ -29,4 +29,8 @@ public class ChattingDto {
     private  String fname;
     private  String flocation;
     private   String fdate;
+
+    private String type;
+    private  String message;
+
 }

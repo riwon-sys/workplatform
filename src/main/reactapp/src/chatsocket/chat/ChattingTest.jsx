@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import html2canvas from 'html2canvas';
 
 const mno = "100001";
 
@@ -15,6 +14,68 @@ const ChatApp = () => {
   const [isSocketOpen, setIsSocketOpen] = useState(false); // WebSocket 채팅
   const [addMembers, setAddMembers] = useState({mnoList :[], rno : ""}) // 채팅방에 추가할 회원번호 목록과 방번호
   const [mNameList, setMnameList] = useState([]) // 채팅방에 추가된 회원의 이름 목록
+
+
+
+  // 브라우저 입장 시 접속되는 소켓
+  // WebSocket 연결 함수
+  const [totalSocket, setTotalSocket] = useState(null);
+  useEffect(() => {
+    connectTotalWebSocket(); // 처음에는 연결 시도
+
+    return () => {
+        if (totalSocket) {
+            totalSocket.close(); // 컴포넌트 언마운트 시 연결 종료
+        }
+    };
+}, []);
+
+
+  // WebSocket 연결 함수
+  const connectTotalWebSocket = () => {
+    // WebSocket이 이미 연결된 상태라면 다시 연결하지 않음
+    if (totalSocket && totalSocket.readyState === WebSocket.OPEN) {
+      console.log('이미 WebSocket 연결됨');
+      return;  // 이미 연결된 경우 다시 연결하지 않음
+    }
+
+    const totalConnect = new WebSocket('ws://localhost:8080/totalConnect');
+
+    // WebSocket이 열린 후
+    totalConnect.onopen = () => {
+      console.log('전체 소켓 연결됨');
+      const initMessage = { type: 'join', message: '클라이언트가 연결됨' };
+      totalConnect.send(JSON.stringify(initMessage));  // 서버에 초기 메시지 전송
+    };
+
+    // WebSocket 오류 발생 시
+    totalConnect.onerror = (error) => {
+      console.error('WebSocket 오류:', error);
+    };
+
+    // WebSocket 연결이 종료될 때
+    totalConnect.onclose = (event) => {
+      console.log('WebSocket 연결 종료', event);
+      if (event.code !== 1000) {  // 정상적으로 종료되지 않은 경우
+        console.log('WebSocket 연결이 비정상적으로 종료됨');
+      }
+    };
+
+    setTotalSocket(totalConnect);
+  };
+
+  useEffect(() => {
+    // 컴포넌트가 마운트될 때 WebSocket 연결을 한 번만 시도
+    connectTotalWebSocket();
+
+    return () => {
+      // 컴포넌트가 언마운트될 때 WebSocket 종료
+      if (totalSocket) {
+        totalSocket.close();
+      }
+    };
+  }, []);  // 빈 배열을 전달하여 한 번만 실행
+
   // 파일 서버로 전달
   const [chattingDto, setChattingDto] = useState({
     mstype: 1,       // 메시지 타입 (1: 파일)
@@ -44,6 +105,15 @@ const ChatApp = () => {
       console.log("채팅방 조회 오류 : ", e);
     }
   };
+/*
+   // 채팅방이 새로 생성되면, 소켓에 리렌더링을 요청하는 함수
+   useEffect(() => {
+    if (totalSocket && rooms.length > 0) {
+      // 채팅방 목록이 업데이트되면 전체 소켓에 리렌더링을 알리기 위해 메시지 보내기
+      totalSocket.send(JSON.stringify({ action: 'refreshRooms', rooms }));
+    }
+  }, [rooms, totalSocket]); // rooms가 업데이트될 때마다 실행됨
+*/
 
   // 컴포넌트 마운트 시 전체 회원 불러오기
   useEffect(() => {findAllMember()}, []);
@@ -98,93 +168,85 @@ const ChatApp = () => {
     }
   };
 
-  // WebSocket 연결 설정
-  const createSocketConnection = (roomId) => {
-    // 웹소켓 연결
-    const socket = new WebSocket('ws://localhost:8080/chatConnect'); 
-
-    // 웹 소켓 연결 성공 시
+   // 채팅방 접속 WebSocket
+   const connectChatRoomSocket = (roomId) => {
+    const socket = new WebSocket('ws://localhost:8080/chatConnect');
+    
     socket.onopen = () => {
-      console.log('WebSocket 연결 성공');
-      setIsSocketOpen(true); // 웹 소켓 연결 상태 업데이트
-
-      // 보낼 채팅 객체
-      const requestMessage = {
+      console.log('채팅방 소켓 연결 성공');
+      setIsSocketOpen(true);
+      const joinMessage = {
         rno: roomId,
         mstype: 3,
       };
-
-      // 파싱 후 서버로 연결 요청
-      socket.send(JSON.stringify(requestMessage));
-      
+      socket.send(JSON.stringify(joinMessage));
     };
 
-    // 웹 소켓 연결 오류 시
     socket.onerror = (error) => {
-      console.error('WebSocket 오류 발생:', error);
+      console.error('채팅방 소켓 오류 발생:', error);
     };
 
-    // 웹 소켓 연결 종료 시
     socket.onclose = (event) => {
-      console.log('WebSocket 연결 종료', event);
-      setIsSocketOpen(false); // 웹 소켓 연결 상태 업데이트
+      console.log('채팅방 소켓 연결 종료', event);
+      setIsSocketOpen(false);
     };
 
-    // 생성된 소켓 반환
-    return socket;
-
-  };
-
-  // 채팅방 선택 
-  const handleRoomSelect = (roomId) => {
-    // 만약 기존 소켓이 존재 시
-    if (clientSocket) {
-      clientSocket.close(); // 해당 소켓 연결 종료
-    }
-
-    // 선택된 채팅방 번호 업데이트
-    setSelectedRoomId(roomId);
-
-    // 새로운 소켓에 연결
-    const socket = createSocketConnection(roomId);
-
-    // 웹소켓 객체에 상태 저장
     setClientSocket(socket);
-
-    // 메세지 초기화
-    setMessages([]);
   };
 
+  // 채팅방 선택
+  const handleRoomSelect = (roomId) => {
+    if (clientSocket) {
+      clientSocket.close(); // 기존 소켓 종료
+    }
+    setSelectedRoomId(roomId);
+    connectChatRoomSocket(roomId); // 새로운 소켓 연결
+    setMessages([]); // 메시지 초기화
+  };
 
   // 메세지 서버로 전달
  const sendMessage = () => {
 
   // 만약 소켓이 연결된 상태이고 방번호가 존재한다면
   if (clientSocket && isSocketOpen && selectedRoomId) {
-    // 서버로 보낼 메세지 객체
-    const messageData = {
-      rno: selectedRoomId,
-      msg: message,
-      mstype: 0,
-      mname: 'test',
-      mno: mno,
-    };
-    console.log(messageData)
-    // 소켓으로 서버에 전달
 
-    clientSocket.send(JSON.stringify(messageData)); // 메시지 보내기
+    if(clientSocket.readyState == WebSocket.OPEN){
+      // 서버로 보낼 메세지 객체
+      const messageData = {
+        rno: selectedRoomId,
+        msg: message,
+        mstype: 0,
+        mname: 'test',
+        mno: mno,
+      };
+      console.log(messageData)
+      // 소켓으로 서버에 전달
 
-    // 보내는 메시지 화면에 출력
-    /*const setMessage = {
-      mname: 'test',
-      msg: message,
-      fname : chattingDto.fname,
-      flocation : chattingDto.flocation,
-      isSent: true,  
-    };
-*/
-    
-    setMessage(''); // 메시지 입력창 초기화
+      clientSocket.send(JSON.stringify(messageData)); // 메시지 보내기
+
+      // 보내는 메시지 화면에 출력
+      /*const setMessage = {
+        mname: 'test',
+        msg: message,
+        fname : chattingDto.fname,
+        flocation : chattingDto.flocation,
+        isSent: true,  
+      };
+  */
+      
+      setMessage(''); // 메시지 입력창 초기화
+    }else{
+      console.log('WebSocket 연결이 완료되지 않았습니다. 연결을 기다립니다...');
+        
+      // WebSocket 연결이 완료될 때까지 일정 간격으로 확인
+      const interval = setInterval(() => {
+        if (clientSocket.readyState === WebSocket.OPEN) {
+          clearInterval(interval);  // 연결되면 인터벌을 종료
+          clientSocket.send(JSON.stringify(messageData));  // 메시지 전송
+          setMessage('');  // 메시지 입력창 초기화
+        }
+      }, 100);  // 100ms마다 연결 상태 확인
+    }
   } else {
     console.log('WebSocket이 연결되지 않았거나 채팅방이 선택되지 않았습니다.');
   }
@@ -274,29 +336,8 @@ const sendFile = async () => {
     }
   }
 
-/*
 
-라이브러리 깔기
-    const onCapture = () => {
-      // html2canvas에서 html에서 캡처를 할 tag를 매개변수로 넣어주면 canvas를 담아 Promise 객체를 반환
-      // 캔버스를 이미지 형태로 리턴하여 id가 imageWrapper인 tag를 감싸게 된다.
-      html2canvas(document.getElementById('imageWrapper') as HttpEle).then(
-        (canvas) => {
-          onSaveAs(canvas.toDataURL('image/png'), 'karina.png');
-        }
-      );
-    };
-    // a 태그를 돔에 삽입하고 매개변수인 uri에 canvas를 집어넣어 canvas 자체를 다운로드(캡처)받는다.
-    const onSaveAs = (uri: String, filename: String) => {
-      const link = document.createElement('a');
-      document.body.appendChild(link);
-      link.href = uri;
-      link.download = filename;
-      link.click();
-      document.body.removeChild(link);
-    };
-  
-*/
+
 // 소켓으로 받은 메세지 처리
 useEffect(() => {
   if (clientSocket && selectedRoomId) { // 만약 소켓이 열려있고 채팅방이 선택됐으면
@@ -376,6 +417,10 @@ const deleteRoom = async (rno) => {
 }
   return (
     <div>
+     <div>
+        <h1>채팅 애플리케이션</h1>
+        <p>전체 소켓 연결 상태: {totalSocket ? (totalSocket.readyState === WebSocket.OPEN ? '연결됨' : '연결 안됨') : '연결 안됨'}</p>
+      </div>
       <h2>채팅방 선택</h2>
       <div>
         {rooms.map((room, index) => (
@@ -391,6 +436,7 @@ const deleteRoom = async (rno) => {
             <h3>선택된 채팅방: {`채팅방 ${selectedRoomId}`}</h3>
             
           </div>
+         
           <div>
           {messages.map((msg, index) => (
             <div key={index}>
@@ -402,17 +448,15 @@ const deleteRoom = async (rno) => {
                 <>
                   {msg.mname}:{" "}
                   {msg.fname}
-                  <div id="imageWrapper">
-                    <img src={Karina} id="img_prev" width="640" height="640" alt="karina" />
-                    <h3>Something Inspirational</h3>
-                  </div>
-                  <button onClick={onCapture}>이미지 다운로드</button>
+                
+                  {/* 파일 다운로드 링크 */}
+                  <a href={`http://localhost:8080/msg/download?file=${encodeURIComponent(msg.fname)}`} download={msg.fname}>
+                    {msg.fname} 다운로드
+                  </a>
                 </>
               )}
             </div>
-          ))}
-
-
+           ))}
           </div>
           <input
             type="text"

@@ -12,9 +12,8 @@ import Board from './Board.jsx';
 
 /* css */
 import './App.css';
-import { Container } from "@mui/material";
 
-export default function App( props ){
+export default function Test( props ){
     return(<>
         <BrowserRouter>
             <div id="wrap">
