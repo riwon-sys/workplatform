@@ -7,6 +7,7 @@ import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import work.model.dto.ChattingDto;
 import work.model.dto.MessageDto.MessageDto;
+import work.model.dto.room.RoomDto;
 import work.model.mapper.room.MessageMapper;
 import work.model.mapper.room.RoomMapper;
 
@@ -119,8 +120,7 @@ public class ChatSocket extends TextWebSocketHandler {
             System.out.println("메세지 : " + chattingDto.getMsg());
             System.out.println("회원 : " + chattingDto.getMno());
             System.out.println("메세지 타입 : " + chattingDto.getMstype());
-
-            // mstype에 따라 처리
+            System.out.println("타입");
             switch (chattingDto.getMstype()) {
                 case 3: // 기존 채팅 기록 요청
                     List<MessageDto> msgList = addClient(rno, session);
@@ -159,6 +159,16 @@ public class ChatSocket extends TextWebSocketHandler {
                 case 4: // 새로 참여한 사람 알림
                     String mname = roomMapper.findMname(chattingDto.getMno());
                     System.out.println("새로온 사람 : " + mname);
+                    break;
+                case 5:
+                    System.out.println("새로고침 요청");
+                    List<RoomDto> roomDtoList = roomMapper.find(100001);// 샘플값
+                    ChattingDto refreshMessage = new ChattingDto();
+                    refreshMessage.setMstype(5);  // 새로고침 메시지 타입
+                    refreshMessage.setMscontent("채팅방 목록을 새로고침하세요.");
+                    refreshMessage.setRooms(roomDtoList); // 새로고침할 채팅방 리스트 추가
+
+                    broadcastMessageToClients(session, refreshMessage);
                     break;
 
                 default:
@@ -205,11 +215,31 @@ public class ChatSocket extends TextWebSocketHandler {
         Set<WebSocketSession> sessions = chatRooms.get(rno);
         if (sessions != null) {
             String jsonMessage = mapper.writeValueAsString(message);
+            System.out.println("서버로 보낼 메세지" + jsonMessage);
             for (WebSocketSession session : sessions) {
                 session.sendMessage(new TextMessage(jsonMessage));
             }
         } else {
             System.out.println("해당 채팅방에 세션이 없습니다. rno: " + rno); // 세션이 없을 경우
+        }
+    }
+
+    // 리렌더링 요청
+    private void broadcastMessageToClients(WebSocketSession session, ChattingDto message) throws Exception {
+
+        System.out.println(totalClients.toString());
+        if (totalClients != null) {
+            String jsonMessage = mapper.writeValueAsString(message);
+            System.out.println("서버로 보낼 메세지" + jsonMessage);
+
+            // Iterator 사용으로 안전한 순회
+            synchronized (totalClients) {
+                Iterator<WebSocketSession> iterator = totalClients.iterator();
+                while (iterator.hasNext()) {
+                    WebSocketSession session1 = iterator.next();
+                    session1.sendMessage(new TextMessage(jsonMessage));
+                }
+            }
         }
     }
 }

@@ -3,6 +3,9 @@ package work.model.dto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
+import work.model.dto.room.RoomDto;
+
+import java.util.List;
 
 
 @Getter @Setter @ToString
@@ -33,4 +36,6 @@ public class ChattingDto {
     private String type;
     private  String message;
 
+    private List<RoomDto> rooms;
+    private  String action;
 }

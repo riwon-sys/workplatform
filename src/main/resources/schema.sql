@@ -1,3 +1,4 @@
+
 -- 결재 테이블 삭제 (approval 테이블은 fileshare를 참조하므로, 먼저 삭제)
 DROP TABLE IF EXISTS approval;
 
@@ -15,10 +16,11 @@ DROP TABLE IF EXISTS report;
 -- 채팅방 테이블 삭제 (room 테이블은 member를 참조하므로, room 테이블을 마지막에 삭제)
 DROP TABLE IF EXISTS room;
 
+
+drop table if exists board;
 -- 이제 'member' 테이블 삭제
 DROP TABLE IF EXISTS member;
 
-drop table if exists board;
 
 -- 직원 테이블 생성
 CREATE TABLE member (
@@ -81,12 +83,13 @@ create table fileshare(
 
 -- 게시판 테이블
 create table board(
-    pid int unsigned auto_increment primary key,
+    pid int unsigned auto_increment,
     title varchar(50) not null,
     content varchar(1000) not null,
     views int unsigned default 0,
     mno int unsigned,
-    foreign key(mno)references member(mno)
+     constraint primary key (pid),
+    constraint foreign key(mno)references member(mno)
     on update cascade
     on delete cascade
 );
