@@ -206,15 +206,15 @@ INSERT INTO fileshare (fname, flocation, pno) VALUES
 
 # 게시판 테이블
 create table board(
-        pid int unsigned auto_increment primary key,
+	pid int unsigned auto_increment,
     title varchar(50) not null,
     content varchar(1000) not null,
     views int unsigned default 0,
     mno int unsigned,
+    constraint primary key( pid ),
     foreign key(mno)references member(mno)
     on update cascade
     on delete cascade
-
 );
 
 # 게시판 샘플데이터 삽입
