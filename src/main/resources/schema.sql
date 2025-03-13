@@ -104,7 +104,8 @@ create table report(
     rpunprocessed varchar(300),
     rpsignificant varchar(300),
     rpexpected varchar(300),
-    rpdate varchar(300),
+    rpdate datetime default now(),
+    rpstate bool default true,
     mno int unsigned,
     constraint primary key( rpno ),
     constraint foreign key( mno ) references member ( mno ) on update cascade on delete cascade
@@ -114,7 +115,7 @@ create table report(
 create table approval(
    apno int unsigned auto_increment,
     apdate datetime default null,
-    apstate int default 0,
+    apstate bool default true,
     apsignature varchar(50) not null,
     mno int unsigned,         -- 승인할 회원번호
     rpno int unsigned,
