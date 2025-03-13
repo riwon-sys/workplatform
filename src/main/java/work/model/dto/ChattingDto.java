@@ -1,6 +1,9 @@
 package work.model.dto;
 
 import lombok.*;
+import work.model.dto.room.RoomDto;
+
+import java.util.List;
 
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor
@@ -30,4 +33,6 @@ public class ChattingDto {
     private String type;
     private  String message;
 
+    private List<RoomDto> rooms;
+    private  String action;
 }
