@@ -1,9 +1,9 @@
 package work.model.dto;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
+import work.model.dto.room.RoomDto;
 
+import java.util.List;
 
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor
@@ -19,4 +19,20 @@ public class ChattingDto {
     // 새로 추가된 msg 필드
     private String msg;
     // 0 : 메세지 1 : 파일
+    private int msno;
+    private String msdate;
+    private  String pdate;
+    private  String rname;
+    private  String rtype;
+
+    private  int fno;
+    private  String fname;
+    private  String flocation;
+    private   String fdate;
+
+    private String type;
+    private  String message;
+
+    private List<RoomDto> rooms;
+    private  String action;
 }

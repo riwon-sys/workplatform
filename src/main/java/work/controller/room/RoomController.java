@@ -68,15 +68,19 @@ public class RoomController {
     @DeleteMapping
     public boolean delete(@RequestParam("rno") int rno) {
 
+        // 나중에 본인 생성한 채팅방인지 유효성 검사 추가하기
         return roomService.delete(rno);
     }
 
     // [6] 기존 채팅방에 회원 추가
     @PostMapping("/addmember")
-    public boolean addMember(@RequestBody RoomDto roomDto){
+    public List<String> addMember(@RequestBody RoomDto roomDto){
+        List<String> result = roomService.addMember(roomDto);
 
-        return roomService.addMember(roomDto);
+        return  result;
     }
+
+    // [7]
 
     // 테스트를 위한 회원 전체 출력
     @GetMapping("/member")
