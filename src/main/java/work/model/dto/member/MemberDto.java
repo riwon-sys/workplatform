@@ -18,4 +18,5 @@ public class MemberDto {
     private  int mtype;
     private  String mrank;
     private  String mprofile;
+
 }

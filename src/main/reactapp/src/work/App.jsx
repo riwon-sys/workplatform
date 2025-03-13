@@ -14,7 +14,7 @@ import Board from './Board.jsx';
 /* css */
 import './App.css';
 
-export default function App( props ){
+export default function Test( props ){
     return(<>
         <BrowserRouter>
             <Box sx={{ display: 'flex' }}>
