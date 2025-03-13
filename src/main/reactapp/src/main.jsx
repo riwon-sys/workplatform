@@ -8,8 +8,8 @@ const root = createRoot(document.querySelector('#root'))
 //import Chatting from './chatsocket/chat/Chatting.jsx'
 //root.render( <Chatting /> )
 
-// import ChatApp from './chatsocket/chat/ChattingTest.jsx'
-// root.render(<ChatApp/>)
+ //import ChatApp from './chatsocket/chat/ChattingTest.jsx'
+ //root.render(<ChatApp/>)
 
-import App from './work/App'
-root.render( <App /> )
+ import Test from './work/App.jsx'
+ root.render(<Test/>)
