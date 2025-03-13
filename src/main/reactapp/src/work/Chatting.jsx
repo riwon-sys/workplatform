@@ -169,20 +169,7 @@ const Chatting = () => {
       console.log("채팅방 생성 오류 : ", e);
     }
   };
-// WebSocket에서 수신한 메시지를 처리하는 useEffect
-useEffect(() => {
-    if (totalSocket) {
-      totalSocket.onmessage = (event) => {
-        const receivedMessage = JSON.parse(event.data);
-  
-        // 리렌더링 요청 메시지 처리
-        if (receivedMessage.action === 'refreshRooms') {
-          console.log("채팅방 목록 리렌더링: ", receivedMessage.rooms);
-          setRooms(receivedMessage.rooms);  // 새로운 채팅방 목록으로 상태 업데이트
-        }
-      };
-    }
-  }, [totalSocket]);
+
 
 
   const [chatRooms, setChatRooms] = useState([]); // 채팅방 목록 상태
@@ -220,11 +207,17 @@ useEffect(() => {
   useEffect(() => {
     const socket = new WebSocket('ws://localhost:8080/chatConnect');
     
+    console.log(selectedRoomId)
     socket.onopen = () => {
       console.log('채팅방 소켓 연결 성공');
+      const send = {
+        rno: selectedRoomId,
+        mstype: 3,
+        mno: mno
+      };
+      socket.send(JSON.stringify(send));
       setIsSocketOpen(true);
     };
-  
     socket.onmessage = (event) => {
       console.log('Received message:', event.data);
       const message = JSON.parse(event.data);
@@ -246,18 +239,26 @@ useEffect(() => {
   
     setClientSocket(socket);  // 소켓 상태 설정
     return () => socket.close();  // 컴포넌트가 언마운트되면 소켓 닫기
-  }, []);  // 빈 배열로 useEffect는 최초 한번만 실행
+  }, [selectedRoomId]);  // 빈 배열로 useEffect는 최초 한번만 실행
   
 
   // 채팅방 선택
-  const handleRoomSelect = (roomId) => {
-    if (clientSocket) {
-      clientSocket.close(); // 기존 소켓 종료
-    }
-    setSelectedRoomId(roomId);
-    connectChatRoomSocket(roomId); // 새로운 소켓 연결
-    setMessages([]); // 메시지 초기화
-  };
+ // 채팅방 선택
+const handleRoomSelect = (roomId) => {
+  console.log(roomId);
+
+  if (clientSocket) {
+    clientSocket.close(); // 기존 소켓 종료
+  }
+
+  // selectedRoomId가 단일 값일 경우 roomId를 직접 설정
+  setSelectedRoomId(roomId);
+  console.log(selectedRoomId) // roomId 가 안들어와
+ 
+  
+  setMessages([]); // 메시지 초기화
+};
+
 
   // 메세지 서버로 전달
  const sendMessage = () => {
