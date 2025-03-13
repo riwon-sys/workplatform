@@ -82,7 +82,6 @@ INSERT INTO room (rname, rtype, mno, rlastdate) VALUES
 ('기술팀 전체', '1', 100006, NOW()), -- 기술팀 전체
 ('운영팀 전체', '1', 100004, NOW()), -- 운영팀 전체
 ('인사팀-사원 회의', '1', 100001, NOW()), -- 인사팀 사원 회의
-
 ('마케팅팀-대리 회의', '1', 200012, NOW()), -- 마케팅팀 대리 회의
 ('영업팀-팀장 회의', '1', 200010, NOW()), -- 영업팀 팀장 회의
 ('기술팀-개발자 회의', '1', 100007, NOW()), -- 기술팀 개발자 회의
@@ -106,7 +105,6 @@ INSERT INTO paritcipant (mno, rno) VALUES
 (100005, 9), -- 김은서, 디자인팀 전체
 (100006, 10), -- 이시훈, 기술팀 전체
 (200012, 11); -- 박시연, 마케팅팀 대리 회의
-
 
 -- 메시지 샘플 데이터 삽입
 INSERT INTO message (msg, msdate, pno) VALUES
@@ -144,19 +142,12 @@ INSERT INTO fileshare (fname, flocation, pno) VALUES
 ('회의 일지.txt', '/uploads/회의_일지.txt', 14), -- 박시연 (마케팅팀 대리 회의)
 ('분석 자료.xlsx', '/uploads/분석_자료.xlsx', 15); -- 윤지호 (마케팅팀 전체)
 
-
--- 외부출장자
-INSERT INTO member (mno, mname, mphone, memail, mtype, mrank) VALUES
-(300020,  '김리원', '010-4333-4333', 'salesteam_dari@example.com', 2, '대리'),
-(300022,  '서진석', '010-6555-6555', 'salesteam_sawon@example.com', 2, '사원'),
-(600044,  '이산', '010-8777-9999', 'designteam_dari@example.com', 2, '대리');
--- 퇴사자
-INSERT INTO member (mno, mname, mphone, memail, mtype, mrank) VALUES
-(100005,  '유나영', '010-5678-9012', 'insateam_dari@example.com', 3, '대리'),
-(300019,  '차정원', '010-3222-3222', 'salesteam_team@example.com', 3, '팀장'),
-(300023,  '김현수', '010-7666-7666', 'salesteam_sawon@example.com', 3, '사원'),
-(600046,  '이민진', '010-0999-1111', 'designteam_sawon@example.com', 3, '사원'),
-(700056,  '현정우', '010-1001-1111', 'financeteam_sawon@example.com', 3, '사원');
+-- 게시판 샘플데이터 삽입
+insert into board (pid,title,content,views,mno)values
+(1, '주변에 맛집있나요?', '매콤한게땡김', 11, 100001),
+(2, '칼퇴해도됩니까?', '칼퇴각', 32, 100002),
+(3, '집에가고싶은데', '집가도됨?', 10, 100003),
+(4, '팀장님들 요즘 왜이럼?', '떡볶이 vs 곱창 추천좀', 30, 100004);
 
 -- 보고서 샘플 추가
 INSERT INTO report( rpname, rpam, rppm, rpunprocessed, rpsignificant, rpexpected, rpdate, mno ) VALUES
@@ -173,3 +164,6 @@ INSERT INTO approval( apdate, apstate, apsignature, mno, rpno ) VALUES
 ( '2025-02-04 23:30:11', 1, '서명3', 100001, 1 ),
 ( '2025-02-05 23:30:11', 1, '서명4', 200012, 2 ),
 ( null , 0, '서명5', 200010, 2 );
+
+
+

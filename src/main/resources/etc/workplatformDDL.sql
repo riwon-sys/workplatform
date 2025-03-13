@@ -127,6 +127,7 @@ create table paritcipant(
     constraint foreign key (mno) references member (mno) on update cascade on delete cascade,
     constraint foreign key (rno) references room (rno) on update cascade on delete cascade
 );
+
 -- 참여현황 샘플 데이터 삽입
 INSERT INTO paritcipant (mno, rno) VALUES
 (100001, 1), -- 최민경, 인사팀-윤서와 민경 (일대일)
@@ -156,7 +157,6 @@ create table message(
     constraint primary key (msno),
     constraint foreign key (pno) references paritcipant (pno) on update cascade on delete cascade
 );
-
 
 -- 메시지 샘플 데이터 삽입
 INSERT INTO message (msg, msdate, pno) VALUES
