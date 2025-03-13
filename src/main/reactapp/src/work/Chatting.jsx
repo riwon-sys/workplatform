@@ -416,7 +416,7 @@ const deleteRoom = async (rno) => {
   }
 }
   return (
-    <div>
+    <div style={{margin :"100px"}}>
      <div>
         <h1>채팅 애플리케이션</h1>
         <p>전체 소켓 연결 상태: {totalSocket ? (totalSocket.readyState === WebSocket.OPEN ? '연결됨' : '연결 안됨') : '연결 안됨'}</p>

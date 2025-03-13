@@ -6,7 +6,6 @@ DROP TABLE IF EXISTS fileshare;
 
 -- 메시지 테이블 삭제 (message 테이블은 paritcipant를 참조하므로, message 테이블을 먼저 삭제)
 DROP TABLE IF EXISTS message;
-
 -- 참여자 테이블 삭제 (paritcipant 테이블은 room과 member를 참조하므로, paritcipant 테이블을 삭제)
 DROP TABLE IF EXISTS paritcipant;
 
@@ -18,6 +17,8 @@ DROP TABLE IF EXISTS room;
 
 -- 이제 'member' 테이블 삭제
 DROP TABLE IF EXISTS member;
+
+drop table if exists board;
 
 -- 직원 테이블 생성
 CREATE TABLE member (
