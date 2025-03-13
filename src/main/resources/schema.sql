@@ -16,6 +16,9 @@ DROP TABLE IF EXISTS report;
 -- 채팅방 테이블 삭제 (room 테이블은 member를 참조하므로, room 테이블을 마지막에 삭제)
 DROP TABLE IF EXISTS room;
 
+-- 게시팜 테이블 삭제
+DROP TABLE if exists board;
+
 -- 이제 'member' 테이블 삭제
 DROP TABLE IF EXISTS member;
 
@@ -35,7 +38,7 @@ CREATE TABLE member (
 
 -- 채팅방 테이블
 create table room (
-        rno int unsigned auto_increment,
+   rno int unsigned auto_increment,
     rname varchar(50) not null,
     rtype varchar(30) not null,
     rdate datetime default now(),
@@ -46,9 +49,9 @@ create table room (
     constraint foreign key (mno) references member (mno) on update cascade on delete cascade
 );
 
--- 참여자 테이블
+-- 참여현황 테이블
 create table paritcipant(
-        pno int unsigned auto_increment,
+   pno int unsigned auto_increment,
     pdate datetime default now(),
     mno int unsigned,
     rno int unsigned,
@@ -56,9 +59,10 @@ create table paritcipant(
     constraint foreign key (mno) references member (mno) on update cascade on delete cascade,
     constraint foreign key (rno) references room (rno) on update cascade on delete cascade
 );
+
 -- 메세지 테이블
 create table message(
-        msno int unsigned auto_increment,
+   msno int unsigned auto_increment,
     msg text ,
     msdate datetime default now(),
     msstate int default 0,
@@ -67,9 +71,9 @@ create table message(
     constraint foreign key (pno) references paritcipant (pno) on update cascade on delete cascade
 );
 
---파일 테이블
+-- 파일 테이블
 create table fileshare(
-        fno int unsigned auto_increment,
+   fno int unsigned auto_increment,
     fname varchar(30),
     flocation varchar(255),
     fdate datetime default now(),
@@ -77,11 +81,25 @@ create table fileshare(
     constraint primary key (fno),
     constraint foreign key (pno) references paritcipant (pno) on update cascade on delete cascade
 );
+
+-- 게시판 테이블
+create table board(
+	pid int unsigned auto_increment,
+    title varchar(50) not null,
+    content varchar(1000) not null,
+    views int unsigned default 0,
+    mno int unsigned,
+    constraint primary key( pid ),
+    foreign key(mno)references member(mno)
+    on update cascade
+    on delete cascade
+);
+
 -- 보고서 테이블
 create table report(
-	rpno int unsigned auto_increment,
+   rpno int unsigned auto_increment,
     rpname varchar(50) not null,
-	rpam varchar(300) not null,
+   rpam varchar(300) not null,
     rppm varchar(300) not null,
     rpunprocessed varchar(300),
     rpsignificant varchar(300),
@@ -94,11 +112,11 @@ create table report(
 
 -- 결재 테이블
 create table approval(
-	apno int unsigned auto_increment,
+   apno int unsigned auto_increment,
     apdate datetime default null,
     apstate int default 0,
     apsignature varchar(50) not null,
-    mno int unsigned,			-- 승인할 회원번호
+    mno int unsigned,         -- 승인할 회원번호
     rpno int unsigned,
     constraint primary key( apno ),
     constraint foreign key( mno ) references member ( mno ) on update cascade on delete cascade,

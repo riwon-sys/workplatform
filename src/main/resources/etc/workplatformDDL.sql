@@ -2,7 +2,6 @@ drop database if exists workplatform;
 create database workplatform;
 use workplatform;
 
-t
 # 직원 테이블 생성
 CREATE TABLE member (
     mno INT UNSIGNED,                                                # unsigned : ( 1: 인사팀 2: 마케팅팀 3: 영업팀 4: 운영팀 5:기술팀 6:디자인팀 7:재무팀) (맨 앞자리 부서/ 자바에서부여)
