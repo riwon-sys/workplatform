@@ -10,15 +10,13 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     height: '100%', // 높이 설정 추가
-    ...theme.applyStyles('dark', {
-      backgroundColor: '#1A2027',
-    }),
 }));
 
 export default function Report_View() {
     return (
         <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
           <Grid container spacing={0} sx={{ height: '100%' }}> 
+            {/* size: 너비 조정 */}
             <Grid size={3.5} sx={{ height: '100%' }}> 
               <Item>size=3.5</Item>
             </Grid>
