@@ -16,6 +16,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 /* css */
 import './App.css';
 
+import ChatTeset from "../chatsocket/chat/ChattingTest.jsx";
+
 export default function Test( props ){
     return(<>
         <ThemeProvider theme={theme}>
@@ -26,7 +28,7 @@ export default function Test( props ){
 
                 <Routes>
                     <Route path="/" element={ <Chatting /> }></Route>
-                    <Route path="/chatting" element={ <Chatting /> }></Route>
+                    <Route path="/chatting" element={ <ChatTeset /> }></Route>
                     <Route path="/report/write" element={ <Report_Write /> }></Route>
                     <Route path="/report/view" element={ <Report_View /> }></Route>
                     <Route path="/board" element={ <Board /> }></Route>

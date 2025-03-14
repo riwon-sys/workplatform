@@ -15,8 +15,8 @@ const Chatting = () => {
   const [addMembers, setAddMembers] = useState({mnoList :[], rno : ""}) // 채팅방에 추가할 회원번호 목록과 방번호
   const [mNameList, setMnameList] = useState([]) // 채팅방에 추가된 회원의 이름 목록
 
+  const [responseMsg , setResponseMsg] = useState(0);
 
-  const resposeMsg = 0;
 
   // 브라우저 입장 시 접속되는 소켓
   // WebSocket 연결 함수
@@ -50,7 +50,7 @@ const Chatting = () => {
       totalConnect.send(JSON.stringify(initMessage));  // 서버에 초기 메시지 전송
     };
 
-  
+    
     
     /////////////////
     // WebSocket 오류 발생 시
@@ -79,6 +79,18 @@ useEffect(() => {
     }
   };
 }, []);
+
+// responseMsg 값이 변경되었을 때 totalSocket을 리렌더링
+useEffect(() => {
+  if (responseMsg === 5 && totalSocket && totalSocket.readyState === WebSocket.OPEN) {
+    // mstype 5가 감지되면 totalSocket을 리렌더링하고 responseMsg를 0으로 초기화
+    totalSocket.send(JSON.stringify({
+      mstype: 5,
+      rooms: rooms  // 새로운 방 리스트 전달
+    }));
+    setResponseMsg(0);  // responseMsg 초기화
+  }
+}, [responseMsg, totalSocket, rooms]);  // responseMsg, totalSocket, rooms가 변경될 때마다 실행
 
  
   // 파일 서버로 전달
@@ -218,7 +230,6 @@ useEffect(() => {
   }, [chatRoomCreated]);
 */
 const [socketMessage, setSocketMessage] = useState([]);  // 상태 변수 선언
-const [responseMsg, setResponseMsg] = useState(null);  // 새로운 상태 변수로 선언
 
 useEffect(() => {
   const socket = new WebSocket('ws://localhost:8080/chatConnect');
