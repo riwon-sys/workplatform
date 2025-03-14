@@ -463,6 +463,16 @@ export default function ChatTeset() {
 
     }
   }
+
+  const mySpaceRef = useRef(null);
+
+  useEffect(() => {
+    // 메시지가 변경될 때마다 스크롤을 맨 아래로 이동
+    if (mySpaceRef.current) {
+      mySpaceRef.current.scrollTop = mySpaceRef.current.scrollHeight;
+    }
+  }, [messages]); // messages가 변경될 때마다 실행됨
+
   return (
     <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Grid container spacing={0} sx={{ height: '100%' }}>
@@ -548,7 +558,7 @@ export default function ChatTeset() {
                 <hr />
 
                 {/* 메시지 영역 */}
-                <div style={{ overflow: "scroll", overflowX: 'hidden', height: '2000%' }}>
+                <div id="space" ref={mySpaceRef} style={{ overflow: "scroll", overflowX: 'hidden', height: '2000%' }}>
                   {messages.map((msg, index) => (
                     <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
                       {msg.msg ? (
