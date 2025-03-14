@@ -7,7 +7,6 @@ import { ThemeProvider } from '@mui/material/styles';
 
 /* jsx import */
 import SideBar from './SideBar.jsx';
-import Chatting from './Chatting.jsx';
 import Report_Write from './Report_Write.jsx';
 import Report_View from './Report_View.jsx';
 import Board from './Board.jsx';
@@ -27,7 +26,7 @@ export default function Test( props ){
                 <SideBar />
 
                 <Routes>
-                    <Route path="/" element={ <Chatting /> }></Route>
+                    <Route path="/" element={ <ChatTeset /> }></Route>
                     <Route path="/chatting" element={ <ChatTeset /> }></Route>
                     <Route path="/report/write" element={ <Report_Write /> }></Route>
                     <Route path="/report/view" element={ <Report_View /> }></Route>
