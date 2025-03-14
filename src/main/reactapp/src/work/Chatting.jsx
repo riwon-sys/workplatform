@@ -217,88 +217,74 @@ useEffect(() => {
     };
   }, [chatRoomCreated]);
 */
-  const [socketMessage, setSocketMessage] = useState([])
-  useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8080/chatConnect');
-    
-    console.log(selectedRoomId)
-    socket.onopen = () => {
-      console.log('채팅방 소켓 연결 성공');
-      const send = {
-        rno: selectedRoomId,
-        mstype: 3,
-        mno: mno
-      };
-      socket.send(JSON.stringify(send));
-      setIsSocketOpen(true);
-    };
-    socket.onmessage = (event) => {
-      console.log('Received message:', event.data);
-      const message = JSON.parse(event.data);
-      console.log('Parsed message:', message);
-  
-      if (message.mstype === 5) {
-        setSocketMessage(message);  // mstype이 5일 경우 상태 변경
-         const [socketMessage, setSocketMessage] = useState([])
-  }
-  useEffect(() => {
-    const socket = new WebSocket('ws://localhost:8080/chatConnect');
-    
-    console.log(selectedRoomId)
-    socket.onopen = () => {
-      console.log('채팅방 소켓 연결 성공');
-      const send = {
-        rno: selectedRoomId,
-        mstype: 3,
-        mno: mno
-      };
+const [socketMessage, setSocketMessage] = useState([]);  // 상태 변수 선언
+const [responseMsg, setResponseMsg] = useState(null);  // 새로운 상태 변수로 선언
 
-    socket.send(JSON.stringify(send));
-      setIsSocketOpen(true);
+useEffect(() => {
+  const socket = new WebSocket('ws://localhost:8080/chatConnect');
+  
+  console.log(selectedRoomId);
+  
+  // 소켓이 열리면
+  socket.onopen = () => {
+    console.log('채팅방 소켓 연결 성공');
+    const send = {
+      rno: selectedRoomId,
+      mstype: 3,
+      mno: mno
     };
+    socket.send(JSON.stringify(send));  // 메시지 전송
+    setIsSocketOpen(true);  // 소켓 연결 상태 설정
+  };
 
-    socket.onmessage = (event) => {
-      console.log('Received message:', event.data);
-      const message = JSON.parse(event.data);
-      console.log('Parsed message:', message);
-  
-      if (message.mstype === 5) {
-        setSocketMessage(message);  // mstype이 5일 경우 상태 변경
-        resposeMsg = 5
-      }
-    };
-    
-    });
-  
-    socket.onerror = (error) => {
-      console.error('채팅방 소켓 오류 발생:', error);
-    };
-  
-    socket.onclose = (event) => {
-      console.log('채팅방 소켓 연결 종료', event);
-      setIsSocketOpen(false);
-    };
-  
-    setClientSocket(socket);  // 소켓 상태 설정
-    return () => socket.close();  // 컴포넌트가 언마운트되면 소켓 닫기
-  }, [selectedRoomId]);  // 빈 배열로 useEffect는 최초 한번만 실행
-  
+  // 메시지를 받으면
+  socket.onmessage = (event) => {
+    console.log('Received message:', event.data);
+    const message = JSON.parse(event.data);  // 서버로부터 받은 메시지 파싱
+    console.log('Parsed message:', message);
 
-  // 채팅방 선택
- // 채팅방 선택
+    // mstype이 5인 경우 처리
+    if (message.mstype === 5) {
+      setSocketMessage(message);  // 상태 업데이트
+      setResponseMsg(5);  // responseMsg 상태 업데이트 (5로 설정)
+    }
+  };
+
+  // 소켓 연결 오류 처리
+  socket.onerror = (error) => {
+    console.error('채팅방 소켓 오류 발생:', error);
+  };
+
+  // 소켓 연결 종료 시 처리
+  socket.onclose = (event) => {
+    console.log('채팅방 소켓 연결 종료', event);
+    setIsSocketOpen(false);  // 소켓 연결 종료 상태 설정
+  };
+
+  setClientSocket(socket);  // 소켓 상태 설정
+
+  // 컴포넌트가 언마운트되면 소켓 종료
+  return () => {
+    socket.close();
+  };
+}, [selectedRoomId, mno]);  // selectedRoomId와 mno가 변경될 때마다 실행
+
+
+// 채팅방 선택
+// 채팅방 선택
 const handleRoomSelect = (roomId) => {
-  console.log(roomId);
+console.log(roomId);
 
-  if (clientSocket) {
-    clientSocket.close(); // 기존 소켓 종료
-  }
+if (clientSocket) {
+  clientSocket.close(); // 기존 소켓 종료
+}
 
-  // selectedRoomId가 단일 값일 경우 roomId를 직접 설정
-  setSelectedRoomId(roomId);
-  console.log(selectedRoomId) // roomId 가 안들어와
- 
-  
-  setMessages([]); // 메시지 초기화
+// selectedRoomId가 단일 값일 경우 roomId를 직접 설정
+setSelectedRoomId(roomId);
+console.log(selectedRoomId) // roomId 가 안들어와
+
+
+setMessages([]); // 메시지 초기화
 };
 
 
@@ -632,5 +618,6 @@ const deleteRoom = async (rno) => {
     </div>
   );
 };
+
 
 export default Chatting;
