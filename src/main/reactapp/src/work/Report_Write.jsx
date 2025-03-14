@@ -2,21 +2,30 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import BasicSelect from './BasicSelect';
 
 const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(5),
-    textAlign: 'center',
-    height: '100%',
-  }));
+  backgroundColor: '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(5),
+  textAlign: 'center',
+  height: '100%',
+}));
+
+const [age, setAge] = React.useState('');
+
+const handleChange = (event) => {
+  setAge(event.target.value);
+};
 
 export default function Report_Write(){
     return(<>
         <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
           <Grid container spacing={0} sx={{ height: '100%' }}> 
             <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>
-              <Item sx={{ overflow: 'scroll' }} >
+              <Item sx={{ overflow: 'scroll', overflowX: 'hidden'  }} >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }} >
                   <h1 style={{ margin: '0 auto' }} > 일일 업무 보고서 </h1>
                   
@@ -31,8 +40,14 @@ export default function Report_Write(){
                         </tr>
                       </thead>
 
-                      <tbody style={{ height: '80px' }} >
+                      <tbody >
                         <tr>
+                          <td>
+                            
+                          </td>
+                          
+                        </tr>
+                        <tr style={{ height: '80px' }} >
                           <td> <img /> </td>
                           <td> <img /> </td>
                           <td> <img /> </td>
@@ -72,46 +87,59 @@ export default function Report_Write(){
 
                         <tr>
                           <th style={{ width: '5%', backgroundColor: '#eeeeee' }} > 오전 </th>   
-                          <td></td>   
-                          <td></td>   
+                          <td style={{ width: '60%' }} > 
+                            <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }} />
+                          </td>  
+                          <td style={{ width: '20%' }} > 
+                            <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }} /> 
+                          </td>    
                         </tr>
 
                         <tr>
                           <th style={{ width: '5%', backgroundColor: '#eeeeee' }} > 오후 </th> 
-                          <td></td>  
-                          <td></td>  
+                          <td style={{ width: '60%' }} > 
+                            <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }} />
+                          </td>  
+                          <td style={{ width: '20%' }} > 
+                            <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }} /> 
+                          </td>  
                         </tr>
 
                         <tr style={{ height: '15%' }} >
-                          <th style={{ width: '15%', backgroundColor: '#eeeeee' }} > 미실시 사항 </th>
+                          <th style={{ width: '15%', backgroundColor: '#eeeeee' }} > 미실시 내역 </th>
                           <td colSpan={3} >
-                            
+                            <textarea style={{ width: '95%', height: '80%', border: 'none', resize: 'none' }} />
                           </td>  
                         </tr>
 
                         <tr style={{ height: '15%' }} >
                           <th style={{ width: '15%', backgroundColor: '#eeeeee' }} > 특이 사항 </th>
                           <td colSpan={3} >
-                            
+                            <textarea style={{ width: '95%', height: '80%', border: 'none', resize: 'none' }} />
                           </td>  
                         </tr>
 
                         <tr style={{ height: '15%' }} >
                           <th style={{ width: '15%', backgroundColor: '#eeeeee' }} > 예정 사항 </th>
                           <td colSpan={3} >
-                            
+                           <textarea style={{ width: '95%', height: '80%', border: 'none', resize: 'none',}} />
                           </td>  
                         </tr>
                       </thead>
                     </table>
-
+                    
                   </form>
-
+                  <div style={{  }} >
+                    <Button variant="contained" color="info" sx={{ mt: 3 }} >
+                      <Link style={{ color: 'white' }} > 등록 </Link>
+                    </Button>
+                  </div>
+                  
               </Item>
             </Grid>
           </Grid>
         </Box>
-            
+        
     </>)
 }
     

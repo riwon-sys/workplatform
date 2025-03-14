@@ -10,9 +10,6 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     color: theme.palette.text.secondary,
     height: '100%', // 높이 설정 추가
-    ...theme.applyStyles('dark', {
-      backgroundColor: '#1A2027',
-    }),
 }));
 
 export default function Report_View() {
