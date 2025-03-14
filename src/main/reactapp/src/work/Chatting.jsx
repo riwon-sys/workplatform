@@ -16,6 +16,7 @@ const Chatting = () => {
   const [mNameList, setMnameList] = useState([]) // 채팅방에 추가된 회원의 이름 목록
 
 
+  const resposeMsg = 0;
 
   // 브라우저 입장 시 접속되는 소켓
   // WebSocket 연결 함수
@@ -48,6 +49,8 @@ const Chatting = () => {
       const initMessage = { type: 'join', message: '클라이언트가 연결됨' };
       totalConnect.send(JSON.stringify(initMessage));  // 서버에 초기 메시지 전송
     };
+
+  
     
     /////////////////
     // WebSocket 오류 발생 시
@@ -65,6 +68,17 @@ const Chatting = () => {
 
     setTotalSocket(totalConnect);
   };
+
+  // WebSocket 연결을 useEffect로 관리
+useEffect(() => {
+  connectTotalWebSocket(); // 처음에는 연결 시도
+
+  return () => {
+    if (totalSocket) {
+      totalSocket.close(); // 컴포넌트 언마운트 시 연결 종료
+    }
+  };
+}, []);
 
  
   // 파일 서버로 전달
@@ -225,8 +239,36 @@ const Chatting = () => {
   
       if (message.mstype === 5) {
         setSocketMessage(message);  // mstype이 5일 경우 상태 변경
+         const [socketMessage, setSocketMessage] = useState([])
+  }
+  useEffect(() => {
+    const socket = new WebSocket('ws://localhost:8080/chatConnect');
+    
+    console.log(selectedRoomId)
+    socket.onopen = () => {
+      console.log('채팅방 소켓 연결 성공');
+      const send = {
+        rno: selectedRoomId,
+        mstype: 3,
+        mno: mno
+      };
+
+    socket.send(JSON.stringify(send));
+      setIsSocketOpen(true);
+    };
+
+    socket.onmessage = (event) => {
+      console.log('Received message:', event.data);
+      const message = JSON.parse(event.data);
+      console.log('Parsed message:', message);
+  
+      if (message.mstype === 5) {
+        setSocketMessage(message);  // mstype이 5일 경우 상태 변경
+        resposeMsg = 5
       }
     };
+    
+    });
   
     socket.onerror = (error) => {
       console.error('채팅방 소켓 오류 발생:', error);
