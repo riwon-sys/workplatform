@@ -1,34 +1,31 @@
-import { useEffect, useState } from "react"
-import axios from 'axios';
-export default function Board(){
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid2';
 
-     // [1] 컴포넌트 최초 실행될때 (딱 1번) 실행하는 생명주기 함수
-     useEffect(()=>{
-        console.log('컴포넌트 실행될때 딱 한번 실행')
-        onRead();//컴포넌트가 열릴때 axios와 통신하여 데이터 가져옴
-     })
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    height: '100%',
+    color: theme.palette.text.secondary,
+    ...theme.applyStyles('dark', {
+      backgroundColor: '#1A2027',
+    }),
+  }));
 
-     //[2]axios 이용하여 서버와 통신
-     const onRead = async()=>{
-        const response = await axios.get('http://localhost:8080/work/board')
-        console.log(response.data);
-        setBoard(response.data); // 서버로부터 받은 모든 상태변수 저장'
-     }
-
-     //[3]서버로부터 받은 결과를 저장하는 상태변수
-     const [board,setBoard] =useState([ ])
-     console.log(board)
-
-
-
+export default function Report_Write(){
     return(<>
-        <h2> 게시판 </h2>
-        <table>
-            <thead>
-                <tr><th>번호</th><th></th><th>번호</th></tr>
-            </thead>
-
-        </table>
+        <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
+          <Grid container spacing={0} sx={{ height: '100%' }}> 
+            {/* size: 너비 조정 */}
+            <Grid size={7} sx={{ height: '100%', margin: '0 auto'  }}>
+              <Item>size=7</Item>
+            </Grid>
+          </Grid>
+        </Box>
+            
     </>)
 }
     
