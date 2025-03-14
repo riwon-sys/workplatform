@@ -79,8 +79,11 @@ export default function ChatTeset() {
     };
 
     totalConnect.onmessage = (e) => {
-      console.log(e.target.value)
-      console.log(e)
+      console.log(e.data)
+    
+      if(e.data == 5){
+        findAllRoom()
+      }
 
     }
     // WebSocket 오류 발생 시
@@ -197,6 +200,12 @@ export default function ChatTeset() {
       if (response.data === true) {
         alert("채팅방 등록 성공");
         findAllRoom()
+        const mappingobj ={
+          rname : rname,
+          mstype : 5
+        }
+        totalSocket.send(JSON.stringify(mappingobj))
+        
       }
 
     } catch (e) {

@@ -10,5 +10,14 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 @EnableWebSocket
 public class TotalSocketMapping implements WebSocketConfigurer {
 
+    @Autowired
+    private  TotalSocket totalSocket;
+
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(totalSocket, "/totalConnect")
+               .setAllowedOriginPatterns("*");
+
+        System.out.println("전체 소켓 접속");
     }
 }
