@@ -2,7 +2,6 @@ import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -12,10 +11,12 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import { Button, Typography } from '@mui/material';
 import { Link } from "react-router-dom";
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import DescriptionIcon from '@mui/icons-material/Description';
+import DvrTwoToneIcon from '@mui/icons-material/DvrTwoTone';
 
 const drawerWidth = 240;
 
@@ -91,18 +92,28 @@ export default function MiniDrawer() {
   };
 
   const menuItems = [
-    { name: "메신저", path: "/chatting", icon: <MailIcon /> },
-    { name: "보고서 작성", path: "/report/write", icon: <InboxIcon /> },
-    { name: "보고서 현황", path: "/report/view", icon: <InboxIcon /> },
-    { name: "게시판", path: "/board", icon: <InboxIcon /> },
+    { name: "메신저", path: "/chatting", icon: <QuestionAnswerIcon /> },
+    { name: "보고서 작성", path: "/report/write", icon: <NoteAddIcon /> },
+    { name: "보고서 현황", path: "/report/view", icon: <DescriptionIcon /> },
+    { name: "게시판", path: "/board", icon: <DvrTwoToneIcon /> },
   ];
 
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
-      
-
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start', p: 2 }}>
+            <img
+              src="/logo.png"
+              alt="Logo"
+              style={{ width: open ? 40 : 30, height: open ? 40 : 30, transition: "0.3s" }}
+            />
+            {open && (
+              <Typography variant="h6" sx={{ ml: 1, fontWeight: 'bold' }}>
+                워크 플랫폼
+              </Typography>
+            )}
+          </Box>
           <IconButton onClick={toggleDrawer}>
             {open ? <ChevronLeftIcon /> : <MenuIcon sx={{ marginRight: 0.5 }} />}
           </IconButton>
@@ -146,7 +157,7 @@ export default function MiniDrawer() {
           ) : (
             <>
               <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }} >
-                로그인 해주세요.
+                로그인 &nbsp;해주세요.
               </Typography>
               <Button variant="contained" color="info" >
                 <Link style={{ color: 'white' }} > 로그인 </Link>

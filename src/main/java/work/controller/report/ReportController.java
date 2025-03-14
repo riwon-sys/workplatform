@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/report")
+@CrossOrigin( "http://localhost:5173" )
 public class ReportController {
 
     private final ReportService reportService;
@@ -22,6 +23,9 @@ public class ReportController {
     @PostMapping
     public boolean write(@RequestBody ReportDto reportDto){
         System.out.println("ReportController.write");
+
+        int mno = 100004;
+        reportDto.setMno(mno);
         System.out.println("reportDto = " + reportDto);
         return reportService.write(reportDto);
     } // f end
