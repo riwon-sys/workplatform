@@ -230,28 +230,31 @@ create table report(
     rpname varchar(50) not null,
 	rpam varchar(300) not null,
     rppm varchar(300) not null,
+    rpamnote varchar(300) not null,
+    rppmnote varchar(300) not null,
     rpunprocessed varchar(300),
     rpsignificant varchar(300),
     rpexpected varchar(300),
-    rpdate varchar(300),
+    rpdate datetime default now(),
+    rpstate bool default true,
     mno int unsigned,
     constraint primary key( rpno ),
     constraint foreign key( mno ) references member ( mno ) on update cascade on delete cascade
 );
 
 -- 보고서 샘플 추가
-INSERT INTO report( rpname, rpam, rppm, rpunprocessed, rpsignificant, rpexpected, rpdate, mno ) VALUES
-( 'uuid1-보고서', '오전 업무1', '오후 업무1', '미처리 내역1', '특이사항1', '예정사항1', '2025-02-01 12:30:11', 100006 ),
-( 'uuid2-보고서', '오전 업무2', '오후 업무2', '미처리 내역2', '특이사항2', '예정사항2', '2025-02-02 12:30:11', 200015 ),
-( 'uuid3-보고서', '오전 업무3', '오후 업무3', '미처리 내역3', '특이사항3', '예정사항3', '2025-02-03 12:30:11', 300024 ),
-( 'uuid4-보고서', '오전 업무4', '오후 업무4', '미처리 내역4', '특이사항4', '예정사항4', '2025-02-04 12:30:11', 400030 ),
-( 'uuid5-보고서', '오전 업무5', '오후 업무5', '미처리 내역5', '특이사항5', '예정사항5', '2025-02-05 12:30:11', 500039 );
+INSERT INTO report( rpname, rpam, rppm, rpamnote, rppmnote, rpunprocessed, rpsignificant, rpexpected, rpdate, mno ) VALUES
+( 'uuid1-보고서', '오전 업무1', '오후 업무1', '오전 비고1', '오후 비고 1', '미처리 내역1', '특이사항1', '예정사항1', '2025-02-01 12:30:11', 100006 ),
+( 'uuid2-보고서', '오전 업무2', '오후 업무2', '오전 비고2', '오후 비고 2', '미처리 내역2', '특이사항2', '예정사항2', '2025-02-02 12:30:11', 200015 ),
+( 'uuid3-보고서', '오전 업무3', '오후 업무3', '오전 비고3', '오후 비고 3', '미처리 내역3', '특이사항3', '예정사항3', '2025-02-03 12:30:11', 300024 ),
+( 'uuid4-보고서', '오전 업무4', '오후 업무4', '오전 비고4', '오후 비고 4', '미처리 내역4', '특이사항4', '예정사항4', '2025-02-04 12:30:11', 400030 ),
+( 'uuid5-보고서', '오전 업무5', '오후 업무5', '오전 비고5', '오후 비고 5', '미처리 내역5', '특이사항5', '예정사항5', '2025-02-05 12:30:11', 500039 );
 
 # 결재 테이블
 create table approval(
 	apno int unsigned auto_increment,
     apdate datetime default null,
-    apstate int default 0,
+    apstate bool default true,
     apsignature varchar(50) not null,
     mno int unsigned,			-- 승인할 회원번호
     rpno int unsigned,

@@ -9,6 +9,8 @@ public class ReportDto {
     private String rpname;
     private String rpam;
     private String rppm;
+    private String rpamnote;
+    private String rppmnote;
     private String rpunprocessed;
     private String rpsignificant;
     private String rpexpected;
