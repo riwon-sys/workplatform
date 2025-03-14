@@ -16,23 +16,25 @@ import theme from './theme';
 /* css */
 import './App.css';
 
+import ChatTeset from "../chatsocket/chat/ChattingTest.jsx";
+
 export default function Test( props ){
     return(<>
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <BrowserRouter>
-                <Box sx={{ display: 'flex' }}>
-                    <SideBar />
+        <BrowserRouter>
+            <Box sx={{ display: 'flex' }}>
+                <SideBar />
 
-                    <Routes>
-                        <Route path="/" element={ <Chatting /> }></Route>
-                        <Route path="/chatting" element={ <Chatting /> }></Route>
-                        <Route path="/report/write" element={ <Report_Write /> }></Route>
-                        <Route path="/report/view" element={ <Report_View /> }></Route>
-                        <Route path="/board" element={ <Board /> }></Route>
-                    </Routes>
-                </Box>
-            </BrowserRouter>
+                <Routes>
+                    <Route path="/" element={ <Chatting /> }></Route>
+                    <Route path="/chatting" element={ <ChatTeset /> }></Route>
+                    <Route path="/report/write" element={ <Report_Write /> }></Route>
+                    <Route path="/report/view" element={ <Report_View /> }></Route>
+                    <Route path="/board" element={ <Board /> }></Route>
+                </Routes>
+            </Box>
+        </BrowserRouter>
         </ThemeProvider>
     </>)
 } // f end
