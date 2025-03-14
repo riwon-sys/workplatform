@@ -2,7 +2,6 @@ drop database if exists workplatform;
 create database workplatform;
 use workplatform;
 
-t
 # 직원 테이블 생성
 CREATE TABLE member (
     mno INT UNSIGNED,                                                # unsigned : ( 1: 인사팀 2: 마케팅팀 3: 영업팀 4: 운영팀 5:기술팀 6:디자인팀 7:재무팀) (맨 앞자리 부서/ 자바에서부여)
@@ -207,15 +206,15 @@ INSERT INTO fileshare (fname, flocation, pno) VALUES
 
 # 게시판 테이블
 create table board(
-        pid int unsigned auto_increment primary key,
+	pid int unsigned auto_increment,
     title varchar(50) not null,
     content varchar(1000) not null,
     views int unsigned default 0,
     mno int unsigned,
+    constraint primary key( pid ),
     foreign key(mno)references member(mno)
     on update cascade
     on delete cascade
-
 );
 
 # 게시판 샘플데이터 삽입

@@ -1,12 +1,9 @@
 package work.model.dto;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.*;
 import work.model.dto.room.RoomDto;
 
 import java.util.List;
-
 
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor

@@ -164,6 +164,3 @@ INSERT INTO approval( apdate, apstate, apsignature, mno, rpno ) VALUES
 ( '2025-02-04 23:30:11', 1, '서명3', 100001, 1 ),
 ( '2025-02-05 23:30:11', 1, '서명4', 200012, 2 ),
 ( null , 0, '서명5', 200010, 2 );
-
-
-
