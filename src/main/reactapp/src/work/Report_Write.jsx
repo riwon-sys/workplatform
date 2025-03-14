@@ -15,6 +15,9 @@ const Item = styled(Paper)(({ theme }) => ({
     }),
   }));
 
+
+  
+
 export default function Report_Write(){
     return(<>
         <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
