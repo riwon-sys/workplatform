@@ -1,6 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
+/* MUI */
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid2';
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    height: '100%',
+    color: theme.palette.text.secondary,
+    ...theme.applyStyles('dark', {
+      backgroundColor: '#1A2027',
+    }),
+  }));
+
+
 const mno = "100001";
 
 const Chatting = () => {
@@ -471,122 +490,138 @@ const deleteRoom = async (rno) => {
   }
 }
   return (
-    <div style={{margin :"100px"}}>
-     <div>
-        <h1>채팅 애플리케이션</h1>
-        <p>전체 소켓 연결 상태: {totalSocket ? (totalSocket.readyState === WebSocket.OPEN ? '연결됨' : '연결 안됨') : '연결 안됨'}</p>
-      </div>
-      <h2>채팅방 선택</h2>
-      <div>
-        {rooms.map((room, index) => (
-          <button key={index} onClick={() => handleRoomSelect(room.rno)}>
-            {room.rname} | {room.rno} 방
-          </button>
-        ))}
-      </div>
-
-      {selectedRoomId && (
-        <div>
+    <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <Grid container spacing={0} sx={{ height: '100%' }}> 
+        {/* size: 너비 조정 */}
+        <Grid size={3.5} sx={{ height: '100%' }}> 
+          <Item>size=3.5</Item>
+        </Grid>
+        <Grid size={5} sx={{ height: '100%'  }}>
+          <Item>
           <div>
-            <h3>선택된 채팅방: {`채팅방 ${selectedRoomId}`}</h3>
-            
-          </div>
-         
-          <div>
-          {mNameList && (
-            mNameList.map((m, index) => (
-                <div key={index}>
-                {m} 님 입장
-                </div>
-            ))
-            )}
+            <div>
+                <h1>채팅 애플리케이션</h1>
+                <p>전체 소켓 연결 상태: {totalSocket ? (totalSocket.readyState === WebSocket.OPEN ? '연결됨' : '연결 안됨') : '연결 안됨'}</p>
+              </div>
+              <h2>채팅방 선택</h2>
+              <div>
+                {rooms.map((room, index) => (
+                  <button key={index} onClick={() => handleRoomSelect(room.rno)}>
+                    {room.rname} | {room.rno} 방
+                  </button>
+                ))}
+              </div>
 
-          {messages.map((msg, index) => (
-            <div key={index}>
-              {/* 텍스트 메시지일 경우 */}
-              {msg.msg ? (
-                `${msg.mname}: ${msg.msg}`
-              ) : (
-                // 파일 메시지일 경우 다운로드 링크 표시
-                <>
-                  {msg.mname}:{" "}
-                  {msg.fname}
+              {selectedRoomId && (
+                <div>
+                  <div>
+                    <h3>선택된 채팅방: {`채팅방 ${selectedRoomId}`}</h3>
+                    
+                  </div>
                 
-                  {/* 파일 다운로드 링크 */}
-                  <a href={`http://localhost:8080/msg/download?file=${encodeURIComponent(msg.fname)}`} download={msg.fname}>
-                    {msg.fname} 다운로드
-                  </a>
-                </>
+                  <div>
+                  {mNameList && (
+                    mNameList.map((m, index) => (
+                        <div key={index}>
+                        {m} 님 입장
+                        </div>
+                    ))
+                    )}
+
+                  {messages.map((msg, index) => (
+                    <div key={index}>
+                      {/* 텍스트 메시지일 경우 */}
+                      {msg.msg ? (
+                        `${msg.mname}: ${msg.msg}`
+                      ) : (
+                        // 파일 메시지일 경우 다운로드 링크 표시
+                        <>
+                          {msg.mname}:{" "}
+                          {msg.fname}
+                        
+                          {/* 파일 다운로드 링크 */}
+                          <a href={`http://localhost:8080/msg/download?file=${encodeURIComponent(msg.fname)}`} download={msg.fname}>
+                            {msg.fname} 다운로드
+                          </a>
+                        </>
+                      )}
+                    </div>
+                  ))}
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="메시지를 입력하세요"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
+                  <button onClick={sendMessage}>등록</button>
+                  {/* 파일 첨부 버튼 */}
+              <button type="button" onClick={handleFileInputClick}>
+                파일첨부
+              </button>
+
+                  <input 
+                    type="file"
+                    ref={fileInputRef} 
+                    style={{ display: 'none' }}  // 파일 input 숨기기
+                    onChange={handleFileChange} // 파일 선택 시 상태 업데이트
+                  />
+
+                  {/* 선택된 파일이 있으면 sendFile 버튼 활성화 */}
+                  {fileObject && (
+                    <button type="button" onClick={sendFile}>
+                      파일 전송
+                    </button>
+                  )}
+                  <br/>
+                  {/* 기존 채팅방에 회원추가*/}
+                  <button type="button" onClick={() => addMember(selectedRoomId)}> 회원추가 </button>
+
+                  {/* 채팅방 삭제 */}
+                  <button type="button" onClick={() => deleteRoom(selectedRoomId)}> 채팅방 삭제 </button>
+
+                </div>
               )}
+
+              <h2>채팅방 생성</h2>
+              <table>
+                <thead>
+                  <tr>
+                    <th>회원번호</th>
+                    <th>회원이름</th>
+                    <th>회원직급</th>
+                    <th>
+                      <button type='button' onClick={creatR}>채팅방 생성</button>
+              
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {members.map((m) => (
+                    <tr key={m.mno}>
+                      <td>
+                        <input
+                          type="checkbox"
+                          value={m.mno}
+                          onChange={() => handleCheckboxChange(m.mno)}
+                        />
+                        {m.mno}
+                      </td>
+                      <td>{m.mname}</td>
+                      <td>{m.mrank}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-           ))}
-          </div>
-          <input
-            type="text"
-            placeholder="메시지를 입력하세요"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          />
-          <button onClick={sendMessage}>등록</button>
-          {/* 파일 첨부 버튼 */}
-      <button type="button" onClick={handleFileInputClick}>
-        파일첨부
-      </button>
+          </Item>
+        </Grid>
 
-          <input 
-            type="file"
-            ref={fileInputRef} 
-            style={{ display: 'none' }}  // 파일 input 숨기기
-            onChange={handleFileChange} // 파일 선택 시 상태 업데이트
-          />
-
-          {/* 선택된 파일이 있으면 sendFile 버튼 활성화 */}
-          {fileObject && (
-            <button type="button" onClick={sendFile}>
-              파일 전송
-            </button>
-          )}
-          <br/>
-          {/* 기존 채팅방에 회원추가*/}
-          <button type="button" onClick={() => addMember(selectedRoomId)}> 회원추가 </button>
-
-          {/* 채팅방 삭제 */}
-          <button type="button" onClick={() => deleteRoom(selectedRoomId)}> 채팅방 삭제 </button>
-
-        </div>
-      )}
-
-      <h2>채팅방 생성</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>회원번호</th>
-            <th>회원이름</th>
-            <th>회원직급</th>
-            <th>
-              <button type='button' onClick={creatR}>채팅방 생성</button>
-      
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {members.map((m) => (
-            <tr key={m.mno}>
-              <td>
-                <input
-                  type="checkbox"
-                  value={m.mno}
-                  onChange={() => handleCheckboxChange(m.mno)}
-                />
-                {m.mno}
-              </td>
-              <td>{m.mname}</td>
-              <td>{m.mrank}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+        <Grid size={3.5} sx={{ height: '100%' }}> 
+          <Item>size=3.5</Item>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
