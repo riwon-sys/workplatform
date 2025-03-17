@@ -40,6 +40,9 @@ export default function Test( props ){
                     <Route path="/board/detail" element={ <BoardDetail /> }></Route>
                     <Route path="/report/Form" element={ <Report_Form /> } ></Route>
                     <Route path="/report/Update" element={ <Report_Update /> } ></Route>
+                    <Route path="/report/list" element={ <Report_List /> } ></Route>
+                    <Route path="/report/Form" element={ <Report_Form /> } ></Route>
+                    <Route path="/report/Update" element={ <Report_Update /> } ></Route>
                 </Routes>
             </Box>
         </BrowserRouter>

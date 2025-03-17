@@ -15,9 +15,6 @@ const Item = styled(Paper)(({ theme }) => ({
   height: '100%',
 }));
 
-
-  
-
 export default function Report_Write(){
   const [ formData, setFormData ] = useState({
     rpname: '일일 업무 보고서' ,
