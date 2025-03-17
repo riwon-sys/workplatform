@@ -125,25 +125,6 @@ export default function Report_Form( { formData, formDataChange, isReadOnly, rpn
           </tr>
         </thead>
       </table>
-{/* 
-      <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-        {
-          !isReadOnly && pagename == 'write' ? 
-            <Button variant="contained" color="info" sx={{ mt: 3 }} onClick={ onPost } >
-              등록
-            </Button> :
-            !isReadOnly && pagename == 'view' ? 
-              <>
-                <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
-                  수정
-                </Button> 
-                <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
-                  삭제
-                </Button> 
-              </>
-              : '' 
-        }
-      </div> */}
     </form>
   </>);
 } // f end

@@ -10,6 +10,7 @@ import * as React from 'react';
 import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -34,6 +35,10 @@ export default function Report_View() {
       rpsignificant: '', 
       rpexpected: '' 
     });
+
+  const formDataChange = (e) => {
+    setFormData( { ...formData, [ e.target.name ] : e.target.value } )
+  } // f end
   
   useEffect( () => { onFindByRpno(); }, [] )
 
@@ -66,7 +71,8 @@ export default function Report_View() {
             <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px', padding: 5 }} >
               { rpno && Number(rpno) > 0 ? 
               <>
-                <Report_Form formData={ formData } isReadOnly={ false } rpno={ rpno } />
+                <Report_Form formData={ formData } formDataChange={ formDataChange } 
+                  isReadOnly={ true } rpno={ rpno } />
  
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
                   <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
