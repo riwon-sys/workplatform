@@ -17,4 +17,6 @@ public class MemberDto {
     private  int mtype; // default 0 : 사원 현재 상태 (0: 활동, 1: 부재, 2: 외부업무, 3: 퇴사)
     private  String mrank; // not null 사원 직급 : 사원 - 대리 - 팀장 - 부서장
     private  String mprofile; // default 'default.jpg' : 프로필 사진 기본값 설정
+
+    private  String department;
 }

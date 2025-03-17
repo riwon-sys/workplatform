@@ -14,12 +14,11 @@ import Avatar from '@mui/material/Avatar';
 import ImageIcon from '@mui/icons-material/Image';
 import Checkbox from '@mui/material/Checkbox';
 
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import { Input } from '@mui/material';
+import { ListItemButton, ListItemIcon, ListSubheader, Collapse, Divider, Typography } from '@mui/material';
+import ExpandMore from '@mui/icons-material/ExpandMore';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import InboxIcon from '@mui/icons-material/Inbox';
+import StarBorder from '@mui/icons-material/StarBorder';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -118,7 +117,7 @@ export default function ChatTeset() {
   }, []);  // 빈 배열을 전달하여 한 번만 실행
 
   // [2-1] 파일 메세지 
-    // 파일 객체
+  // 파일 객체
   const [fileObject, setFileObject] = useState();
   const [chattingDto, setChattingDto] = useState({
 
@@ -190,39 +189,39 @@ export default function ChatTeset() {
         });
 
         // 파일 업로드 성공
-         console.log("파일 업로드 성공:", response.data);
+        console.log("파일 업로드 성공:", response.data);
 
-      // 서버에서 응답 받은 파일 경로와 파일명
-      const { flocation, fname } = response.data;
+        // 서버에서 응답 받은 파일 경로와 파일명
+        const { flocation, fname } = response.data;
 
-      console.log(fname)
-      console.log(response.data)
-      // 파일 정보를 messages에 바로 추가
-      const newMessage = {
-        rno: selectedRoomId,
-        msg: "", // 텍스트 메시지 비워두기
-        mstype: 1, // 파일 메시지 타입
-        mname: "test", // 메시지 작성자 (예시)
-        mno: mno,
-        flocation : response.data, // 서버로부터 받은 파일 경로
-        fname, // 서버로부터 받은 파일명
-      };
-      console.log(newMessage)
+        console.log(fname)
+        console.log(response.data)
+        // 파일 정보를 messages에 바로 추가
+        const newMessage = {
+          rno: selectedRoomId,
+          msg: "", // 텍스트 메시지 비워두기
+          mstype: 1, // 파일 메시지 타입
+          mname: "test", // 메시지 작성자 (예시)
+          mno: mno,
+          flocation: response.data, // 서버로부터 받은 파일 경로
+          fname, // 서버로부터 받은 파일명
+        };
+        console.log(newMessage)
 
-      // 메시지 목록에 파일 메시지 추가
-      setMessages(prevMessages => [...prevMessages, newMessage]);
+        // 메시지 목록에 파일 메시지 추가
+        setMessages(prevMessages => [...prevMessages, newMessage]);
 
-      // 상태 업데이트 후 WebSocket으로 메시지 전송
-      if (clientSocket && isSocketOpen && selectedRoomId) {
-        console.log("파일 메시지 전송:", newMessage);
-        clientSocket.send(JSON.stringify(newMessage)); // 소켓으로 메시지 전송
-        setFileObject(null); // 파일 객체 초기화
+        // 상태 업데이트 후 WebSocket으로 메시지 전송
+        if (clientSocket && isSocketOpen && selectedRoomId) {
+          console.log("파일 메시지 전송:", newMessage);
+          clientSocket.send(JSON.stringify(newMessage)); // 소켓으로 메시지 전송
+          setFileObject(null); // 파일 객체 초기화
+        }
+
+      } catch (error) {
+        console.error("파일 업로드 실패:", error);
       }
-      
-    } catch (error) {
-      console.error("파일 업로드 실패:", error);
     }
-  }
   }
   // [3-1] 컴포넌트 마운트 시 현재 로그인된 회원번호가 가입된 채팅방 불러오기
   useEffect(() => { findAllRoom() }, []);
@@ -344,7 +343,7 @@ export default function ChatTeset() {
   };
 
   // [6-3] 채팅방 정보 서버로부터 받기
-  
+
 
   // [7-1] 메세지 서버로 전달
   const sendMessage = () => {
@@ -449,7 +448,7 @@ export default function ChatTeset() {
         alert("추가성공");
         setMnameList(response.data); // 추가된 회원명 목록으로 상태 업데이트
         console.log(response.data)
-        
+
         setMnameList([]); // 초기화
       }
     } catch (e) {
@@ -484,6 +483,46 @@ export default function ChatTeset() {
       mySpaceRef.current.scrollTop = mySpaceRef.current.scrollHeight;
     }
   }, [messages]); // messages가 변경될 때마다 실행됨
+
+
+
+
+  const [open, setOpen] = useState({}); // 부서별 드롭다운 상태 관리
+  const [selectedMnos, setSelectedMnos] = useState([]); // 체크박스 선택 상태 관리
+
+  // 부서별로 회원들을 그룹화하는 함수
+  const groupMembersByDepartment = () => {
+    return members.reduce((acc, member) => {
+      const department = member.department;  // 부서를 기준으로 그룹화
+      if (!acc[department]) {
+        acc[department] = [];
+      }
+      acc[department].push(member);
+      return acc;
+    }, {});
+  };
+
+  // 부서별로 그룹화된 회원들
+  const groupedMembers = groupMembersByDepartment();
+
+  // 부서의 드롭다운을 열고 닫는 함수
+  const handleClick = (department) => {
+    setOpen((prevOpen) => ({
+      ...prevOpen,
+      [department]: !prevOpen[department],  // 해당 부서의 드롭다운 상태를 토글
+    }));
+  };
+
+  // // 체크박스 상태 변경 함수
+  // const handleCheckboxChange = (mno) => {
+  //   setSelectedMnos((prevMnos) => {
+  //     if (prevMnos.includes(mno)) {
+  //       return prevMnos.filter(item => item !== mno);  // 체크 해제
+  //     } else {
+  //       return [...prevMnos, mno];  // 체크
+  //     }
+  //   });
+  // };
 
   return (
     <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -693,43 +732,57 @@ export default function ChatTeset() {
 
             <div style={{ overflow: "scroll", overflowX: 'hidden', height: '800px', height: '94.8%' }}>
 
-              <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-                {members.map((m) => (
-                  // map 함수 내에서 return을 직접 사용하기 전에 괄호로 묶어야 합니다.
-                  <ListItem key={m.mno} alignItems="flex-start">
-                    <ListItemAvatar>
-                      {/* Avatar를 회원의 이미지로 동적으로 설정 */}
-                      <Avatar alt={m.mname} src={m.avatarUrl || '/static/images/avatar/1.jpg'} />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={`${m.mname} (${m.mno})`} // 회원명과 회원번호
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            component="span"
-                            variant="body2"
-                            sx={{ color: 'text.primary', display: 'inline' }}
-                          >
-                            {m.mname} {/* 회원명 */}
-                          </Typography>
-                          {" - "}
-                          {m.mrank} {/* 회원 직급 */}
 
-                          <input type='checkbox'
-                            value={m.mno}
-                            checked={mnoList.includes(m.mno)}
-                            onChange={() => handleCheckboxChange(m.mno)} />
-                        </React.Fragment>
-                      }
-                    />
-                    <Divider variant="inset" component="li" />
-                  </ListItem>
+              <List
+                sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
+                component="nav"
+                aria-labelledby="nested-list-subheader"
+                subheader={
+                  <ListSubheader component="div" id="nested-list-subheader">
+                    사원목록
+                  </ListSubheader>
+                }
+              >
+                {Object.keys(groupedMembers).map((department) => (
+                  <div key={department}>
+                    {/* 부서명 드롭다운 버튼 */}
+                    <ListItemButton onClick={() => handleClick(department)}>
+                      <ListItemIcon>
+                        <InboxIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={department} /> {/* 부서명 */}
+                      {open[department] ? <ExpandLess /> : <ExpandMore />} {/* 드롭다운 화살표 */}
+                    </ListItemButton>
+                    <Collapse in={open[department]} timeout="auto" unmountOnExit>
+                      <List component="div" disablePadding>
+                        {groupedMembers[department].map((m) => (
+                          <ListItemButton sx={{ pl: 4 }} key={m.mno}>
+                            <ListItemAvatar>
+                              <Avatar alt={m.mname} src={m.avatarUrl || '/static/images/avatar/1.jpg'} />
+                            </ListItemAvatar>
+                            <ListItemText
+                              primary={`${m.mname} (${m.mno})`} // 회원명과 사원번호
+                              secondary={m.mrank} // 직급
+                            />
+                            <ListItemIcon>
+                              <input type='checkbox'
+                                value={m.mno}
+                                checked={mnoList.includes(m.mno)}
+                                onChange={() => handleCheckboxChange(m.mno)} />
+                            </ListItemIcon>
+                            <Divider variant="inset" component="li" />
+                          </ListItemButton>
+                        ))}
+                      </List>
+                    </Collapse>
+                  </div>
                 ))}
               </List>
             </div>
 
           </Item>
         </Grid>
+
       </Grid>
     </Box>
 
