@@ -8,19 +8,14 @@ export default function Report_List() {
   const [ reports, setReports ] = useState( [] );
   const navigate = useNavigate();
   
-  // 로그인 세션 대용 mno
-  const mno = 100004;
-  
   useEffect( () => { onFindByMno() }, [] );
 
   const onFindByMno = async ( props ) => {
     const response = await axios.get( `http://localhost:8080/report` )
-    setReports( [ ...reports, response.data ] );
+    setReports( ...reports, response.data );
   } // f end
 
-  const onView = ( rpno ) => {
-    navigate( `/report/view/rpno` );
-  } // f end
+  const onView = ( rpno ) => { navigate( `/report/view/${rpno}` ); } // f end
 
   return (
     <Table hoverRow sx={{ '& tr > *:not(:first-of-type)': { textAlign: 'center' } }} >
@@ -34,13 +29,13 @@ export default function Report_List() {
       </thead>
       <tbody>
         {
-        reports != [] ?
+        reports.length > 0 ?
           reports.map( ( row )  => (
             <tr key = { row.rpno } onClick={ () => onView( row.rpno ) } >
               <td> { row.rpno } </td>
               <td style={{ textAlign: 'left' }} >{ row.rpname }</td>
-              <td> { row.rpdate } </td>
               <td> { row.mname } </td>
+              <td> { row.rpdate } </td>
             </tr>
           )) :
             <tr>

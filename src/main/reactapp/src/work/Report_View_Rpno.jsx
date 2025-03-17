@@ -8,7 +8,6 @@ import Report_Form from './Report_Form';
 import * as React from 'react';
 import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles';
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -19,24 +18,9 @@ const Item = styled(Paper)(({ theme }) => ({
     height: '100%', // 높이 설정 추가
 }));
 
-export default function Report_View() {
+export default function Report_View_Rpno() {
 
   const rpno = useParams().rpno;
-
-  const [ formData, setFormData ] = useState({
-      rpname: '일일 업무 보고서' ,
-      rpam: '',
-      rppm: '',
-      rpamnote: '',
-      rppmnote: '',
-      rpunprocessed: '',
-      rpsignificant: '', 
-      rpexpected: '' 
-    });
-  
-  const formDataChange = (e) => {
-    setFormData( { ...formData, [ e.target.name ] : e.target.value } )
-  } // f end
 
   return (
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -59,18 +43,7 @@ export default function Report_View() {
           <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>
             <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px', padding: 5 }} >
               { rpno && Number(rpno) > 0 ? 
-              <>
-                <Report_Form formData={ formData } isReadOnly={ false } rpno={ rpno } />
- 
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-                  <Button variant="contained" color="info" sx={{ mt: 3 }} >
-                      수정
-                  </Button>
-                  <Button variant="contained" color="info" sx={{ mt: 3 }} >
-                      삭제
-                  </Button>
-                </div>
-              </> : 
+              <Report_Form  pagename = { 'view' } rpno = { 'rpno' } /> : 
               null }
             </Item>
           </Grid>

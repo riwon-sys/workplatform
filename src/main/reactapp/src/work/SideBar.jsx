@@ -102,7 +102,7 @@ export default function MiniDrawer() {
     <Box sx={{ display: 'flex', height: '100vh' }}>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start', p: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start', p: 1, pr: 2 }}>
             <img
               src="/logo.png"
               alt="Logo"

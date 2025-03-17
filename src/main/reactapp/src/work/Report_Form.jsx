@@ -1,26 +1,15 @@
 import Button from '@mui/material/Button';
 import BasicSelect from './BasicSelect';
 
-export default function Report_Form(){
-  const [ formData, setFormData ] = useState( { rpname: '일일 보고서' , rpam: '', rppm: '', 
-    rpamnote: '' , rppmnote: '', rpunprocessed: '', rpsignificant: '', 
-    rpexpected: '' } );
-  const formDataChange = (e) => {
-    console.log( e.target.value );
-    setFormData( { ...formData, [ e.target.name ] : e.target.value } )
-  } // f end
+export default function Report_Form( { formData, formDataChange, isReadOnly, rpno } ){
+  
+  useEffect( () => { onFindByRpno(); }, [] )
 
-  const onPost = async ( props ) => {
+  const onFindByRpno = async ( props ) => {
     try{
-      console.log( formData );
-      const response = await axios.post( 'http://localhost:8080/report', formData );
-      if( response.data == true ){
-        alert('등록 성공');
-        setFormData( { rpname: '일일 보고서', rpam: '', rppm: '', rpamnote: '', rppmnote: '',
-          rpunprocessed: '', rpsignificant: '', rpexpected: '' } );
-      }else{ alert('등록 실패') }
+      const response = await axios.get( `http://localhost:8080/report/view?rpno=${rpno}` );
     }catch( e ){ console.log( e ) }
-  } // f end 
+  } // f end
 
   let today = new Date();
   let year = today.getFullYear(); // 년도
@@ -93,11 +82,13 @@ export default function Report_Form(){
             <th style={{ width: '5%', backgroundColor: '#eeeeee' }} > 오전 </th>   
             <td style={{ width: '60%' }} > 
               <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }} 
-                type="text" name="rpam" value={ formData.rpam } onChange={ formDataChange } />
+                type="text" name="rpam" value={ formData.rpam } onChange={ formDataChange } 
+                readOnly={isReadOnly} />
             </td>  
             <td style={{ width: '20%' }} > 
               <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }}
-                type="text" name="rpamnote" value={ formData.rpamnote } onChange={ formDataChange } /> 
+                type="text" name="rpamnote" value={ formData.rpamnote } onChange={ formDataChange } 
+                readOnly={isReadOnly} /> 
             </td>    
           </tr>
 
@@ -105,11 +96,13 @@ export default function Report_Form(){
             <th style={{ width: '5%', backgroundColor: '#eeeeee' }} > 오후 </th> 
             <td style={{ width: '60%' }} > 
               <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }} 
-                type="text" name="rppm" value={ formData.rppm } onChange={ formDataChange } />
+                type="text" name="rppm" value={ formData.rppm } onChange={ formDataChange } 
+                readOnly={isReadOnly} />
             </td>  
             <td style={{ width: '20%' }} > 
               <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }}
-                type="text" name="rppmnote" value={ formData.rppmnote } onChange={ formDataChange } /> 
+                type="text" name="rppmnote" value={ formData.rppmnote } onChange={ formDataChange }
+                readOnly={isReadOnly} /> 
             </td>
           </tr>
 
@@ -117,7 +110,8 @@ export default function Report_Form(){
             <th style={{ width: '15%', backgroundColor: '#eeeeee' }} > 미실시 내역 </th>
             <td colSpan={3} >
               <textarea style={{ width: '97%', height: '80%', border: 'none', resize: 'none' }} 
-                type="text" name="rpunprocessed" value={ formData.rpunprocessed } onChange={ formDataChange } />
+                type="text" name="rpunprocessed" value={ formData.rpunprocessed } onChange={ formDataChange } 
+                readOnly={isReadOnly} />
             </td>  
           </tr>
 
@@ -125,7 +119,8 @@ export default function Report_Form(){
             <th style={{ width: '15%', backgroundColor: '#eeeeee' }} > 특이 사항 </th>
             <td colSpan={3} >
               <textarea style={{ width: '97%', height: '80%', border: 'none', resize: 'none' }}
-                type="text" name="rpsignificant" value={ formData.rpsignificant } onChange={ formDataChange } />
+                type="text" name="rpsignificant" value={ formData.rpsignificant } onChange={ formDataChange }
+                readOnly={isReadOnly} />
             </td>  
           </tr>
 
@@ -133,17 +128,31 @@ export default function Report_Form(){
             <th style={{ width: '15%', backgroundColor: '#eeeeee' }} > 예정 사항 </th>
             <td colSpan={3} >
               <textarea style={{ width: '97%', height: '85%', border: 'none', resize: 'none' }}
-                type="text" name="rpexpected" value={ formData.rpexpected } onChange={ formDataChange } />
+                type="text" name="rpexpected" value={ formData.rpexpected } onChange={ formDataChange } 
+                readOnly={isReadOnly} />
             </td>  
           </tr>
         </thead>
       </table>
-      
+{/* 
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
+        {
+          !isReadOnly && pagename == 'write' ? 
+            <Button variant="contained" color="info" sx={{ mt: 3 }} onClick={ onPost } >
+              등록
+            </Button> :
+            !isReadOnly && pagename == 'view' ? 
+              <>
+                <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
+                  수정
+                </Button> 
+                <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
+                  삭제
+                </Button> 
+              </>
+              : '' 
+        }
+      </div> */}
     </form>
-    <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-      <Button variant="contained" color="info" sx={{ mt: 3 }} onClick={ onPost } >
-        등록
-      </Button>
-    </div>
   </>);
 } // f end
