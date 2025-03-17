@@ -23,7 +23,11 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Report_View() {
 
-  const rpno = useParams().rpno;
+  const { rpno } = useParams();
+
+  useEffect(() => { 
+    if ( rpno ) { onFindByRpno(); } 
+  }, [ rpno ]);
 
   const [ formData, setFormData ] = useState({
       rpname: '일일 업무 보고서' ,
@@ -43,6 +47,7 @@ export default function Report_View() {
   useEffect( () => { onFindByRpno(); }, [] )
 
   const onFindByRpno = async ( props ) => {
+    if( !rpno ){ return; }
     try{
       const response = await axios.get( `http://localhost:8080/report/view?rpno=${rpno}` );
       setFormData( response.data );
