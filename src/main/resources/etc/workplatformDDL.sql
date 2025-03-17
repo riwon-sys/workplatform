@@ -271,7 +271,7 @@ INSERT INTO approval( apdate, apstate, apsignature, mno, rpno ) VALUES
 ( '2025-02-05 23:30:11', 1, '서명4', 200012, 2 ),
 ( null , 0, '서명5', 200010, 2 );
 
-select * from report;
+select rp.*, m.mname from report rp inner join member m on rp.mno = m.mno where rp.mno = 100004 && rpstate = true;
 select * from approval;
 
 

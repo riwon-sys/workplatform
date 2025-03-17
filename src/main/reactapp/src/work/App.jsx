@@ -16,6 +16,7 @@ import theme from './theme';
 import './App.css';
 
 import ChatTeset from "../chatsocket/chat/ChattingTest.jsx";
+import Report_List from "./Report_List.jsx";
 import BoardDetail from "./BoardDetail.jsx";
 
 export default function Test( props ){
@@ -32,6 +33,7 @@ export default function Test( props ){
                     <Route path="/report/write" element={ <Report_Write /> }></Route>
                     <Route path="/report/view" element={ <Report_View /> }></Route>
                     <Route path="/board" element={ <Board /> }></Route>
+                    <Route path="/report/list" element={ <Report_List /> } ></Route>
                     <Route path="/board/detail" element={ <BoardDetail /> }></Route>
                 </Routes>
             </Box>
