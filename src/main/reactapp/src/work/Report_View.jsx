@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Report_Form from './Report_Form';
 import * as React from 'react';
 import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -58,6 +58,9 @@ export default function Report_View() {
     }catch( e ){ console.log( e ) }
   } // f end
 
+  const navigate = useNavigate();
+  const onUpdate = async () => { await navigate( `/report/update/${rpno}` ) }
+
   return (
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Grid container spacing={0} sx={{ height: '100%' }}> 
@@ -84,7 +87,7 @@ export default function Report_View() {
                   isReadOnly={ true } rpno={ rpno } />
  
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
+                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate } >
                       수정
                   </Button>
                   <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >

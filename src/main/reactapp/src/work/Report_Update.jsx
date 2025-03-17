@@ -54,7 +54,6 @@ export default function Report_Update() {
     try{
       const response = await axios.get( `http://localhost:8080/report/view?rpno=${rpno}` );
       setFormData( response.data );
-      console.log( response.data.mrank )
     }catch( e ){ console.log( e ) }
   } // f end
 
@@ -81,14 +80,14 @@ export default function Report_Update() {
               { rpno && Number(rpno) > 0 ? 
               <>
                 <Report_Form formData={ formData } formDataChange={ formDataChange } 
-                  isReadOnly={ true } rpno={ rpno } />
+                  isReadOnly={ false } rpno={ rpno } />
  
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
                   <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
                       수정
                   </Button>
                   <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
-                      삭제
+                      취소
                   </Button>
                 </div>
               </> : 
