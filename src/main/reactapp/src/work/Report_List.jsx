@@ -1,40 +1,52 @@
-import * as React from 'react';
 import Table from '@mui/joy/Table';
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(1, 159, 6.0, 24, 4.0),
-  createData(2, 237, 9.0, 37, 4.3),
-  createData(3, 262, 16.0, 24, 6.0),
-  createData(4, 305, 3.7, 67, 4.3),
-  createData(5, 356, 16.0, 49, 3.9),
-];
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Report_List() {
+
+  const [ reports, setReports ] = useState( [] );
+  const navigate = useNavigate();
+  
+  // 로그인 세션 대용 mno
+  const mno = 100004;
+  
+  useEffect( () => { onFindByMno() }, [] );
+
+  const onFindByMno = async ( props ) => {
+    const response = await axios.get( `http://localhost:8080/report` )
+    setReports( [ ...reports, response.data ] );
+  } // f end
+
+  const onView = ( rpno ) => {
+    navigate( `/report/view/rpno` );
+  } // f end
+
   return (
-    <Table hoverRow>
+    <Table hoverRow sx={{ '& tr > *:not(:first-of-type)': { textAlign: 'center' } }} >
       <thead>
         <tr>
-          <th style={{ width: '40%' }}>Column width (40%)</th>
-          <th> 번호 </th>
-          <th> 보고서명 </th>
-          <th> 날짜 </th>
-          <th>  </th>
+          <th style={{ width: '10%' }}> 번호 </th>
+          <th style={{ width: '50%' }}> 보고서명 </th>
+          <th style={{ width: '20%' }}> 보고자명 </th>
+          <th style={{ width: '20%' }}> 날짜 </th>
         </tr>
       </thead>
       <tbody>
-        {rows.map((row) => (
-          <tr key={row.name}>
-            <td>{row.name}</td>
-            <td>{row.calories}</td>
-            <td>{row.fat}</td>
-            <td>{row.carbs}</td>
-            <td>{row.protein}</td>
-          </tr>
-        ))}
+        {
+        reports != [] ?
+          reports.map( ( row )  => (
+            <tr key = { row.rpno } onClick={ () => onView( row.rpno ) } >
+              <td> { row.rpno } </td>
+              <td style={{ textAlign: 'left' }} >{ row.rpname }</td>
+              <td> { row.rpdate } </td>
+              <td> { row.mname } </td>
+            </tr>
+          )) :
+            <tr>
+              <td colSpan={4} > 작성한 보고서가 없습니다. </td>
+            </tr>
+        }
       </tbody>
     </Table>
   );

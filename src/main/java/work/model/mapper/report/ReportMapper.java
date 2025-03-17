@@ -12,9 +12,11 @@ public interface ReportMapper {
             "VALUES ( #{rpname}, #{rpam}, #{rppm}, #{rpamnote}, #{rppmnote}, " +
             "#{rpunprocessed}, #{rpsignificant}, #{rpexpected}, #{mno} )" )
     boolean write(ReportDto reportDto);
-    @Select( "SELECT * FROM report WHERE mno = #{mno} && rpstate = true" )
+    @Select( "SELECT m.mname, rp.* FROM report rp INNER JOIN member m on rp.mno = m.mno " +
+            "WHERE rp.mno = #{mno} && rpstate = true" )
     List<ReportDto> findByMno( int mno );
-    @Select( "SELECT * FROM report WHERE rpno = #{rpno} && rpstate = true" )
+    @Select( "SELECT m.mname, m.mrank, rp.* FROM report rp INNER JOIN member m on rp.mno = m.mno " +
+            "WHERE rpno = #{rpno} && rpstate = true" )
     ReportDto findByRpno( int rpno );
     @Update( "UPDATE report SET rpname = #{rpname}, rpam = #{rpam}, rppm = #{rppm}, " +
             "rpamnote = #{rpamnote}, rppmnote = #{rppmnote} " +

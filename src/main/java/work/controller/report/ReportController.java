@@ -32,7 +32,8 @@ public class ReportController {
 
     // 2. 회원별 보고서 조회
     @GetMapping
-    public List<ReportDto> findByMno(@RequestParam int mno){
+    public List<ReportDto> findByMno(){
+        int mno = 100004;
         System.out.println("ReportController.findAll");
         return reportService.findByMno(mno);
     } // f end

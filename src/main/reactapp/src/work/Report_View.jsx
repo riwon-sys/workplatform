@@ -3,6 +3,10 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 import Report_List from './Report_List';
+import Report_Write from './Report_Write';
+
+import * as React from 'react';
+import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -22,12 +26,18 @@ export default function Report_View() {
               <Item>
                 <h1> 보고서 목록 </h1>
                 <br/>
-                <Report_List />
+                <React.StrictMode>
+                  <StyledEngineProvider injectFirst>
+                    <CssVarsProvider>
+                      <Report_List />
+                    </CssVarsProvider>
+                  </StyledEngineProvider>
+                </React.StrictMode>
               </Item>
             </Grid>
             <Grid size={7} sx={{ height: '100%' }}>
               <Item>
-                
+                <Report_Write />
               </Item>
             </Grid>
           </Grid>
