@@ -19,7 +19,6 @@ import Report_Form from "./Report_Form.jsx";
 import './App.css';
 import Report_Update from "./Report_Update.jsx";
 
-import ChatTeset from "../chatsocket/chat/ChattingTest.jsx";
 import BoardDetail from "./BoardDetail.jsx";
 
 export default function Test( props ){
@@ -35,7 +34,15 @@ export default function Test( props ){
                     <Route path="/chatting" element={ <ChatTeset /> }></Route>
                     <Route path="/report/write" element={ <Report_Write /> }></Route>
                     <Route path="/report/view" element={ <Report_View /> }></Route>
+                    <Route path="/report/view/:rpno" element={ <Report_View /> }></Route>
                     <Route path="/board" element={ <Board /> }></Route>
+                    <Route path="/report/list" element={ <Report_List /> } ></Route>
+                    <Route path="/board/detail" element={ <BoardDetail /> }></Route>
+                    <Route path="/report/Form" element={ <Report_Form /> } ></Route>
+                    <Route path="/report/Update" element={ <Report_Update /> } ></Route>
+                    <Route path="/report/list" element={ <Report_List /> } ></Route>
+                    <Route path="/report/Form" element={ <Report_Form /> } ></Route>
+                    <Route path="/report/Update" element={ <Report_Update /> } ></Route>
                 </Routes>
             </Box>
         </BrowserRouter>
