@@ -21,7 +21,7 @@ import java.util.List;
 @RequestMapping("/work/board")
 @RequiredArgsConstructor
 public class BoardController {
-    //서비스 사용하기 위한 객체주입
+    //서비스 사용하기 위한 객체주입gg
    private final BoardService boardService;
 
     //[1]게시물 전체 조회
