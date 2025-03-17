@@ -32,26 +32,26 @@ const Item = styled(Paper)(({ theme }) => ({
 
 }));
 
+// 샘플 로그인 아이디(나중에 스프링에서 session 으로 가져오기)
 const mno = "100001";
 export default function ChatTeset() {
-  const [rooms, setRooms] = useState([{ rno: "", rname: "", mnoList: [] }]);
+  const [rooms, setRooms] = useState([{ rno: "", rname: "", mnoList: [] }]); // 채팅방 목록
   const [members, setMembers] = useState([]); // 전체 회원 목록
   const [mnoList, setMnoList] = useState([]); // 선택된 회원 번호 목록
   const [selectedRoomId, setSelectedRoomId] = useState(null); // 클라이언트가 선택한 방번호
   const [message, setMessage] = useState(''); // 클라이언트가 입력한 메세지
-  const [messages, setMessages] = useState([]); // 클라이언트가 선택한 채팅방의 메세지 목록
+  const [messages, setMessages] = useState([]); // 클라이언트가 선택한 채팅방의 기존 메세지 목록
   const [clientSocket, setClientSocket] = useState(null); // WebSocket 연결
-  const [isSocketOpen, setIsSocketOpen] = useState(false); // WebSocket 채팅
+  const [isSocketOpen, setIsSocketOpen] = useState(false); // WebSocket 연결 상태 확인
   const [addMembers, setAddMembers] = useState({ mnoList: [], rno: "" }) // 채팅방에 추가할 회원번호 목록과 방번호
   const [mNameList, setMnameList] = useState([]) // 채팅방에 추가된 회원의 이름 목록
 
 
 
-  // 브라우저 입장 시 접속되는 소켓
-  // WebSocket 연결 함수
+  // [1-1] 브라우저 입장 시 접속되는 연결되는 소켓
   const [totalSocket, setTotalSocket] = useState(null);
   useEffect(() => {
-    connectTotalWebSocket(); // 처음에는 연결 시도
+    connectTotalWebSocket(); // 소켓 연결 시도
     return () => {
       if (totalSocket) {
         totalSocket.close(); // 컴포넌트 언마운트 시 연결 종료
@@ -60,7 +60,7 @@ export default function ChatTeset() {
   }, []);
 
 
-  // WebSocket 연결 함수
+  // [1-2] WebSocket 연결 함수
   const connectTotalWebSocket = () => {
     // WebSocket이 이미 연결된 상태라면 다시 연결하지 않음
     if (totalSocket && totalSocket.readyState === WebSocket.OPEN) {
@@ -78,11 +78,12 @@ export default function ChatTeset() {
 
     };
 
+    // 서버로부터 5를 반환받으면(채팅방이 새로 생성되면)
     totalConnect.onmessage = (e) => {
       console.log(e.data)
-    
-      if(e.data == 5){
-        findAllRoom()
+
+      if (e.data == 5) {
+        findAllRoom() // 소켓에 연결된 세션들의 채팅방 목록 갱신
       }
 
     }
@@ -99,9 +100,11 @@ export default function ChatTeset() {
       }
     };
 
+    // 소켓 연결 설정
     setTotalSocket(totalConnect);
   };
 
+  // [1-3] 컴포넌트 마운트 시 소켓 연결
   useEffect(() => {
     // 컴포넌트가 마운트될 때 WebSocket 연결을 한 번만 시도
     connectTotalWebSocket();
@@ -114,205 +117,38 @@ export default function ChatTeset() {
     };
   }, []);  // 빈 배열을 전달하여 한 번만 실행
 
-  // 파일 서버로 전달
+  // [2-1] 파일 메세지 
+    // 파일 객체
+  const [fileObject, setFileObject] = useState();
   const [chattingDto, setChattingDto] = useState({
+
     mstype: 1,       // 메시지 타입 (1: 파일)
     rno: selectedRoomId,
-    mname: "test", // 보내는 사람의 이름
+    mname: "test", // 보내는 사람의 이름 (나중에 서버에서 현재 로그인된 mno 의 이름으로 반환받기)
     fname: "파일 전송 중", // 메시지 내용
-    mno: mno,        // 회원 번호
+    mno: mno,        // 회원 번호 (나중에 서버에서 현재 로그인된 mno 로 받아오기)
     msg: "",         // 텍스트 메시지 내용
     flocation: ""    // 파일 경로
   });
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef(null); // 파일 선택 input 참조
 
-  const [fileObject, setFileObject] = useState();
-  // 컴포넌트 마운트 시 현재 로그인된 회원번호가 가입된 채팅방 불러오기
-  useEffect(() => { findAllRoom() }, []);
 
-  // 서버에서 채팅방 목록 response 받기
-  const findAllRoom = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/chatingroom");
 
-      // 해당 사용자가 참여 중인 채팅 목록이 존재 시
-      if (response.data) {
-        setRooms(response.data);
-      }
-    } catch (e) {
-      console.log("채팅방 조회 오류 : ", e);
-    }
-  };
-  /*
-     // 채팅방이 새로 생성되면, 소켓에 리렌더링을 요청하는 함수
-     useEffect(() => {
-      if (totalSocket && rooms.length > 0) {
-        // 채팅방 목록이 업데이트되면 전체 소켓에 리렌더링을 알리기 위해 메시지 보내기
-        totalSocket.send(JSON.stringify({ action: 'refreshRooms', rooms }));
-      }
-    }, [rooms, totalSocket]); // rooms가 업데이트될 때마다 실행됨
-  */
-
-  // 컴포넌트 마운트 시 전체 회원 불러오기
-  useEffect(() => { findAllMember() }, []);
-
-  const findAllMember = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/chatingroom/member");
-
-      if (response.data) {
-        setMembers(response.data);
-      }
-    } catch (e) {
-      console.log("회원 조회 오류 : ", e);
-    }
-  };
-
-  // 채팅방 생성 시 참여할 회원 번호 체크박스 여러개 선택 처리
-  const handleCheckboxChange = (mno) => {
-
-    setMnoList((prevMnoList) => {
-      if (prevMnoList.includes(mno)) {
-        return prevMnoList.filter(item => item !== mno); // 이미 선택된 번호는 삭제
-      } else {
-        return [...prevMnoList, mno]; // 새로 선택된 번호는 추가
-      }
-    });
-   // setMnoList([])
-
-  };
-
-  // 채팅방 생성
-  const creatR = async () => {
-    // 생성할 채팅방 이름 입력받기
-    const rname = prompt("채팅방 이름")
-
-    const obj = {
-      rname: rname,
-      mnoList: mnoList,
-    };
-
-    console.log("채팅방에 참여할 mno" + mnoList)
-
-    try {
-      const response = await axios.post("http://localhost:8080/chatingroom", obj);
-
-      if (response.data === true) {
-        alert("채팅방 등록 성공");
-        findAllRoom()
-        const mappingobj ={
-          rname : rname,
-          mstype : 5
-        }
-        totalSocket.send(JSON.stringify(mappingobj))
-        
-      }
-
-    } catch (e) {
-      console.log("채팅방 생성 오류 : ", e);
-    }
-
-    setMnoList([])
-  };
-
-  // 채팅방 접속 WebSocket
-  const connectChatRoomSocket = (roomId) => {
-    const socket = new WebSocket('ws://localhost:8080/chatConnect');
-
-    socket.onopen = () => {
-      console.log('채팅방 소켓 연결 성공');
-      setIsSocketOpen(true);
-      const joinMessage = {
-        rno: roomId,
-        mstype: 3,
-      };
-      socket.send(JSON.stringify(joinMessage));
-    };
-
-    socket.onerror = (error) => {
-      console.error('채팅방 소켓 오류 발생:', error);
-    };
-
-    socket.onclose = (event) => {
-      console.log('채팅방 소켓 연결 종료', event);
-      setIsSocketOpen(false);
-    };
-
-    setClientSocket(socket);
-  };
-
-  // 채팅방 선택
-  const handleRoomSelect = (roomId) => {
-    if (clientSocket) {
-      clientSocket.close(); // 기존 소켓 종료
-    }
-    setSelectedRoomId(roomId);
-    connectChatRoomSocket(roomId); // 새로운 소켓 연결
-    setMessages([]); // 메시지 초기화
-  };
-
-  // 메세지 서버로 전달
-  const sendMessage = () => {
-
-    // 만약 소켓이 연결된 상태이고 방번호가 존재한다면
-    if (clientSocket && isSocketOpen && selectedRoomId) {
-
-      if (clientSocket.readyState == WebSocket.OPEN) {
-        // 서버로 보낼 메세지 객체
-        const messageData = {
-          rno: selectedRoomId,
-          msg: message,
-          mstype: 0,
-          mname: 'test',
-          mno: mno,
-        };
-        console.log(messageData)
-        // 소켓으로 서버에 전달
-
-        clientSocket.send(JSON.stringify(messageData)); // 메시지 보내기
-
-        // 보내는 메시지 화면에 출력
-        /*const setMessage = {
-          mname: 'test',
-          msg: message,
-          fname : chattingDto.fname,
-          flocation : chattingDto.flocation,
-          isSent: true,  
-        };
-    */
-
-        setMessage(''); // 메시지 입력창 초기화
-      } else {
-        console.log('WebSocket 연결이 완료되지 않았습니다. 연결을 기다립니다...');
-
-        // WebSocket 연결이 완료될 때까지 일정 간격으로 확인
-        const interval = setInterval(() => {
-          if (clientSocket.readyState === WebSocket.OPEN) {
-            clearInterval(interval);  // 연결되면 인터벌을 종료
-            clientSocket.send(JSON.stringify(messageData));  // 메시지 전송
-            setMessage('');  // 메시지 입력창 초기화
-          }
-        }, 100);  // 100ms마다 연결 상태 확인
-      }
-    } else {
-      console.log('WebSocket이 연결되지 않았거나 채팅방이 선택되지 않았습니다.');
-    }
-  };
-  // 파일 선택 버튼 클릭 시 input을 트리거하는 함수
+  // [2-2] 파일 선택 버튼 클릭 시 input을 트리거
   const handleFileInputClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
 
-  // 파일 선택 후 상태 업데이트
+  // [2-3] 파일 선택 후 상태 업데이트
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setFileObject(file); // 선택된 파일을 상태로 업데이트
     }
   };
-
+  // [2-4] 파일타입 메세지 전송 상태 처리 (소켓)
   useEffect(() => {
     if (chattingDto.flocation) {
       // chattingDto.flocation 값이 변경되면 WebSocket을 통해 전송
@@ -333,6 +169,7 @@ export default function ChatTeset() {
     }
   }, [clientSocket, isSocketOpen, selectedRoomId]);
 
+  // [2-5] 파일 메세지 서버로 전송 (multipart/form-data 타입으로)
   const sendFile = async () => {
     if (clientSocket && fileObject && selectedRoomId && mno) {
       // FormData로 파일 준비
@@ -342,51 +179,218 @@ export default function ChatTeset() {
       formData.append("mstype", 1); // 파일 메시지 타입
       formData.append("mno", mno);
 
+      console.log(formData);
+
       try {
         // 파일 서버에 업로드
-        const response = await axios.post('http://localhost:8080/msg', formData, {
+        const response = await axios.post('http://localhost:8080/api/msg/file/upload', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           }
         });
 
         // 파일 업로드 성공
-        console.log("파일 업로드 성공:", response.data);
+         console.log("파일 업로드 성공:", response.data);
 
+      // 서버에서 응답 받은 파일 경로와 파일명
+      const { flocation, fname } = response.data;
 
-        // 서버에서 응답 받은 파일 경로를 상태 업데이트
-        setChattingDto((prevDto) => ({
-          ...prevDto,
-          flocation: response.data.flocation, // 서버로부터 받은 파일 경로
-          fname: response.data.fname // 서버로부터 받은 파일명
-        }));
+      console.log(fname)
+      console.log(response.data)
+      // 파일 정보를 messages에 바로 추가
+      const newMessage = {
+        rno: selectedRoomId,
+        msg: "", // 텍스트 메시지 비워두기
+        mstype: 1, // 파일 메시지 타입
+        mname: "test", // 메시지 작성자 (예시)
+        mno: mno,
+        flocation : response.data, // 서버로부터 받은 파일 경로
+        fname, // 서버로부터 받은 파일명
+      };
+      console.log(newMessage)
 
-        // 상태 업데이트 후 WebSocket으로 메시지 전송
-        if (clientSocket && isSocketOpen && selectedRoomId) {
-          const messageData = {
-            rno: selectedRoomId,
-            msg: "", // 텍스트는 비워두고, 파일로 전송
-            mstype: 1, // 파일 메시지 타입
-            mname: "test", // 메시지 작성자 (예시로 'test')
-            mno: mno,
-            flocation: response.data.flocation,
-            fname: response.data.fname
-          };
+      // 메시지 목록에 파일 메시지 추가
+      setMessages(prevMessages => [...prevMessages, newMessage]);
 
-          console.log("파일 메시지 전송:", messageData);
-          clientSocket.send(JSON.stringify(messageData)); // 소켓으로 메시지 전송
-          setFileObject("")
-        }
-
-      } catch (error) {
-        console.error("파일 업로드 실패:", error);
+      // 상태 업데이트 후 WebSocket으로 메시지 전송
+      if (clientSocket && isSocketOpen && selectedRoomId) {
+        console.log("파일 메시지 전송:", newMessage);
+        clientSocket.send(JSON.stringify(newMessage)); // 소켓으로 메시지 전송
+        setFileObject(null); // 파일 객체 초기화
       }
+      
+    } catch (error) {
+      console.error("파일 업로드 실패:", error);
     }
   }
+  }
+  // [3-1] 컴포넌트 마운트 시 현재 로그인된 회원번호가 가입된 채팅방 불러오기
+  useEffect(() => { findAllRoom() }, []);
+
+  // [3-2] 서버에서 채팅방 목록 response 받기
+  const findAllRoom = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/chatingroom");
+
+      // 해당 사용자가 참여 중인 채팅 목록이 존재 시
+      if (response.data) {
+        setRooms(response.data); // Rooms 상태 변수에 저장
+      }
+    } catch (e) {
+      console.log("채팅방 조회 오류 : ", e);
+    }
+  };
+
+
+  // [4-1] 컴포넌트 마운트 시 전체 회원 불러오기
+  useEffect(() => { findAllMember() }, []);
+
+  // [4-2] 서버에서 전체 회원목록 받아오기
+  const findAllMember = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/chatingroom/member");
+
+      if (response.data) {
+        setMembers(response.data); // Members 상태 변수에 저장
+      }
+    } catch (e) {
+      console.log("회원 조회 오류 : ", e);
+    }
+  };
+
+  // [5-1] 채팅방 생성 시 참여할 회원 번호 체크박스 여러개 선택 처리
+  const handleCheckboxChange = (mno) => {
+
+    setMnoList((prevMnoList) => {
+      if (prevMnoList.includes(mno)) {
+        return prevMnoList.filter(item => item !== mno); // 이미 선택된 번호는 삭제
+      } else {
+        return [...prevMnoList, mno]; // 새로 선택된 번호는 추가
+      }
+    });
+
+  };
+
+  // [5-2] 채팅방 생성
+  const creatR = async () => {
+    // 생성할 채팅방 이름 입력받기
+    const rname = prompt("채팅방 이름")
+
+    const obj = {
+      rname: rname,
+      mnoList: mnoList,
+    };
+
+    console.log("채팅방에 참여할 mno" + mnoList)
+
+    try {
+      const response = await axios.post("http://localhost:8080/chatingroom", obj);
+
+      if (response.data === true) {
+        alert("채팅방 등록 성공");
+        findAllRoom() // 채팅방 목록 갱신
+        const mappingobj = {
+          rname: rname,
+          mstype: 5 // 채팅방 생성타입을 서버로 보내기
+        }
+        totalSocket.send(JSON.stringify(mappingobj)) // JSON 으로 파싱 후 서버로 전송
+
+      }
+
+    } catch (e) {
+      console.log("채팅방 생성 오류 : ", e);
+    }
+
+    setMnoList([]) // 회원선택 초기화
+  };
+
+  // [6-1] 채팅방 접속 WebSocket
+  const connectChatRoomSocket = (roomId) => {
+    const socket = new WebSocket('ws://localhost:8080/chatConnect');
+
+    socket.onopen = () => {
+      console.log('채팅방 소켓 연결 성공');
+      setIsSocketOpen(true); // 소켓 상태 업데이트
+      const joinMessage = {
+        rno: roomId,
+        mstype: 3, // 채팅방 접속 타입을 서버로 보내기
+      };
+      socket.send(JSON.stringify(joinMessage));
+    };
+
+    // 소켓 오류 시
+    socket.onerror = (error) => {
+      console.error('채팅방 소켓 오류 발생:', error);
+    };
+
+    // 소켓 연결 종료 시
+    socket.onclose = (event) => {
+      console.log('채팅방 소켓 연결 종료', event);
+      setIsSocketOpen(false);
+    };
+
+    // 소켓 상태 업데이트
+    setClientSocket(socket);
+  };
+
+  // [6-2] 채팅방 선택
+  const handleRoomSelect = (roomId) => {
+    if (clientSocket) {
+      clientSocket.close(); // 기존 소켓 종료
+    }
+    setSelectedRoomId(roomId);
+    connectChatRoomSocket(roomId); // 새로운 소켓 연결
+    setMessages([]); // 메시지 초기화
+  };
+
+  // [6-3] 채팅방 정보 서버로부터 받기
+  
+
+  // [7-1] 메세지 서버로 전달
+  const sendMessage = () => {
+
+    // 만약 소켓이 연결된 상태이고 방번호가 존재한다면
+    if (clientSocket && isSocketOpen && selectedRoomId) {
+
+      if (clientSocket.readyState == WebSocket.OPEN) {
+        // 서버로 보낼 메세지 객체
+        const messageData = {
+          rno: selectedRoomId,
+          msg: message,
+          mstype: 0, // 일반 메세지 타입 서버로 전송
+          mname: 'test', // 나중에 세션에 저장된 로그인된 회원으로 변경
+          mno: mno, // 나중에 세션에 저장된 로그인된 회원으로 변경
+        };
+
+        console.log(messageData)
+
+        // 소켓으로 서버에 전달
+        clientSocket.send(JSON.stringify(messageData)); // 메시지 보내기
+
+        setMessage(''); // 메시지 입력창 초기화
+
+      } else {
+        console.log('WebSocket 연결이 완료되지 않았습니다. 연결을 기다립니다...');
+
+        // WebSocket 연결이 완료될 때까지 일정 간격으로 확인
+        const interval = setInterval(() => {
+          if (clientSocket.readyState === WebSocket.OPEN) {
+            clearInterval(interval);  // 연결되면 인터벌을 종료
+            clientSocket.send(JSON.stringify(messageData));  // 메시지 전송
+            setMessage('');  // 메시지 입력창 초기화
+          }
+        }, 100);  // 100ms마다 연결 상태 확인
+      }
+    } else {
+      console.log('WebSocket이 연결되지 않았거나 채팅방이 선택되지 않았습니다.');
+    }
+  };
 
 
 
-  // 소켓으로 받은 메세지 처리
+
+
+  // [7-2] 소켓으로 받은 메세지 처리
   useEffect(() => {
     if (clientSocket && selectedRoomId) { // 만약 소켓이 열려있고 채팅방이 선택됐으면
       clientSocket.onmessage = (event) => { // 해당 소켓이 메세지를 받으면 실행
@@ -411,7 +415,7 @@ export default function ChatTeset() {
     }
   }, [clientSocket, selectedRoomId]); // cilentSocket 이나 채팅방 새로 선택 시마다 리렌더링
 
-  // 기존 채팅방에 회원추가
+  // [8] 기존 채팅방에 회원추가
   const addMember = async (rno) => {
     // 추가할 회원수
     const count = Number(prompt("추가할 회원 수"));
@@ -434,7 +438,7 @@ export default function ChatTeset() {
     try {
       const obj = {
         rno: rno,
-        mnoList: newMnoList,
+        mnoList: newMnoList, // 추가할 회원번호 목록
       };
 
       // 서버로 채팅방에 추가할 회원번호 보내고 회원이름 반환받기
@@ -444,13 +448,19 @@ export default function ChatTeset() {
       if (response.data != null) {
         alert("추가성공");
         setMnameList(response.data); // 추가된 회원명 목록으로 상태 업데이트
+        console.log(response.data)
+        
+        setMnameList([]); // 초기화
       }
     } catch (e) {
       console.log("회원 추가 오류 : ", e);
     }
   };
 
-  // 채팅방 삭제
+
+  console.log(mNameList)
+
+  // [9] 채팅방 삭제
   const deleteRoom = async (rno) => {
     try {
       const response = await axios.delete(`http://localhost:8080/chatingroom?rno=${rno}`)
@@ -465,7 +475,9 @@ export default function ChatTeset() {
   }
 
   const mySpaceRef = useRef(null);
+  console.log(messages)
 
+  // [10] 메세지 입력 시 스크롤 맨 밑으로 고정
   useEffect(() => {
     // 메시지가 변경될 때마다 스크롤을 맨 아래로 이동
     if (mySpaceRef.current) {
@@ -489,13 +501,13 @@ export default function ChatTeset() {
             </div>
             <hr></hr>
 
-            <div style={{margin : " 0 auto", overflow: "scroll", overflowX: 'hidden', height: '94.8%' }}>
-              <div style={{ width : "100%",display: "flex", justifyContent: "center", alignItems: "center" }}>
+            <div style={{ margin: " 0 auto", overflow: "scroll", overflowX: 'hidden', height: '94.8%' }}>
+              <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
                 <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
 
                   {rooms.map((room, index) => (
                     <div>
-                      <ListItem style={{width : "100%"}}>
+                      <ListItem style={{ width: "100%" }}>
                         <ListItemAvatar>
                           <Avatar>
                             <ImageIcon />
@@ -506,7 +518,7 @@ export default function ChatTeset() {
                           primary={`${room.rname} | ${room.rno} 방`} secondary={`${room.rdate}`} />
                       </ListItem>
 
-                      <hr style={{ border: "1px solid #bdbdbd", width : "100%" }} />
+                      <hr style={{ border: "1px solid #bdbdbd", width: "100%" }} />
                     </div>
                   ))}
                 </List>
@@ -528,7 +540,7 @@ export default function ChatTeset() {
                 height: "4.3%"
               }}>
                 {/* 채팅방 정보 */}
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center",marginBottom: "1.5%", textAlign: "center"}}>
+                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "1.5%", textAlign: "center" }}>
                   <h3 style={{ fontSize: "180%" }}>{`채팅방 ${selectedRoomId}`}</h3>
 
                   {/* 기존 채팅방에 회원추가 */}
@@ -562,100 +574,100 @@ export default function ChatTeset() {
                   {messages.map((msg, index) => (
                     <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
                       {msg.msg ? (
-                        
-                          <Card sx={{ minWidth: 100 }} style={{ marginLeft : "5%",width: '450px', textAlign: "start" }}>
-                            <CardContent>
-                              <Typography variant="body2">
-                                <h3 style={{ color: "black" }}>{msg.mname}</h3>
-                                <br />
-                                {msg.msg}
-                              </Typography>
-                            </CardContent>
-                            <CardActions>
-                              <Button size="small">채팅 삭제</Button>
-                            </CardActions>
-                          </Card>
-                        ) : (
-                          <Card sx={{ minWidth: 100 }} style={{marginLeft : "5%", width: '300px', textAlign: "start" }}>
-                            <CardContent>
-                              <Typography variant="body2">
-                                <h3 style={{ color: "black" }}>{msg.mname}</h3>
-                                <br />
-                                {msg.fname}
-                              </Typography>
-                            </CardContent>
-                            <CardActions>
-                              <Button size="small">채팅 삭제</Button>
-                              <Button
-                                href={`http://localhost:8080/msg/download?file=${encodeURIComponent(msg.fname)}`}
-                                download={msg.fname}
-                              >
-                                다운로드
-                              </Button>
-                            </CardActions>
-                          </Card>
+
+                        <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
+                          <CardContent>
+                            <Typography variant="body2">
+                              <h3 style={{ color: "black" }}>{msg.mname}</h3>
+                              <br />
+                              {msg.msg}
+                            </Typography>
+                          </CardContent>
+                          <CardActions>
+                            <Button size="small">채팅 삭제</Button>
+                          </CardActions>
+                        </Card>
+                      ) : (
+                        <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '300px', textAlign: "start" }}>
+                          <CardContent>
+                            <Typography variant="body2">
+                              <h3 style={{ color: "black" }}>{msg.mname}</h3>
+                              <br />
+                              {msg.flocation}
+                            </Typography>
+                          </CardContent>
+                          <CardActions>
+                            <Button size="small">채팅 삭제</Button>
+                            <Button
+                              href={`http://localhost:8080/api/msg/file/download?file=${encodeURIComponent(msg.flocation)}`}
+                              download={msg.fname}
+                            >
+                              다운로드
+                            </Button>
+                          </CardActions>
+                        </Card>
                       )}
                     </div>
                   ))}
                 </div>
-                
-                <div style={{marginBottom : "7%"}}>
-                
-                {/* 메시지 입력칸과  등록 버튼 */}
-                <div style={{ display: 'flex',  marginLeft : "3%" }}>
-                  <Input
-                    type="text"
-                    placeholder="메시지를 입력하세요."
-                    value={message}
-                    variant="outlined"
-                    onChange={(e) => setMessage(e.target.value)}
-                    style={{ width: "60%", marginRight: "10px"}}
-                  />
-                  <Button onClick={sendMessage} variant="contained" color='info'
-                  style={{width : "10%", height : "5%", marginTop : "5%", marginLeft : "2.5%"}}>
-                    등록
-                  </Button>
 
-                  {/* 파일 첨부 버튼 */}
-                <Button
-                  type='button'
-                  component="label"
-                  variant="contained"
-                  startIcon={<CloudUploadIcon />}
-                  onClick={handleFileInputClick}
-                  color='info'
-                  style={{width : "13%", height : "5%", marginTop : "5%", marginLeft : "2.5%"}}
-                >
-                  첨부
-                </Button>
+                <div style={{ marginBottom: "7%" }}>
 
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  style={{ display: 'none' }}
-                  onChange={handleFileChange}
-                />
+                  {/* 메시지 입력칸과  등록 버튼 */}
+                  <div style={{ display: 'flex', marginLeft: "3%" }}>
+                    <Input
+                      type="text"
+                      placeholder="메시지를 입력하세요."
+                      value={message}
+                      variant="outlined"
+                      onChange={(e) => setMessage(e.target.value)}
+                      style={{ width: "60%", marginRight: "10px" }}
+                    />
+                    <Button onClick={sendMessage} variant="contained" color='info'
+                      style={{ width: "10%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}>
+                      등록
+                    </Button>
 
-                {/* 선택된 파일이 있으면 전송 버튼 활성화 */}
-                {fileObject && (
-                  <Button
-                    type='button'
-                    component="label"
-                    variant="contained"
-                    startIcon={<CloudUploadIcon />}
-                    onClick={sendFile}
-                    color='info'
-                    style={{width : "13%", height : "5%", marginTop : "5%" , marginLeft : "2.5%"}}
-                  >
-                    전송
-                  </Button>
-                )}
+                    {/* 파일 첨부 버튼 */}
+                    <Button
+                      type='button'
+                      component="label"
+                      variant="contained"
+                      startIcon={<CloudUploadIcon />}
+                      onClick={handleFileInputClick}
+                      color='info'
+                      style={{ width: "13%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}
+                    >
+                      첨부
+                    </Button>
 
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      style={{ display: 'none' }}
+                      onChange={handleFileChange}
+                    />
+
+                    {/* 선택된 파일이 있으면 전송 버튼 활성화 */}
+                    {fileObject && (
+                      <Button
+                        type='button'
+                        component="label"
+                        variant="contained"
+                        startIcon={<CloudUploadIcon />}
+                        onClick={sendFile}
+                        color='info'
+                        style={{ width: "13%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}
+                      >
+                        전송
+                      </Button>
+                    )}
+
+                  </div>
                 </div>
               </div>
-              </div>
             )}
-            
+
           </Item>
         </Grid>
 
@@ -705,7 +717,7 @@ export default function ChatTeset() {
 
                           <input type='checkbox'
                             value={m.mno}
-                            checked={mnoList.includes(m.mno)} 
+                            checked={mnoList.includes(m.mno)}
                             onChange={() => handleCheckboxChange(m.mno)} />
                         </React.Fragment>
                       }

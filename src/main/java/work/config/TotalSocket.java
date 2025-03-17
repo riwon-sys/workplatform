@@ -33,9 +33,8 @@ public class TotalSocket extends TextWebSocketHandler {
             ChattingDto chattingDto = objectMapper.readValue(message.getPayload(), ChattingDto.class);
 
             System.out.println("전체소켓 타입" + chattingDto.getMstype());
-            // 메시지 타입이 5일 경우 처리 로직
+            // 메시지 타입이 5일 경우 (채팅방이 새로 생성됐을 때)
             if(chattingDto.getMstype() == 5){
-                // 예시: 특정 메시지를 모든 클라이언트에게 방송
                 broadcastToClients("5");
             }
         } catch (IOException e) {
@@ -43,16 +42,18 @@ public class TotalSocket extends TextWebSocketHandler {
         }
     }
 
+    // 소켓 연결 종료
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
         totalClients.remove(session);
-        System.out.println("Total client disconnected : " + totalClients.size());
+        System.out.println("Total client 연결종료 : " + totalClients.size());
     }
 
     // 클라이언트로 리렌더링 요청 보내기
     private void broadcastToClients(String messageContent) {
         System.out.println("보낼 메세지" + messageContent);
         System.out.println("메세지를 보낼 소켓" + totalClients.toString());
+        // 현재 소켓에 접속된 모든 소켓에 5 보내기(리렌더링 요청)
         if (totalClients != null) {
             for (WebSocketSession s : totalClients) {
                 try {

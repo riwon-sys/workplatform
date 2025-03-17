@@ -72,42 +72,6 @@ public class ChatSocket extends TextWebSocketHandler {
         return  msgList;
     }
 
-    /*
-    // 클라이언트 소켓 접속 성공 시
-    @Override
-    public void afterConnectionEstablished(WebSocketSession session) {
-        System.out.println("WebSocket 연결 :  " + session.getId()); // 연결된 세션의 ID 출력
-
-        // WebSocketSession에서 HttpSession 가져오기
-        HttpSession httpSession = (HttpSession) session.getAttributes().get("httpSession");
-
-        if (httpSession != null) {
-            // HttpSession에서 로그인된 회원번호 가져오기
-            String loginMno = (String) httpSession.getAttribute("loginMno");
-
-            if (loginMno != null) { // loginMno 가 존재하면
-
-                // WebSocketSession 에 로그인된 회원번호 저장
-                session.getAttributes().put("loginMno", loginMno);
-
-                System.out.println("로그인된 회원번호 : " + loginMno);  // 회원번호 출력
-
-                // HttpSession 에서 rno 가져오기
-                String rnoString = (String) session.getAttributes().get("rno");
-                int rno = Integer.parseInt(rnoString);
-
-                // 접속한 클라이언트의 세션 추가 후 기존 채팅 불러오기
-                addClient(rno, session);
-
-            }
-        }
-
-
-    }
-
-     */
-
-
     // 클라이언트가 메시지를 보낼 때
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
@@ -142,7 +106,7 @@ public class ChatSocket extends TextWebSocketHandler {
 
                 case 0: // 일반 텍스트 메시지
                     broadcastMessage(rno, chattingDto);
-                    boolean result = messageMapper.writeMessage(chattingDto);
+                    boolean result = messageMapper.writeMessage(chattingDto); // 컨트롤러로 연결해야됨
                     System.out.println("메시지 저장 결과: " + result);
                     break;
 
@@ -159,17 +123,9 @@ public class ChatSocket extends TextWebSocketHandler {
                 case 4: // 새로 참여한 사람 알림
                     String mname = roomMapper.findMname(chattingDto.getMno());
                     System.out.println("새로온 사람 : " + mname);
-                    break;
-                case 5:
-                    System.out.println("새로고침 요청");
-                    List<RoomDto> roomDtoList = roomMapper.find(100001);// 샘플값
-                    ChattingDto refreshMessage = new ChattingDto();
-                    refreshMessage.setMstype(5);  // 새로고침 메시지 타입
-                    refreshMessage.setMscontent("채팅방 목록을 새로고침하세요.");
-                    refreshMessage.setRooms(roomDtoList); // 새로고침할 채팅방 리스트 추가
 
-                    broadcastMessageToClients(session, refreshMessage);
                     break;
+
 
                 default:
                     System.err.println("알 수 없는 메시지 타입: " + chattingDto.getMstype());
@@ -182,7 +138,7 @@ public class ChatSocket extends TextWebSocketHandler {
             // 클라이언트에게 오류 메시지 전송
             session.sendMessage(new TextMessage("Error: Invalid message format."));
         } catch (Exception e) {
-            // 기타 예기치 못한 예외 처리
+            // 예외 처리
             System.err.println("Unexpected error: " + e.getMessage());
             e.printStackTrace();
             session.sendMessage(new TextMessage("An unexpected error occurred. Please try again later."));
@@ -224,22 +180,4 @@ public class ChatSocket extends TextWebSocketHandler {
         }
     }
 
-    // 리렌더링 요청
-    private void broadcastMessageToClients(WebSocketSession session, ChattingDto message) throws Exception {
-
-        System.out.println(totalClients.toString());
-        if (totalClients != null) {
-            String jsonMessage = mapper.writeValueAsString(message);
-            System.out.println("서버로 보낼 메세지" + jsonMessage);
-
-            // Iterator 사용으로 안전한 순회
-            synchronized (totalClients) {
-                Iterator<WebSocketSession> iterator = totalClients.iterator();
-                while (iterator.hasNext()) {
-                    WebSocketSession session1 = iterator.next();
-                    session1.sendMessage(new TextMessage(jsonMessage));
-                }
-            }
-        }
-    }
 }
