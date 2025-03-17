@@ -1,5 +1,6 @@
 package work.service.room;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import work.model.dto.ChattingDto;
@@ -12,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RoomService {
 
-    @Autowired
-    RoomMapper roomMapper;
+    private final RoomMapper roomMapper;
 
     // [1] 채팅방 등록 (채팅방에 참여할 인원수(mnoList length 에 따라 메소드 나누기)
     public boolean write(RoomDto roomDto, int loginMno){

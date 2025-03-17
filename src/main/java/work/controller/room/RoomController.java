@@ -1,29 +1,34 @@
 package work.controller.room;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import work.model.dto.ChattingDto;
 import work.model.dto.MessageDto.MessageDto;
 import work.model.dto.member.MemberDto;
+import work.model.dto.member.MemberUtils;
 import work.model.dto.room.RoomDto;
 import work.model.mapper.room.RoomMapper;
 import work.service.room.RoomService;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/chatingroom")
 @CrossOrigin("http://localhost:5173")
+@RequiredArgsConstructor
 public class RoomController {
-    @Autowired
-    private RoomService roomService;
 
-    @Autowired
-    private HttpSession httpSession;
+    private final RoomService roomService;
 
+    private final HttpSession httpSession;
 
+    private  final MemberUtils memberUtils;
     // 테스트 용
     @Autowired
     private RoomMapper roomMapper;
@@ -80,11 +85,24 @@ public class RoomController {
         return  result;
     }
 
-    // [7]
+    // [7] 채팅방 나가기
+
 
     // 테스트를 위한 회원 전체 출력
     @GetMapping("/member")
     public List<MemberDto> findMember(){
-        return roomMapper.findMember();
+
+        List<MemberDto> result = roomMapper.findMember();
+
+        // 각 회원의 mno에 대해 부서 정보를 가져와 department에 설정
+        for (MemberDto member : result) {
+            // getDepartmentFromMno() 메소드를 호출하여 부서명을 설정
+            String department = memberUtils.getDepartmentFromMno(member.getMno());
+            member.setDepartment(department); // MemberDto에 부서 정보 설정
+        }
+
+
+        // 결과 반환
+        return result;
     }
 }

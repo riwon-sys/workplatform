@@ -1,6 +1,8 @@
 package work.controller.member;
 
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import work.model.dto.member.MemberDto;
@@ -25,15 +27,22 @@ public class MemberController {
         }
 
     // [2] 사원 로그인 // http://localhost:8080/workplatform/login
+    // 로그인 세션 처리 기능 추가
     @PostMapping("/login")
-        public boolean onLogIn(@RequestBody MemberDto memberDto){
+        public boolean onLogIn(@RequestBody MemberDto memberDto , HttpServletRequest req){
         // {"mno": "700055", "mpwd": "1234"}
 
         System.out.println("MemberController.onLogIn");
         System.out.println("memberDto = " + memberDto);
-
-        return memberService.onLogIn(memberDto); // 성공시 true, 실패시 false
-    }
+        MemberDto result = memberService.onLogIn(memberDto); // 성공시 MemberDto, 실패시 null
+        if( result ==null){return false;} // 로그인 서비스 결과가 null 이면 로그인 실패
+        else{ // 서비스 결과가 null 이 아니면 로그인 성공 => 세션에 로그인 성공한 결과를 MemberDto 를 저장
+            HttpSession session = req.getSession(); // 세션을 호출
+            session.setAttribute("memberDto" , result); // 세션 객체 내 새로운 속성 추가 로그인 성공한 결과를 meberDto 라는 이름으로 저장
+            session.setMaxInactiveInterval(60*10); // 세션 유지 시간(초) 60x10 은 10분
+            return true; // 로그인 성공
+        } // e e
+    } // f e
 
     // [3] 사원 로그아웃 // http://localhost:8080/workplatform/logout
     @DeleteMapping("/logout")

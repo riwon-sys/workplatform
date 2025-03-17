@@ -18,8 +18,13 @@ public class MemberService {
 
     }
     // [2] 사원 로그인
-    public boolean onLogIn(MemberDto memberDto ){
-        return memberMapper.onLogIn(memberDto);
+    // 로그인 세션 처리 기능 추가
+    public MemberDto onLogIn(MemberDto memberDto ){
+        System.out.println("MemberService.onLogIn");
+        System.out.println("memberDto = " + memberDto);
+        // return false;
+        MemberDto result = memberMapper.onLogIn(memberDto);
+        return result;
 
     }
 
