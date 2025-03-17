@@ -1,15 +1,6 @@
-import Button from '@mui/material/Button';
 import BasicSelect from './BasicSelect';
 
 export default function Report_Form( { formData, formDataChange, isReadOnly, rpno } ){
-  
-  useEffect( () => { onFindByRpno(); }, [] )
-
-  const onFindByRpno = async ( props ) => {
-    try{
-      const response = await axios.get( `http://localhost:8080/report/view?rpno=${rpno}` );
-    }catch( e ){ console.log( e ) }
-  } // f end
 
   let today = new Date();
   let year = today.getFullYear(); // 년도
