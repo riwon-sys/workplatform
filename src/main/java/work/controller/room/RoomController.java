@@ -1,6 +1,8 @@
 package work.controller.room;
 
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +18,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/chatingroom")
 @CrossOrigin("http://localhost:5173")
+@RequiredArgsConstructor
 public class RoomController {
-    @Autowired
-    private RoomService roomService;
 
-    @Autowired
-    private HttpSession httpSession;
+    private final RoomService roomService;
 
-
+    private final HttpSession httpSession;
     // 테스트 용
     @Autowired
     private RoomMapper roomMapper;
@@ -80,7 +80,8 @@ public class RoomController {
         return  result;
     }
 
-    // [7]
+    // [7] 채팅방 나가기
+
 
     // 테스트를 위한 회원 전체 출력
     @GetMapping("/member")
