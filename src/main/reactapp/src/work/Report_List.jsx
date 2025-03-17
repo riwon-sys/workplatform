@@ -15,7 +15,7 @@ export default function Report_List() {
     setReports( ...reports, response.data );
   } // f end
 
-  const onView = ( rpno ) => { navigate( `/report/view/${rpno}` ); } // f end
+  const onView = async ( rpno ) => { await navigate( `/report/view/${rpno}` ); }
 
   return (
     <Table hoverRow sx={{ '& tr > *:not(:first-of-type)': { textAlign: 'center' } }} >
@@ -34,7 +34,7 @@ export default function Report_List() {
             <tr key = { row.rpno } onClick={ () => onView( row.rpno ) } >
               <td> { row.rpno } </td>
               <td style={{ textAlign: 'left' }} >{ row.rpname }</td>
-              <td> { row.mname } </td>
+              <td> { row.mname }({ row.mdepartment }) </td>
               <td> { row.rpdate } </td>
             </tr>
           )) :
