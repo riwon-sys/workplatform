@@ -21,7 +21,7 @@ const Item = styled(Paper)(({ theme }) => ({
     height: '100%', // 높이 설정 추가
 }));
 
-export default function Report_View() {
+export default function Report_Update() {
 
   const { rpno } = useParams();
 

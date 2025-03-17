@@ -18,4 +18,5 @@ public class ReportDto {
     private int mno;
     private String mname;
     private String mdepartment;
+    private String mrank;
 }

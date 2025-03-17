@@ -49,14 +49,14 @@ export default function Report_Form( { formData, formDataChange, isReadOnly, rpn
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성일자 </th>
             <td style={{ width: '30%' }} > {year}년 {month}월 {date}일 ({week}) </td>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성자 </th>
-            <td style={{ width: '30%' }} > 최진우 </td>
+            <td style={{ width: '30%' }} > { formData.mname } </td>
           </tr>
 
           <tr>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 소속 </th>
-            <td style={{ width: '30%' }} > 인사 </td>
+            <td style={{ width: '30%' }} > { formData.mdepartment } </td>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 직위 </th>
-            <td style={{ width: '30%' }} > 사원 </td>
+            <td style={{ width: '30%' }} > { formData.mrank } </td>
           </tr>
         </tbody>
       </table>

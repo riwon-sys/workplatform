@@ -36,7 +36,7 @@ public class ReportController {
         int mno = 100004;
         System.out.println("ReportController.findAll");
 
-        List<ReportDto> results = new ArrayList<>();
+        List<ReportDto> results = reportService.findByMno(mno);
         for (ReportDto report : results) {
             String part = MemberUtils.getDepartmentFromMno(report.getMno());
             report.setMdepartment(part); // 값만 변경해도 리스트 내 객체가 변경됨
@@ -54,6 +54,7 @@ public class ReportController {
         ReportDto result = reportService.findByRpno(rpno);
         String part = MemberUtils.getDepartmentFromMno(result.getMno());
         result.setMdepartment( part );
+        System.out.println(result);
         return result;
     } // f end
 
