@@ -54,12 +54,23 @@ export default function Report_View() {
     try{
       const response = await axios.get( `http://localhost:8080/report/view?rpno=${rpno}` );
       setFormData( response.data );
-      console.log( response.data.mrank )
     }catch( e ){ console.log( e ) }
   } // f end
 
   const navigate = useNavigate();
   const onUpdate = async () => { await navigate( `/report/update/${rpno}` ) }
+
+  const onDelete = async () => {  
+    if( !confirm('보고서를 삭제하시겠습니까?') ){ return; }
+    try{
+      const response = await axios.put( `http://localhost:8080/report/delete?rpno=${rpno}` )
+      if( response.data ){
+        alert('보고서 삭제가 완료되었습니다.')
+        navigate( 0 ); // 0 : 페이지 새로고침
+        navigate( '/report/view' );
+      }else{ alert('보고서 삭제 실패'); }
+    }catch( e ){ console.log( e ); }
+  }
 
   return (
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -80,17 +91,17 @@ export default function Report_View() {
           </Grid>
           
           <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>
-            <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px', padding: 5 }} >
+            <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px', padding: 7 }} >
               { rpno && Number(rpno) > 0 ? 
               <>
                 <Report_Form formData={ formData } formDataChange={ formDataChange } 
                   isReadOnly={ true } rpno={ rpno } />
  
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate } >
+                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate() } >
                       수정
                   </Button>
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
+                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onDelete() } >
                       삭제
                   </Button>
                 </div>

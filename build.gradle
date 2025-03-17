@@ -46,6 +46,9 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+    // paging
+    implementation 'com.github.pagehelper:pagehelper:5.3.2'
+
 
 }
 

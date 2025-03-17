@@ -8,7 +8,7 @@ import Button from '@mui/material/Button';
 import Report_Form from './Report_Form';
 import * as React from 'react';
 import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -57,6 +57,20 @@ export default function Report_Update() {
     }catch( e ){ console.log( e ) }
   } // f end
 
+  const onUpdate = async () => {
+    if( !confirm('보고서를 수정하시겠습니까?') ){ return; }
+    try{
+      const response = await axios.put( `http://localhost:8080/report?rpno=${rpno}`, formData );
+      if( response.data ){ 
+        alert('보고서 수정이 완료되었습니다.'); 
+        onCancle();
+      }else{ alert('보고서 수정 실패'); }
+    }catch( e ){ console.log( e ); }
+  } // f end
+
+  const navigate = useNavigate();
+  const onCancle = async () => { await navigate( -1 ); } // -1 : 뒤로가기
+
   return (
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Grid container spacing={0} sx={{ height: '100%' }}> 
@@ -83,10 +97,10 @@ export default function Report_Update() {
                   isReadOnly={ false } rpno={ rpno } />
  
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
+                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate() } >
                       수정
                   </Button>
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} >
+                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onCancle() } >
                       취소
                   </Button>
                 </div>

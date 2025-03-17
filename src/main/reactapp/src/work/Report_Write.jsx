@@ -10,7 +10,7 @@ import axios from 'axios';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(5),
+  padding: theme.spacing(7),
   textAlign: 'center',
   height: '100%',
 }));
@@ -35,7 +35,7 @@ export default function Report_Write(){
     try{
       console.log( formData );
       const response = await axios.post( 'http://localhost:8080/report', formData );
-      if( response.data == true ){
+      if( response.data ){
         alert('등록 성공');
         setFormData( { rpname: '일일 업무 보고서', rpam: '', rppm: '', rpamnote: '', rppmnote: '',
           rpunprocessed: '', rpsignificant: '', rpexpected: '' } );

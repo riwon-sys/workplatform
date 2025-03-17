@@ -19,9 +19,9 @@ public interface ReportMapper {
             "WHERE rpno = #{rpno} && rpstate = true" )
     ReportDto findByRpno( int rpno );
     @Update( "UPDATE report SET rpname = #{rpname}, rpam = #{rpam}, rppm = #{rppm}, " +
-            "rpamnote = #{rpamnote}, rppmnote = #{rppmnote} " +
+            "rpamnote = #{rpamnote}, rppmnote = #{rppmnote}, " +
             "rpunprocessed = #{rpunprocessed}, rpsignificant = #{rpsignificant}, " +
-            "rpexpected = #{rpexpected}, rpdate =now() WHERE rpno = #{rpno} ")
+            "rpexpected = #{rpexpected}, rpdate = now() WHERE rpno = #{rpno} ")
     boolean update(ReportDto reportDto);
     @Delete( "UPDATE report SET rpstate = false WHERE rpno = #{rpno}" )
     boolean delete(int rpno);
