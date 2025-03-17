@@ -16,4 +16,6 @@ public class ReportDto {
     private String rpexpected;
     private String rpdate;
     private int mno;
+    private String mname;
+    private String mdepartment;
 }
