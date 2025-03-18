@@ -34,9 +34,10 @@ public class MemberService {
     }
 
     // [4] 사원 전체 조회
-    public List<MemberDto> getAllMembers(){
+    public List<MemberDto> getAllMembers(String mrank, Integer mno){
         System.out.println("MemberService.getAllMembers");
-        return null;
+        System.out.println("mrank = " + mrank + ", mno = " + mno);
+        return memberMapper.getAllMembers(mrank, mno);
     }
 
 

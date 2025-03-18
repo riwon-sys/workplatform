@@ -1,7 +1,7 @@
 import BasicSelect from './BasicSelect';
 import CustomTextarea from './CustomTextarea';
 
-export default function Report_Form( { formData, formDataChange, isReadOnly, rpno } ){
+export default function Report_Form( { formData, formDataChange, isReadOnly, rpno, members, approval, handleApprovalChange, membersByRank } ){
 
   let today = new Date();
   let year = today.getFullYear(); // 년도
@@ -19,18 +19,32 @@ export default function Report_Form( { formData, formDataChange, isReadOnly, rpn
         <table border={2} style={{ borderCollapse: 'collapse' }} >
           <tbody >
             <tr>
-              <td width='100px' >  
-                <BasicSelect rank={ "대리" } />
-              </td>
-              <td width='100px'>
-                <BasicSelect rank={ "차장" } />
-              </td>
-              <td width='100px'>
-                <BasicSelect rank={ "과장" } />
-              </td>
-              <td width='100px'>
-                <BasicSelect rank={ "부장" } />
-              </td>
+              {
+                !isReadOnly ?
+                ["대리", "차장", "과장", "부장"].map((rank) => {
+                  const selectedMno = approval.find((item) => item.rank === rank)?.mno || "";
+
+                  return (
+                    <td key={ rank } width="100px">
+                      <BasicSelect
+                        rank={ rank }
+                        members={ membersByRank[rank] || [] }
+                        value={ selectedMno } // undefined 방지
+                        handleChange={ handleApprovalChange(rank) }
+                      />
+                    </td>
+                  );
+                }) :
+                approval.map( (rank) => {
+                  return(<>
+                    <td key={ rank } width="100px">
+                      <BasicSelect
+                        value={ rank.mname } // undefined 방지
+                      />
+                    </td>
+                  </>)
+                })
+              }
             </tr>
             <tr style={{ height: '80px' }} >
               <td> <img /> </td>

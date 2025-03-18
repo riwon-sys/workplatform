@@ -4,21 +4,16 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function BasicSelect( props ) {
-  const [age, setAge] = React.useState('');
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
+export default function BasicSelect( { rank, handleChange, members, value } ) {
 
   return (
     <FormControl sx={{ minWidth: 95, maxWidth: 95 }} size="small" >
-      <InputLabel id="demo-select-small-label" sx={{ mt: -1, pl: 2 }} > { props.rank } </InputLabel>
+      <InputLabel id="demo-select-small-label" sx={{ mt: -1, pl: 2 }} > { rank } </InputLabel>
       <Select
-        labelId="rank-select-label"
-        id="rank-select"
-        value={age}
-        onChange={handleChange}
+        labelId={ `rank-select-${rank}` }
+        id={ `rank-select-${rank}` }
+        value={ value }
+        onChange={ handleChange }
         variant="filled" // filled 사용하여 아래쪽 줄 제거
         disableUnderline // underline 완전 제거 (filled, standard일 때만 적용됨)
         sx={{
@@ -28,12 +23,11 @@ export default function BasicSelect( props ) {
           "& .MuiSelect-select": { padding: "4px 8px" }, // 패딩 조정
         }}
       >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={10}>홍길동</MenuItem>
-        <MenuItem value={20}>유재석</MenuItem>
-        <MenuItem value={30}>신동엽</MenuItem>
+        {
+          members.map( (member) => (
+            <MenuItem key={ member.mno } value={ member.mno } > { member.mname } </MenuItem>
+          ))
+        }
       </Select>
     </FormControl>
   );
