@@ -1,4 +1,5 @@
 import BasicSelect from './BasicSelect';
+import CustomTextarea from './CustomTextarea';
 
 export default function Report_Form( { formData, formDataChange, isReadOnly, rpno } ){
 
@@ -11,7 +12,7 @@ export default function Report_Form( { formData, formDataChange, isReadOnly, rpn
   let day = year+''+month+''+date;
 
   return(<>
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }} >
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px'   }} >
       <h1 style={{ margin: '0 auto' }} > 일일 업무 보고서 </h1>
       
       <form>
@@ -43,7 +44,7 @@ export default function Report_Form( { formData, formDataChange, isReadOnly, rpn
     </div>
 
     <form>
-      <table border={2} style={{ borderCollapse: 'collapse', width: '100%', height: '70px', marginBottom: '30px' }} >
+      <table border={2} style={{ borderCollapse: 'collapse', width: '100%', height: '70px', marginBottom: '30px', fontSize: '15px' }} >
         <tbody>
           <tr>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성일자 </th>
@@ -61,8 +62,8 @@ export default function Report_Form( { formData, formDataChange, isReadOnly, rpn
         </tbody>
       </table>
 
-      <table border={2} style={{ borderCollapse: 'collapse', width: '100%', height: '850px' }}>
-        <thead>
+      <table border={2} style={{ borderCollapse: 'collapse', width: '100%', height: '850px', fontSize: '15px' }}>
+        <tbody>
           <tr>
             <th style={{ width: '15%', backgroundColor: '#eeeeee' }} rowSpan={3} > 금일<br/>실시사항 </th>
             <th style={{ width: '65%', height: '5%', backgroundColor: '#eeeeee' }} colSpan={2} > 금일 업무보고 </th>
@@ -72,58 +73,51 @@ export default function Report_Form( { formData, formDataChange, isReadOnly, rpn
           <tr>
             <th style={{ width: '5%', backgroundColor: '#eeeeee' }} > 오전 </th>   
             <td style={{ width: '60%' }} > 
-              <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }} 
-                type="text" name="rpam" value={ formData.rpam } onChange={ formDataChange } 
-                readOnly={isReadOnly} />
+              <CustomTextarea name="rpam" value={formData.rpam} 
+                onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>  
             <td style={{ width: '20%' }} > 
-              <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }}
-                type="text" name="rpamnote" value={ formData.rpamnote } onChange={ formDataChange } 
-                readOnly={isReadOnly} /> 
+              <CustomTextarea name="rpamnote" value={formData.rpamnote} 
+                onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>    
           </tr>
 
           <tr>
             <th style={{ width: '5%', backgroundColor: '#eeeeee' }} > 오후 </th> 
             <td style={{ width: '60%' }} > 
-              <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }} 
-                type="text" name="rppm" value={ formData.rppm } onChange={ formDataChange } 
-                readOnly={isReadOnly} />
+              <CustomTextarea name="rppm" value={formData.rppm} 
+                onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>  
             <td style={{ width: '20%' }} > 
-              <textarea style={{ width: '95%', height: '90%', border: 'none', resize: 'none' }}
-                type="text" name="rppmnote" value={ formData.rppmnote } onChange={ formDataChange }
-                readOnly={isReadOnly} /> 
+              <CustomTextarea name="rppmnote" value={formData.rppmnote} 
+                onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>
           </tr>
 
           <tr style={{ height: '15%' }} >
             <th style={{ width: '15%', backgroundColor: '#eeeeee' }} > 미실시 내역 </th>
             <td colSpan={3} >
-              <textarea style={{ width: '97%', height: '80%', border: 'none', resize: 'none' }} 
-                type="text" name="rpunprocessed" value={ formData.rpunprocessed } onChange={ formDataChange } 
-                readOnly={isReadOnly} />
+              <CustomTextarea name="rpunprocessed" value={formData.rpunprocessed} 
+                onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>  
           </tr>
 
           <tr style={{ height: '15%' }} >
             <th style={{ width: '15%', backgroundColor: '#eeeeee' }} > 특이 사항 </th>
             <td colSpan={3} >
-              <textarea style={{ width: '97%', height: '80%', border: 'none', resize: 'none' }}
-                type="text" name="rpsignificant" value={ formData.rpsignificant } onChange={ formDataChange }
-                readOnly={isReadOnly} />
+              <CustomTextarea name="rpsignificant" value={formData.rpsignificant} 
+                onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>  
           </tr>
 
           <tr style={{ height: '15%' }} >
             <th style={{ width: '15%', backgroundColor: '#eeeeee' }} > 예정 사항 </th>
             <td colSpan={3} >
-              <textarea style={{ width: '97%', height: '85%', border: 'none', resize: 'none' }}
-                type="text" name="rpexpected" value={ formData.rpexpected } onChange={ formDataChange } 
-                readOnly={isReadOnly} />
+              <CustomTextarea name="rpexpected" value={formData.rpexpected} 
+                onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>  
           </tr>
-        </thead>
+        </tbody>
       </table>
     </form>
   </>);
