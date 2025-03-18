@@ -24,7 +24,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/msg")
-@CrossOrigin("http://localhost:5173")
 @RequiredArgsConstructor
 public class MessageController {
 

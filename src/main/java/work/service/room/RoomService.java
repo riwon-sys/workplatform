@@ -95,4 +95,15 @@ public class RoomService {
         return mnameList;
 
     }
+
+    // [8] 채팅방 정보 조회
+    public RoomDto findRoomInfo (int rno){
+        System.out.println("RoomService.findRoomInfo");
+        System.out.println("rno = " + rno);
+
+        RoomDto result = roomMapper.findRoomInfo(rno);
+        System.out.println("result = " + result);
+
+        return result;
+    }
 }

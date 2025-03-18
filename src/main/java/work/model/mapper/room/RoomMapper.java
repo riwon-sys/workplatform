@@ -51,6 +51,10 @@ public interface RoomMapper {
     @Insert("INSERT INTO paritcipant (mno, rno) VALUES (#{roomDto.mno} , {roomDto.rno}")
     boolean addMember(@Param("roomDto") RoomDto roomDto);
 
+
+    // [8] 채팅방 정보 조회
+    @Select("select * from room where rno = #{rno}")
+    RoomDto findRoomInfo(int rno);
     // 테스트용 회원조회
     @Select("select * from member ")
     List<MemberDto> findMember();
