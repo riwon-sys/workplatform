@@ -7,11 +7,8 @@ import work.model.dto.member.MemberUtils;
 import work.model.dto.report.ReportDto;
 import work.service.report.ReportService;
 
-import java.util.List;
-
 @RestController
-@RequestMapping("/report")
-@CrossOrigin( "http://localhost:5173" )
+@RequestMapping("/api/report")
 @RequiredArgsConstructor
 public class ReportController {
 
@@ -31,7 +28,7 @@ public class ReportController {
     // 2. 회원별 보고서 조회( 페이징 처리 추가 )
     @GetMapping
     public PageInfo<ReportDto> findByMno( @RequestParam(defaultValue = "3") int page,
-                                      @RequestParam(defaultValue = "10") int pageSize){
+                                          @RequestParam(defaultValue = "10") int pageSize){
         int mno = 100007;
         System.out.println("ReportController.findAll");
         System.out.println("page = " + page + ", pageSize = " + pageSize);

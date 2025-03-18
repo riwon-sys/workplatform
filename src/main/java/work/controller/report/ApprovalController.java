@@ -8,7 +8,7 @@ import work.service.report.ApprovalService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Approval")
+@RequestMapping("/api/Approval")
 public class ApprovalController {
 
     private final ApprovalService approvalService;

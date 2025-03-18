@@ -55,7 +55,7 @@ export default function Report_View() {
   const onFindByRpno = async ( props ) => {
     if( !rpno ){ return; }
     try{
-      const response = await axios.get( `http://localhost:8080/report/view?rpno=${rpno}` );
+      const response = await axios.get( `http://localhost:8080/api/report/view?rpno=${rpno}` );
       setFormData( response.data );
     }catch( e ){ console.log( e ) }
   } // f end
@@ -65,7 +65,7 @@ export default function Report_View() {
   const onDelete = async () => {  
     if( !confirm('보고서를 삭제하시겠습니까?') ){ return; }
     try{
-      const response = await axios.put( `http://localhost:8080/report/delete?rpno=${rpno}` )
+      const response = await axios.put( `http://localhost:8080/api/report/delete?rpno=${rpno}` )
       if( response.data ){
         alert('보고서 삭제가 완료되었습니다.')
         navigate( 0 ); // 0 : 페이지 새로고침
@@ -86,7 +86,7 @@ export default function Report_View() {
   useEffect( () => { onFindByMno(page) }, [page] );
 
   const onFindByMno = async ( page ) => {
-    const response = await axios.get( `http://localhost:8080/report?page=${3}&pageSize=10` )
+    const response = await axios.get( `http://localhost:8080/api/report?page=${page}&pageSize=10` )
     setReports( response.data.list );
     console.log( response.data );
     setTotalPages( response.data.pages );
@@ -103,14 +103,14 @@ export default function Report_View() {
               <React.StrictMode>
                 <StyledEngineProvider injectFirst>
                   <CssVarsProvider>
-                    <Report_List rpno = { rpno } reports={ reports } />
+                    <Report_List rpno = { rpno } />
                   </CssVarsProvider>
                 </StyledEngineProvider>
               </React.StrictMode>
               <Stack spacing={2}>
                 <Pagination count={ totalPages+1 } color="primary"
                   page={ page }
-                  onChange={ (e, value) => { handlePageChange(value) } }
+                  onChange={ (value) => { handlePageChange(value) } }
                 />
               </Stack>
             </Item>

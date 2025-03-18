@@ -52,7 +52,7 @@ export default function Report_Update() {
   const onFindByRpno = async ( props ) => {
     if( !rpno ){ return; }
     try{
-      const response = await axios.get( `http://localhost:8080/report/view?rpno=${rpno}` );
+      const response = await axios.get( `http://localhost:8080/api/report/view?rpno=${rpno}` );
       setFormData( response.data );
     }catch( e ){ console.log( e ) }
   } // f end
@@ -60,7 +60,7 @@ export default function Report_Update() {
   const onUpdate = async () => {
     if( !confirm('보고서를 수정하시겠습니까?') ){ return; }
     try{
-      const response = await axios.put( `http://localhost:8080/report?rpno=${rpno}`, formData );
+      const response = await axios.put( `http://localhost:8080/api/report?rpno=${rpno}`, formData );
       if( response.data ){ 
         alert('보고서 수정이 완료되었습니다.'); 
         onCancle();

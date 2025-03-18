@@ -29,16 +29,15 @@ public class ReportService {
         System.out.println("mno = " + mno + ", page = " + page + ", pageSize = " + pageSize);
 
         // PageHelper로 페이징 처리 적용
-        PageHelper.startPage(2, 10);
+        PageHelper.startPage(page, pageSize);
         List<ReportDto> pagingResult = reportMapper.findByMno(mno);
 
         // 부서명 설정 로직 적용
         for (ReportDto report : pagingResult) {
             String part = MemberUtils.getDepartmentFromMno(report.getMno());
-            System.out.println("part = " + part);
             report.setMdepartment(part);
         } // for end
-        
+
         // PageInfo의 pageSize가 정상적인지 확인
         PageInfo<ReportDto> pageInfo = new PageInfo<>(pagingResult);
         System.out.println("pageInfo = " + pageInfo);

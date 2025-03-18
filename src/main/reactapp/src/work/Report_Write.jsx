@@ -34,7 +34,7 @@ export default function Report_Write(){
   const onPost = async ( props ) => {
     try{
       console.log( formData );
-      const response = await axios.post( 'http://localhost:8080/report', formData );
+      const response = await axios.post( 'http://localhost:8080/api/report', formData );
       if( response.data ){
         alert('등록 성공');
         setFormData( { rpname: '일일 업무 보고서', rpam: '', rppm: '', rpamnote: '', rppmnote: '',
