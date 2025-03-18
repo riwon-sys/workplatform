@@ -30,10 +30,11 @@ public class ReportController {
 
     // 2. 회원별 보고서 조회( 페이징 처리 추가 )
     @GetMapping
-    public PageInfo<ReportDto> findByMno( @RequestParam(defaultValue = "1") int page,
+    public PageInfo<ReportDto> findByMno( @RequestParam(defaultValue = "3") int page,
                                       @RequestParam(defaultValue = "10") int pageSize){
         int mno = 100007;
         System.out.println("ReportController.findAll");
+        System.out.println("page = " + page + ", pageSize = " + pageSize);
 
         return reportService.findByMno(mno, page, pageSize);
     } // f end

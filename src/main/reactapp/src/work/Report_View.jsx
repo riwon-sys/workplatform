@@ -2,10 +2,13 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
-import Report_List from './Report_List';
 import Button from '@mui/material/Button';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
+import Report_List from './Report_List';
 import Report_Form from './Report_Form';
+
 import * as React from 'react';
 import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -57,7 +60,6 @@ export default function Report_View() {
     }catch( e ){ console.log( e ) }
   } // f end
 
-  const navigate = useNavigate();
   const onUpdate = async () => { await navigate( `/report/update/${rpno}` ) }
 
   const onDelete = async () => {  
@@ -72,6 +74,24 @@ export default function Report_View() {
     }catch( e ){ console.log( e ); }
   }
 
+  const [ reports, setReports ] = useState( [] );
+  const [ page, setPage ] = useState(1); // 현재 페이지
+  const [ totalPages, setTotalPages ] = useState(1); // 전체 페이지 수
+  const navigate = useNavigate();
+
+  const handlePageChange = ( e, value ) => {
+    setPage( value );
+  }
+  
+  useEffect( () => { onFindByMno(page) }, [page] );
+
+  const onFindByMno = async ( page ) => {
+    const response = await axios.get( `http://localhost:8080/report?page=${3}&pageSize=10` )
+    setReports( response.data.list );
+    console.log( response.data );
+    setTotalPages( response.data.pages );
+  } // f end
+
   return (
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Grid container spacing={0} sx={{ height: '100%' }}> 
@@ -83,10 +103,16 @@ export default function Report_View() {
               <React.StrictMode>
                 <StyledEngineProvider injectFirst>
                   <CssVarsProvider>
-                    <Report_List rpno = { rpno } />
+                    <Report_List rpno = { rpno } reports={ reports } />
                   </CssVarsProvider>
                 </StyledEngineProvider>
               </React.StrictMode>
+              <Stack spacing={2}>
+                <Pagination count={ totalPages+1 } color="primary"
+                  page={ page }
+                  onChange={ (e, value) => { handlePageChange(value) } }
+                />
+              </Stack>
             </Item>
           </Grid>
           
@@ -96,7 +122,7 @@ export default function Report_View() {
               <>
                 <Report_Form formData={ formData } formDataChange={ formDataChange } 
                   isReadOnly={ true } rpno={ rpno } />
- 
+              
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
                   <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate() } >
                       수정

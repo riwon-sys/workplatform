@@ -26,17 +26,25 @@ public class ReportService {
     // 2. 회원별 보고서 조회( 페이징 적용 )
     public PageInfo<ReportDto> findByMno(int mno, int page, int pageSize){
         System.out.println("ReportService.findByMno with paging");
+        System.out.println("mno = " + mno + ", page = " + page + ", pageSize = " + pageSize);
 
         // PageHelper로 페이징 처리 적용
-        PageHelper.startPage(page, pageSize);
+        PageHelper.startPage(2, 10);
         List<ReportDto> pagingResult = reportMapper.findByMno(mno);
-        // 회원번호 앞자리 부서
+
+        // 부서명 설정 로직 적용
         for (ReportDto report : pagingResult) {
             String part = MemberUtils.getDepartmentFromMno(report.getMno());
+            System.out.println("part = " + part);
             report.setMdepartment(part);
-        }
+        } // for end
+        
+        // PageInfo의 pageSize가 정상적인지 확인
+        PageInfo<ReportDto> pageInfo = new PageInfo<>(pagingResult);
+        System.out.println("pageInfo = " + pageInfo);
+        System.out.println("PageHelper 적용 후 pageSize: " + pageInfo.getPageSize());
 
-        return new PageInfo<>(pagingResult);
+        return pageInfo;
     } // f end
 
 //    public List<ReportDto> findByMno(int mno){

@@ -1,27 +1,9 @@
 import Table from '@mui/joy/Table';
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export default function Report_List( rpno ) {
+export default function Report_List( { rpno, reports }  ) {
 
-  const [ reports, setReports ] = useState( [] );
-  const [page, setPage] = useState(1); // 현재 페이지
-  const [totalPages, setTotalPages] = useState(1); // 전체 페이지 수
   const navigate = useNavigate();
-
-  const handlePageChange = ( value ) => {
-    setPage( value );
-  }
-  
-  useEffect( () => { onFindByMno(page) }, [page] );
-
-  const onFindByMno = async ( page ) => {
-    const response = await axios.get( `http://localhost:8080/report?page=${page}&pageSize=10` )
-    setReports( ...reports, response.data.list );
-    setTotalPages( response.data.pages );
-  } // f end
-
   const onView = async ( rpno ) => { await navigate( `/report/view/${rpno}` ); }
 
   return (<>
