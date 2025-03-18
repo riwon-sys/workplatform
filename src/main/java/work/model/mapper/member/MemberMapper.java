@@ -11,7 +11,7 @@ import work.model.dto.member.MemberDto;
 public interface MemberMapper {
 
     // [1] 사원 등록
-    @Insert("insert into member( mno,mname,mphone,memail,mrank )" + "values( #{mno} , #{mname} , #{mphone},#{memail} , #{mrank})")
+    @Insert("insert into member( mno,mname,mphone,memail,mrank,mprofile )" + "values( #{mno} , #{mname} , #{mphone},#{memail} , #{mrank} , #{mprofile} )")
     public boolean signUp(MemberDto memberDto);
 
     // [2] 사원 로그인

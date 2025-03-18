@@ -45,11 +45,32 @@ public class MemberController {
     } // f e
 
     // [3] 사원 로그아웃 // http://localhost:8080/workplatform/logout
-    @DeleteMapping("/logout")
-    public void offLogOut() {
+    // 로그아웃 세션 처리 삭제 기능 추가
+    // @DeleteMapping("/logout")
+
+   /* public void offLogOut() {
         // {x}
         memberService.offLogOut();
         System.out.println("MemberController.offLogOut: 로그아웃 요청 완료");
+    }
+   */
+    @GetMapping("/logout")
+    public boolean offLogOut(HttpServletRequest request){
+        HttpSession session = request.getSession(); // 1. 세션 호출
+        if( session == null ) return false;
+        // session.invalidate(); // 2. 세션 내 전체 속성 초기화 한다.
+        session.removeAttribute("memberDto"); // 3. 세션 내 특정 속성만 초기화 한다.
+
+        return true; // 로그아웃 성공
+    }
+    // [3-2] 사원 로그인 상태 확인 및 내정보 보기(마이페이지 기능) http://localhost:8080/workplatform/myinfo
+    @GetMapping("/myinfo")
+    public MemberDto myInfo( HttpServletRequest request ){
+        HttpSession session = request.getSession(); // 1. 세션 호출
+        if( session == null ) return null; // 2. 만약에 세션이 존재하지 않으면 null 반환
+        Object object = session.getAttribute("memberDto"); // 3.로그인 성공시 저장한 loginDto 의 로그인정보를 꺼낸다.
+        MemberDto memberDto = (MemberDto)object; // 세션에 저장된 자료들을 모두 Object 타입 이므로 타입 변환 한다.
+        return memberDto; // 5. 로그인된 정보 반환
     }
 
     // [4] 사원 전체 조회 // http://localhost:8080/workplatform/allmembers

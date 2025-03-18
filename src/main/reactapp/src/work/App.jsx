@@ -11,7 +11,7 @@ import Report_Write from './Report_Write.jsx';
 import Report_View from './Report_View.jsx';
 import Board from './Board.jsx';
 import theme from './theme';
-
+import Member_Post from './member/Member_Post.jsx'; // rw
 /* css */
 import './App.css';
 
@@ -31,6 +31,7 @@ export default function Test( props ){
                     <Route path="/report/write" element={ <Report_Write /> }></Route>
                     <Route path="/report/view" element={ <Report_View /> }></Route>
                     <Route path="/board" element={ <Board /> }></Route>
+                    <Route path="/member/post" element={<Member_Post/> }></Route>
                 </Routes>
             </Box>
         </BrowserRouter>
