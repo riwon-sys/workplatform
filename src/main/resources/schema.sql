@@ -16,7 +16,6 @@ DROP TABLE IF EXISTS report;
 -- 채팅방 테이블 삭제 (room 테이블은 member를 참조하므로, room 테이블을 마지막에 삭제)
 DROP TABLE IF EXISTS room;
 
-
 drop table if exists board;
 -- 이제 'member' 테이블 삭제
 DROP TABLE IF EXISTS member;
@@ -116,8 +115,8 @@ create table report(
 create table approval(
 	apno int unsigned auto_increment,
     apdate datetime default null,
-    apstate int default 0,
-    apsignature varchar(50) not null,
+    apstate bool default false,
+    apsignature varchar(50) default null,
     mno int unsigned,			-- 승인할 회원번호
     rpno int unsigned,
     constraint primary key( apno ),

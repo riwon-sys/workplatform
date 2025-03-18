@@ -398,8 +398,8 @@ INSERT INTO report( rpname, rpam, rppm, rpamnote, rppmnote, rpunprocessed, rpsig
 create table approval(
 	apno int unsigned auto_increment,
     apdate datetime default null,
-    apstate bool default true,
-    apsignature varchar(50) not null,
+    apstate bool default false,
+    apsignature varchar(50) default null,
     mno int unsigned,			-- 승인할 회원번호
     rpno int unsigned,
     constraint primary key( apno ),
@@ -409,11 +409,11 @@ create table approval(
 
 -- 결재 샘플 추가
 INSERT INTO approval( apdate, apstate, apsignature, mno, rpno ) VALUES
-( '2025-02-02 23:30:11', 1, '서명1', 100004, 1 ),
-( '2025-02-03 23:30:11', 1, '서명2', 100002, 1 ),
-( '2025-02-04 23:30:11', 1, '서명3', 100001, 1 ),
+( '2025-02-02 23:30:11', 1, '서명1', 100004, 6 ),
+( '2025-02-03 23:30:11', 1, '서명2', 100002, 6 ),
+( '2025-02-04 23:30:11', 1, '서명3', 100001, 6 ),
 ( '2025-02-05 23:30:11', 1, '서명4', 200012, 2 ),
-( null , 0, '서명5', 200010, 2 );
+( null , 0, null , 200010, 2 );
 
 select * from report;
 select rp.*, m.mname, m.mrank from report rp inner join member m on rp.mno = m.mno where rp.mno = 100004 && rpstate = true;
