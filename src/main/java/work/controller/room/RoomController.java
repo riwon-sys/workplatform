@@ -14,13 +14,11 @@ import work.model.dto.room.RoomDto;
 import work.model.mapper.room.RoomMapper;
 import work.service.room.RoomService;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/chatingroom")
-@CrossOrigin("http://localhost:5173")
+@RequestMapping("/chattingroom")
 @RequiredArgsConstructor
 public class RoomController {
 
@@ -38,7 +36,7 @@ public class RoomController {
     @PostMapping
     public boolean write(@RequestBody RoomDto roomDto) {
         System.out.println("RoomController.write");
-        System.out.println("roomDto = " + roomDto);
+        System.out.println("roomDto = " + roomDto.getMnoList());
         // 세션에서 로그인된 회원번호 가져오기
         Integer loginMno = (Integer) httpSession.getAttribute("mno");
 
@@ -52,7 +50,20 @@ public class RoomController {
         // 세션에서 로그인된 회원번호 가져오기
         Integer loginMno = (Integer) httpSession.getAttribute("mno");
 
-        return roomService.find(sample); // sample 나중에 mno 로 바꾸기
+        List<RoomDto> result = roomService.find(sample);
+    // rno가 중복되지 않도록 Set을 사용하여 고유한 rno를 필터링
+        Set<Integer> uniqueRnos = new HashSet<>();
+        List<RoomDto> uniqueRooms = new ArrayList<>();
+
+        for (RoomDto room : result) {
+            if (!uniqueRnos.contains(room.getRno())) {
+                uniqueRnos.add(room.getRno());
+                uniqueRooms.add(room);
+            }
+        }
+
+        // 필터링된 고유한 채팅방만 리턴
+        return uniqueRooms;
     }
 
     // [3] 채팅방 상세 조회
@@ -80,13 +91,25 @@ public class RoomController {
     // [6] 기존 채팅방에 회원 추가
     @PostMapping("/addmember")
     public List<String> addMember(@RequestBody RoomDto roomDto){
+
+        System.out.println("RoomController.addMember");
+        System.out.println("roomDto = " + roomDto.getRno());
         List<String> result = roomService.addMember(roomDto);
 
+        System.out.println("result = " + result);
         return  result;
     }
 
     // [7] 채팅방 나가기
 
+    // [8] 채팅방 정보 조회
+    @GetMapping("/findroominfo")
+    public RoomDto findRoomInfo(@RequestParam int rno){
+        System.out.println("RoomController.findRoomInfo");
+        System.out.println("rno = " + rno);
+
+        return  roomService.findRoomInfo(rno);
+    }
 
     // 테스트를 위한 회원 전체 출력
     @GetMapping("/member")

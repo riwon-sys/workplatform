@@ -14,12 +14,11 @@ import Avatar from '@mui/material/Avatar';
 import ImageIcon from '@mui/icons-material/Image';
 import Checkbox from '@mui/material/Checkbox';
 
-import { ListItemButton, ListItemIcon, ListSubheader, Collapse, Divider, Typography } from '@mui/material';
+import { Card, CardContent, CardActions, ListItemButton, ListItemIcon, ListSubheader, Collapse, Divider, Typography, Input } from '@mui/material';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import InboxIcon from '@mui/icons-material/Inbox';
 import StarBorder from '@mui/icons-material/StarBorder';
-
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -229,7 +228,7 @@ export default function ChatTeset() {
   // [3-2] 서버에서 채팅방 목록 response 받기
   const findAllRoom = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/chatingroom");
+      const response = await axios.get("http://localhost:8080/chattingroom");
 
       // 해당 사용자가 참여 중인 채팅 목록이 존재 시
       if (response.data) {
@@ -247,7 +246,7 @@ export default function ChatTeset() {
   // [4-2] 서버에서 전체 회원목록 받아오기
   const findAllMember = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/chatingroom/member");
+      const response = await axios.get("http://localhost:8080/chattingroom/member");
 
       if (response.data) {
         setMembers(response.data); // Members 상태 변수에 저장
@@ -283,7 +282,7 @@ export default function ChatTeset() {
     console.log("채팅방에 참여할 mno" + mnoList)
 
     try {
-      const response = await axios.post("http://localhost:8080/chatingroom", obj);
+      const response = await axios.post("http://localhost:8080/chattingroom", obj);
 
       if (response.data === true) {
         alert("채팅방 등록 성공");
@@ -416,32 +415,32 @@ export default function ChatTeset() {
 
   // [8] 기존 채팅방에 회원추가
   const addMember = async (rno) => {
-    // 추가할 회원수
-    const count = Number(prompt("추가할 회원 수"));
-    console.log(count);
+    // // 추가할 회원수
+    // const count = Number(prompt("추가할 회원 수"));
+    // console.log(count);
 
-    let newMnoList = [...addMembers.mnoList]; // 기존 mnoList 복사
+    // let newMnoList = [...addMembers.mnoList]; // 기존 mnoList 복사
 
-    // 추가할 회원번호를 여러 번 입력받아서 newMnoList에 추가
-    for (let i = 0; i < count; i++) {
-      const mno = prompt("추가할 회원번호");
-      newMnoList.push(mno); // newMnoList에 mno 추가
-    }
+    // // 추가할 회원번호를 여러 번 입력받아서 newMnoList에 추가
+    // for (let i = 0; i < count; i++) {
+    //   const mno = prompt("추가할 회원번호");
+    //   newMnoList.push(mno); // newMnoList에 mno 추가
+    // }
 
-    // 상태 업데이트 (newMnoList 사용)
-    setAddMembers((prevState) => ({
-      ...prevState,
-      mnoList: newMnoList, // 새로 추가된 mnoList 상태 업데이트
-    }));
+    // // 상태 업데이트 (newMnoList 사용)
+    // setAddMembers((prevState) => ({
+    //   ...prevState,
+    //   mnoList: newMnoList, // 새로 추가된 mnoList 상태 업데이트
+    // }));
 
     try {
       const obj = {
         rno: rno,
-        mnoList: newMnoList, // 추가할 회원번호 목록
+        mnoList: mnoList, // 추가할 회원번호 목록
       };
 
       // 서버로 채팅방에 추가할 회원번호 보내고 회원이름 반환받기
-      const response = await axios.post("http://localhost:8080/chatingroom/addmember", obj);
+      const response = await axios.post("http://localhost:8080/chattingroom/addmember", obj);
       console.log(response.data);
 
       if (response.data != null) {
@@ -449,20 +448,35 @@ export default function ChatTeset() {
         setMnameList(response.data); // 추가된 회원명 목록으로 상태 업데이트
         console.log(response.data)
 
-        setMnameList([]); // 초기화
       }
     } catch (e) {
       console.log("회원 추가 오류 : ", e);
     }
+
   };
+
+  // useEffect(() => {addMember(); }, [mNameList])
 
 
   console.log(mNameList)
 
+  // 입장 시 일정 시간동안만 출력
+  const [showMessage, setShowMessage] = useState(true);  // 메시지 출력 여부 상태
+
+  useEffect(() => {
+    // 30초 후에 메시지를 숨기는 타이머 설정
+    const timer = setTimeout(() => {
+      setShowMessage(false);  // 30초 후 메시지를 숨김
+    }, 20000); // 30초
+
+    // 컴포넌트가 언마운트될 때 타이머 정리
+    return () => clearTimeout(timer)
+  }, []);
+
   // [9] 채팅방 삭제
   const deleteRoom = async (rno) => {
     try {
-      const response = await axios.delete(`http://localhost:8080/chatingroom?rno=${rno}`)
+      const response = await axios.delete(`http://localhost:8080/chattingroom?rno=${rno}`)
 
       if (response.data == true) {
         alert("삭제성공")
@@ -582,17 +596,7 @@ export default function ChatTeset() {
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "1.5%", textAlign: "center" }}>
                   <h3 style={{ fontSize: "180%" }}>{`채팅방 ${selectedRoomId}`}</h3>
 
-                  {/* 기존 채팅방에 회원추가 */}
-                  <Button
-                    type="button"
-                    onClick={() => addMember(selectedRoomId)}
-                    component="label"
-                    variant="contained"
-                    color='info'
-                    sx={{ height: "30%", marginLeft: "10%" }}
-                  >
-                    회원추가
-                  </Button>
+
 
                   {/* 채팅방 삭제 */}
                   <Button
@@ -608,8 +612,21 @@ export default function ChatTeset() {
                 </div>
                 <hr />
 
-                {/* 메시지 영역 */}
+                <div>
+                  {/* 메시지 영역 */}
+                  {showMessage && mNameList && (
+                    mNameList.map((name, index) => {
+                      return (
+                        <div key={index}>
+                          {name} 님 입장
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+
                 <div id="space" ref={mySpaceRef} style={{ overflow: "scroll", overflowX: 'hidden', height: '2000%' }}>
+             
                   {messages.map((msg, index) => (
                     <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
                       {msg.msg ? (
@@ -723,6 +740,20 @@ export default function ChatTeset() {
             }}>
 
               <h2 style={{ fontSize: "180%" }}>채팅방 생성</h2>
+              {selectedRoomId && (
+                <>
+                  {/* 기존 채팅방에 회원추가 */}
+                  <Button
+                    type="button"
+                    onClick={() => addMember(selectedRoomId)}
+                    component="label"
+                    variant="contained"
+                    color='info'
+                    sx={{ height: "30%", marginLeft: "10%" }}
+                  >
+                    회원추가
+                  </Button></>
+              )}
               <Button type='button' onClick={creatR} variant="contained"
                 style={{ marginLeft: "10%" }}>
                 채팅방 생성
@@ -739,7 +770,7 @@ export default function ChatTeset() {
                 aria-labelledby="nested-list-subheader"
                 subheader={
                   <ListSubheader component="div" id="nested-list-subheader">
-                   
+                    사원목록
                   </ListSubheader>
                 }
               >
@@ -789,4 +820,3 @@ export default function ChatTeset() {
 
   );
 };
-
