@@ -43,8 +43,8 @@ export default function Report_View() {
   const [ reports, setReports ] = useState( [] );
   const [ page, setPage ] = useState(1); // 현재 페이지
   const [ totalPages, setTotalPages ] = useState(1); // 전체 페이지 수
-  const navigate = useNavigate();
   const [approval, setApproval] = useState([]);
+  const navigate = useNavigate();
   
   useEffect(() => { 
     if ( rpno ) { onFindByRpno(); } 
