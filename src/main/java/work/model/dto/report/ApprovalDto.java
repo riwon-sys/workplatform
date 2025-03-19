@@ -11,4 +11,6 @@ public class ApprovalDto {
     private String apsignature;
     private int mno;
     private int rpno;
+    private String mname;
+    private String mrank;
 }

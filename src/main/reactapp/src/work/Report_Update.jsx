@@ -68,9 +68,11 @@ export default function Report_Update() {
     }catch( e ){ console.log( e ); }
   } // f end
 
+  useEffect( () => { onApprovalByRpno(); }, [rpno] );
+
   // 결재자 찾기
   const onApprovalByRpno = async (  ) => {
-    const response = await axios.get( `http://localhost:8080/approval?rpno=${rpno}`);
+    const response = await axios.get( `http://localhost:8080/api/approval?rpno=${rpno}`);
     setApproval( response.data );
     console.log( response.data );
   } // f end
@@ -100,8 +102,14 @@ export default function Report_Update() {
             <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px', padding: 5 }} >
               { rpno && Number(rpno) > 0 ? 
               <>
-                <Report_Form formData={ formData } formDataChange={ formDataChange } 
-                  isReadOnly={ false } rpno={ rpno } approval={ approval } />
+                <Report_Form 
+                  formData={ formData } 
+                  formDataChange={ formDataChange } 
+                  isReadOnly={ false } 
+                  isUpdate={ true } 
+                  rpno={ rpno } 
+                  approval={ approval } 
+                />
  
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
                   <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate() } >

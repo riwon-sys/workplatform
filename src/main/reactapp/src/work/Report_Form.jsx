@@ -1,7 +1,8 @@
 import BasicSelect from './BasicSelect';
 import CustomTextarea from './CustomTextarea';
 
-export default function Report_Form( { formData, formDataChange, isReadOnly, rpno, members, approval, handleApprovalChange, membersByRank } ){
+export default function Report_Form( 
+  { formData, formDataChange, isReadOnly, approval, handleApprovalChange, membersByRank, isUpdate } ){
 
   let today = new Date();
   let year = today.getFullYear(); // 년도
@@ -20,7 +21,7 @@ export default function Report_Form( { formData, formDataChange, isReadOnly, rpn
           <tbody >
             <tr>
               {
-                !isReadOnly ?
+                !isReadOnly && !isUpdate ?
                 ["대리", "차장", "과장", "부장"].map((rank) => {
                   const selectedMno = approval.find((item) => item.rank === rank)?.mno || "";
 
@@ -36,21 +37,28 @@ export default function Report_Form( { formData, formDataChange, isReadOnly, rpn
                   );
                 }) :
                 approval.map( (rank) => {
-                  return(<>
-                    <td key={ rank } width="100px">
-                      <BasicSelect
-                        value={ rank.mname } // undefined 방지
-                      />
-                    </td>
-                  </>)
+                  return(
+                    <th key={ rank.mno } width="100px">
+                      { rank.mname }( { rank.mrank } )
+                    </th>
+                  )
                 })
               }
             </tr>
-            <tr style={{ height: '80px' }} >
-              <td> <img /> </td>
-              <td> <img /> </td>
-              <td> <img /> </td>
-              <td> <img /> </td>
+            <tr style={{ height: '80px' }}>
+              {
+                !isReadOnly ?
+                approval.map((rank) => (
+                  <td key={rank.mno} >
+                    {rank.apsignature ? 
+                    <img 
+                    src={`http://localhost:5173/public/${rank.apsignature}.jpg`}
+                    style={{ width: '95%', padding: 5 }} 
+                    alt="서명 이미지" /> : null}
+                  </td>
+                )) :
+                Array(4).fill(null).map((_, index) => <td key={index}></td>) // 4개의 빈 <td> 자동 생성
+              }
             </tr>
           </tbody>
         </table>

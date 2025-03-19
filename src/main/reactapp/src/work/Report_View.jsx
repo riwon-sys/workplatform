@@ -43,7 +43,7 @@ export default function Report_View() {
   const [ reports, setReports ] = useState( [] );
   const [ page, setPage ] = useState(1); // 현재 페이지
   const [ totalPages, setTotalPages ] = useState(1); // 전체 페이지 수
-  const [approval, setApproval] = useState([]);
+  const [approval, setApproval] = useState( [] );
   const navigate = useNavigate();
   
   useEffect(() => { 
@@ -91,11 +91,11 @@ export default function Report_View() {
     setTotalPages( response.data.pages );
   } // f end
 
-  useEffect( () => { onApprovalByRpno(); }, [] );
+  useEffect( () => { onApprovalByRpno(); }, [rpno] );
 
   // 결재자 찾기
   const onApprovalByRpno = async (  ) => {
-    const response = await axios.get( `http://localhost:8080/approval?rpno=${rpno}`);
+    const response = await axios.get( `http://localhost:8080/api/approval?rpno=${rpno}`);
     setApproval( response.data );
     console.log( response.data );
   } // f end
@@ -116,7 +116,7 @@ export default function Report_View() {
                 </StyledEngineProvider>
               </React.StrictMode>
               <Stack spacing={2}>
-                <Pagination count={ totalPages+1 } color="primary"
+                <Pagination count={ totalPages } color="primary"
                   page={ page }
                   onChange={ (value) => { handlePageChange(value) } }
                 />
@@ -128,8 +128,14 @@ export default function Report_View() {
             <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px', padding: 7 }} >
               { rpno && Number(rpno) > 0 ? 
               <>
-                <Report_Form formData={ formData } formDataChange={ formDataChange } 
-                  isReadOnly={ true } rpno={ rpno } approval={ approval } />
+                <Report_Form 
+                  formData={ formData } 
+                  formDataChange={ formDataChange } 
+                  isReadOnly={ true } 
+                  isUpdate={ false } 
+                  rpno={ rpno } 
+                  approval={ approval } 
+                />
               
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
                   <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate() } >

@@ -15,7 +15,7 @@ public class ApprovalController {
 
     private final ApprovalService approvalService;
 
-    // 1. 승인 테이블 등록
+    // 1. 결재자 목록 등록
     @PostMapping
     public boolean write(@RequestBody List<ApprovalDto> approvalList){
         System.out.println("ApprovalController.write");
@@ -23,12 +23,14 @@ public class ApprovalController {
         return approvalService.write(approvalList);
     } // f end
 
-//    // 2. 승인 전체 목록 조회
-//    @GetMapping
-//    public List<ApprovalDto> findAll(){
-//        System.out.println("ApprovalController.findAll");
-//        return approvalService.findAll();
-//    } // f end
+    // 2. 승인 전체 목록 조회
+    @GetMapping
+    public List<ApprovalDto> findApproval(@RequestParam Integer rpno){
+        System.out.println("ApprovalController.findAll");
+        int mno = 100007;
+        System.out.println("mno = " + mno + ", rpno = " + rpno);
+        return approvalService.findApproval(mno, rpno);
+    } // f end
 
 
 }
