@@ -1,5 +1,7 @@
 package work.model.mapper.member;
 
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import work.model.dto.member.MemberDto;
@@ -10,7 +12,7 @@ import java.util.List;
 public interface MemberMapper {
 
     // [1] 사원 등록
-    @Insert("insert into member( mno,mname,mphone,memail,mrank )" + "values( #{mno} , #{mname} , #{mphone},#{memail} , #{mrank})")
+    @Insert("insert into member( mno,mname,mphone,memail,mrank,mprofile )" + "values( #{mno} , #{mname} , #{mphone},#{memail} , #{mrank} , #{mprofile} )")
     public boolean signUp(MemberDto memberDto);
 
     // [2] 사원 로그인
@@ -29,7 +31,7 @@ public interface MemberMapper {
 
     // [4] 사원 전체 조회
     @SelectProvider( type = SqlBuilder.class, method = "buildGetUserByMrank" )
-    public List<MemberDto> getAllMembers( @Param("mrank") String mrank, @Param("mno") Integer mno);
+    public List<MemberDto> getAllMembers(@Param("mrank") String mrank, @Param("mno") Integer mno);
 
     class SqlBuilder{
         public static String buildGetUserByMrank( final String mrank, final Integer mno){

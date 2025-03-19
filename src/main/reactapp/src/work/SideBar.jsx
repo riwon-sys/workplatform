@@ -96,6 +96,7 @@ export default function MiniDrawer() {
     { name: "보고서 작성", path: "/report/write", icon: <NoteAddIcon /> },
     { name: "보고서 현황", path: "/report/view", icon: <DescriptionIcon /> },
     { name: "게시판", path: "/board", icon: <DvrTwoToneIcon /> },
+    { name: "사원 등록", path : "/member/post",icon: <DvrTwoToneIcon />} // rw 25-03-18
   ];
 
   return (
