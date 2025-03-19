@@ -1,5 +1,6 @@
 package work.service.member;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,9 +9,12 @@ import work.model.mapper.member.MemberMapper;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
+
 public class MemberService {
-    @Autowired MemberMapper memberMapper;
+
+    private final MemberMapper memberMapper;
     // [1] 사원 등록
     public boolean signUp( MemberDto memberDto ){
         System.out.println("memberDto = " + memberDto);
@@ -34,9 +38,10 @@ public class MemberService {
     }
 
     // [4] 사원 전체 조회
-    public List<MemberDto> getAllMembers(){
+    public List<MemberDto> getAllMembers(String mrank, Integer mno){
         System.out.println("MemberService.getAllMembers");
-        return null;
+        System.out.println("mrank = " + mrank + ", mno = " + mno);
+        return memberMapper.getAllMembers(mrank, mno);
     }
 
 
