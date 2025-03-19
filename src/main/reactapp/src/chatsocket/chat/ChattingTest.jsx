@@ -140,10 +140,24 @@ export default function ChatTeset() {
   };
 
   // [2-3] 파일 선택 후 상태 업데이트
+  // 미리보기 벼눗
+  // const [preview, setPreview] = useState(null)
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setFileObject(file); // 선택된 파일을 상태로 업데이트
+
+      // 미리보기
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        console.log(reader.result)
+        setPreview(reader.result)
+      }
+
+      reader.readAsDataURL(file)
+    } else {
+      setPreview(null)
     }
   };
   // [2-4] 파일타입 메세지 전송 상태 처리 (소켓)
@@ -161,8 +175,9 @@ export default function ChatTeset() {
           flocation: chattingDto.flocation // 파일 경로
         };
 
-        clientSocket.send(JSON.stringify(messageData)); // 소켓으로 메시지 전송
+        clientSocket.send(JSON.stringify(messageData)); // 소켓으로 메시지 전송  /////////// 여기 서 두번보냄
         console.log("파일 메시지 전송:", messageData); // 디버깅용 로그
+        setFileObject(null)
       }
     }
   }, [clientSocket, isSocketOpen, selectedRoomId]);
@@ -213,7 +228,7 @@ export default function ChatTeset() {
         // 상태 업데이트 후 WebSocket으로 메시지 전송
         if (clientSocket && isSocketOpen && selectedRoomId) {
           console.log("파일 메시지 전송:", newMessage);
-          clientSocket.send(JSON.stringify(newMessage)); // 소켓으로 메시지 전송
+          clientSocket.send(JSON.stringify(newMessage)); // 소켓으로 메시지 전송 /////////// 여기 서 두번보냄
           setFileObject(null); // 파일 객체 초기화
         }
 
@@ -416,19 +431,27 @@ export default function ChatTeset() {
   // [7-2] 소켓으로 받은 메세지 처리
   useEffect(() => {
     if (clientSocket && selectedRoomId) { // 만약 소켓이 열려있고 채팅방이 선택됐으면
+
       clientSocket.onmessage = (event) => { // 해당 소켓이 메세지를 받으면 실행
         console.log(event.data);
         const receivedMessage = JSON.parse(event.data); // 서버가 준 메세지 파싱
+        console.log(receivedMessage);
+        console.log(receivedMessage.mstype);
 
-        // 수신 메세지타입이 보낸상태가 아니면 화면에 추가
-        if (!receivedMessage.isSent) {
+        // 메세지 출력
+        if (receivedMessage.mstype !== 4 && (receivedMessage.mstype === undefined || receivedMessage.mstype === null || !receivedMessage.isSent)) {
+          console.log("실행됨");
           setMessages((prevMessages) => { // 메세지 리스트 업데이트
-
-            // 이전메세지와 새 메세지 합치기
             return [...prevMessages, receivedMessage];
-
-
           });
+        }
+
+        // 기존 채팅방에 회원이 새로 추가돼서 서버소켓이 mstype 4를 반환했을 때
+        if (receivedMessage.mstype === 4 || receivedMessage.mnameList) {
+          console.log("444444");
+          console.log(receivedMessage.mnameList);
+          setMnameList(receivedMessage.mnameList);
+          console.log(mNameList);
         }
       };
 
@@ -470,8 +493,15 @@ export default function ChatTeset() {
 
       if (response.data != null) {
         alert("추가성공");
-        setMnameList(response.data); // 추가된 회원명 목록으로 상태 업데이트
+        // setMnameList(response.data); // 추가된 회원명 목록으로 상태 업데이트
         console.log(response.data)
+        const socketObj = {
+          mstype: 4,
+          mnameList: response.data,
+          rno: selectedRoomId
+        }
+        console.log(socketObj)
+        clientSocket.send(JSON.stringify(socketObj)) // 채팅방 소켓으로 보내기
 
       }
     } catch (e) {
@@ -494,7 +524,7 @@ export default function ChatTeset() {
       const timer = setTimeout(() => {
         setShowMessage(false);  // 30초 후 메시지를 숨김
         setMnameList(null)
-      }, 30000); // 30초
+      }, 20000); // 30초
 
       // 컴포넌트가 언마운트될 때 타이머 정리
       return () => clearTimeout(timer)
@@ -508,7 +538,7 @@ export default function ChatTeset() {
       const response = await axios.delete(`http://localhost:8080/chattingroom?rno=${rno}`)
 
       if (response.data == true) {
-        alert("삭제성공")
+        alert("나가기 성공")
         findAllRoom()
       }
     } catch (e) {
@@ -566,6 +596,8 @@ export default function ChatTeset() {
   //     }
   //   });
   // };
+
+  console.log(messages)
 
   return (
     <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -646,27 +678,28 @@ export default function ChatTeset() {
                     color='info'
                     sx={{ width: "15%", marginLeft: "-10%", marginRight: "10%" }}
                   >
-                    채팅방 삭제
+                    나가기
                   </Button>
                 </div>
                 <hr />
 
-                <div>
-                  {/* 메시지 영역 */}
-                  {showMessage && mNameList && (
-                    mNameList.map((name, index) => {
-                      return (
-                        <div key={index}>
-                          {name} 님 입장
-                        </div>
-                      );
-                    })
-                  )}
-                </div>
-
                 <div id="space" ref={mySpaceRef} style={{ overflow: "scroll", overflowX: 'hidden', height: '2000%' }}>
 
-                  {messages.map((msg, index) => (
+                  <div>
+                    {/* 메시지 영역 */}
+                    {showMessage && mNameList && (
+                      mNameList.map((name, index) => {
+                        return (
+                          <div key={index}>
+                            {name} 님 입장
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+
+
+                  {messages && messages.map((msg, index) => (
                     <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
                       {msg.msg ? (
 
@@ -704,47 +737,75 @@ export default function ChatTeset() {
                       )}
                     </div>
                   ))}
+
                 </div>
 
                 <div style={{ marginBottom: "7%" }}>
 
                   {/* 메시지 입력칸과  등록 버튼 */}
                   <div style={{ display: 'flex', marginLeft: "3%" }}>
-                    <Input
-                      type="text"
-                      placeholder="메시지를 입력하세요."
-                      value={message}
-                      variant="outlined"
-                      onChange={(e) => setMessage(e.target.value)}
-                      style={{ width: "60%", marginRight: "10px" }}
-                    />
-                    <Button onClick={sendMessage} variant="contained" color='info'
-                      style={{ width: "10%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}>
-                      등록
-                    </Button>
+                    {fileObject ? (
+                      // fileObject가 있을 때
+                      <>
+                        <Input
+                          type="text"
+                          placeholder="메시지를 입력하세요."
+                          value={fileObject}
+                          variant="outlined"
+                          onChange={(e) => setMessage(e.target.value)}
+                          style={{ marginLeft : "5%",width: "55%", height: "30%", marginRight: "10px", marginTop: "5%" }}
+                        />
+                        <Button
+                        type='button'
+                        component="label"
+                        variant="contained"
+                        startIcon={<CloudUploadIcon />}
+                        onClick={sendFile}
+                        color='red'
+                        style={{ width: "10%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}
+                      >
+                        전송
+                      </Button>
+                      </>
+                    ) : (
+                      // fileObject가 없을 때
+                      <>
+                        <Input
+                          type="text"
+                          placeholder="메시지를 입력하세요."
+                          value={message}
+                          variant="outlined"
+                          onChange={(e) => setMessage(e.target.value)}
+                          style={{ width: "55%", height: "30%", marginRight: "10px", marginTop: "3%" }}
+                        />
+                        <Button
+                          onClick={sendMessage}
+                          variant="contained"
+                          color="info"
+                          style={{ width: "10%", height: "5%", marginTop: "3%", marginLeft: "2.5%" }}
+                        >
+                          등록
+                        </Button>
+                      </>
+                    )}
 
-                    {/* 파일 첨부 버튼 */}
-                    <Button
-                      type='button'
-                      component="label"
-                      variant="contained"
-                      startIcon={<CloudUploadIcon />}
-                      onClick={handleFileInputClick}
-                      color='info'
-                      style={{ width: "13%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}
-                    >
-                      첨부
-                    </Button>
 
-                    <input
-                      type="file"
-                      ref={fileInputRef}
-                      style={{ display: 'none' }}
-                      onChange={handleFileChange}
-                    />
+                    <div style={{ display: "flex", flexDirection: "column", marginTop: "1.6%" }}>
 
-                    {/* 선택된 파일이 있으면 전송 버튼 활성화 */}
-                    {fileObject && (
+
+                      {/* 파일 첨부 버튼 */}
+                      <Button
+                        type='button'
+                        component="label"
+                        variant="contained"
+                        startIcon={<CloudUploadIcon />}
+                        onClick={handleFileInputClick}
+                        color='info'
+                        style={{ width: "110%", height: "100%", marginTop: "15%", marginLeft: "2.5%" }}
+                      >
+                        첨부
+                      </Button>
+{/*
                       <Button
                         type='button'
                         component="label"
@@ -752,11 +813,21 @@ export default function ChatTeset() {
                         startIcon={<CloudUploadIcon />}
                         onClick={sendFile}
                         color='info'
-                        style={{ width: "13%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}
+                        style={{ width: "120%", height: "36%", marginTop: "5%", marginLeft: "2.5%" }}
                       >
                         전송
                       </Button>
-                    )}
+*/}
+                      <input
+                        type="file"
+                        accept='image/'
+                        ref={fileInputRef}
+                        style={{ display: 'none' }}
+                        onChange={handleFileChange}
+                      />
+                    </div>
+
+
 
                   </div>
                 </div>
@@ -775,10 +846,10 @@ export default function ChatTeset() {
               alignItems: "center",
               textAlign: "center",
               marginBottom: "3%",
-              height: "3.75%"
+              height: "4%"
             }}>
 
-              <h2 style={{ fontSize: "180%" }}>사원목록</h2>
+              <h2 style={{ fontSize: "180%" }}>목록</h2>
               {selectedRoomId && (
                 <>
                   {/* 기존 채팅방에 회원추가 */}

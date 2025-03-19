@@ -85,12 +85,12 @@ public class RoomController {
         return roomService.update(roomDto);
     }
 
-    // [5] 채팅방 삭제
+    // [5] 채팅방 나가기
     @DeleteMapping
     public boolean delete(@RequestParam("rno") int rno) {
 
         // 나중에 본인 생성한 채팅방인지 유효성 검사 추가하기
-        return roomService.delete(rno);
+        return roomService.delete(rno, sample); // 나중에 로그인된 세션 mno 로 바꾸기
     }
 
     // [6] 기존 채팅방에 회원 추가

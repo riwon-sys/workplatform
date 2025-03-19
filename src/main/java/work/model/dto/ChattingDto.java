@@ -1,6 +1,7 @@
 package work.model.dto;
 
 import lombok.*;
+import work.model.dto.MessageDto.MessageDto;
 import work.model.dto.room.RoomDto;
 
 import java.util.List;
@@ -24,6 +25,8 @@ public class ChattingDto {
     private  String pdate;
     private  String rname;
     private  String rtype;
+    private  List<String> mnameList;
+    private  List<MessageDto> msgList;
 
     private  int fno;
     private  String fname;

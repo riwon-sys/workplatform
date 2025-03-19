@@ -69,6 +69,7 @@ public class ChatSocket extends TextWebSocketHandler {
         // 기존 채팅 불러오기
         List<MessageDto> msgList = roomMapper.findAll(rno); // 나중에 limit  지정하기
 
+        System.out.println(msgList);
         return  msgList;
     }
 
@@ -84,7 +85,13 @@ public class ChatSocket extends TextWebSocketHandler {
             System.out.println("메세지 : " + chattingDto.getMsg());
             System.out.println("회원 : " + chattingDto.getMno());
             System.out.println("메세지 타입 : " + chattingDto.getMstype());
-            System.out.println("타입");
+        if(chattingDto.getMnameList() != null) {
+            if (chattingDto.getMnameList().size() > 0) {
+                for (int i = 0; i < chattingDto.getMnameList().size(); i++) {
+                    System.out.println("새로 추가된 회원" + chattingDto.getMnameList().get(i));
+                }
+            }
+        }
             switch (chattingDto.getMstype()) {
                 case 3: // 기존 채팅 기록 요청
                     List<MessageDto> msgList = addClient(rno, session);
@@ -121,14 +128,15 @@ public class ChatSocket extends TextWebSocketHandler {
                     break;
 
                 case 4: // 새로 참여한 사람 알림
-                    String mname = roomMapper.findMname(chattingDto.getMno());
-                    System.out.println("새로온 사람 : " + mname);
 
+                    String mname = roomMapper.findMname(chattingDto.getMno());
+                    // System.out.println("새로온 사람 : " + );
+                    broadcastMessage(rno, chattingDto);
                     break;
 
 
                 default:
-                    System.err.println("알 수 없는 메시지 타입: " + chattingDto.getMstype());
+                    System.out.println("알 수 없는 메시지 타입: " + chattingDto.getMstype());
                     break;
             }
         } catch (IOException e) {
@@ -168,12 +176,22 @@ public class ChatSocket extends TextWebSocketHandler {
     // 서버 코드에서 채팅방에 접속한 모든 클라이언트에게 메시지를 보냄
     private void broadcastMessage(int rno, ChattingDto message) throws Exception {
         System.out.println("메시지를 보내는 채팅방 rno: " + rno);  // rno 출력
+        System.out.println("소켓으로 보낼 타입 " +message.getMstype());
+        System.out.println(message.getMnameList());
         Set<WebSocketSession> sessions = chatRooms.get(rno);
         if (sessions != null) {
             String jsonMessage = mapper.writeValueAsString(message);
             System.out.println("서버로 보낼 메세지" + jsonMessage);
             for (WebSocketSession session : sessions) {
                 session.sendMessage(new TextMessage(jsonMessage));
+            }
+
+            if(message.getMstype() == 4){
+                // 새로 추가된 회원 이름 보내기
+                String jsonMsg = mapper.writeValueAsString(message);
+                for (WebSocketSession session : sessions) {
+                    session.sendMessage(new TextMessage(jsonMsg));
+                }
             }
         } else {
             System.out.println("해당 채팅방에 세션이 없습니다. rno: " + rno); // 세션이 없을 경우

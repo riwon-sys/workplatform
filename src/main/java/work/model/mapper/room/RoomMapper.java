@@ -43,9 +43,9 @@ public interface RoomMapper {
     @Update("UPDATE room SET rname = #{roomDto.rname}, rlastdate = now() where rno = #{roomDto.rno}")
     boolean update(@Param("roomDto") RoomDto roomDto);
 
-    // [5] 채팅방 삭제
-    @Update("update room set rstate = false where rno= #{rno}")
-    boolean delete(int rno);
+    // [5] 채팅방 나가기
+    @Delete("delete from paritcipant where rno = #{rno} and mno = #{loginMno}")
+    boolean delete(int rno, int loginMno);
 
     // [6] 기존 채팅방에 회원 추가
     @Insert("INSERT INTO paritcipant (mno, rno) VALUES (#{roomDto.mno} , {roomDto.rno}")
