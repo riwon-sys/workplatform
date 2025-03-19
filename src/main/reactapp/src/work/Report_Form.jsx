@@ -47,12 +47,12 @@ export default function Report_Form(
             </tr>
             <tr style={{ height: '80px' }}>
               {
-                !isReadOnly ?
+                !isReadOnly || !isUpdate ?
                 approval.map((rank) => (
                   <td key={rank.mno} >
                     {rank.apsignature ? 
                     <img 
-                    src={`http://localhost:5173/public/${rank.apsignature}.jpg`}
+                    src={`http://localhost:8080/file/${rank.apsignature}.jpg`}
                     style={{ width: '95%', padding: 5 }} 
                     alt="서명 이미지" /> : null}
                   </td>
