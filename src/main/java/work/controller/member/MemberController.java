@@ -3,6 +3,7 @@ package work.controller.member;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import work.model.dto.member.MemberDto;
@@ -12,9 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/workplatform")
+@RequiredArgsConstructor
 public class MemberController {
 
-@Autowired private MemberService memberService; // service 메소드를 사용하기 위한 객체 주입
+    private final MemberService memberService; // service 메소드를 사용하기 위한 객체 주입
     // [1] 사원 등록 // http://localhost:8080/workplatform/signup
     @PostMapping("/signup")
         public boolean signUp(@RequestBody MemberDto memberDto){
@@ -53,8 +55,11 @@ public class MemberController {
     }
 
     // [4] 사원 전체 조회 // http://localhost:8080/workplatform/allmembers
+    // 쿼리스트링 없이 호출시 : SELECT * FROM member
+    // 쿼리스트링 넣고 호출시 : SELECT * FROM member WHERE mrank = #{mrank} and mno = '#{mno}/100000%'
     @GetMapping("/allmembers")
-    public List<MemberDto> getAllMembers(){
+    public List<MemberDto> getAllMembers(@RequestParam(required = false) String mrank,
+                                         @RequestParam(required = false) Integer mno){
 
        /*
        [
@@ -65,7 +70,8 @@ public class MemberController {
        */
 
         System.out.println("MemberController.getAllMembers");
-        return null;
+        System.out.println("mrank = " + mrank + ", mno = " + mno);
+        return memberService.getAllMembers(mrank, mno);
     }
 
     // [5] 사원 수정  // http://localhost:8080/workplatform/update

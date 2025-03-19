@@ -24,11 +24,6 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Report_Update() {
 
   const { rpno } = useParams();
-
-  useEffect(() => { 
-    if ( rpno ) { onFindByRpno(); } 
-  }, [ rpno ]);
-
   const [ formData, setFormData ] = useState({
       rpname: '일일 업무 보고서' ,
       rpam: '',
@@ -41,7 +36,12 @@ export default function Report_Update() {
       mname: '',
       mrank: '',
       mdepartment: '' 
-    });
+  });
+  const [approval, setApproval] = useState([]);
+  
+  useEffect(() => { 
+    if ( rpno ) { onFindByRpno(); } 
+  }, [ rpno ]);
 
   const formDataChange = (e) => {
     setFormData( { ...formData, [ e.target.name ] : e.target.value } )
@@ -66,6 +66,13 @@ export default function Report_Update() {
         onCancle();
       }else{ alert('보고서 수정 실패'); }
     }catch( e ){ console.log( e ); }
+  } // f end
+
+  // 결재자 찾기
+  const onApprovalByRpno = async (  ) => {
+    const response = await axios.get( `http://localhost:8080/approval?rpno=${rpno}`);
+    setApproval( response.data );
+    console.log( response.data );
   } // f end
 
   const navigate = useNavigate();
@@ -94,7 +101,7 @@ export default function Report_Update() {
               { rpno && Number(rpno) > 0 ? 
               <>
                 <Report_Form formData={ formData } formDataChange={ formDataChange } 
-                  isReadOnly={ false } rpno={ rpno } />
+                  isReadOnly={ false } rpno={ rpno } approval={ approval } />
  
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
                   <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate() } >

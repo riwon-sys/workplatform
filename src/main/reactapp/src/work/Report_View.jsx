@@ -27,24 +27,28 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Report_View() {
 
   const { rpno } = useParams();
-
+  const [ formData, setFormData ] = useState({
+    rpname: '일일 업무 보고서' ,
+    rpam: '',
+    rppm: '',
+    rpamnote: '',
+    rppmnote: '',
+    rpunprocessed: '',
+    rpsignificant: '', 
+    rpexpected: '',
+    mname: '',
+    mrank: '',
+    mdepartment: '' 
+  });
+  const [ reports, setReports ] = useState( [] );
+  const [ page, setPage ] = useState(1); // 현재 페이지
+  const [ totalPages, setTotalPages ] = useState(1); // 전체 페이지 수
+  const [approval, setApproval] = useState([]);
+  const navigate = useNavigate();
+  
   useEffect(() => { 
     if ( rpno ) { onFindByRpno(); } 
   }, [ rpno ]);
-
-  const [ formData, setFormData ] = useState({
-      rpname: '일일 업무 보고서' ,
-      rpam: '',
-      rppm: '',
-      rpamnote: '',
-      rppmnote: '',
-      rpunprocessed: '',
-      rpsignificant: '', 
-      rpexpected: '',
-      mname: '',
-      mrank: '',
-      mdepartment: '' 
-    });
 
   const formDataChange = (e) => {
     setFormData( { ...formData, [ e.target.name ] : e.target.value } )
@@ -74,11 +78,6 @@ export default function Report_View() {
     }catch( e ){ console.log( e ); }
   }
 
-  const [ reports, setReports ] = useState( [] );
-  const [ page, setPage ] = useState(1); // 현재 페이지
-  const [ totalPages, setTotalPages ] = useState(1); // 전체 페이지 수
-  const navigate = useNavigate();
-
   const handlePageChange = ( e, value ) => {
     setPage( value );
   }
@@ -90,6 +89,15 @@ export default function Report_View() {
     setReports( response.data.list );
     console.log( response.data );
     setTotalPages( response.data.pages );
+  } // f end
+
+  useEffect( () => { onApprovalByRpno(); }, [] );
+
+  // 결재자 찾기
+  const onApprovalByRpno = async (  ) => {
+    const response = await axios.get( `http://localhost:8080/approval?rpno=${rpno}`);
+    setApproval( response.data );
+    console.log( response.data );
   } // f end
 
   return (
@@ -121,7 +129,7 @@ export default function Report_View() {
               { rpno && Number(rpno) > 0 ? 
               <>
                 <Report_Form formData={ formData } formDataChange={ formDataChange } 
-                  isReadOnly={ true } rpno={ rpno } />
+                  isReadOnly={ true } rpno={ rpno } approval={ approval } />
               
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
                   <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate() } >

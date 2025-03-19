@@ -1,11 +1,10 @@
 package work.model.mapper.member;
 
-import lombok.Setter;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.jdbc.SQL;
 import work.model.dto.member.MemberDto;
+
+import java.util.List;
 
 @Mapper
 public interface MemberMapper {
@@ -29,7 +28,23 @@ public interface MemberMapper {
     public boolean logOut(int mno);
 
     // [4] 사원 전체 조회
-    @Select("select * from member")
-    public MemberDto[] getAllMembers();
+    @SelectProvider( type = SqlBuilder.class, method = "buildGetUserByMrank" )
+    public List<MemberDto> getAllMembers( @Param("mrank") String mrank, @Param("mno") Integer mno);
+
+    class SqlBuilder{
+        public static String buildGetUserByMrank( final String mrank, final Integer mno){
+            return new SQL(){{
+                SELECT("*");
+                FROM("member");
+                if ( mrank != null ){
+                    WHERE("mrank = #{mrank}");
+                }
+                if( mno != null ){
+                    WHERE("mno LIKE '" + (mno / 100000) + "%'");
+                }
+                ORDER_BY("mno ASC");
+            }}.toString();
+        }
+    }
 
 }
