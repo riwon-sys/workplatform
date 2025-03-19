@@ -341,8 +341,33 @@ export default function ChatTeset() {
     setMessages([]); // 메시지 초기화
   };
 
-  // [6-3] 채팅방 정보 서버로부터 받기
+  console.log(selectedRoomId)
 
+  // [6-3] 채팅방 정보 서버로부터 받기
+  const [roomInfo, setRoomInfo] = useState({
+    rno: "", rid: "", rname: ""
+    , rdate: "", rlastdate: ""
+  })
+  const findRoomInfo = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/chattingroom/findroominfo?rno=${selectedRoomId}`)
+      console.log(response.data)
+      setRoomInfo(response.data)
+      console.log(roomInfo)
+
+    } catch (e) {
+      console.log("채팅방 상세 정보 오류", e)
+    }
+  }
+
+  useEffect(() => {
+    if (selectedRoomId) {  // selectedRoomId가 null이 아닌 경우에만 실행
+      findRoomInfo();
+    }
+  }, [selectedRoomId])
+
+  console.log(roomInfo)
+  console.log(selectedRoomId)
 
   // [7-1] 메세지 서버로 전달
   const sendMessage = () => {
@@ -452,10 +477,9 @@ export default function ChatTeset() {
     } catch (e) {
       console.log("회원 추가 오류 : ", e);
     }
-
+    setMnoList([]) // 회원선택 초기화
   };
 
-  // useEffect(() => {addMember(); }, [mNameList])
 
 
   console.log(mNameList)
@@ -464,14 +488,19 @@ export default function ChatTeset() {
   const [showMessage, setShowMessage] = useState(true);  // 메시지 출력 여부 상태
 
   useEffect(() => {
-    // 30초 후에 메시지를 숨기는 타이머 설정
-    const timer = setTimeout(() => {
-      setShowMessage(false);  // 30초 후 메시지를 숨김
-    }, 20000); // 30초
+    if (mNameList && mNameList.length > 0) {  // mNameList에 값이 있을 때만 타이머 시작
+      setShowMessage(true)
+      // 30초 후에 메시지를 숨기는 타이머 설정
+      const timer = setTimeout(() => {
+        setShowMessage(false);  // 30초 후 메시지를 숨김
+        setMnameList(null)
+      }, 30000); // 30초
 
-    // 컴포넌트가 언마운트될 때 타이머 정리
-    return () => clearTimeout(timer)
-  }, []);
+      // 컴포넌트가 언마운트될 때 타이머 정리
+      return () => clearTimeout(timer)
+    }
+  }, [mNameList]);
+
 
   // [9] 채팅방 삭제
   const deleteRoom = async (rno) => {
@@ -541,7 +570,7 @@ export default function ChatTeset() {
   return (
     <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Grid container spacing={0} sx={{ height: '100%' }}>
-        <Grid size={2.5} sx={{ height: '100%' }}>
+        <Grid size={2.8} sx={{ height: '100%' }}>
           <Item >
             <div style={{
               justifyContent: "center",
@@ -582,7 +611,7 @@ export default function ChatTeset() {
         </Grid>
 
 
-        <Grid size={6} sx={{ height: '100%' }}>
+        <Grid size={6.6} sx={{ height: '100%' }}>
           <Item>
             {selectedRoomId && (
               <div style={{
@@ -594,7 +623,17 @@ export default function ChatTeset() {
               }}>
                 {/* 채팅방 정보 */}
                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "1.5%", textAlign: "center" }}>
-                  <h3 style={{ fontSize: "180%" }}>{`채팅방 ${selectedRoomId}`}</h3>
+                  <div style={{ display: "flex", width: "100%", textAlign: "center" }}>
+                    {roomInfo && (
+                      <>
+                        <h3 style={{ fontSize: "180%", marginLeft: "20%" }}>{roomInfo.rname} </h3>
+                        <h6 style={{ fontSize: "90%", marginLeft: "5%" }}>
+                          생성일 : {roomInfo.rdate} <br />
+                          수정일 : {roomInfo.rlastdate}
+                        </h6>
+                      </>
+                    )}
+                  </div>
 
 
 
@@ -605,7 +644,7 @@ export default function ChatTeset() {
                     component="label"
                     variant="contained"
                     color='info'
-                    sx={{ height: "30%", marginLeft: "5%" }}
+                    sx={{ width: "15%", marginLeft: "-10%", marginRight: "10%" }}
                   >
                     채팅방 삭제
                   </Button>
@@ -626,7 +665,7 @@ export default function ChatTeset() {
                 </div>
 
                 <div id="space" ref={mySpaceRef} style={{ overflow: "scroll", overflowX: 'hidden', height: '2000%' }}>
-             
+
                   {messages.map((msg, index) => (
                     <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
                       {msg.msg ? (
@@ -728,7 +767,7 @@ export default function ChatTeset() {
         </Grid>
 
 
-        <Grid size={3.5} sx={{ height: '100%' }}>
+        <Grid size={2.6} sx={{ height: '100%' }}>
           <Item >
             <div style={{
               display: "flex",
@@ -736,10 +775,10 @@ export default function ChatTeset() {
               alignItems: "center",
               textAlign: "center",
               marginBottom: "3%",
-              height: "3.5%"
+              height: "3.75%"
             }}>
 
-              <h2 style={{ fontSize: "180%" }}>채팅방 생성</h2>
+              <h2 style={{ fontSize: "180%" }}>사원목록</h2>
               {selectedRoomId && (
                 <>
                   {/* 기존 채팅방에 회원추가 */}
@@ -749,7 +788,7 @@ export default function ChatTeset() {
                     component="label"
                     variant="contained"
                     color='info'
-                    sx={{ height: "30%", marginLeft: "10%" }}
+                    sx={{ marginLeft: "10%" }}
                   >
                     회원추가
                   </Button></>
@@ -770,7 +809,7 @@ export default function ChatTeset() {
                 aria-labelledby="nested-list-subheader"
                 subheader={
                   <ListSubheader component="div" id="nested-list-subheader">
-                    사원목록
+
                   </ListSubheader>
                 }
               >

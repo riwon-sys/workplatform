@@ -51,14 +51,19 @@ public class RoomController {
         Integer loginMno = (Integer) httpSession.getAttribute("mno");
 
         List<RoomDto> result = roomService.find(sample);
-    // rno가 중복되지 않도록 Set을 사용하여 고유한 rno를 필터링
+
+        // rno 중북 제거 후 return
         Set<Integer> uniqueRnos = new HashSet<>();
+
+        // 중복 제거한 List 를 저장할 변수 선언
         List<RoomDto> uniqueRooms = new ArrayList<>();
 
         for (RoomDto room : result) {
+            // uniqueRnos 에 rno 가 없으면
+            // 리스트.contains() : List 내 요소 존재 여부 확인
             if (!uniqueRnos.contains(room.getRno())) {
-                uniqueRnos.add(room.getRno());
-                uniqueRooms.add(room);
+                uniqueRnos.add(room.getRno()); // uniqueRnos 에 추가
+                uniqueRooms.add(room); // uniqueRooms 에 추가
             }
         }
 
