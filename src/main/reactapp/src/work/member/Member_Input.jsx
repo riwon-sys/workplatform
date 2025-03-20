@@ -9,6 +9,19 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 // [4] 회원가입 첨부파일 미리보기 기능, 첨부파일 유무에 따라서 fomdata 속성 설정
 
+
+import * as React from 'react';
+import { Card, Box, Button, TextField, Typography, IconButton } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import SettingsIcon from '@mui/icons-material/Settings';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import MinimizeIcon from '@mui/icons-material/Minimize';
+import MaximizeIcon from '@mui/icons-material/Fullscreen';
+import CloseIcon from '@mui/icons-material/Close';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+
+
 export default function Member_Input ( props ) {
     // (1) 입력받은 값들을 저장하는 state 변수 선언
     // const [ memberInfo , setMemberInfo ] = useState({mno : "" , mname : "" , mphone : "" , memail : "" ,  mrank : "" ,  uploadfile:null})
@@ -63,11 +76,11 @@ export default function Member_Input ( props ) {
         formdata.append('mphone', memberInfo.mphone);
         formdata.append('memail', memberInfo.memail);
         formdata.append('mrank', memberInfo.mrank);
-        formdata.append('uploadfile', memberInfo.uploadfile);
+        //formdata.append('uploadfile', memberInfo.uploadfile);
 
         // [4] -(3) 만약에 첨부파일이 존재하면 첨부파일 추가
         if( profile ){
-            formData.append('uploadfile' , profile );
+            formdata.append('uploadFile' , profile );
         }
 
         // 3.axios 에서 사용할 http 헤더 정보 , axios 에서는 application/json 은 기본값이므로 설정 할 필요가 없음
@@ -85,25 +98,147 @@ export default function Member_Input ( props ) {
             else{ alert ('회원가입 실패');}
     }
 
+
+  const [darkMode, setDarkMode] = React.useState(false); // 색상 모드 상태 추가
+
+  const toggleColorMode = () => {
+    setDarkMode(!darkMode); // 색상 모드 토글
+  };
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#1976d2', // Blue 색상
+      },
+      secondary: {
+        main: '#dc004e', // Pink 색상
+      },
+      mode: darkMode ? 'dark' : 'light', // darkMode 상태에 따라 모드 변경
+    },
+  });
+
+
     return (
       <>
-        <h3> 회원 가입 페이지 </h3>
-        <form>
-          사원 번호 : <input type="text" name="mno" value={memberInfo.mno} onChange={onInputChange} /><br />
-          사원 이름 : <input type="text" name="mname" value={memberInfo.mname} onChange={onInputChange} /><br />
-          연 락 처 : <input type="text" name="mphone" value={memberInfo.mphone} onChange={onInputChange} /><br />
-          사원 이메일 : <input type="text" name="memail" value={memberInfo.memail} onChange={onInputChange} /><br />
-          직 급 : <input type="text" name="mrank" value={memberInfo.mrank} onChange={onInputChange} /><br />
-          사진 등록 : <input type="file" accept="image/*" onChange={onFileUpload} />
-          <br />
-          {preview && (
-            <>
-              미리보기 :
-              <img src={preview} style={{ width: "100px" }} alt="미리보기 이미지" />
-            </>
-          )}
-          <button type="button" onClick={onSignup}> 회원 등록 </button>
-        </form>
+            <ThemeProvider theme={theme}>
+              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', padding: '20px' }}>
+                <Card variant="outlined" sx={{ width: '100%', maxWidth: '850px', padding: '50px', marginTop: '50px', borderRadius: '12px', position: 'relative' }}>
+                  {/* 최상단 오른쪽 버튼들 (사원 등록 박스 내) */}
+                  <Box sx={{ position: 'absolute', top: 5, right: 5, display: 'flex', gap: 3 }}>
+                    {/* 밝기 모드 전환 버튼 추가 */}
+                    <IconButton color="primary" aria-label="color-mode-toggle" onClick={toggleColorMode} sx={{ fontSize: 30 }}>
+                      {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+                    </IconButton>
+
+                    {/* 세팅 버튼 */}
+                    <IconButton color="primary" aria-label="settings" component="span" sx={{ fontSize: 30 }}>
+                      <SettingsIcon />
+                    </IconButton>
+
+                    {/* 나머지 아이콘 버튼들 */}
+                    <IconButton color="primary" aria-label="minimize" component="span" sx={{ fontSize: 30 }}>
+                      <MinimizeIcon />
+                    </IconButton>
+                    <IconButton color="primary" aria-label="maximize" component="span" sx={{ fontSize: 30 }}>
+                      <MaximizeIcon />
+                    </IconButton>
+                    <IconButton color="primary" aria-label="close" component="span" sx={{ fontSize: 30 }}>
+                      <CloseIcon />
+                    </IconButton>
+                  </Box>
+
+                  <Typography component="h1" variant="h4" sx={{ textAlign: 'center', marginBottom: '30px' }}>
+                    사원 등록
+                  </Typography>
+
+                  <Box component="form" noValidate  sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                    <TextField
+                      label="사원 번호"
+                      type="number"
+name="mno" value={memberInfo.mno} onChange={onInputChange}
+                      fullWidth
+                      required
+                      variant="outlined"
+                    />
+                    <TextField
+                      label="이름"
+                      type="text"
+name="mname" value={memberInfo.mname} onChange={onInputChange}
+                      fullWidth
+                      required
+                      variant="outlined"
+                    />
+                    <TextField
+                      label="전화번호"
+                      type="text"
+name="mphone" value={memberInfo.mphone} onChange={onInputChange}
+                      fullWidth
+                      required
+                      variant="outlined"
+                    />
+                    <TextField
+                      label="이메일"
+                      type="email"
+name="memail" value={memberInfo.memail} onChange={onInputChange}
+                      fullWidth
+                      required
+                      variant="outlined"
+                    />
+                    <TextField
+                      label="직급"
+                      type="text"
+name="mrank" value={memberInfo.mrank} onChange={onInputChange}
+                      fullWidth
+                      required
+                      variant="outlined"
+                    />
+
+                                        <TextField
+                                          label="사진 등록"
+                                          type="file"
+    accept="image/*" onChange={onFileUpload}
+                                          fullWidth
+                                          required
+                                          variant="outlined"
+                                        />
+
+                              {preview && (
+                                <>
+                                  미리보기 :
+                                  <img src={preview} style={{ width: "100px" }} alt="미리보기 이미지" />
+                                </>
+                              )}
+
+                    <Button type="button" variant="contained" color="primary" fullWidth sx={{ marginTop: '20px' }} onClick={onSignup}>
+                      등록
+                    </Button>
+                  </Box>
+                </Card>
+              </Box>
+            </ThemeProvider>
+
       </>
     );
 }
+
+
+
+
+
+// npm install @mui/material @emotion/react @emotion/styled
+
+// npm install @mui/material @mui/styled-engine-sc styled-components
+
+// npm install @mui/icons-material
+
+// 팀단위로 업무를 할 경우에는 pacakage.json 파일 내
+// 'dependencies'에 코드 자동 작성됨( 빌드 그레이들 )
+
+// npm install 현재 pacakage.json 파일 내 dependencies 코드들을 라이브러리들을 자동 설치
+
+// 라이브 러리를 관리 잘하기 !!!
+
+// 이제 컴포넌트를 사용하기
+
+
+

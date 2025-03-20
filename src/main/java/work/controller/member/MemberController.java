@@ -18,13 +18,17 @@ public class MemberController {
   private final  MemberService memberService; // service 메소드를 사용하기 위한 객체 주입
     // [1] 사원 등록 // http://localhost:8080/workplatform/signup
     @PostMapping("/signup")
-        public boolean signUp(@RequestBody MemberDto memberDto){
+        // public boolean signUp(@RequestBody MemberDto memberDto){
         // {"mno":"700055","mname": "한웅재", "mphone": "010-1234-5678", "memail": "financeteam_sawon@example.com", "mrank": "사원" }
-
+        public boolean signUp(MemberDto memberDto){ // multipart/form-data 사용; @RequestBody 생략
         System.out.println("MemberController.signUp");
         System.out.println("memberDto = " + memberDto);
-
-         return memberService.signUp(memberDto);  //    return true; // 성공시 true, 실패시 false
+        
+        // return memberService.signUp(memberDto);  //    return true; // 성공시 true, 실패시 false
+        boolean result = memberService.signUp(memberDto);
+        System.out.println("result = " + result);
+        return result; // 성공시 true, 실패시 false
+        
         }
 
     // [2] 사원 로그인 // http://localhost:8080/workplatform/login
