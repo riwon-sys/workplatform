@@ -411,10 +411,14 @@ create table approval(
 INSERT INTO approval( apdate, apstate, apsignature, mno, rpno ) VALUES
 ( '2025-02-01 23:30:11', 1, '서명1', 100007, 6 ),
 ( '2025-02-02 11:15:11', 1, '서명2', 100004, 6 ),
-( '2025-02-03 13:30:31', 0, null, 100002, 6 ),
-( '2025-02-04 15:34:26', 0, null, 100001, 6 ),
+( null, 0, null, 100002, 6 ),
+( null, 0, null, 100001, 6 ),
 ( '2025-02-05 23:30:11', 1, '서명5', 200012, 2 ),
-( null , 0, '서명6', 200010, 2 );
+( null , 0, '서명6', 200010, 2 ),
+( '2025-02-01 23:30:11', 1, '서명1', 100007, 20 ),
+( '2025-02-02 11:15:11', 1, '서명2', 100004, 20 ),
+( null, 0, null, 100002, 20 ),
+( null, 0, null, 100001, 20 );
 
 select * from report;
 select rp.*, m.mname, m.mrank from report rp inner join member m on rp.mno = m.mno where rp.mno = 100004 && rpstate = true;

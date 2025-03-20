@@ -36,7 +36,7 @@ public interface ReportMapper {
     boolean delete(int rpno);
 
     // 6. 보고서 번호
-    @Select( "SELECT LAST_INSERT_ID() FROM report" )
+    @Select( "SELECT LAST_INSERT_rpno() FROM report" )
     int lastRpno();
 
 }
