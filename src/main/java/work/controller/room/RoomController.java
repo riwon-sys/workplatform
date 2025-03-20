@@ -133,4 +133,13 @@ public class RoomController {
         // 결과 반환
         return result;
     }
+
+    // 이미 참여중인 회원조회
+    @GetMapping("/participation")
+    public List<MemberDto> findParticipation(@RequestParam int rno){
+        System.out.println("RoomController.findParticipation");
+        System.out.println("rno = " + rno);
+
+        return roomService.findParticipation(rno);
+    }
 }

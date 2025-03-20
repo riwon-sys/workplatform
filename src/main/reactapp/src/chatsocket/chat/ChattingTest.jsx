@@ -140,24 +140,10 @@ export default function ChatTeset() {
   };
 
   // [2-3] 파일 선택 후 상태 업데이트
-  // 미리보기 벼눗
-  // const [preview, setPreview] = useState(null)
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       setFileObject(file); // 선택된 파일을 상태로 업데이트
-
-      // 미리보기
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        console.log(reader.result)
-        setPreview(reader.result)
-      }
-
-      reader.readAsDataURL(file)
-    } else {
-      setPreview(null)
     }
   };
   // [2-4] 파일타입 메세지 전송 상태 처리 (소켓)
@@ -175,9 +161,9 @@ export default function ChatTeset() {
           flocation: chattingDto.flocation // 파일 경로
         };
 
-        clientSocket.send(JSON.stringify(messageData)); // 소켓으로 메시지 전송  /////////// 여기 서 두번보냄
+        clientSocket.send(JSON.stringify(messageData)); // 소켓으로 메시지 전송
         console.log("파일 메시지 전송:", messageData); // 디버깅용 로그
-        setFileObject(null)
+        console.log("파일 소켓으로 send1")
       }
     }
   }, [clientSocket, isSocketOpen, selectedRoomId]);
@@ -228,7 +214,8 @@ export default function ChatTeset() {
         // 상태 업데이트 후 WebSocket으로 메시지 전송
         if (clientSocket && isSocketOpen && selectedRoomId) {
           console.log("파일 메시지 전송:", newMessage);
-          clientSocket.send(JSON.stringify(newMessage)); // 소켓으로 메시지 전송 /////////// 여기 서 두번보냄
+          clientSocket.send(JSON.stringify(newMessage)); // 소켓으로 메시지 전송
+          console.log("파일 소켓으로 send2")
           setFileObject(null); // 파일 객체 초기화
         }
 
@@ -237,6 +224,8 @@ export default function ChatTeset() {
       }
     }
   }
+
+
   // [3-1] 컴포넌트 마운트 시 현재 로그인된 회원번호가 가입된 채팅방 불러오기
   useEffect(() => { findAllRoom() }, []);
 
@@ -286,36 +275,51 @@ export default function ChatTeset() {
 
   // [5-2] 채팅방 생성
   const creatR = async () => {
-    // 생성할 채팅방 이름 입력받기
-    const rname = prompt("채팅방 이름")
+    let rname = null;
 
-    const obj = {
-      rname: rname,
-      mnoList: mnoList,
-    };
 
-    console.log("채팅방에 참여할 mno" + mnoList)
 
-    try {
-      const response = await axios.post("http://localhost:8080/chattingroom", obj);
+    // 채팅방이 이미 선택되었으면 회원 목록 초기화 후, 새로운 채팅방을 만들기
+    if (selectedRoomId != null) {
+      await findAllRoom()
+      setSelectedRoomId(""); // 기존 roomId 초기화
 
-      if (response.data === true) {
-        alert("채팅방 등록 성공");
-        findAllRoom() // 채팅방 목록 갱신
-        const mappingobj = {
-          rname: rname,
-          mstype: 5 // 채팅방 생성타입을 서버로 보내기
+    }
+    rname = prompt("채팅방 이름");
+    // rname과 mnoList가 있을 경우에만 채팅방 생성
+    if (rname && mnoList) {
+      const obj = {
+        rname: rname,
+        mnoList: mnoList,
+      };
+
+      console.log("채팅방에 참여할 mno: ", mnoList);
+
+      try {
+        // 새로운 채팅방 생성 요청
+        const response = await axios.post("http://localhost:8080/chattingroom", obj);
+
+        if (response.data === true) {
+          alert("채팅방 등록 성공");
+          findAllRoom(); // 채팅방 목록 갱신
+
+          const mappingobj = {
+            rname: rname,
+            mstype: 5, // 채팅방 생성타입을 서버로 보내기
+          };
+
+          // 채팅방 생성 메시지를 소켓으로 전송
+          totalSocket.send(JSON.stringify(mappingobj)); // JSON으로 파싱 후 서버로 전송
         }
-        totalSocket.send(JSON.stringify(mappingobj)) // JSON 으로 파싱 후 서버로 전송
-
+      } catch (e) {
+        console.log("채팅방 생성 오류: ", e);
       }
 
-    } catch (e) {
-      console.log("채팅방 생성 오류 : ", e);
+      // 채팅방 생성 후, mnoList 초기화
+      setMnoList([]); // 회원선택 초기화
     }
-
-    setMnoList([]) // 회원선택 초기화
   };
+
 
   // [6-1] 채팅방 접속 WebSocket
   const connectChatRoomSocket = (roomId) => {
@@ -340,6 +344,7 @@ export default function ChatTeset() {
     socket.onclose = (event) => {
       console.log('채팅방 소켓 연결 종료', event);
       setIsSocketOpen(false);
+      setMessages([]) ///////////////////
     };
 
     // 소켓 상태 업데이트
@@ -350,6 +355,9 @@ export default function ChatTeset() {
   const handleRoomSelect = (roomId) => {
     if (clientSocket) {
       clientSocket.close(); // 기존 소켓 종료
+      console.log("채팅방 소켓 종료")
+      setMnameList([])
+      console.log("추가회원리스트 null")
     }
     setSelectedRoomId(roomId);
     connectChatRoomSocket(roomId); // 새로운 소켓 연결
@@ -404,8 +412,9 @@ export default function ChatTeset() {
 
         // 소켓으로 서버에 전달
         clientSocket.send(JSON.stringify(messageData)); // 메시지 보내기
-
+        console.log("메세지 소켓으로 send1")
         setMessage(''); // 메시지 입력창 초기화
+        // setMessages([])////
 
       } else {
         console.log('WebSocket 연결이 완료되지 않았습니다. 연결을 기다립니다...');
@@ -414,7 +423,8 @@ export default function ChatTeset() {
         const interval = setInterval(() => {
           if (clientSocket.readyState === WebSocket.OPEN) {
             clearInterval(interval);  // 연결되면 인터벌을 종료
-            clientSocket.send(JSON.stringify(messageData));  // 메시지 전송
+            //clientSocket.send(JSON.stringify(messageData));  // 메시지 전송
+            console.log("메세지 소켓으로 send 2")
             setMessage('');  // 메시지 입력창 초기화
           }
         }, 100);  // 100ms마다 연결 상태 확인
@@ -431,22 +441,37 @@ export default function ChatTeset() {
   // [7-2] 소켓으로 받은 메세지 처리
   useEffect(() => {
     if (clientSocket && selectedRoomId) { // 만약 소켓이 열려있고 채팅방이 선택됐으면
-
       clientSocket.onmessage = (event) => { // 해당 소켓이 메세지를 받으면 실행
         console.log(event.data);
         const receivedMessage = JSON.parse(event.data); // 서버가 준 메세지 파싱
-        console.log(receivedMessage);
-        console.log(receivedMessage.mstype);
 
         // 메세지 출력
-        if (receivedMessage.mstype !== 4 && (receivedMessage.mstype === undefined || receivedMessage.mstype === null || !receivedMessage.isSent)) {
+        if (receivedMessage.mstype !== 4 &&(receivedMessage.mstype === null || !receivedMessage.isSent)) {
           console.log("실행됨");
           setMessages((prevMessages) => { // 메세지 리스트 업데이트
             return [...prevMessages, receivedMessage];
           });
         }
 
-        // 기존 채팅방에 회원이 새로 추가돼서 서버소켓이 mstype 4를 반환했을 때
+
+        
+        // // 메세지 출력
+        // if (receivedMessage.mstype !== 4 && receivedMessage.mstype === 0 && (receivedMessage.mstype === null || !receivedMessage.isSent)) {
+        //   console.log("실행됨");
+        //   setMessages((prevMessages) => { // 메세지 리스트 업데이트
+        //     return [...prevMessages, receivedMessage];
+        //   });
+        // }
+
+        // // 팡리 출력
+        // if (receivedMessage.mstype !== 4 && receivedMessage.mstype === 1 && (receivedMessage.mstype === null || !receivedMessage.isSent)) {
+        //   console.log("실행됨");
+        //   setMessages((prevMessages) => { // 메세지 리스트 업데이트
+        //     return [...prevMessages, receivedMessage];
+        //   });
+        // }
+
+        //기존 채팅방에 회원이 새로 추가돼서 서버소켓이 mstype 4를 반환했을 때
         if (receivedMessage.mstype === 4 || receivedMessage.mnameList) {
           console.log("444444");
           console.log(receivedMessage.mnameList);
@@ -454,9 +479,9 @@ export default function ChatTeset() {
           console.log(mNameList);
         }
       };
-
       return () => {
         clientSocket.close(); // 컴포넌트 언마운트 되면 소켓 종료
+        setMessages([])
       };
     }
   }, [clientSocket, selectedRoomId]); // cilentSocket 이나 채팅방 새로 선택 시마다 리렌더링
@@ -563,7 +588,7 @@ export default function ChatTeset() {
   const [open, setOpen] = useState({}); // 부서별 드롭다운 상태 관리
   const [selectedMnos, setSelectedMnos] = useState([]); // 체크박스 선택 상태 관리
 
-  // 부서별로 회원들을 그룹화하는 함수
+  // [11] 부서별로 회원들을 그룹화하는 함수
   const groupMembersByDepartment = () => {
     return members.reduce((acc, member) => {
       const department = member.department;  // 부서를 기준으로 그룹화
@@ -599,6 +624,37 @@ export default function ChatTeset() {
 
   console.log(messages)
 
+
+  // [12] 이미 채팅 참여중인 사람 조회
+  const [participationMember, setParticipationMember] = useState([])
+  const participant = async () => {
+
+    if (!selectedRoomId) {
+      // selectedRoomId가 없으면 함수 종료
+      console.log('Room ID가 없습니다.');
+      return;
+    }
+
+    try {
+      console.log(selectedRoomId)
+      const response = await axios.get(`http://localhost:8080/chattingroom/participation?rno=${selectedRoomId}`);
+
+      if (response.data != null) {
+        setParticipationMember(response.data)
+        console.log(participationMember)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => {
+    participant();
+  }, [selectedRoomId])
+
+  console.log(participationMember)
+
+
   return (
     <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Grid container spacing={0} sx={{ height: '100%' }}>
@@ -612,6 +668,8 @@ export default function ChatTeset() {
               height: "4.3%"
             }}>
               <h3 style={{ fontSize: "180%" }}>채팅방 선택</h3> {/* 나중에 로그인된 회원정보 출력으로 바꾸기 */}
+
+
             </div>
             <hr></hr>
 
@@ -675,8 +733,8 @@ export default function ChatTeset() {
                     onClick={() => deleteRoom(selectedRoomId)}
                     component="label"
                     variant="contained"
-                    color='info'
-                    sx={{ width: "15%", marginLeft: "-10%", marginRight: "10%" }}
+
+                    sx={{ width: "15%", marginLeft: "-10%", marginRight: "10%", backgroundColor: "#ff7a7a" }}
                   >
                     나가기
                   </Button>
@@ -698,136 +756,99 @@ export default function ChatTeset() {
                     )}
                   </div>
 
+                  <div>
+                    {messages.map((msg, index) => (
+                      <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
+                        {msg.msg ? (
 
-                  {messages && messages.map((msg, index) => (
-                    <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
-                      {msg.msg ? (
-
-                        <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
-                          <CardContent>
-                            <Typography variant="body2">
-                              <h3 style={{ color: "black" }}>{msg.mname}</h3>
-                              <br />
-                              {msg.msg}
-                            </Typography>
-                          </CardContent>
-                          <CardActions>
-                            <Button size="small">채팅 삭제</Button>
-                          </CardActions>
-                        </Card>
-                      ) : (
-                        <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '300px', textAlign: "start" }}>
-                          <CardContent>
-                            <Typography variant="body2">
-                              <h3 style={{ color: "black" }}>{msg.mname}</h3>
-                              <br />
-                              {msg.flocation}
-                            </Typography>
-                          </CardContent>
-                          <CardActions>
-                            <Button size="small">채팅 삭제</Button>
-                            <Button
-                              href={`http://localhost:8080/api/msg/file/download?file=${encodeURIComponent(msg.flocation)}`}
-                              download={msg.fname}
-                            >
-                              다운로드
-                            </Button>
-                          </CardActions>
-                        </Card>
-                      )}
-                    </div>
-                  ))}
-
+                          <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
+                            <CardContent>
+                              <Typography variant="body2">
+                                <h3 style={{ color: "black" }}>{msg.msno}{msg.mname}</h3>
+                                <br />
+                                {msg.msg}
+                              </Typography>
+                            </CardContent>
+                            <CardActions>
+                              <Button size="small">채팅 삭제</Button>
+                            </CardActions>
+                          </Card>
+                        ) : (
+                          <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '300px', textAlign: "start" }}>
+                            <CardContent>
+                              <Typography variant="body2">
+                                <h3 style={{ color: "black" }}>{msg.mname}</h3>
+                                <br />
+                                {msg.flocation}
+                              </Typography>
+                            </CardContent>
+                            <CardActions>
+                              <Button size="small">채팅 삭제</Button>
+                              <Button
+                                href={`http://localhost:8080/api/msg/file/download?file=${encodeURIComponent(msg.flocation)}`}
+                                download={msg.fname}
+                              >
+                                다운로드
+                              </Button>
+                            </CardActions>
+                          </Card>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-
                 <div style={{ marginBottom: "7%" }}>
 
                   {/* 메시지 입력칸과  등록 버튼 */}
                   <div style={{ display: 'flex', marginLeft: "3%" }}>
-                    {fileObject ? (
-                      // fileObject가 있을 때
-                      <>
-                        <Input
-                          type="text"
-                          placeholder="메시지를 입력하세요."
-                          value={fileObject}
-                          variant="outlined"
-                          onChange={(e) => setMessage(e.target.value)}
-                          style={{ marginLeft : "5%",width: "55%", height: "30%", marginRight: "10px", marginTop: "5%" }}
-                        />
-                        <Button
+                    <Input
+                      type="text"
+                      placeholder="메시지를 입력하세요."
+                      value={message}
+                      variant="outlined"
+                      onChange={(e) => setMessage(e.target.value)}
+                      style={{ width: "60%", marginRight: "10px" }}
+                    />
+                    <Button onClick={sendMessage} variant="contained" color='info'
+                      style={{ width: "10%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}>
+                      등록
+                    </Button>
+
+                    {/* 파일 첨부 버튼 */}
+
+                    <Button
+                      type='button'
+                      component="label"
+                      variant="contained"
+                      startIcon={<CloudUploadIcon />}
+                      onClick={handleFileInputClick}
+                      color='info'
+                      style={{ width: "13%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}
+                    >
+                      첨부
+                    </Button>
+
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      style={{ display: 'none' }}
+                      onChange={handleFileChange}
+                    />
+
+                    {/* 선택된 파일이 있으면 전송 버튼 활성화 */}
+                    {fileObject && (
+                      <Button
                         type='button'
                         component="label"
                         variant="contained"
                         startIcon={<CloudUploadIcon />}
                         onClick={sendFile}
-                        color='red'
-                        style={{ width: "10%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}
+                        color='info'
+                        style={{ width: "13%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}
                       >
                         전송
                       </Button>
-                      </>
-                    ) : (
-                      // fileObject가 없을 때
-                      <>
-                        <Input
-                          type="text"
-                          placeholder="메시지를 입력하세요."
-                          value={message}
-                          variant="outlined"
-                          onChange={(e) => setMessage(e.target.value)}
-                          style={{ width: "55%", height: "30%", marginRight: "10px", marginTop: "3%" }}
-                        />
-                        <Button
-                          onClick={sendMessage}
-                          variant="contained"
-                          color="info"
-                          style={{ width: "10%", height: "5%", marginTop: "3%", marginLeft: "2.5%" }}
-                        >
-                          등록
-                        </Button>
-                      </>
                     )}
-
-
-                    <div style={{ display: "flex", flexDirection: "column", marginTop: "1.6%" }}>
-
-
-                      {/* 파일 첨부 버튼 */}
-                      <Button
-                        type='button'
-                        component="label"
-                        variant="contained"
-                        startIcon={<CloudUploadIcon />}
-                        onClick={handleFileInputClick}
-                        color='info'
-                        style={{ width: "110%", height: "100%", marginTop: "15%", marginLeft: "2.5%" }}
-                      >
-                        첨부
-                      </Button>
-{/*
-                      <Button
-                        type='button'
-                        component="label"
-                        variant="contained"
-                        startIcon={<CloudUploadIcon />}
-                        onClick={sendFile}
-                        color='info'
-                        style={{ width: "120%", height: "36%", marginTop: "5%", marginLeft: "2.5%" }}
-                      >
-                        전송
-                      </Button>
-*/}
-                      <input
-                        type="file"
-                        accept='image/'
-                        ref={fileInputRef}
-                        style={{ display: 'none' }}
-                        onChange={handleFileChange}
-                      />
-                    </div>
-
-
 
                   </div>
                 </div>
@@ -836,7 +857,6 @@ export default function ChatTeset() {
 
           </Item>
         </Grid>
-
 
         <Grid size={2.6} sx={{ height: '100%' }}>
           <Item >
@@ -864,6 +884,7 @@ export default function ChatTeset() {
                     회원추가
                   </Button></>
               )}
+
               <Button type='button' onClick={creatR} variant="contained"
                 style={{ marginLeft: "10%" }}>
                 채팅방 생성
@@ -896,7 +917,9 @@ export default function ChatTeset() {
                     </ListItemButton>
                     <Collapse in={open[department]} timeout="auto" unmountOnExit>
                       <List component="div" disablePadding>
-                        {groupedMembers[department].map((m) => (
+
+
+                        {!selectedRoomId && groupedMembers[department].map((m) => (
                           <ListItemButton sx={{ pl: 4 }} key={m.mno}>
                             <ListItemAvatar>
                               <Avatar alt={m.mname} src={m.avatarUrl || '/static/images/avatar/1.jpg'} />
@@ -906,14 +929,43 @@ export default function ChatTeset() {
                               secondary={m.mrank} // 직급
                             />
                             <ListItemIcon>
+
+
                               <input type='checkbox'
                                 value={m.mno}
                                 checked={mnoList.includes(m.mno)}
                                 onChange={() => handleCheckboxChange(m.mno)} />
+
+
+                            </ListItemIcon>
+
+
+
+                            <Divider variant="inset" component="li" />
+                          </ListItemButton>
+                        ))}
+                        {selectedRoomId && groupedMembers[department].map((m) => (
+                          <ListItemButton sx={{ pl: 4 }} key={m.mno}>
+                            <ListItemAvatar>
+                              <Avatar alt={m.mname} src={m.avatarUrl || '/static/images/avatar/1.jpg'} />
+                            </ListItemAvatar>
+                            <ListItemText
+                              primary={`${m.mname} (${m.mno})`} // 회원명과 사원번호
+                              secondary={m.mrank} // 직급
+                            />
+                            <ListItemIcon>
+                              {/* 참여 회원에 해당하는 mno가 있을 경우 checked로, 없으면 mnoList에 있는지 확인 */}
+                              <input
+                                type='checkbox'
+                                value={m.mno}
+                                checked={participationMember.some(on => on.mno === m.mno) || mnoList.includes(m.mno)} // 조건에 맞으면 체크
+                                onChange={() => handleCheckboxChange(m.mno)}
+                              />
                             </ListItemIcon>
                             <Divider variant="inset" component="li" />
                           </ListItemButton>
                         ))}
+
                       </List>
                     </Collapse>
                   </div>

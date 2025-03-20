@@ -62,4 +62,8 @@ public interface RoomMapper {
     // 새로 들어온 회원이름 조회
     @Select("select mname from member where mno = #{mno}")
     String findMname(int mno);
+
+    // 이미 채팅에 참여 중인 회원조회
+    @Select("select mno from paritcipant where rno = #{rno}")
+    List<MemberDto> findParticipation(int rno);
 }

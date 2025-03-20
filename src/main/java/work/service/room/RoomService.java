@@ -118,4 +118,12 @@ public class RoomService {
 
         return result;
     }
+
+    // 이미 채팅에 참여중인 회원조회
+    public List<MemberDto> findParticipation(int rno){
+        System.out.println("RoomService.findParticipation");
+        System.out.println("rno = " + rno);
+
+        return roomMapper.findParticipation(rno);
+    }
 }
