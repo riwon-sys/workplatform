@@ -14,7 +14,7 @@ public interface ReportMapper {
     boolean write(ReportDto reportDto);
 
     @Select( "SELECT m.mname, rp.* FROM report rp INNER JOIN member m on rp.mno = m.mno " +
-            "WHERE rp.mno = #{mno} && rpstate = true" )
+            "WHERE rp.mno = #{mno} && rpstate = true ORDER BY rpno DESC" )
     List<ReportDto> findByMno(int mno);
 
     @Select( "SELECT m.mname, m.mrank, rp.* FROM report rp INNER JOIN member m on rp.mno = m.mno " +
