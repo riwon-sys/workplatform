@@ -1,5 +1,6 @@
 package work.controller.board;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,9 +19,10 @@ import java.util.List;
 @CrossOrigin("http://localhost:5173")//리액트 포트 도메인 허용
 @RestController
 @RequestMapping("/work/board")
+@RequiredArgsConstructor
 public class BoardController {
-    //서비스 사용하기 위한 객체주입
-    @Autowired private BoardService boardService;
+    //서비스 사용하기 위한 객체주입gg
+   private final BoardService boardService;
 
     //[1]게시물 전체 조회
     @GetMapping("")

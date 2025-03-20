@@ -5,4 +5,4 @@ const root = createRoot(document.querySelector('#root'))
 
 
 import Test from './work/App.jsx'
-root.render(<Test/>)
+root.render(<Test/>);

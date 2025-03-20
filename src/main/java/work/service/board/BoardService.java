@@ -1,5 +1,6 @@
 package work.service.board;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import work.model.dto.board.BoardDto;
@@ -8,9 +9,10 @@ import work.model.mapper.board.BoardMapper;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BoardService {
     // 서비스와 매퍼 연결
-    @Autowired private BoardMapper boardMapper;
+    private final BoardMapper boardMapper;
 
     //[1]전체조회
     public List<BoardDto>allView(){

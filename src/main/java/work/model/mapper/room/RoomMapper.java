@@ -11,12 +11,12 @@ import java.util.List;
 @Mapper
 public interface RoomMapper {
 
-    // [1] 채팅방 등록
+    // [1-1] 채팅방 등록
     @Insert("INSERT INTO room (rname, rtype, rlastdate, mno) VALUES (#{roomDto.rname}, #{roomDto.rtype} , NOW(), #{loginMno})")
     @Options(useGeneratedKeys = true, keyProperty = "roomDto.rno") // 생성된 rno 받아오기
     boolean write(@Param("roomDto") RoomDto roomDto, @Param("loginMno") int loginMno);
 
-    // [] 참여자 등록
+    // [1-2] 참여자 등록
     @Insert("INSERT INTO paritcipant (mno, rno) VALUES (#{mno}, #{rno})")
     boolean participantWrite(int mno, int rno);
 
@@ -24,7 +24,7 @@ public interface RoomMapper {
     @Select("select p.* , m.mname , r.* from paritcipant p join member m on p.mno = m.mno join room r on p.rno = r.rno where p.mno = #{loginMno} and r.rstate= true")
     List<RoomDto> find(int loginMno);
 
-    // [3] 채팅방 상세 조회
+    // [3] 채팅방 메세지 상세 조회
     @Select("""
             ( select ms.msno, ms.msg ,ms.msdate as msdate,p.pdate,r.rno, r.rname, r.rtype,  m.mname, null fno,null fname, null flocation, null fdate               
                 from message ms join paritcipant p on ms.pno = p.pno join room r on p.rno = r.rno join member m on p.mno = m.mno
@@ -51,6 +51,10 @@ public interface RoomMapper {
     @Insert("INSERT INTO paritcipant (mno, rno) VALUES (#{roomDto.mno} , {roomDto.rno}")
     boolean addMember(@Param("roomDto") RoomDto roomDto);
 
+
+    // [8] 채팅방 정보 조회
+    @Select("select * from room where rno = #{rno}")
+    RoomDto findRoomInfo(int rno);
     // 테스트용 회원조회
     @Select("select * from member ")
     List<MemberDto> findMember();

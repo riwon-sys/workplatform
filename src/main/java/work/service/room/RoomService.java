@@ -1,7 +1,9 @@
 package work.service.room;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import work.model.dto.ChattingDto;
 import work.model.dto.MessageDto.MessageDto;
 import work.model.dto.member.MemberDto;
@@ -12,12 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RoomService {
 
-    @Autowired
-    RoomMapper roomMapper;
+    private final RoomMapper roomMapper;
 
     // [1] 채팅방 등록 (채팅방에 참여할 인원수(mnoList length 에 따라 메소드 나누기)
+    // insert 시 데이터 일관성 유지를 위해 트랜젝션 처리
+    // RuntimeException , Error 외에도 에외 발생 시 롤백
+    @Transactional(rollbackFor = Exception.class)
     public boolean write(RoomDto roomDto, int loginMno){
 
         // 채팅방 타입 지정
@@ -93,5 +98,16 @@ public class RoomService {
         }
         return mnameList;
 
+    }
+
+    // [8] 채팅방 정보 조회
+    public RoomDto findRoomInfo (int rno){
+        System.out.println("RoomService.findRoomInfo");
+        System.out.println("rno = " + rno);
+
+        RoomDto result = roomMapper.findRoomInfo(rno);
+        System.out.println("result = " + result);
+
+        return result;
     }
 }
