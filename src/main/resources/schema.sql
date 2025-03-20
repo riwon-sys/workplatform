@@ -35,7 +35,7 @@ CREATE TABLE member (
     mtype INT DEFAULT 0,
     mrank VARCHAR(10) NOT NULL,
     mprofile VARCHAR(255) DEFAULT 'default.jpg',
-    constraint PRIMARY KEY (mno)
+    PRIMARY KEY (mno)
 );
 
 -- 채팅방 테이블

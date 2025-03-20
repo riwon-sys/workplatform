@@ -158,7 +158,7 @@ export default function MiniDrawer() {
                 로그인 &nbsp;해주세요.
               </Typography>
               <Button variant="contained" color="info" >
-                <Link style={{ color: 'white' }} > 로그인 </Link>
+                <Link to = "/member/login" style={{ color: 'white' }} > 로그인 </Link>
               </Button>
             </>
           )}

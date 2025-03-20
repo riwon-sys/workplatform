@@ -1,6 +1,7 @@
 package work.model.dto.member;
 
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,4 +20,7 @@ public class MemberDto {
     private  String mprofile; // default 'default.jpg' : 프로필 사진 기본값 설정
 
     private  String department;
+
+    // +  첨부파일 ( O )
+    private MultipartFile uploadFile; // 25-03-20 첨부파일 기능 추가
 }

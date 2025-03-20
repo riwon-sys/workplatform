@@ -15,6 +15,10 @@ import theme from './theme';
 import ChatTeset from "../chatsocket/chat/ChattingTest.jsx";
 import Report_List from "./Report_List.jsx";
 import Report_Form from "./Report_Form.jsx";
+import Member_Post from "./member/Member_Post.jsx";
+import Member_Login from "./member/Member_Login.jsx";
+
+
 import Report_Approval from "./Report_Approval.jsx";
 
 /* css */
@@ -42,9 +46,12 @@ export default function Test( props ){
                     <Route path="/report/list" element={ <Report_List /> } ></Route>
                     <Route path="/report/Form" element={ <Report_Form /> } ></Route>
                     <Route path="/report/update/:rpno" element={ <Report_Update /> } ></Route>
+                    <Route path="/member/post" element={ <Member_Post /> } ></Route>
+                    <Route path="/member/login" element={ <Member_Login /> } ></Route>
                 </Routes>
             </Box>
         </BrowserRouter>
         </ThemeProvider>
     </>)
 } // f end
+
