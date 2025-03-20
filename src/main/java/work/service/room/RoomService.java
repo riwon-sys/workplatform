@@ -2,6 +2,7 @@ package work.service.room;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import work.model.dto.ChattingDto;
@@ -10,8 +11,10 @@ import work.model.dto.member.MemberDto;
 import work.model.dto.room.RoomDto;
 import work.model.mapper.room.RoomMapper;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -22,36 +25,41 @@ public class RoomService {
     // [1] 채팅방 등록 (채팅방에 참여할 인원수(mnoList length 에 따라 메소드 나누기)
     // insert 시 데이터 일관성 유지를 위해 트랜젝션 처리
     // RuntimeException , Error 외에도 에외 발생 시 롤백
-    @Transactional(rollbackFor = Exception.class)
-    public boolean write(RoomDto roomDto, int loginMno){
 
-        // 채팅방 타입 지정
-        int type = roomDto.getMnoList().size() > 1 ? 1 : 0;
+    @Transactional(rollbackFor = {DataAccessException.class, RuntimeException.class, Exception.class})
+    public boolean write(RoomDto roomDto, int loginMno) {
+        try {
+            // 채팅방 타입 지정
+            int type = roomDto.getMnoList().size() > 1 ? 1 : 0;
+            String rtype = Integer.toString(type);
+            roomDto.setRtype(rtype);
 
-        String rtype = Integer.toString(type);
+            // 채팅방 생성
+            boolean roomCreate = roomMapper.write(roomDto, loginMno);
+            if (!roomCreate) {
+                return false;
+            }
 
-        roomDto.setRtype(rtype);
+            // rno 저장 후 참여자 테이블 insert
+            int rno = roomDto.getRno();
 
-        // 채팅방 생성
-        // 나중에 만든 회원번호로 참여자 테이블에 추가하기
-        boolean roomCreate = roomMapper.write(roomDto, loginMno);
-        if(!roomCreate){
-            return false;
-        }
+            // 참여자 리스트에 등록
+            for (int mno : roomDto.getMnoList()) {
+                roomMapper.participantWrite(mno, rno);
+            }
 
-        // rno 저장 후 참여자테이블 insert
-        int rno = roomDto.getRno();
-
-        // 현재 로그인된 회원번호 참여자 리스트 추가
-        // roomDto.getMnoList().add(loginMno);
-
-        for(int mno : roomDto.getMnoList()){
-            roomMapper.participantWrite(mno, rno);
+        } catch (DataAccessException e) {
+            // SQLException을 RuntimeException으로 감싸서 던짐
+            throw new RuntimeException("SQLException 발생", e);
+        } catch (Exception e) {
+            // 기타 예외 처리
+            throw new RuntimeException("기타 예외 발생", e);
         }
 
         return true;
-
     }
+
+
 
     // [2] 회원별 채팅방 전체 조회
     public List<RoomDto> find(int loginMno){
@@ -74,10 +82,10 @@ public class RoomService {
 
     }
 
-    // [5] 채팅방 삭제
-    public boolean delete(int rno){
+    // [5] 채팅방 나가기
+    public boolean delete(int rno, int loginMno){
 
-        return roomMapper.delete(rno);
+        return roomMapper.delete(rno, loginMno);
 
     }
 
@@ -109,5 +117,13 @@ public class RoomService {
         System.out.println("result = " + result);
 
         return result;
+    }
+
+    // 이미 채팅에 참여중인 회원조회
+    public List<MemberDto> findParticipation(int rno){
+        System.out.println("RoomService.findParticipation");
+        System.out.println("rno = " + rno);
+
+        return roomMapper.findParticipation(rno);
     }
 }

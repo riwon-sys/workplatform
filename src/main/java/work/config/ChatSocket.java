@@ -69,6 +69,18 @@ public class ChatSocket extends TextWebSocketHandler {
         // 기존 채팅 불러오기
         List<MessageDto> msgList = roomMapper.findAll(rno); // 나중에 limit  지정하기
 
+        // 중복된 msno를 제거하기 위해 Set을 사용하여 중복을 제거
+        Set<Integer> seenMsno = new HashSet<>();
+        List<MessageDto> uniqueMessages = new ArrayList<>();
+
+        for (MessageDto message : msgList) {
+            if (!seenMsno.contains(message.getMsno())) {
+                uniqueMessages.add(message);
+                seenMsno.add(message.getMsno());
+            }
+        }
+
+        System.out.println(msgList);
         return  msgList;
     }
 
@@ -84,7 +96,13 @@ public class ChatSocket extends TextWebSocketHandler {
             System.out.println("메세지 : " + chattingDto.getMsg());
             System.out.println("회원 : " + chattingDto.getMno());
             System.out.println("메세지 타입 : " + chattingDto.getMstype());
-            System.out.println("타입");
+        if(chattingDto.getMnameList() != null) {
+            if (chattingDto.getMnameList().size() > 0) {
+                for (int i = 0; i < chattingDto.getMnameList().size(); i++) {
+                    System.out.println("새로 추가된 회원" + chattingDto.getMnameList().get(i));
+                }
+            }
+        }
             switch (chattingDto.getMstype()) {
                 case 3: // 기존 채팅 기록 요청
                     List<MessageDto> msgList = addClient(rno, session);
@@ -106,6 +124,8 @@ public class ChatSocket extends TextWebSocketHandler {
 
                 case 0: // 일반 텍스트 메시지
                     broadcastMessage(rno, chattingDto);
+                    System.out.println(chattingDto.getMsg());
+                    System.out.println(chattingDto.getMsgList());
                     boolean result = messageMapper.writeMessage(chattingDto); // 컨트롤러로 연결해야됨
                     System.out.println("메시지 저장 결과: " + result);
                     break;
@@ -121,14 +141,15 @@ public class ChatSocket extends TextWebSocketHandler {
                     break;
 
                 case 4: // 새로 참여한 사람 알림
-                    String mname = roomMapper.findMname(chattingDto.getMno());
-                    System.out.println("새로온 사람 : " + mname);
 
+                    String mname = roomMapper.findMname(chattingDto.getMno());
+                    // System.out.println("새로온 사람 : " + );
+                    broadcastMessage(rno, chattingDto);
                     break;
 
 
                 default:
-                    System.err.println("알 수 없는 메시지 타입: " + chattingDto.getMstype());
+                    System.out.println("알 수 없는 메시지 타입: " + chattingDto.getMstype());
                     break;
             }
         } catch (IOException e) {
@@ -152,28 +173,44 @@ public class ChatSocket extends TextWebSocketHandler {
         totalClients.remove(session);
         // 클라이언트가 연결 종료 시 해당 세션 제거
         chatRooms.forEach((rno, sessions) -> {
-            if (sessions.remove(session)) { // 세션을 제거한 경우
-                System.out.println(session.getId() + "가 " + rno + "에서 나감");
-
-                // 존재하는 세션이 없을 때
-                if(sessions.isEmpty()){
-                    chatRooms.remove(rno);
-                    System.out.println("채팅방 없음");
+            Iterator<WebSocketSession> iterator = sessions.iterator();
+            while (iterator.hasNext()) {
+                WebSocketSession wsSession = iterator.next();
+                if (wsSession.equals(session)) {
+                    iterator.remove(); // 안전하게 세션 제거
+                    System.out.println(session.getId() + "가 " + rno + "에서 나감");
                 }
+            }
+
+            // 존재하는 세션이 없을 때
+            if (sessions.isEmpty()) {
+                chatRooms.remove(rno);
+                System.out.println("채팅방 없음");
             }
         });
     }
+
 
     // 특정 rno에 접속한 클라이언트들에게 메시지를 전송
     // 서버 코드에서 채팅방에 접속한 모든 클라이언트에게 메시지를 보냄
     private void broadcastMessage(int rno, ChattingDto message) throws Exception {
         System.out.println("메시지를 보내는 채팅방 rno: " + rno);  // rno 출력
+        System.out.println("소켓으로 보낼 타입 " +message.getMstype());
+        System.out.println(message.getMnameList());
         Set<WebSocketSession> sessions = chatRooms.get(rno);
         if (sessions != null) {
             String jsonMessage = mapper.writeValueAsString(message);
             System.out.println("서버로 보낼 메세지" + jsonMessage);
             for (WebSocketSession session : sessions) {
                 session.sendMessage(new TextMessage(jsonMessage));
+            }
+
+            if(message.getMstype() == 4){
+                // 새로 추가된 회원 이름 보내기
+                String jsonMsg = mapper.writeValueAsString(message);
+                for (WebSocketSession session : sessions) {
+                    session.sendMessage(new TextMessage(jsonMsg));
+                }
             }
         } else {
             System.out.println("해당 채팅방에 세션이 없습니다. rno: " + rno); // 세션이 없을 경우
