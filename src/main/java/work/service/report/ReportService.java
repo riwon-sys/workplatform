@@ -46,11 +46,6 @@ public class ReportService {
         return pageInfo;
     } // f end
 
-//    public List<ReportDto> findByMno(int mno){
-//        System.out.println("ReportController.findAll");
-//        return reportMapper.findByMno(mno);
-//    } // f end
-
     // 3. 보고서 상세 조회
     public ReportDto findByRpno(int rpno){
         System.out.println("ReportController.findAll");
@@ -70,6 +65,13 @@ public class ReportService {
         System.out.println("ReportController.delete");
         System.out.println("rpno = " + rpno);
         return reportMapper.delete(rpno);
+    } // f end
+
+    // 6. 보고서 번호
+
+    public int lastRpno(){
+        System.out.println("ReportController.findAll");
+        return reportMapper.lastRpno();
     } // f end
 
 }

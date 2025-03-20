@@ -7,6 +7,8 @@ import work.model.dto.member.MemberUtils;
 import work.model.dto.report.ReportDto;
 import work.service.report.ReportService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/report")
 @RequiredArgsConstructor
@@ -65,6 +67,13 @@ public class ReportController {
         System.out.println("ReportController.delete");
         System.out.println("rpno = " + rpno);
         return reportService.delete(rpno);
+    } // f end
+
+    // 6. 보고서 번호
+    @GetMapping("/lastrpno")
+    public int lastRpno(){
+        System.out.println("ReportController.findAll");
+        return reportService.lastRpno();
     } // f end
 
 }

@@ -26,9 +26,15 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Report_View() {
 
+  let today = new Date();
+  let year = today.getFullYear(); // 년도
+  let month = today.getMonth() + 1;  // 월
+  let date = today.getDate();  // 날짜
+  let day = year+''+month+''+date;
+
   const { rpno } = useParams();
   const [ formData, setFormData ] = useState({
-    rpname: '일일 업무 보고서' ,
+    rpname: '일일 업무 보고서'+day ,
     rpam: '',
     rppm: '',
     rpamnote: '',
@@ -114,7 +120,7 @@ export default function Report_View() {
                 />
               </CssVarsProvider>
 
-              <Stack spacing={2} mt={ 1 } >
+              <Stack spacing={2} mt={1} >
                 <Pagination 
                   color="primary"
                   page={ page }

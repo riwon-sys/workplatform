@@ -28,13 +28,14 @@ export default function Report_Write(){
     rpexpected: '' 
   });
   const [ mrank, setMrank ] = useState('');
-  const [approval, setApproval] = useState([
+  const [ approval, setApproval ] = useState([
     { rank: "대리", mno: "", rpno: "" },
     { rank: "차장", mno: "", rpno: "" },
     { rank: "과장", mno: "", rpno: "" },
     { rank: "부장", mno: "", rpno: "" },
   ]);
   const [ members, setMembers ] = useState([]);
+  const [ reports, setReports ] = useState( [] );
   const [ membersByRank, setMembersByRank ] = useState({}); // 직급별 멤버 상태
   console.log( approval );
 
@@ -42,17 +43,28 @@ export default function Report_Write(){
       setFormData( { ...formData, [ e.target.name ] : e.target.value } )
   } // f end
 
+  // 보고서 등록 함수
   const onPost = async ( props ) => {
     try{
-      console.log( formData );
       const response = await axios.post( 'http://localhost:8080/api/report', formData );
+      if( response.data ){
+        onApprovalPost();
+      }else{ alert('등록 실패') }
+    }catch( e ){ console.log( e ); }
+  } // f end 
+
+  // 보고서 결재 등록
+  const onApprovalPost = async ( props ) => {
+    try{
+      console.log( approval );
+      const response = await axios.post( 'http://localhost:8080/api/approval', approval );
       if( response.data ){
         alert('등록 성공');
         setFormData( { rpname: '일일 업무 보고서', rpam: '', rppm: '', rpamnote: '', rppmnote: '',
           rpunprocessed: '', rpsignificant: '', rpexpected: '' } );
       }else{ alert('등록 실패') }
-    }catch( e ){ console.log( e ) }
-  } // f end 
+    }catch( e ){ console.log( e ); }
+  } // f end
 
   useEffect(() => {
     const fetchMembers = async () => {
@@ -112,6 +124,7 @@ export default function Report_Write(){
                 formData={ formData } 
                 formDataChange={ formDataChange } 
                 isReadOnly={ false } 
+                isUpdate={ false }
                 members={ members }
                 approval={ approval }
                 membersByRank={ membersByRank }

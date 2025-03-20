@@ -14,6 +14,7 @@ import theme from './theme';
 import ChatTeset from "../chatsocket/chat/ChattingTest.jsx";
 import Report_List from "./Report_List.jsx";
 import Report_Form from "./Report_Form.jsx";
+import Report_Approval from "./Report_Approval.jsx";
 
 /* css */
 import './App.css';
@@ -33,10 +34,13 @@ export default function Test( props ){
                     <Route path="/report/write" element={ <Report_Write /> }></Route>
                     <Route path="/report/view" element={ <Report_View /> }></Route>
                     <Route path="/report/view/:rpno" element={ <Report_View /> }></Route>
+                    <Route path="/report/approval" element={ <Report_Approval /> }></Route>
+                    <Route path="/report/approval/:rpno" element={ <Report_Approval /> }></Route>
                     <Route path="/board" element={ <Board /> }></Route>
                     <Route path="/report/list" element={ <Report_List /> } ></Route>
                     <Route path="/report/Form" element={ <Report_Form /> } ></Route>
                     <Route path="/report/update/:rpno" element={ <Report_Update /> } ></Route>
+                    
                 </Routes>
             </Box>
         </BrowserRouter>

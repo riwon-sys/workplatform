@@ -14,7 +14,10 @@ export default function Report_Form(
 
   return(<>
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px'   }} >
-      <h1 style={{ margin: '0 auto' }} > 일일 업무 보고서 </h1>
+      <div style={{ margin: '0 auto', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} >
+        <h1 style={{ marginRight: 10 }} > 일일 업무 </h1>
+        <h1> 보고서 </h1>
+      </div>
       
       <form>
         <table border={2} style={{ borderCollapse: 'collapse' }} >

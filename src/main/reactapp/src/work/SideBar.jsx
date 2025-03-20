@@ -94,7 +94,8 @@ export default function MiniDrawer() {
   const menuItems = [
     { name: "메신저", path: "/chatting", icon: <QuestionAnswerIcon /> },
     { name: "보고서 작성", path: "/report/write", icon: <NoteAddIcon /> },
-    { name: "보고서 현황", path: "/report/view", icon: <DescriptionIcon /> },
+    { name: "나의 보고서", path: "/report/view", icon: <DescriptionIcon /> },
+    { name: "결재 목록", path: "/report/approval", icon: <DescriptionIcon /> },
     { name: "게시판", path: "/board", icon: <DvrTwoToneIcon /> },
   ];
 
@@ -102,40 +103,36 @@ export default function MiniDrawer() {
     <Box sx={{ display: 'flex', height: '100vh' }}>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start', p: 1, pr: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start', pr: 3 }}>
             <img
-              src="/logo.png"
+              src="/Logo_long.png"
               alt="Logo"
-              style={{ width: open ? 40 : 30, height: open ? 40 : 30, transition: "0.3s" }}
+              style={{ width: open ? 140 : 30, height: open ? 40 : 30, transition: "0.3s" }}
             />
-            {open && (
-              <Typography variant="h6" sx={{ ml: 1, fontWeight: 'bold' }}>
-                워크 플랫폼
-              </Typography>
-            )}
           </Box>
           <IconButton onClick={toggleDrawer}>
-            {open ? <ChevronLeftIcon /> : <MenuIcon sx={{ marginRight: 0.5 }} />}
+            {open ? <ChevronLeftIcon /> : <img src='/Logo.png' style={{ width: '40px' , marginRight: -5 }} />}
           </IconButton>
         </DrawerHeader>
         <Divider />
 
         {/* 메뉴 리스트 */}
         <List>
-          {menuItems.map((item) => (
-            <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
-              <ListItemButton
-                component={Link}
-                to={item.path}
-                sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
-              >
-                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
-                  {item.icon}
-                </ListItemIcon>
-                <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {menuItems.map((item, index) => 
+            (
+              <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
+                  component={Link}
+                  to={item.path}
+                  sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
+                >
+                  <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            ))}
         </List>
 
         <Divider />
