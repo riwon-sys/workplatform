@@ -16,6 +16,10 @@ DROP TABLE IF EXISTS report;
 -- 채팅방 테이블 삭제 (room 테이블은 member를 참조하므로, room 테이블을 마지막에 삭제)
 DROP TABLE IF EXISTS room;
 
+-- 댓글 테이블 삭제 (comment 테이블은 board를 참조하므로, comment 테이블을 먼저 삭제)
+drop table if exists comment;
+
+-- 게시판 테이블 삭제
 drop table if exists board;
 -- 이제 'member' 테이블 삭제
 DROP TABLE IF EXISTS member;
@@ -91,6 +95,22 @@ create table board(
     constraint foreign key(mno)references member(mno)
     on update cascade
     on delete cascade
+);
+
+-- 댓글 테이블
+create table comment(
+ cid int unsigned auto_increment,
+ content varchar(200) not null,
+ reg_date datetime default current_timestamp,
+ pid int unsigned,
+ mno int unsigned,
+ primary key (cid),
+ foreign key(pid) references board(pid)
+ on update cascade
+ on delete cascade,
+ foreign key(mno) references Member(mno)
+ on update cascade
+ on delete cascade
 );
 
 -- 보고서 테이블
