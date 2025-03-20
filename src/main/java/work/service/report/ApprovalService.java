@@ -17,6 +17,7 @@ public class ApprovalService {
 
     private final ApprovalMapper approvalMapper;
 
+    // 1. 결재자 목록 등록
     @Transactional
     public boolean write(List<ApprovalDto> approvalList){
         System.out.println("ApprovalService.write");
@@ -31,5 +32,12 @@ public class ApprovalService {
         } // for end
         return true;
     } // f end
+
+    // 2. 결재 목록 조회
+    public List<ApprovalDto> findApproval(Integer mno, Integer rpno){
+        System.out.println("ApprovalService.findByMno");
+        System.out.println("mno = " + mno + ", rpno = " + rpno);
+        return approvalMapper.findApproval(mno, rpno);
+    }
 
 }
