@@ -4,8 +4,8 @@ import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 import Report_Form from './Report_Form';
 import { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
 import axios from 'axios';
+import PostModal from './PostModal';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -17,8 +17,14 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Report_Write(){
 
+  let today = new Date();
+  let year = today.getFullYear(); // 년도
+  let month = (today.getMonth() + 1).toString().padStart(2, '0'); // 월
+  let date = today.getDate().toString().padStart(2, '0'); // 일
+  let day = year+''+month+''+date;
+
   const [ formData, setFormData ] = useState({
-    rpname: '일일 업무 보고서' ,
+    rpname: day+' 일일 업무 보고서',
     rpam: '',
     rppm: '',
     rpamnote: '',
@@ -28,10 +34,11 @@ export default function Report_Write(){
     rpexpected: '' 
   });
   const [ mrank, setMrank ] = useState('');
+  const [ lastRpno, setLastRpno ] = useState(''); 
   const [ approval, setApproval ] = useState([
     { rank: "대리", mno: "", rpno: "" },
-    { rank: "차장", mno: "", rpno: "" },
     { rank: "과장", mno: "", rpno: "" },
+    { rank: "차장", mno: "", rpno: "" },
     { rank: "부장", mno: "", rpno: "" },
   ]);
   const [ members, setMembers ] = useState([]);
@@ -40,11 +47,20 @@ export default function Report_Write(){
   console.log( approval );
 
   const formDataChange = (e) => {
-      setFormData( { ...formData, [ e.target.name ] : e.target.value } )
+    setFormData( { ...formData, [ e.target.name ] : e.target.value } )
   } // f end
+
+  // Auto_increment 번호 조회
+  const onLastRpno = async () => {
+    const response = await axios.get( 'http://localhost:8080/api/report/lastrpno' );
+    setLastRpno( response.data );
+  } // f end
+
+  useEffect( () => { onLastRpno(); }, [] );
 
   // 보고서 등록 함수
   const onPost = async ( props ) => {
+    if( !confirm('보고서 작성을 완료하시겠습니까?') ){ return; }
     try{
       const response = await axios.post( 'http://localhost:8080/api/report', formData );
       if( response.data ){
@@ -56,7 +72,6 @@ export default function Report_Write(){
   // 보고서 결재 등록
   const onApprovalPost = async ( props ) => {
     try{
-      console.log( approval );
       const response = await axios.post( 'http://localhost:8080/api/approval', approval );
       if( response.data ){
         alert('등록 성공');
@@ -75,19 +90,21 @@ export default function Report_Write(){
     fetchMembers();
   }, [mrank]);
 
+  // select 선택시 데이터 변경
   const handleApprovalChange = (rank) => async (e) => {
-    const selectedMno = e.target?.value; // 안전한 접근을 위해 optional chaining 사용
-    
+    const selectedMno = e.target?.value; // 안전한 접근
+  
     if (!selectedMno) {
       console.error("선택된 멤버가 없습니다.");
       return;
     }
-    
-    const updatedApproval = approval.map((item) =>
-      item.rank === rank ? { ...item, mno: selectedMno } : item
-    );
   
-    setApproval(updatedApproval);
+    // 기존 approval 배열에서 동일한 rank 항목만 업데이트 (중복 추가 방지)
+    setApproval((prevApproval) =>
+      prevApproval.map((item) =>
+        item.rank === rank ? { ...item, mno: selectedMno, rpno: lastRpno } : item
+      )
+    );
   };
 
 
@@ -132,9 +149,10 @@ export default function Report_Write(){
               />
 
               <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-                <Button variant="contained" color="info" sx={{ mt: 3 }} onClick={ onPost } >
+                {/* <Button variant="contained" color="info" sx={{ mt: 3 }} onClick={ onPost } >
                     등록
-                </Button>
+                </Button> */}
+                <PostModal onPost={ onPost } />
               </div>
             </Item>
           </Grid>

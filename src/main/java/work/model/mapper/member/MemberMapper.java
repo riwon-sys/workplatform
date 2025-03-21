@@ -44,6 +44,7 @@ public interface MemberMapper {
                 if( mno != null ){
                     WHERE("mno LIKE '" + (mno / 100000) + "%'");
                 }
+                WHERE( "mtype = 0" );
                 ORDER_BY("mno ASC");
             }}.toString();
         }

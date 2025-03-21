@@ -1,22 +1,28 @@
 import * as React from 'react';
+import { Link } from "react-router-dom";
+
+/* mui import */
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { Button, Typography } from '@mui/material';
-import { Link } from "react-router-dom";
+
+/* mui icon */
+import IconButton from '@mui/material/IconButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import DescriptionIcon from '@mui/icons-material/Description';
 import DvrTwoToneIcon from '@mui/icons-material/DvrTwoTone';
+import ApprovalIcon from '@mui/icons-material/Approval';
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
+import PersonIcon from '@mui/icons-material/Person';
 
 const drawerWidth = 240;
 
@@ -91,13 +97,16 @@ export default function MiniDrawer() {
     localStorage.removeItem("username"); // 로그아웃 시 상태 삭제
   };
 
-  const menuItems = [
+  const mainMenuItems = [
     { name: "메신저", path: "/chatting", icon: <QuestionAnswerIcon /> },
     { name: "보고서 작성", path: "/report/write", icon: <NoteAddIcon /> },
     { name: "나의 보고서", path: "/report/view", icon: <DescriptionIcon /> },
-    { name: "결재 목록", path: "/report/approval", icon: <DescriptionIcon /> },
+    { name: "결재 목록", path: "/report/approval", icon: <ApprovalIcon /> },
+  ];
+  const menuItems = [
     { name: "게시판", path: "/board", icon: <DvrTwoToneIcon /> },
-    { name: "사원 등록", path : "/member/post",icon: <DvrTwoToneIcon />} // rw 25-03-18
+    { name: "나의 정보", path: "/board", icon: <PersonIcon /> },
+    { name: "사원 등록", path : "/member/post",icon: <PersonAddAlt1Icon />} // rw 25-03-18
   ];
 
   return (
@@ -115,6 +124,27 @@ export default function MiniDrawer() {
             {open ? <ChevronLeftIcon /> : <img src='/logo_blue.jpg' style={{ width: '40px' , marginRight: -5 }} />}
           </IconButton>
         </DrawerHeader>
+        <Divider />
+
+        {/* 메뉴 리스트 */}
+        <List>
+          {mainMenuItems.map((item, index) => 
+            (
+              <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
+                  component={Link}
+                  to={item.path}
+                  sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
+                >
+                  <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+        </List>
+
         <Divider />
 
         {/* 메뉴 리스트 */}
