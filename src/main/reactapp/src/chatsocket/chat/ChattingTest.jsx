@@ -286,6 +286,10 @@ export default function ChatTeset() {
       console.log("mnolist 있음")
       rname = prompt("채팅방 이름");
 
+      if(rname === ""){
+        alert("채팅방 이름을 입력하세요.")
+        return;
+      }
 
       const obj = {
         rname: rname,
