@@ -1,4 +1,4 @@
-package work.config;
+package work.config.chat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import work.config.Browser.BrowserSokcet;
 import work.log.LogClass;
 import work.log.LogReader;
 import work.model.dto.ChattingDto;
@@ -31,6 +32,8 @@ public class ChatSocket extends TextWebSocketHandler {
 
     private  final LogReader logReader = new LogReader();
 
+    @Autowired
+    private BrowserSokcet browserSokcet;
     // 브라우저 접속 소켓
     private  final  Set<WebSocketSession> totalClients = new HashSet<>();
 
@@ -135,6 +138,9 @@ public class ChatSocket extends TextWebSocketHandler {
                     System.out.println("메시지 저장 결과: " + result);
                     // 로그처리
                     logClass.logMsg(chattingDto);
+                    // 브라우저 소켓에 로그 전송
+                    browserSokcet.broadcastToBrowser();
+                    System.out.println("브라우저 소켓으로 로그 보냄");
 
                     break;
 
@@ -149,6 +155,9 @@ public class ChatSocket extends TextWebSocketHandler {
                     // 로그처리
                     logClass.logMsg(chattingDto);
 
+                    // 브라우저 소켓에 로그 전송
+                    browserSokcet.broadcastToBrowser();
+                    System.out.println("브라우저 소켓으로 로그 보냄");
                     System.out.println(fileResult);
                     break;
 

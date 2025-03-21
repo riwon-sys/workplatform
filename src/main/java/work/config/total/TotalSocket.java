@@ -1,4 +1,4 @@
-package work.config;
+package work.config.total;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
@@ -7,6 +7,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import work.log.LogClass;
+import work.log.LogReader;
 import work.model.dto.ChattingDto;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class TotalSocket extends TextWebSocketHandler {
     private  final LogClass logClass = new LogClass();
 
 
-    // 브라우저 접속 소켓
+    // 채팅 브라우저 접속 소켓
     private final Set<WebSocketSession> totalClients = new HashSet<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -27,7 +28,8 @@ public class TotalSocket extends TextWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         totalClients.add(session);
         System.out.println("Total client connected : " + totalClients.size());
-        System.out.println("전체소켓 연결 성공");
+        System.out.println("전체 채팅 소켓 연결 성공");
+        LogReader.readLastLog();
     }
 
     @Override
@@ -38,7 +40,7 @@ public class TotalSocket extends TextWebSocketHandler {
             ChattingDto chattingDto = objectMapper.readValue(message.getPayload(), ChattingDto.class);
 
             logClass.logMethod();
-            System.out.println("전체소켓 타입" + chattingDto.getMstype());
+            System.out.println("전체 채팅 소켓 타입" + chattingDto.getMstype());
             // 메시지 타입이 5일 경우 (채팅방이 새로 생성됐을 때)
             if(chattingDto.getMstype() == 5){
                 broadcastToClients("5");
