@@ -106,13 +106,13 @@ export default function MiniDrawer() {
         <DrawerHeader>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start', pr: 3 }}>
             <img
-              src="/Logo_long.png"
+              src="/logoname_blue.jpg"
               alt="Logo"
               style={{ width: open ? 140 : 30, height: open ? 40 : 30, transition: "0.3s" }}
             />
           </Box>
           <IconButton onClick={toggleDrawer}>
-            {open ? <ChevronLeftIcon /> : <img src='/Logo.png' style={{ width: '40px' , marginRight: -5 }} />}
+            {open ? <ChevronLeftIcon /> : <img src='/logo_blue.jpg' style={{ width: '40px' , marginRight: -5 }} />}
           </IconButton>
         </DrawerHeader>
         <Divider />
