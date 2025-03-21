@@ -276,18 +276,17 @@ export default function ChatTeset() {
   // [5-2] 채팅방 생성
   const creatR = async () => {
     let rname = null;
+    setSelectedRoomId(""); // 기존 roomId 초기화
+    console.log("방번호제거완료")
+    await findAllRoom()
 
-
-
-    // 채팅방이 이미 선택되었으면 회원 목록 초기화 후, 새로운 채팅방을 만들기
-    if (selectedRoomId != null) {
-      await findAllRoom()
-      setSelectedRoomId(""); // 기존 roomId 초기화
-
-    }
-    rname = prompt("채팅방 이름");
+    console.log("방목록 리렌더링 완료")
     // rname과 mnoList가 있을 경우에만 채팅방 생성
-    if (rname && mnoList) {
+    if (mnoList.length > 0) {
+      console.log("mnolist 있음")
+      rname = prompt("채팅방 이름");
+
+
       const obj = {
         rname: rname,
         mnoList: mnoList,
@@ -322,6 +321,7 @@ export default function ChatTeset() {
 
 
   // [6-1] 채팅방 접속 WebSocket
+
   const connectChatRoomSocket = (roomId) => {
     const socket = new WebSocket('ws://localhost:8080/chatConnect');
 
@@ -435,41 +435,61 @@ export default function ChatTeset() {
   };
 
 
+  const addMessageIfNew = (newMessage) => {
+    // 이미 동일한 파일 메시지가 존재하는지 확인
+    const messageExists = messages.some((msg) => msg.flocation === newMessage.flocation && msg.fname === newMessage.fname);
+
+    if (!messageExists) {
+      setMessages((prevMessages) => [...prevMessages, newMessage]);
+    } else {
+      console.log("중복된 파일 메시지. 추가하지 않음.");
+    }
+  };
 
 
 
   // [7-2] 소켓으로 받은 메세지 처리
   useEffect(() => {
+
+
     if (clientSocket && selectedRoomId) { // 만약 소켓이 열려있고 채팅방이 선택됐으면
       clientSocket.onmessage = (event) => { // 해당 소켓이 메세지를 받으면 실행
         console.log(event.data);
         const receivedMessage = JSON.parse(event.data); // 서버가 준 메세지 파싱
 
+
+
+        // 이미 같은 파일 메시지가 messages에 존재하는지 확인
+        const messageExists = messages.some((msg) => msg.flocation === receivedMessage.flocation);
+
         // 메세지 출력
-        if (receivedMessage.mstype !== 4 &&(receivedMessage.mstype === null || !receivedMessage.isSent)) {
+        if (receivedMessage.mstype !== 4 && (receivedMessage.mstype === null || !receivedMessage.isSent)) {
           console.log("실행됨");
-          setMessages((prevMessages) => { // 메세지 리스트 업데이트
-            return [...prevMessages, receivedMessage];
-          });
+          if (receivedMessage.mstype === undefined) {
+            console.log("undefinde 실행")
+            setMessages((prevMessages) => { // 메세지 리스트 업데이트
+              return [...prevMessages, receivedMessage];
+            });
+          }
+          if (receivedMessage.mstype === 1 && !messageExists) {
+
+            console.log("파일실행")
+            addMessageIfNew(receivedMessage)
+          }
+
+          if (receivedMessage.mstype === 0) {
+            console.log("메세지 실행")
+            setMessages((prevMessages) => { // 메세지 리스트 업데이트
+              return [...prevMessages, receivedMessage];
+            });
+          }
         }
 
-
-        
-        // // 메세지 출력
-        // if (receivedMessage.mstype !== 4 && receivedMessage.mstype === 0 && (receivedMessage.mstype === null || !receivedMessage.isSent)) {
-        //   console.log("실행됨");
-        //   setMessages((prevMessages) => { // 메세지 리스트 업데이트
-        //     return [...prevMessages, receivedMessage];
-        //   });
-        // }
-
-        // // 팡리 출력
-        // if (receivedMessage.mstype !== 4 && receivedMessage.mstype === 1 && (receivedMessage.mstype === null || !receivedMessage.isSent)) {
-        //   console.log("실행됨");
-        //   setMessages((prevMessages) => { // 메세지 리스트 업데이트
-        //     return [...prevMessages, receivedMessage];
-        //   });
-        // }
+        // 소켓 이벤트 핸들러 설정 (한 번만 설정)
+        if (!clientSocket._onMessageSet) {
+          // clientSocket.onmessage = handleMessage;
+          clientSocket._onMessageSet = true;
+        }
 
         //기존 채팅방에 회원이 새로 추가돼서 서버소켓이 mstype 4를 반환했을 때
         if (receivedMessage.mstype === 4 || receivedMessage.mnameList) {
@@ -480,11 +500,11 @@ export default function ChatTeset() {
         }
       };
       return () => {
-        clientSocket.close(); // 컴포넌트 언마운트 되면 소켓 종료
-        setMessages([])
+        clientSocket._onMessageSet = false;
+        clientSocket.onmessage = null;
       };
     }
-  }, [clientSocket, selectedRoomId]); // cilentSocket 이나 채팅방 새로 선택 시마다 리렌더링
+  }, [clientSocket, selectedRoomId, messages]); // cilentSocket 이나 채팅방 새로 선택 시, 메세지마다 리렌더링
 
   // [8] 기존 채팅방에 회원추가
   const addMember = async (rno) => {
@@ -527,7 +547,7 @@ export default function ChatTeset() {
         }
         console.log(socketObj)
         clientSocket.send(JSON.stringify(socketObj)) // 채팅방 소켓으로 보내기
-
+        participant() // 이미 추가된 회원 체크박스 업데이트
       }
     } catch (e) {
       console.log("회원 추가 오류 : ", e);
@@ -580,7 +600,7 @@ export default function ChatTeset() {
     if (mySpaceRef.current) {
       mySpaceRef.current.scrollTop = mySpaceRef.current.scrollHeight;
     }
-  }, [messages]); // messages가 변경될 때마다 실행됨
+  }, [messages, mNameList]); // messages가 변경될 때마다 실행됨
 
 
 
@@ -742,25 +762,19 @@ export default function ChatTeset() {
                 <hr />
 
                 <div id="space" ref={mySpaceRef} style={{ overflow: "scroll", overflowX: 'hidden', height: '2000%' }}>
-
                   <div>
                     {/* 메시지 영역 */}
-                    {showMessage && mNameList && (
-                      mNameList.map((name, index) => {
-                        return (
+                    {messages.map((msg, index) => (
+                      <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
+                        {/* 입장 메시지 처리 */}
+                        {msg.mNameList && msg.mNameList.length > 0 && msg.mNameList.map((name, index) => (
                           <div key={index}>
                             {name} 님 입장
                           </div>
-                        );
-                      })
-                    )}
-                  </div>
+                        ))}
 
-                  <div>
-                    {messages.map((msg, index) => (
-                      <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
+                        {/* 기존 메시지 출력 */}
                         {msg.msg ? (
-
                           <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
                             <CardContent>
                               <Typography variant="body2">
@@ -795,7 +809,18 @@ export default function ChatTeset() {
                         )}
                       </div>
                     ))}
+
+                    {/* mNameList가 있을 경우 입장 메시지 처리 */}
+                    {showMessage && mNameList && mNameList.length > 0 && (
+                      mNameList.map((name, index) => (
+                        <div key={index}>
+                          {name} 님 입장
+                        </div>
+                      ))
+                    )}
                   </div>
+
+
                 </div>
                 <div style={{ marginBottom: "7%" }}>
 
