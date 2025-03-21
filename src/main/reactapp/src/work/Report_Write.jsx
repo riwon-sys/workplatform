@@ -3,9 +3,10 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 import Report_Form from './Report_Form';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import PostModal from './PostModal';
+import SignatureCanvas from 'react-signature-canvas'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -16,6 +17,9 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Report_Write(){
+
+  // Signature Canvas 참조
+  const signCanvas = useRef(null);
 
   let today = new Date();
   let year = today.getFullYear(); // 년도
@@ -39,7 +43,7 @@ export default function Report_Write(){
     { rank: "대리", mno: "", rpno: "" },
     { rank: "과장", mno: "", rpno: "" },
     { rank: "차장", mno: "", rpno: "" },
-    { rank: "부장", mno: "", rpno: "" },
+    { rank: "부장", mno: "", rpno: "" }
   ]);
   const [ members, setMembers ] = useState([]);
   const [ reports, setReports ] = useState( [] );
@@ -69,12 +73,37 @@ export default function Report_Write(){
     }catch( e ){ console.log( e ); }
   } // f end 
 
-  // 보고서 결재 등록
   const onApprovalPost = async ( props ) => {
+    // signData는 Base64로 인코딩된 서명 이미지 데이터
+    const signData = signCanvas.current.toDataURL();
+    console.log("signData:", signData);
+  
+    // Base64 데이터를 Blob으로 변환하는 함수
+    const convertBase64ToBlob = (base64Data, mimeType) => {
+      const byteCharacters = atob(base64Data.split(',')[1]);
+      const byteArrays = [];
+  
+      for (let offset = 0; offset < byteCharacters.length; offset++) {
+        const byte = byteCharacters.charCodeAt(offset);
+        byteArrays.push(byte);
+      }
+  
+      return new Blob([new Uint8Array(byteArrays)], { type: mimeType });
+    };
+  
+    // Blob으로 변환
+    const blob = convertBase64ToBlob(signData, 'image/png');  // MIME 타입에 맞게 설정
+  
+    // FormData 객체 생성
+    const signFormData = new FormData();
+    signFormData.append( 'signature', blob, 'signature.png' );  // 'signature.png'는 파일 이름
+    signFormData.append( 'approval', approval );
     try{
-      const response = await axios.post( 'http://localhost:8080/api/approval', approval );
+      const option = { header: { "Content-Type" : "multipart/form-data" } }
+      const response = await axios.post( 'http://localhost:8080/api/approval', signFormData, option );
       if( response.data ){
         alert('등록 성공');
+        signCanvas.current.clear();
         setFormData( { rpname: '일일 업무 보고서', rpam: '', rppm: '', rpamnote: '', rppmnote: '',
           rpunprocessed: '', rpsignificant: '', rpexpected: '' } );
       }else{ alert('등록 실패') }
@@ -99,10 +128,10 @@ export default function Report_Write(){
       return;
     }
   
-    // 기존 approval 배열에서 동일한 rank 항목만 업데이트 (중복 추가 방지)
-    setApproval((prevApproval) =>
-      prevApproval.map((item) =>
-        item.rank === rank ? { ...item, mno: selectedMno, rpno: lastRpno } : item
+  // 기존 approval 배열에서 동일한 rank 항목만 업데이트 (중복 추가 방지)
+  setApproval((prevApproval) =>
+    prevApproval.map((item) =>
+      item.rank === rank ? { ...item, mno: selectedMno, rpno: lastRpno } : item
       )
     );
   };
@@ -152,7 +181,7 @@ export default function Report_Write(){
                 {/* <Button variant="contained" color="info" sx={{ mt: 3 }} onClick={ onPost } >
                     등록
                 </Button> */}
-                <PostModal onPost={ onPost } />
+                <PostModal onPost={ onPost } signCanvas={ signCanvas } />
               </div>
             </Item>
           </Grid>

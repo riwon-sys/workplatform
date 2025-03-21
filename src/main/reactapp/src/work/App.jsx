@@ -36,25 +36,32 @@ export default function Test(props) {
     const [log, setLog] = useState();
 
     useEffect(() => {
+        // WebSocket 연결
         const socket = new WebSocket("ws://localhost:8080/browserConnect");
 
+        // 소켓 연결이 성공하면
         socket.onopen = () => {
             console.log('브라우저 소켓 연결 성공');
         };
 
+        // 소켓에서 메시지를 받으면
         socket.onmessage = (event) => {
             console.log('**********************수신된 메시지: ', event.data);
-            setLog(event.data);
+
+            setLog(event.data)
         };
 
+        // 소켓 연결 종료시
         socket.onclose = () => {
             console.log('----- 브라우저 소켓 연결 종료 ------');
         };
 
+        // 에러 발생 시
         socket.onerror = (error) => {
             console.error('WebSocket 오류: ', error);
         };
 
+        // 컴포넌트가 언마운트될 때 소켓 연결 종료
         return () => {
             socket.close();
         };
