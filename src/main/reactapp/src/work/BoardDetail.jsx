@@ -18,8 +18,8 @@ import ImageIcon from '@mui/icons-material/Image';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
+  padding: theme.spacing(5),
+  textAlign: 'left',
   height: '100%',
   color: theme.palette.text.secondary,
   ...theme.applyStyles?.('dark', {  // 옵셔널 체이닝 추가
@@ -45,12 +45,12 @@ export default function BoardDetail() {
   const pid = searchParams.get("pid");
 
   const [board,setBoard] = useState({});
-  const [commentText,setCommentText] = useState({});
+ 
 
 
 
   useEffect(()=>{//게시물 상세페이지 관리
-    getview();getCommentText();
+    getview();
   },[])
 
   //자바 서버로부터 게시물 상세페이지 가져오는 함수
@@ -64,19 +64,26 @@ export default function BoardDetail() {
   // `http://localhost:8080/work/board/view?pid=${pid}`
   }
 
-  const getCommentText = async()=>{
-  const response1 = await axios.get(`http://localhost:8080/work/reply?pid=${pid}`)
-  console.log(response1.data)
-  setCommentText(response1.data)
+  //HTML에서 입력한 데이터를 STATE에서 관리
+  const[comment,setComment] = useState('');
+  //작성자 샘플 : 리덕스에서 가져올 예정
+  const mno = 100001;
 
+  //댓글 등록함수
+  const createComment = async() => {
+    const sendData = {mno:mno , pid:pid , content : comment }
+    const response = await axios.post('http://localhost:8080/work/reply' , sendData )
+    if(response.data == true){alert('댓글이 등록 되었습니다.');setComment('');getview();}
+    else{alert('댓글 작성을 실패했습니다.');}
   }
+  
   return (
     <>
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
         <Grid container spacing={0} sx={{ height: '100%' }}>
           {/* xs: 너비 조정 */}
           <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>  {/* size → xs 변경 */}
-            <Item>
+            <Item sx={{overflow:'scroll',overflowX:'hidden'}}>
 
                           {/* 헤더 부분 */}
             <Box sx={{ display: 'flex', alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid #eee' }}>
@@ -151,7 +158,7 @@ export default function BoardDetail() {
               {/* 댓글 섹션 */}
               <Box sx={{ padding: '16px', borderBottom: '1px solid #eee' }}>
                 <Typography sx={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px' }}>
-                  댓글 10
+                  댓글 {board.commentList && board.commentList.length}
               </Typography>
 
                {/* 댓글 작성 폼 */}
@@ -162,8 +169,8 @@ export default function BoardDetail() {
                   rows={4}
                   placeholder="댓글을 남겨주세요."
                   variant="outlined"
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       borderRadius: '4px',
@@ -179,6 +186,7 @@ export default function BoardDetail() {
                     사진 첨부
                   </Button>
                   <Button
+                  onClick={createComment}
                     variant="contained"
                     sx={{ 
                       backgroundColor: '#0068c3', 
@@ -195,6 +203,35 @@ export default function BoardDetail() {
                 </Box>
               </Box>
               </Box>
+              {/*현재 게시물 해당하는 댓글조회 , 리스트명.map((반복변수,인덱스)),조건&&참 */}
+              {board.commentList && board.commentList.map((comment,index)=>{
+             return (
+              <Box 
+                key={index}
+                sx={{ 
+                  padding: '12px 16px', 
+                  borderBottom: '1px solid #eee',
+                  textAlign: 'left'
+                }}
+              >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#333' }}>
+                    {comment.mno}
+                  </Typography>
+                  <Typography sx={{ fontSize: '12px', color: '#999' }}>
+                    {comment.reg_date}
+                  </Typography>
+                </Box>
+                <Typography sx={{ fontSize: '14px', marginBottom: '12px', color: '#333' }}>
+                  {comment.content}
+                </Typography>
+                <Box sx={{ display: 'flex', gap: '8px' }}>
+                  <Button size="small" sx={{ fontSize: '12px', color: '#666', minWidth: 'auto', padding: '2px 8px' }}>수정</Button>
+                  <Button size="small" sx={{ fontSize: '12px', color: '#666', minWidth: 'auto', padding: '2px 8px' }}>삭제</Button>
+                </Box>
+              </Box>
+            );
+          })}
             </Item>
           </Grid>
         </Grid>

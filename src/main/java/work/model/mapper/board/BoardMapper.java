@@ -17,8 +17,8 @@ public interface BoardMapper {
     public List<BoardDto>allView();
 
     //2[게시물등록]
-    @Insert("insert into productsample( pid,title,content,views,mno ) " +
-            " values ( #{ pid } , #{ title } , #{ content } , #{ views },#{ mno } )")
+    @Insert("insert into board( title,content,mno ) " +
+            " values ( #{ title } , #{ content },#{ mno } )")
     public boolean boardCreate( BoardDto boardCreate );
 
     //3[게시물 상세조회]
