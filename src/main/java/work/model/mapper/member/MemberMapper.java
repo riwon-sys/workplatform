@@ -12,7 +12,7 @@ import java.util.List;
 public interface MemberMapper {
 
     // [1] 사원 등록
-    @Insert("insert into member( mno,mname,mphone,memail,mrank,mprofile )" + "values( #{mno} , #{mname} , #{mphone},#{memail} , #{mrank} , #{mprofile} )")
+    @Insert("insert into member( mno,mname,mphone,memail,mrank,mprofile,mpwd )" + "values( #{mno} , #{mname} , #{mphone},#{memail} , #{mrank} , #{mprofile} , #{mpwd} )")
     public boolean signUp(MemberDto memberDto);
 
     // [2] 사원 로그인
@@ -21,7 +21,16 @@ public interface MemberMapper {
 
     // 변경된 세션 처리된 [2] 사원 로그인
     // 로그인 세션 처리 기능 추가 -> 입력받은 자료를 확인 및 검증할 때는 SELECT 사용
-    @Select("select mno,mname,mphone,memail,mtype,mrank,mprofile from member where mno=#{mno} and mpwd=#{mpwd}")
+    // @Select("select mno,mname,mphone,memail,mtype,mrank,mprofile from member where mno=#{mno} and mpwd=#{mpwd}")
+    // public MemberDto onLogIn( MemberDto memberDto ); // MemberDto : select 결과가 있으면 memberDto, 없으면 null
+
+    // [2-(1)] NEW 로그인 기능( 암화화 기능 ) | rw 25-03-21
+    // 로그인시 입력받은 아이디로 암호화된 패스워드 반환
+    @Select("select mpwd from member where mno = #{mno}")
+    public String findPassword( int mno );
+    // [2-(2)] NEW 로그인 기능( 암화화 기능 ) | rw 25-03-21
+    // 로그인 비밀번호 검증 성공시 반활할 회원정보
+    @Select("select mno,mname,mphone,memail,mtype,mrank,mprofile from member where mno=#{mno}")
     public MemberDto onLogIn( MemberDto memberDto ); // MemberDto : select 결과가 있으면 memberDto, 없으면 null
 
 
