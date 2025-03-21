@@ -1,1 +1,0 @@
-import SignatureCanvas from 'react-signature-canvas';

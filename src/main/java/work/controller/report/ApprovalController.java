@@ -17,10 +17,12 @@ public class ApprovalController {
 
     // 1. 결재자 목록 등록
     @PostMapping
-    public boolean write(@RequestBody List<ApprovalDto> approvalList){
+    public boolean write(ApprovalDto approvalDto){
         System.out.println("ApprovalController.write");
-        System.out.println("approvalList = " + approvalList);
-        return approvalService.write(approvalList);
+        System.out.println("approvalDto = " + approvalDto);
+
+        int mno = 100007;
+        return approvalService.write(approvalDto, mno);
     } // f end
 
     // 2. 승인 전체 목록 조회
