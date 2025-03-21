@@ -28,7 +28,7 @@ DROP TABLE IF EXISTS member;
 -- 직원 테이블 생성
 CREATE TABLE member (
     mno INT UNSIGNED,
-    mpwd VARCHAR(30) DEFAULT '1234',
+    mpwd VARCHAR(60) DEFAULT '1234', -- 암호화 적용 시 평문 대비 길이 증가로 변경 (기존30 > 변경60) | rw 25-03-21
     mname VARCHAR(30),
     mphone VARCHAR(13) NOT NULL UNIQUE,
     memail VARCHAR(100),

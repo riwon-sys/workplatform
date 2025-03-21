@@ -71,27 +71,27 @@ public class LogReader {
                     case "rno":
                         chattingDto.setRno(Integer.parseInt(value));
                         break;
-                    case "msDate":
-                        chattingDto.setMsDate(value.equals("null") ? null : value);
-                        break;
+//                    case "msDate":
+//                        chattingDto.setMsDate(value.equals("null") ? null : value);
+//                        break;
                     case "loginMno":
                         chattingDto.setLoginMno(Integer.parseInt(value));
                         break;
                     case "mname":
                         chattingDto.setMname(value);
                         break;
-                    case "mscontent":
-                        chattingDto.setMscontent(value.equals("null") ? null : value);
-                        break;
+//                    case "mscontent":
+//                        chattingDto.setMscontent(value.equals("null") ? null : value);
+//                        break;
                     case "mno":
                         chattingDto.setMno(Integer.parseInt(value));
                         break;
                     case "msg":
                         chattingDto.setMsg(value);
                         break;
-                    case "msno":
-                        chattingDto.setMsno(Integer.parseInt(value));
-                        break;
+//                    case "msno":
+//                        chattingDto.setMsno(Integer.parseInt(value));
+//                        break;
                     case "fno":
                         chattingDto.setFno(Integer.parseInt(value));
                         break;
@@ -101,18 +101,18 @@ public class LogReader {
                     case "flocation":
                         chattingDto.setFlocation(value);
                         break;
-                    case "fdate":
-                        chattingDto.setFdate(value.equals("null") ? null : value);
-                        break;
-                    case "type":
-                        chattingDto.setType(value.equals("null") ? null : value);
-                        break;
-                    case "message":
-                        chattingDto.setMessage(value.equals("null") ? null : value);
-                        break;
-                    case "action":
-                        chattingDto.setAction(value.equals("null") ? null : value);
-                        break;
+//                    case "fdate":
+//                        chattingDto.setFdate(value.equals("null") ? null : value);
+//                        break;
+//                    case "type":
+//                        chattingDto.setType(value.equals("null") ? null : value);
+//                        break;
+//                    case "message":
+//                        chattingDto.setMessage(value.equals("null") ? null : value);
+//                        break;
+//                    case "action":
+//                        chattingDto.setAction(value.equals("null") ? null : value);
+//                        break;
                     default:
                         break;
                 }

@@ -20,6 +20,9 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import InboxIcon from '@mui/icons-material/Inbox';
 import StarBorder from '@mui/icons-material/StarBorder';
 
+import { useSelector} from 'react-redux';
+import log from "../../work/member/reduxs/logSlice"
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
@@ -33,6 +36,10 @@ const Item = styled(Paper)(({ theme }) => ({
 // 샘플 로그인 아이디(나중에 스프링에서 session 으로 가져오기)
 const mno = "100001";
 export default function ChatTeset() {
+  // 리덕스
+  const log = useSelector((state) => state.log)
+console.log("로그 리덕스" , log)
+
   const [rooms, setRooms] = useState([{ rno: "", rname: "", mnoList: [] }]); // 채팅방 목록
   const [members, setMembers] = useState([]); // 전체 회원 목록
   const [mnoList, setMnoList] = useState([]); // 선택된 회원 번호 목록
@@ -281,6 +288,11 @@ export default function ChatTeset() {
     await findAllRoom()
 
     console.log("방목록 리렌더링 완료")
+
+    if(mnoList.length === 0){
+      alert("채팅방에 참여할 회원을 선택하세요.")
+    }
+
     // rname과 mnoList가 있을 경우에만 채팅방 생성
     if (mnoList.length > 0) {
       console.log("mnolist 있음")
@@ -450,7 +462,56 @@ export default function ChatTeset() {
     }
   };
 
-
+  // useEffect(() => {
+  //   if (clientSocket && selectedRoomId) { // 만약 소켓이 열려있고 채팅방이 선택됐으면
+  //     const handleMessage = (event) => { // 메세지를 받으면 실행
+  //       console.log(event.data);
+        
+  //       let receivedMessage;
+  //       try {
+  //         receivedMessage = JSON.parse(event.data); // 서버가 준 메세지 파싱
+  //       } catch (error) {
+  //         console.error('Invalid message received:', event.data);
+  //         return;
+  //       }
+  
+  //       // 이미 같은 파일 메시지가 messages에 존재하는지 확인
+  //       const messageExists = messages.some((msg) => msg.flocation === receivedMessage.flocation);
+  
+  //       // 메세지 출력
+  //       if (receivedMessage.mstype !== 4 && (receivedMessage.mstype === null || !receivedMessage.isSent)) {
+  //         console.log("실행됨");
+  //         if (receivedMessage.mstype === undefined) {
+  //           console.log("undefined 실행");
+  //           setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+  //         } else if (receivedMessage.mstype === 1 && !messageExists) {
+  //           console.log("파일실행");
+  //           addMessageIfNew(receivedMessage);
+  //         } else if (receivedMessage.mstype === 0) {
+  //           console.log("메세지 실행");
+  //           setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+  //         }
+  //       }
+  
+  //       // 기존 채팅방에 회원이 새로 추가돼서 서버소켓이 mstype 4를 반환했을 때
+  //       if (receivedMessage.mstype === 4 || receivedMessage.mnameList) {
+  //         console.log("444444");
+  //         console.log(receivedMessage.mnameList);
+  //         setMnameList(receivedMessage.mnameList);
+  //         console.log(mNameList);
+  //       }
+  //     };
+  
+  //     // 소켓 이벤트 핸들러 설정 (한 번만 설정)
+  //     clientSocket.onmessage = handleMessage;
+  
+  //     // 컴포넌트가 언마운트되거나 clientSocket이 변경될 때 핸들러 제거
+  //     return () => {
+  //       clientSocket.onmessage = null;
+  //     };
+  //   }
+  // }, [clientSocket, selectedRoomId, messages]); // clientSocket, selectedRoomId, messages 변경 시 실행
+  
 
   // [7-2] 소켓으로 받은 메세지 처리
   useEffect(() => {
@@ -530,6 +591,10 @@ export default function ChatTeset() {
     //   mnoList: newMnoList, // 새로 추가된 mnoList 상태 업데이트
     // }));
 
+    if(mnoList.length === 0 ){
+      alert("추가할 회원을 선택하세요.")
+      return;
+    }
     try {
       const obj = {
         rno: rno,

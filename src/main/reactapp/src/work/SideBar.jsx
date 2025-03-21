@@ -31,6 +31,8 @@ import { useNavigate } from "react-router-dom"; // rw 25-03-21
 import { useDispatch , useSelector } from 'react-redux'; // rw 25-03-21
 import { logout } from './member/reduxs/userSlice' // rw 25-03-21
 
+import Socket from "./socket.jsx";
+
 
 const drawerWidth = 240;
 
@@ -212,6 +214,9 @@ export default function MiniDrawer() {
         </List>
 
         <Divider />
+
+        <Socket/>
+
 
         {/* 로그인 영역 */}
         <Box sx={{ flexGrow: 1 }} />

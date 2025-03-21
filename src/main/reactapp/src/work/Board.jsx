@@ -67,6 +67,7 @@ export default function () {
                       }
                     </tbody>
                   </Table>
+                  <button onClick={()=>{navigate("/board/write")}}>글쓰기</button>
                 </CssVarsProvider>
             </Item>
           </Grid>

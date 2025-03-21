@@ -2,6 +2,7 @@ package work.service.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import work.model.dto.member.MemberDto;
@@ -31,6 +32,15 @@ public class MemberService {
                 // (3) 업로드된 파일명을 dto 저장
                 memberDto.setMprofile(filename);
             }
+            // (4) 비크립트 라이브러리 사용 | rw 25-03-21
+                // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                // (4-(2)) 비밀번호 암호화 ( 자료에 encode )
+            String hashedPassword = passwordEncoder.encode( "1234" );
+            System.out.println( "hashedPassword = " + hashedPassword );
+                // (4-(3)) dto 에 encode 된 비밀번호 저장
+            memberDto.setMpwd( hashedPassword );
+
         boolean result=memberMapper.signUp(memberDto);
             System.out.println("result = " + result);
             return result;
@@ -44,9 +54,21 @@ public class MemberService {
         System.out.println("MemberService.onLogIn");
         System.out.println("memberDto = " + memberDto);
         // return false;
-        MemberDto result = memberMapper.onLogIn(memberDto);
-        System.out.println(result);
-        return result;
+        // MemberDto result = memberMapper.onLogIn(memberDto);
+
+        // (1) 암호화된 진짜 비밀번호는 DB존재
+        // (2) 로그인에서 입력받은 아이디의 암호화 비밀번호 갖고오기
+        String password = memberMapper.findPassword (memberDto.getMno() );
+        if( password == null ) return null;
+        // (3) 로그인에서 입력받은 비밀번호와 암호화된 비밀번호 검증하기
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // 1. 비크립트 객체 생성
+        boolean result = passwordEncoder.matches( memberDto.getMpwd(), password ); // 2. 로그인에 입력받은 자료와 db에 가져온 해시 값 검증
+        if( result == false ) return null;
+
+        // (4) 로그인에서 입력한 아이디와 비밀번호가 모두 일치하면 회원정보 가져오기
+        MemberDto result2 = memberMapper.onLogIn( memberDto );
+
+        return result2;
 
     }
 
