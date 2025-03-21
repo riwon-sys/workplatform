@@ -25,7 +25,7 @@ public interface ReportMapper {
     ReportDto findByRpno( int rpno );
 
     // 4. 보고서 수정
-    @Update( "UPDATE report SET rpname = CONCAT(#{rpname}, '( 수정됨 )'), rpam = #{rpam}, rppm = #{rppm}, " +
+    @Update( "UPDATE report SET rpname = CONCAT(#{rpname}, ' ( 수정됨 )'), rpam = #{rpam}, rppm = #{rppm}, " +
             "rpamnote = #{rpamnote}, rppmnote = #{rppmnote}, " +
             "rpunprocessed = #{rpunprocessed}, rpsignificant = #{rpsignificant}, " +
             "rpexpected = #{rpexpected}, rpdate = now() WHERE rpno = #{rpno} ")
@@ -36,7 +36,7 @@ public interface ReportMapper {
     boolean delete(int rpno);
 
     // 6. 보고서 번호
-    @Select( "SELECT LAST_INSERT_rpno() FROM report" )
+    @Select( "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'workplatform' AND TABLE_NAME = 'report'" )
     int lastRpno();
 
 }

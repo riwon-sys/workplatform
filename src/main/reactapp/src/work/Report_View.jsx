@@ -26,15 +26,9 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Report_View() {
 
-  let today = new Date();
-  let year = today.getFullYear(); // 년도
-  let month = today.getMonth() + 1;  // 월
-  let date = today.getDate();  // 날짜
-  let day = year+''+month+''+date;
-
   const { rpno } = useParams();
   const [ formData, setFormData ] = useState({
-    rpname: '일일 업무 보고서'+day ,
+    rpname: '',
     rpam: '',
     rppm: '',
     rpamnote: '',
@@ -53,7 +47,7 @@ export default function Report_View() {
   const navigate = useNavigate();
   
   const formDataChange = (e) => {
-    setFormData( { ...formData, [ e.target.name ] : e.target.value } )
+    setFormData( { ...formData, [ e.target.name ] : e.target.value } );
   } // f end
 
   // 보고서 상세 조회 함수

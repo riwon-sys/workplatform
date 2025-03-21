@@ -25,7 +25,7 @@ export default function Report_Form(
             <tr>
               {
                 !isReadOnly && !isUpdate ?
-                ["대리", "차장", "과장", "부장"].map((rank) => {
+                ["대리", "과장", "차장", "부장"].map((rank) => {
                   const selectedMno = approval.find((item) => item.rank === rank)?.mno || "";
 
                   return (
@@ -41,7 +41,7 @@ export default function Report_Form(
                 }) :
                 approval.map( (rank) => {
                   return(
-                    <th key={ rank.mno } width="100px">
+                    <th key={ rank.mname } width="100px">
                       { rank.mname }( { rank.mrank } )
                     </th>
                   )
@@ -51,13 +51,15 @@ export default function Report_Form(
             <tr style={{ height: '80px' }}>
               {
                 !isReadOnly || !isUpdate ?
-                approval.map((rank) => (
-                  <td key={rank.mno} >
-                    {rank.apsignature ? 
-                    <img 
-                    src={`http://localhost:8080/file/${rank.apsignature}.jpg`}
-                    style={{ width: '95%', padding: 5 }} 
-                    alt="서명 이미지" /> : null}
+                approval.map((rank, index) => (
+                  <td key={ `${rank.mno || 'empty'}-${index}` } >
+                    {
+                      rank.apsignature ? 
+                      <img 
+                      src={`http://localhost:8080/file/${rank.apsignature}.jpg`}
+                      style={{ width: '95%', padding: 5 }} 
+                      alt="서명 이미지" /> : null
+                    }
                   </td>
                 )) :
                 Array(4).fill(null).map((_, index) => <td key={index}></td>) // 4개의 빈 <td> 자동 생성
