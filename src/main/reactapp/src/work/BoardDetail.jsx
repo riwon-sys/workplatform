@@ -45,12 +45,12 @@ export default function BoardDetail() {
   const pid = searchParams.get("pid");
 
   const [board,setBoard] = useState({});
-  const [commentText,setCommentText] = useState({});
+ 
 
 
 
   useEffect(()=>{//게시물 상세페이지 관리
-    getview();getCommentText();
+    getview();
   },[])
 
   //자바 서버로부터 게시물 상세페이지 가져오는 함수
@@ -64,12 +64,19 @@ export default function BoardDetail() {
   // `http://localhost:8080/work/board/view?pid=${pid}`
   }
 
-  const getCommentText = async()=>{
-  const response1 = await axios.get(`http://localhost:8080/work/reply?pid=${pid}`)
-  console.log(response1.data)
-  setCommentText(response1.data)
+  //HTML에서 입력한 데이터를 STATE에서 관리
+  const[comment,setComment] = useState('');
+  //작성자 샘플 : 리덕스에서 가져올 예정
+  const mno = 100001;
 
+  //댓글 등록함수
+  const createComment = async() => {
+    const sendData = {mno:mno , pid:pid , content : comment }
+    const response = await axios.post('http://localhost:8080/work/reply' , sendData )
+    if(response.data == true){alert('댓글이 등록 되었습니다.');setComment('');getview();}
+    else{alert('댓글 작성을 실패했습니다.');}
   }
+  
   return (
     <>
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
@@ -162,8 +169,8 @@ export default function BoardDetail() {
                   rows={4}
                   placeholder="댓글을 남겨주세요."
                   variant="outlined"
-                  value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
                   sx={{
                     '& .MuiOutlinedInput-root': {
                       borderRadius: '4px',
@@ -179,6 +186,7 @@ export default function BoardDetail() {
                     사진 첨부
                   </Button>
                   <Button
+                  onClick={createComment}
                     variant="contained"
                     sx={{ 
                       backgroundColor: '#0068c3', 
@@ -195,6 +203,21 @@ export default function BoardDetail() {
                 </Box>
               </Box>
               </Box>
+              {/*현재 게시물 해당하는 댓글조회 , 리스트명.map((반복변수,인덱스)),조건&&참 */}
+              {board.commentList && board.commentList.map((comment,index)=>{
+                return(<>
+                  <div>
+                    <span>{comment.mno}</span>
+                    <span>{comment.reg_date}</span>
+                    <span>{comment.content}</span>
+                    <span>수정버튼, 삭제버튼</span>
+
+
+                  </div>
+                
+                
+                </>)
+              })}
             </Item>
           </Grid>
         </Grid>

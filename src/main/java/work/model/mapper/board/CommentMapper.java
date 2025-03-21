@@ -4,14 +4,19 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import work.model.dto.board.CommentDto;
 
+import java.util.List;
+
 @Mapper
 public interface CommentMapper {
-
+    //[0] pid에 해당하는 전체 댓글 조회
+    @Select("select * from comment where pid =#{pid};")
+    public List<CommentDto>CommentFindAll(int pid);
     //[1]댓글등록
-    @Insert("insert into commentsample( pid,content,mno)"+
+    @Insert("insert into comment( pid,content,mno)"+
     "values(#{pid},#{content},#{mno})")
     public boolean CommentCreate(CommentDto commentDto);
 
