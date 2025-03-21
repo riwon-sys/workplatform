@@ -737,3 +737,783 @@
 2025-03-21 14:24:49 - Starting ProtocolHandler ["http-nio-8080"]
 2025-03-21 14:24:49 - Tomcat started on port 8080 (http) with context path '/'
 2025-03-21 14:24:49 - Started AppStart in 4.705 seconds (process running for 5.288)
+2025-03-21 14:49:03 - Starting AppStart using Java 17.0.12 with PID 47624 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-21 14:49:03 - No active profile set, falling back to 1 default profile: "default"
+2025-03-21 14:49:04 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-21 14:49:04 - Finished Spring Data repository scanning in 21 ms. Found 0 JPA repository interfaces.
+2025-03-21 14:49:05 - Tomcat initialized with port 8080 (http)
+2025-03-21 14:49:05 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-21 14:49:05 - Starting service [Tomcat]
+2025-03-21 14:49:05 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-21 14:49:05 - Initializing Spring embedded WebApplicationContext
+2025-03-21 14:49:05 - Root WebApplicationContext: initialization completed in 2315 ms
+2025-03-21 14:49:06 - HikariPool-1 - Starting...
+2025-03-21 14:49:06 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@367d34c0
+2025-03-21 14:49:06 - HikariPool-1 - Start completed.
+2025-03-21 14:49:07 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-21 14:49:07 - HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-21 14:49:07 - HHH000026: Second-level cache disabled
+2025-03-21 14:49:08 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-21 14:49:08 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-21 14:49:08 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-21 14:49:08 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-21 14:49:10 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-21 14:49:10 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-21 14:49:10 - Started AppStart in 7.367 seconds (process running for 8.395)
+2025-03-21 14:50:07 - Starting AppStart using Java 17.0.12 with PID 9664 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-21 14:50:07 - No active profile set, falling back to 1 default profile: "default"
+2025-03-21 14:50:14 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-21 14:50:14 - Finished Spring Data repository scanning in 29 ms. Found 0 JPA repository interfaces.
+2025-03-21 14:50:15 - Tomcat initialized with port 8080 (http)
+2025-03-21 14:50:15 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-21 14:50:15 - Starting service [Tomcat]
+2025-03-21 14:50:15 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-21 14:50:16 - Initializing Spring embedded WebApplicationContext
+2025-03-21 14:50:16 - Root WebApplicationContext: initialization completed in 8185 ms
+2025-03-21 14:50:16 - HikariPool-1 - Starting...
+2025-03-21 14:50:16 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@34136bd1
+2025-03-21 14:50:16 - HikariPool-1 - Start completed.
+2025-03-21 14:50:18 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-21 14:50:18 - HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-21 14:50:18 - HHH000026: Second-level cache disabled
+2025-03-21 14:50:19 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-21 14:50:19 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-21 14:50:20 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-21 14:50:20 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-21 14:50:21 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-21 14:50:21 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-21 14:50:21 - Started AppStart in 14.638 seconds (process running for 19.942)
+2025-03-21 14:50:25 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-21 14:50:25 - Initializing Servlet 'dispatcherServlet'
+2025-03-21 14:50:25 - Completed initialization in 1 ms
+2025-03-21 14:50:25 -  log info 
+2025-03-21 14:50:25 -  log info 
+2025-03-21 14:50:31 -  log info 
+2025-03-21 14:50:31 -  log info 
+2025-03-21 14:50:34 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 14:50:46 - 파일메세지ChattingDto(mstype=1, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=f13dfc26-0f6d-4518-9ee8-93a4ef374309_icon.png, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:26:19 -  log info 
+2025-03-21 15:26:19 -  log info 
+2025-03-21 15:26:23 -  log info 
+2025-03-21 15:26:23 -  log info 
+2025-03-21 15:26:57 -  log info 
+2025-03-21 15:26:57 -  log info 
+2025-03-21 15:27:12 -  log info 
+2025-03-21 15:27:12 -  log info 
+2025-03-21 15:39:41 -  log info 
+2025-03-21 15:39:41 -  log info 
+2025-03-21 15:39:41 -  log info 
+2025-03-21 15:39:41 -  log info 
+2025-03-21 15:40:10 -  log info 
+2025-03-21 15:40:10 -  log info 
+2025-03-21 15:40:11 -  log info 
+2025-03-21 15:40:11 -  log info 
+2025-03-21 15:40:14 -  log info 
+2025-03-21 15:40:14 -  log info 
+2025-03-21 15:40:33 -  log info 
+2025-03-21 15:40:33 -  log info 
+2025-03-21 15:40:55 - Starting AppStart using Java 17.0.12 with PID 25380 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-21 15:40:55 - No active profile set, falling back to 1 default profile: "default"
+2025-03-21 15:40:56 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-21 15:40:56 - Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
+2025-03-21 15:40:57 - Tomcat initialized with port 8080 (http)
+2025-03-21 15:40:57 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-21 15:40:57 - Starting service [Tomcat]
+2025-03-21 15:40:57 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-21 15:40:57 - Initializing Spring embedded WebApplicationContext
+2025-03-21 15:40:57 - Root WebApplicationContext: initialization completed in 1679 ms
+2025-03-21 15:40:57 - HikariPool-1 - Starting...
+2025-03-21 15:40:57 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@367d34c0
+2025-03-21 15:40:57 - HikariPool-1 - Start completed.
+2025-03-21 15:40:58 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-21 15:40:58 - HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-21 15:40:58 - HHH000026: Second-level cache disabled
+2025-03-21 15:40:58 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-21 15:40:58 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-21 15:40:59 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-21 15:40:59 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-21 15:41:00 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-21 15:41:00 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-21 15:41:00 - Started AppStart in 6.086 seconds (process running for 6.658)
+2025-03-21 15:41:00 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-21 15:41:00 - Initializing Servlet 'dispatcherServlet'
+2025-03-21 15:41:00 - Completed initialization in 1 ms
+2025-03-21 15:41:01 -  log info 
+2025-03-21 15:41:01 -  log info 
+2025-03-21 15:41:21 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:44:55 -  log info 
+2025-03-21 15:44:55 -  log info 
+2025-03-21 15:46:05 -  log info 
+2025-03-21 15:46:05 -  log info 
+2025-03-21 15:46:09 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:46:38 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:47:17 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:48:03 -  log info 
+2025-03-21 15:48:03 -  log info 
+2025-03-21 15:48:06 -  log info 
+2025-03-21 15:48:06 -  log info 
+2025-03-21 15:48:42 -  log info 
+2025-03-21 15:48:42 -  log info 
+2025-03-21 15:48:42 -  log info 
+2025-03-21 15:48:42 -  log info 
+2025-03-21 15:48:56 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:50:36 -  log info 
+2025-03-21 15:50:36 -  log info 
+2025-03-21 15:50:36 -  log info 
+2025-03-21 15:50:36 -  log info 
+2025-03-21 15:50:48 -  log info 
+2025-03-21 15:50:48 -  log info 
+2025-03-21 15:50:48 -  log info 
+2025-03-21 15:50:48 -  log info 
+2025-03-21 15:51:15 -  log info 
+2025-03-21 15:51:15 -  log info 
+2025-03-21 15:51:22 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:51:45 -  log info 
+2025-03-21 15:51:45 -  log info 
+2025-03-21 15:51:52 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:53:33 -  log info 
+2025-03-21 15:53:33 -  log info 
+2025-03-21 15:53:33 -  log info 
+2025-03-21 15:53:33 -  log info 
+2025-03-21 15:53:48 -  log info 
+2025-03-21 15:53:48 -  log info 
+2025-03-21 15:53:48 -  log info 
+2025-03-21 15:53:48 -  log info 
+2025-03-21 15:54:04 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:55:00 -  log info 
+2025-03-21 15:55:00 -  log info 
+2025-03-21 15:55:00 -  log info 
+2025-03-21 15:55:00 -  log info 
+2025-03-21 15:55:25 -  log info 
+2025-03-21 15:55:25 -  log info 
+2025-03-21 15:55:25 -  log info 
+2025-03-21 15:55:25 -  log info 
+2025-03-21 15:55:30 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:55:54 - 파일메세지ChattingDto(mstype=1, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=b11714c4-793b-478e-9909-6ba42a1cd0d9_icon.png, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:56:13 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅣㅣㅣ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:56:17 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:56:25 - 파일메세지ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=2306c13f-5a08-42c2-a90e-72c1a303ef78_11.gif, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:57:38 -  log info 
+2025-03-21 15:57:38 -  log info 
+2025-03-21 15:57:43 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:57:48 -  log info 
+2025-03-21 15:57:48 -  log info 
+2025-03-21 15:58:03 -  log info 
+2025-03-21 15:58:03 -  log info 
+2025-03-21 15:58:18 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 15:58:23 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:00:00 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:00:13 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:00:41 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:01:25 -  log info 
+2025-03-21 16:01:25 -  log info 
+2025-03-21 16:01:32 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:01:35 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㄴㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:01:40 -  log info 
+2025-03-21 16:01:40 -  log info 
+2025-03-21 16:01:40 -  log info 
+2025-03-21 16:01:40 -  log info 
+2025-03-21 16:01:48 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅗㅗㅗ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:05:07 - Starting AppStart using Java 17.0.12 with PID 32536 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-21 16:05:07 - No active profile set, falling back to 1 default profile: "default"
+2025-03-21 16:05:08 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-21 16:05:08 - Finished Spring Data repository scanning in 17 ms. Found 0 JPA repository interfaces.
+2025-03-21 16:05:09 - Tomcat initialized with port 8080 (http)
+2025-03-21 16:05:09 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-21 16:05:09 - Starting service [Tomcat]
+2025-03-21 16:05:09 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-21 16:05:09 - Initializing Spring embedded WebApplicationContext
+2025-03-21 16:05:09 - Root WebApplicationContext: initialization completed in 1687 ms
+2025-03-21 16:05:09 - HikariPool-1 - Starting...
+2025-03-21 16:05:10 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@34136bd1
+2025-03-21 16:05:10 - HikariPool-1 - Start completed.
+2025-03-21 16:05:11 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-21 16:05:11 - HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-21 16:05:11 - HHH000026: Second-level cache disabled
+2025-03-21 16:05:11 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-21 16:05:11 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-21 16:05:12 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-21 16:05:12 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-21 16:05:13 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-21 16:05:13 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-21 16:05:13 - Started AppStart in 5.847 seconds (process running for 6.412)
+2025-03-21 16:05:13 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-21 16:05:13 - Initializing Servlet 'dispatcherServlet'
+2025-03-21 16:05:13 - Completed initialization in 1 ms
+2025-03-21 16:05:13 -  log info 
+2025-03-21 16:05:13 -  log info 
+2025-03-21 16:05:17 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:06:54 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:07:35 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:12:17 -  log info 
+2025-03-21 16:12:17 -  log info 
+2025-03-21 16:12:21 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:12:41 -  log info 
+2025-03-21 16:12:41 -  log info 
+2025-03-21 16:12:44 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:13:16 -  log info 
+2025-03-21 16:13:16 -  log info 
+2025-03-21 16:13:17 -  log info 
+2025-03-21 16:13:17 -  log info 
+2025-03-21 16:13:17 -  log info 
+2025-03-21 16:13:17 -  log info 
+2025-03-21 16:13:43 -  log info 
+2025-03-21 16:13:43 -  log info 
+2025-03-21 16:13:45 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:14:06 -  log info 
+2025-03-21 16:14:06 -  log info 
+2025-03-21 16:14:06 -  log info 
+2025-03-21 16:14:06 -  log info 
+2025-03-21 16:14:06 -  log info 
+2025-03-21 16:14:06 -  log info 
+2025-03-21 16:14:36 -  log info 
+2025-03-21 16:14:36 -  log info 
+2025-03-21 16:14:40 -  log info 
+2025-03-21 16:14:40 -  log info 
+2025-03-21 16:14:46 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:14:55 -  log info 
+2025-03-21 16:14:55 -  log info 
+2025-03-21 16:15:02 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:15:24 -  log info 
+2025-03-21 16:15:24 -  log info 
+2025-03-21 16:15:25 -  log info 
+2025-03-21 16:15:25 -  log info 
+2025-03-21 16:15:29 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:15:41 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:15:44 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:15:46 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅅㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:17:34 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅁㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:24:30 -  log info 
+2025-03-21 16:24:30 -  log info 
+2025-03-21 16:24:30 -  log info 
+2025-03-21 16:24:30 -  log info 
+2025-03-21 16:24:31 -  log info 
+2025-03-21 16:24:31 -  log info 
+2025-03-21 16:24:34 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:24:49 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=zzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:25:13 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=zzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:25:27 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:27:17 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=zzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:27:20 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=zzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:27:51 -  log info 
+2025-03-21 16:27:51 -  log info 
+2025-03-21 16:27:54 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=zz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:28:11 -  log info 
+2025-03-21 16:28:11 -  log info 
+2025-03-21 16:28:11 -  log info 
+2025-03-21 16:28:11 -  log info 
+2025-03-21 16:28:11 -  log info 
+2025-03-21 16:28:11 -  log info 
+2025-03-21 16:28:41 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=zzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:28:44 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:28:46 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:28:48 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=zzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:28:53 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:29:09 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=zzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:29:46 -  log info 
+2025-03-21 16:29:46 -  log info 
+2025-03-21 16:29:46 -  log info 
+2025-03-21 16:29:46 -  log info 
+2025-03-21 16:29:46 -  log info 
+2025-03-21 16:29:46 -  log info 
+2025-03-21 16:29:50 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=aaa, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:29:55 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:29:57 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=zzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:30:13 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:30:22 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=안녕하세용, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:30:33 -  log info 
+2025-03-21 16:30:33 -  log info 
+2025-03-21 16:30:34 -  log info 
+2025-03-21 16:30:34 -  log info 
+2025-03-21 16:30:39 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:30:43 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅅㅅ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:30:46 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅅㅅㅅ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:31:11 -  log info 
+2025-03-21 16:31:11 -  log info 
+2025-03-21 16:31:38 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:31:41 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:31:53 -  log info 
+2025-03-21 16:31:53 -  log info 
+2025-03-21 16:31:57 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅡㅡㅐ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:32:20 -  log info 
+2025-03-21 16:32:20 -  log info 
+2025-03-21 16:32:20 -  log info 
+2025-03-21 16:32:20 -  log info 
+2025-03-21 16:32:20 -  log info 
+2025-03-21 16:32:20 -  log info 
+2025-03-21 16:32:39 -  log info 
+2025-03-21 16:32:39 -  log info 
+2025-03-21 16:32:42 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅁㅁㅁ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:33:29 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:33:41 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:34:12 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:34:16 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:35:24 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=1, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:35:26 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=2, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:35:31 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=3, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:37:19 -  log info 
+2025-03-21 16:37:19 -  log info 
+2025-03-21 16:37:33 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=4, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:37:37 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=5, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:37:44 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=55, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:38:47 - Starting AppStart using Java 17.0.12 with PID 4344 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-21 16:38:47 - No active profile set, falling back to 1 default profile: "default"
+2025-03-21 16:38:48 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-21 16:38:48 - Finished Spring Data repository scanning in 15 ms. Found 0 JPA repository interfaces.
+2025-03-21 16:38:48 - Tomcat initialized with port 8080 (http)
+2025-03-21 16:38:49 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-21 16:38:49 - Starting service [Tomcat]
+2025-03-21 16:38:49 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-21 16:38:49 - Initializing Spring embedded WebApplicationContext
+2025-03-21 16:38:49 - Root WebApplicationContext: initialization completed in 1684 ms
+2025-03-21 16:38:49 - HikariPool-1 - Starting...
+2025-03-21 16:38:49 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@437ed416
+2025-03-21 16:38:49 - HikariPool-1 - Start completed.
+2025-03-21 16:38:50 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-21 16:38:50 - HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-21 16:38:50 - HHH000026: Second-level cache disabled
+2025-03-21 16:38:51 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-21 16:38:51 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-21 16:38:51 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-21 16:38:51 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-21 16:38:52 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-21 16:38:52 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-21 16:38:52 - Started AppStart in 5.605 seconds (process running for 6.128)
+2025-03-21 16:38:53 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-21 16:38:53 - Initializing Servlet 'dispatcherServlet'
+2025-03-21 16:38:53 - Completed initialization in 1 ms
+2025-03-21 16:38:53 -  log info 
+2025-03-21 16:38:53 -  log info 
+2025-03-21 16:38:55 -  log info 
+2025-03-21 16:38:55 -  log info 
+2025-03-21 16:39:00 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅎㅋㅎㅋㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:39:03 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=1, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:39:05 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=2, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:39:06 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=3, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:39:12 -  log info 
+2025-03-21 16:39:12 -  log info 
+2025-03-21 16:39:15 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅎㅋㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:39:18 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:39:24 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:39:25 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:39:27 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:39:31 - 파일메세지ChattingDto(mstype=1, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=ef8fe7a2-ac8e-4985-be16-2deb6b08cca6_icon.png, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:40:44 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:40:59 -  log info 
+2025-03-21 16:40:59 -  log info 
+2025-03-21 16:41:03 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:41:09 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:41:14 -  log info 
+2025-03-21 16:41:14 -  log info 
+2025-03-21 16:41:16 -  log info 
+2025-03-21 16:41:16 -  log info 
+2025-03-21 16:41:22 -  log info 
+2025-03-21 16:41:22 -  log info 
+2025-03-21 16:41:31 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅁㅁㅁ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:41:35 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:41:38 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:41:40 -  log info 
+2025-03-21 16:41:40 -  log info 
+2025-03-21 16:41:42 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:41:50 -  log info 
+2025-03-21 16:41:50 -  log info 
+2025-03-21 16:41:58 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:42:34 -  log info 
+2025-03-21 16:42:34 -  log info 
+2025-03-21 16:42:41 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=1, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:42:44 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=2, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:44:37 -  log info 
+2025-03-21 16:44:37 -  log info 
+2025-03-21 16:44:41 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:44:43 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=1, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:45:09 -  log info 
+2025-03-21 16:45:09 -  log info 
+2025-03-21 16:45:11 -  log info 
+2025-03-21 16:45:11 -  log info 
+2025-03-21 16:45:14 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:45:16 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:47:57 -  log info 
+2025-03-21 16:47:57 -  log info 
+2025-03-21 16:47:58 -  log info 
+2025-03-21 16:47:58 -  log info 
+2025-03-21 16:47:58 -  log info 
+2025-03-21 16:47:58 -  log info 
+2025-03-21 16:47:58 -  log info 
+2025-03-21 16:47:58 -  log info 
+2025-03-21 16:47:59 -  log info 
+2025-03-21 16:47:59 -  log info 
+2025-03-21 16:47:59 -  log info 
+2025-03-21 16:47:59 -  log info 
+2025-03-21 16:47:59 -  log info 
+2025-03-21 16:47:59 -  log info 
+2025-03-21 16:47:59 -  log info 
+2025-03-21 16:47:59 -  log info 
+2025-03-21 16:48:04 -  log info 
+2025-03-21 16:48:04 -  log info 
+2025-03-21 16:48:12 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=1, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:49:51 -  log info 
+2025-03-21 16:49:51 -  log info 
+2025-03-21 16:49:52 -  log info 
+2025-03-21 16:49:52 -  log info 
+2025-03-21 16:49:52 -  log info 
+2025-03-21 16:49:52 -  log info 
+2025-03-21 16:49:52 -  log info 
+2025-03-21 16:49:52 -  log info 
+2025-03-21 16:49:57 -  log info 
+2025-03-21 16:49:57 -  log info 
+2025-03-21 16:49:57 -  log info 
+2025-03-21 16:49:57 -  log info 
+2025-03-21 16:49:57 -  log info 
+2025-03-21 16:49:57 -  log info 
+2025-03-21 16:49:58 -  log info 
+2025-03-21 16:49:58 -  log info 
+2025-03-21 16:53:32 - Starting AppStart using Java 17.0.12 with PID 56480 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-21 16:53:32 - No active profile set, falling back to 1 default profile: "default"
+2025-03-21 16:53:33 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-21 16:53:33 - Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
+2025-03-21 16:53:34 - Tomcat initialized with port 8080 (http)
+2025-03-21 16:53:34 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-21 16:53:34 - Starting service [Tomcat]
+2025-03-21 16:53:34 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-21 16:53:34 - Initializing Spring embedded WebApplicationContext
+2025-03-21 16:53:34 - Root WebApplicationContext: initialization completed in 1385 ms
+2025-03-21 16:53:34 - HikariPool-1 - Starting...
+2025-03-21 16:53:34 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2ca54da9
+2025-03-21 16:53:34 - HikariPool-1 - Start completed.
+2025-03-21 16:53:35 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-21 16:53:35 - HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-21 16:53:35 - HHH000026: Second-level cache disabled
+2025-03-21 16:53:35 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-21 16:53:36 - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.41
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-03-21 16:53:36 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-21 16:53:36 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-21 16:53:37 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-21 16:53:37 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-21 16:53:37 - Started AppStart in 4.499 seconds (process running for 5.07)
+2025-03-21 16:53:40 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-21 16:53:40 - Initializing Servlet 'dispatcherServlet'
+2025-03-21 16:53:40 - Completed initialization in 3 ms
+2025-03-21 16:53:41 -  log info 
+2025-03-21 16:53:41 -  log info 
+2025-03-21 16:53:43 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:53:45 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:53:46 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:53:55 -  log info 
+2025-03-21 16:53:55 -  log info 
+2025-03-21 16:53:57 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:54:00 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:54:05 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅜㅜㅜㅜ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:54:10 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅌㅌㅌ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:54:13 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:55:18 -  log info 
+2025-03-21 16:55:18 -  log info 
+2025-03-21 16:55:18 -  log info 
+2025-03-21 16:55:18 -  log info 
+2025-03-21 16:55:18 -  log info 
+2025-03-21 16:55:18 -  log info 
+2025-03-21 16:55:21 -  log info 
+2025-03-21 16:55:21 -  log info 
+2025-03-21 16:55:23 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:55:25 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:55:48 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:58:09 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:58:52 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:58:54 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:58:55 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:59:21 -  log info 
+2025-03-21 16:59:21 -  log info 
+2025-03-21 16:59:21 -  log info 
+2025-03-21 16:59:21 -  log info 
+2025-03-21 16:59:21 -  log info 
+2025-03-21 16:59:21 -  log info 
+2025-03-21 16:59:23 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:59:30 -  log info 
+2025-03-21 16:59:30 -  log info 
+2025-03-21 16:59:33 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅁㅁㅁ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 16:59:49 -  log info 
+2025-03-21 16:59:49 -  log info 
+2025-03-21 17:01:38 -  log info 
+2025-03-21 17:01:38 -  log info 
+2025-03-21 17:01:38 -  log info 
+2025-03-21 17:01:38 -  log info 
+2025-03-21 17:01:39 -  log info 
+2025-03-21 17:01:39 -  log info 
+2025-03-21 17:01:39 -  log info 
+2025-03-21 17:01:39 -  log info 
+2025-03-21 17:01:39 -  log info 
+2025-03-21 17:01:39 -  log info 
+2025-03-21 17:01:42 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=zzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:02:04 -  log info 
+2025-03-21 17:02:04 -  log info 
+2025-03-21 17:02:04 -  log info 
+2025-03-21 17:02:04 -  log info 
+2025-03-21 17:02:04 -  log info 
+2025-03-21 17:02:04 -  log info 
+2025-03-21 17:02:04 -  log info 
+2025-03-21 17:02:04 -  log info 
+2025-03-21 17:02:04 -  log info 
+2025-03-21 17:02:04 -  log info 
+2025-03-21 17:03:13 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:03:20 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:03:32 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:04:10 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:04:20 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:04:22 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:04:39 -  log info 
+2025-03-21 17:04:39 -  log info 
+2025-03-21 17:04:39 -  log info 
+2025-03-21 17:04:39 -  log info 
+2025-03-21 17:04:39 -  log info 
+2025-03-21 17:04:39 -  log info 
+2025-03-21 17:04:39 -  log info 
+2025-03-21 17:04:39 -  log info 
+2025-03-21 17:04:39 -  log info 
+2025-03-21 17:04:39 -  log info 
+2025-03-21 17:04:42 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:04:53 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:07:10 -  log info 
+2025-03-21 17:07:10 -  log info 
+2025-03-21 17:07:15 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:07:38 -  log info 
+2025-03-21 17:07:39 -  log info 
+2025-03-21 17:07:39 -  log info 
+2025-03-21 17:07:39 -  log info 
+2025-03-21 17:07:39 -  log info 
+2025-03-21 17:07:39 -  log info 
+2025-03-21 17:07:39 -  log info 
+2025-03-21 17:07:39 -  log info 
+2025-03-21 17:07:39 -  log info 
+2025-03-21 17:07:39 -  log info 
+2025-03-21 17:07:45 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:07:58 -  log info 
+2025-03-21 17:07:58 -  log info 
+2025-03-21 17:08:02 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:08:05 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㄹㄹㄹㄹ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:08:07 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅁㅁㅁ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:08:16 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㄹㄹ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:08:47 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:09:26 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:09:29 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:09:39 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅁㅁㅁ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:09:45 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=안녕하세용, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:09:50 - 파일메세지ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=a328027d-a1ec-4784-809e-5df074991817_icon.png, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:11:41 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:13:24 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:13:27 - 파일메세지ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=64afce73-8fa4-46d0-a93d-46bdc44f4865_11.gif, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:15:41 -  log info 
+2025-03-21 17:15:41 -  log info 
+2025-03-21 17:15:42 -  log info 
+2025-03-21 17:15:42 -  log info 
+2025-03-21 17:15:42 -  log info 
+2025-03-21 17:15:43 -  log info 
+2025-03-21 17:15:43 -  log info 
+2025-03-21 17:15:43 -  log info 
+2025-03-21 17:16:13 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:16:23 -  log info 
+2025-03-21 17:16:23 -  log info 
+2025-03-21 17:16:26 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:17:20 -  log info 
+2025-03-21 17:17:20 -  log info 
+2025-03-21 17:17:33 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:17:56 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:18:03 -  log info 
+2025-03-21 17:18:03 -  log info 
+2025-03-21 17:18:05 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:18:48 -  log info 
+2025-03-21 17:18:48 -  log info 
+2025-03-21 17:18:54 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:19:16 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:19:53 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:20:23 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:21:06 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:28:15 -  log info 
+2025-03-21 17:28:15 -  log info 
+2025-03-21 17:28:16 -  log info 
+2025-03-21 17:28:16 -  log info 
+2025-03-21 17:28:16 -  log info 
+2025-03-21 17:28:16 -  log info 
+2025-03-21 17:28:16 -  log info 
+2025-03-21 17:28:16 -  log info 
+2025-03-21 17:28:27 -  log info 
+2025-03-21 17:28:27 -  log info 
+2025-03-21 17:28:27 -  log info 
+2025-03-21 17:28:27 -  log info 
+2025-03-21 17:28:27 -  log info 
+2025-03-21 17:28:27 -  log info 
+2025-03-21 17:28:27 -  log info 
+2025-03-21 17:28:27 -  log info 
+2025-03-21 17:28:31 -  log info 
+2025-03-21 17:28:31 -  log info 
+2025-03-21 17:28:31 -  log info 
+2025-03-21 17:28:31 -  log info 
+2025-03-21 17:28:31 -  log info 
+2025-03-21 17:28:31 -  log info 
+2025-03-21 17:28:31 -  log info 
+2025-03-21 17:28:31 -  log info 
+2025-03-21 17:28:34 -  log info 
+2025-03-21 17:28:34 -  log info 
+2025-03-21 17:29:18 -  log info 
+2025-03-21 17:29:18 -  log info 
+2025-03-21 17:29:31 -  log info 
+2025-03-21 17:29:31 -  log info 
+2025-03-21 17:29:31 -  log info 
+2025-03-21 17:29:31 -  log info 
+2025-03-21 17:29:31 -  log info 
+2025-03-21 17:29:31 -  log info 
+2025-03-21 17:29:40 -  log info 
+2025-03-21 17:29:40 -  log info 
+2025-03-21 17:29:45 -  log info 
+2025-03-21 17:29:45 -  log info 
+2025-03-21 17:29:59 -  log info 
+2025-03-21 17:29:59 -  log info 
+2025-03-21 17:30:10 -  log info 
+2025-03-21 17:30:10 -  log info 
+2025-03-21 17:30:10 -  log info 
+2025-03-21 17:30:10 -  log info 
+2025-03-21 17:30:10 -  log info 
+2025-03-21 17:30:10 -  log info 
+2025-03-21 17:30:12 -  log info 
+2025-03-21 17:30:12 -  log info 
+2025-03-21 17:30:18 -  log info 
+2025-03-21 17:30:18 -  log info 
+2025-03-21 17:31:30 -  log info 
+2025-03-21 17:31:30 -  log info 
+2025-03-21 17:31:30 -  log info 
+2025-03-21 17:31:30 -  log info 
+2025-03-21 17:31:30 -  log info 
+2025-03-21 17:31:30 -  log info 
+2025-03-21 17:32:14 -  log info 
+2025-03-21 17:32:14 -  log info 
+2025-03-21 17:32:16 -  log info 
+2025-03-21 17:32:16 -  log info 
+2025-03-21 17:32:16 -  log info 
+2025-03-21 17:32:16 -  log info 
+2025-03-21 17:32:16 -  log info 
+2025-03-21 17:32:16 -  log info 
+2025-03-21 17:32:19 -  log info 
+2025-03-21 17:32:19 -  log info 
+2025-03-21 17:32:21 -  log info 
+2025-03-21 17:32:21 -  log info 
+2025-03-21 17:32:21 -  log info 
+2025-03-21 17:32:21 -  log info 
+2025-03-21 17:32:21 -  log info 
+2025-03-21 17:32:21 -  log info 
+2025-03-21 17:32:23 -  log info 
+2025-03-21 17:32:23 -  log info 
+2025-03-21 17:32:25 -  log info 
+2025-03-21 17:32:25 -  log info 
+2025-03-21 17:32:25 -  log info 
+2025-03-21 17:32:25 -  log info 
+2025-03-21 17:32:25 -  log info 
+2025-03-21 17:32:25 -  log info 
+2025-03-21 17:32:26 -  log info 
+2025-03-21 17:32:26 -  log info 
+2025-03-21 17:32:27 -  log info 
+2025-03-21 17:32:27 -  log info 
+2025-03-21 17:32:27 -  log info 
+2025-03-21 17:32:27 -  log info 
+2025-03-21 17:32:27 -  log info 
+2025-03-21 17:32:27 -  log info 
+2025-03-21 17:32:30 -  log info 
+2025-03-21 17:32:30 -  log info 
+2025-03-21 17:32:38 -  log info 
+2025-03-21 17:32:38 -  log info 
+2025-03-21 17:32:38 -  log info 
+2025-03-21 17:32:38 -  log info 
+2025-03-21 17:32:38 -  log info 
+2025-03-21 17:32:38 -  log info 
+2025-03-21 17:32:44 -  log info 
+2025-03-21 17:32:47 - 일반메세지ChattingDto(mstype=0, rno=15, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:32:51 -  log info 
+2025-03-21 17:32:51 -  log info 
+2025-03-21 17:32:55 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:34:18 -  log info 
+2025-03-21 17:34:18 -  log info 
+2025-03-21 17:34:24 -  log info 
+2025-03-21 17:34:24 -  log info 
+2025-03-21 17:34:27 - 일반메세지ChattingDto(mstype=0, rno=15, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:35:14 -  log info 
+2025-03-21 17:35:14 -  log info 
+2025-03-21 17:35:18 -  log info 
+2025-03-21 17:35:18 -  log info 
+2025-03-21 17:35:21 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:35:23 - 일반메세지ChattingDto(mstype=0, rno=15, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:35:27 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:35:31 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:35:46 -  log info 
+2025-03-21 17:35:46 -  log info 
+2025-03-21 17:35:47 -  log info 
+2025-03-21 17:35:47 -  log info 
+2025-03-21 17:35:47 -  log info 
+2025-03-21 17:35:47 -  log info 
+2025-03-21 17:35:47 -  log info 
+2025-03-21 17:35:47 -  log info 
+2025-03-21 17:35:52 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:35:54 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:37:37 -  log info 
+2025-03-21 17:37:37 -  log info 
+2025-03-21 17:37:39 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:38:09 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:38:25 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:38:37 - 일반메세지ChattingDto(mstype=0, rno=15, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:39:15 - 일반메세지ChattingDto(mstype=0, rno=15, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:40:30 - 일반메세지ChattingDto(mstype=0, rno=15, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:40:34 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:40:39 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:40:42 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:40:46 - 일반메세지ChattingDto(mstype=0, rno=15, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:41:04 -  log info 
+2025-03-21 17:41:06 - 일반메세지ChattingDto(mstype=0, rno=16, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:41:24 -  log info 
+2025-03-21 17:41:24 -  log info 
+2025-03-21 17:41:31 -  log info 
+2025-03-21 17:41:36 - 일반메세지ChattingDto(mstype=0, rno=17, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:41:40 - 일반메세지ChattingDto(mstype=0, rno=17, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:41:43 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅁㅁㅁ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:42:32 -  log info 
+2025-03-21 17:42:32 -  log info 
+2025-03-21 17:42:36 - 일반메세지ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:42:40 - 일반메세지ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅁ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-21 17:42:47 - 일반메세지ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㄹ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)

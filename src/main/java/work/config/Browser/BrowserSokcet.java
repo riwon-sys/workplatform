@@ -53,23 +53,30 @@ public class BrowserSokcet extends TextWebSocketHandler {
 
     ObjectMapper mapper = new ObjectMapper();
     // 클라이언트 소켓으로 로그를 보내는 메소드
-    public void broadcastToBrowser() {
+  public void broadcastToBrowser() {
         // 모든 클라이언트 소켓에 로그 메시지 전송
         for (WebSocketSession client : browserClients) {
             try {
-                // 마지막 로그 한 줄을 ChattingDto로 가져옴
-                ChattingDto log = logReader.readLastLog();
+                // 클라이언트 세션이 열린 상태인지 확인
+                if (client.isOpen()) {
+                    // 마지막 로그 한 줄을 ChattingDto로 가져옴
+                    ChattingDto log = logReader.readLastLog();
 
-                if (log != null) {
-                    // ObjectMapper를 사용하여 ChattingDto 객체를 JSON 문자열로 변환
-                    ObjectMapper mapper = new ObjectMapper();
-                    String jsonLog = mapper.writeValueAsString(log);
+                    if (log != null) {
+                        // ObjectMapper를 사용하여 ChattingDto 객체를 JSON 문자열로 변환
+                        ObjectMapper mapper = new ObjectMapper();
+                        String jsonLog = mapper.writeValueAsString(log);
 
-                    // 변환된 JSON 문자열을 클라이언트에 전송
-                    client.sendMessage(new TextMessage(jsonLog));
-                    System.out.println("로그보내기 성공********");
+                        // 변환된 JSON 문자열을 클라이언트에 전송
+                        client.sendMessage(new TextMessage(jsonLog));
+                        System.out.println("로그보내기 성공********");
+                    } else {
+                        System.out.println("마지막 로그가 없습니다.");
+                    }
                 } else {
-                    System.out.println("마지막 로그가 없습니다.");
+                    // 세션이 닫혀있으면 클라이언트 목록에서 제거
+                    System.out.println("클라이언트 세션이 닫혀 있습니다. 세션 제거: " + client.getId());
+                    browserClients.remove(client); // 세션 목록에서 제거
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -77,7 +84,6 @@ public class BrowserSokcet extends TextWebSocketHandler {
             }
         }
     }
-
 
 
 }
