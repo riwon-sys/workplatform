@@ -11,7 +11,7 @@ import {  Typography, IconButton, Avatar, Divider, Button, TextField } from '@mu
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-
+import ImageIcon from '@mui/icons-material/Image';
 
 
 
@@ -27,6 +27,17 @@ const Item = styled(Paper)(({ theme }) => ({
   }),
 }));
 
+
+// // 자바 서버로부터 게시물목록 가져오는 함수 
+// const getboards = async()=>{
+
+//   //const respons  = await axios.메소드명( "자바주소" )
+//  const response =await axios.get("http://localhost:8080/work/board")
+//   console.log(response.data)
+//   // 응답받은 게시물목록을 state 변수에 저장한다. -> state가 변경되면 컴포넌트 재렌더링 된다.
+//   setboards(response.data)
+// }
+
 export default function BoardDetail() {
 
   // + 경로상의 pid 가져오기 // http://localhost:5173/board/detail?pid=4
@@ -34,11 +45,12 @@ export default function BoardDetail() {
   const pid = searchParams.get("pid");
 
   const [board,setBoard] = useState({});
+  const [commentText,setCommentText] = useState({});
 
 
 
   useEffect(()=>{//게시물 상세페이지 관리
-    getview();
+    getview();getCommentText();
   },[])
 
   //자바 서버로부터 게시물 상세페이지 가져오는 함수
@@ -52,7 +64,12 @@ export default function BoardDetail() {
   // `http://localhost:8080/work/board/view?pid=${pid}`
   }
 
+  const getCommentText = async()=>{
+  const response1 = await axios.get(`http://localhost:8080/work/reply?pid=${pid}`)
+  console.log(response1.data)
+  setCommentText(response1.data)
 
+  }
   return (
     <>
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
@@ -127,10 +144,57 @@ export default function BoardDetail() {
                   <Avatar sx={{ bgcolor: '#3b5998', width: 24, height: 24, fontSize: '12px', mr: 1 }}>f</Avatar>
                   <Avatar sx={{ bgcolor: '#1DA1F2', width: 24, height: 24, fontSize: '12px', mr: 1 }}>t</Avatar>
                   <Avatar sx={{ bgcolor: '#444', width: 24, height: 24, fontSize: '12px', mr: 1 }}>...</Avatar>
+                </Box>   
+              </Box>
+             </Box> 
+
+              {/* 댓글 섹션 */}
+              <Box sx={{ padding: '16px', borderBottom: '1px solid #eee' }}>
+                <Typography sx={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px' }}>
+                  댓글 10
+              </Typography>
+
+               {/* 댓글 작성 폼 */}
+               <Box sx={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
+                <TextField
+                  fullWidth
+                  multiline
+                  rows={4}
+                  placeholder="댓글을 남겨주세요."
+                  variant="outlined"
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      borderRadius: '4px',
+                      fontSize: '14px'
+                    }
+                  }}
+                />
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginTop: '8px' }}>
+                  <Button
+                    startIcon={<ImageIcon />}
+                    sx={{ color: '#999', fontSize: '13px' }}
+                  >
+                    사진 첨부
+                  </Button>
+                  <Button
+                    variant="contained"
+                    sx={{ 
+                      backgroundColor: '#0068c3', 
+                      color: 'white',
+                      fontSize: '14px',
+                      padding: '6px 16px',
+                      '&:hover': {
+                        backgroundColor: '#0056a3'
+                      }
+                    }}
+                  >
+                    등록
+                  </Button>
                 </Box>
               </Box>
-
-             </Box> 
+              </Box>
             </Item>
           </Grid>
         </Grid>
