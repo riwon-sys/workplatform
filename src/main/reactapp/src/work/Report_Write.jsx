@@ -40,10 +40,10 @@ export default function Report_Write(){
   const [ mrank, setMrank ] = useState('');
   const [ lastRpno, setLastRpno ] = useState(''); 
   const [ approval, setApproval ] = useState([
-    { rank: "대리", mno: "", rpno: "" },
-    { rank: "과장", mno: "", rpno: "" },
-    { rank: "차장", mno: "", rpno: "" },
-    { rank: "부장", mno: "", rpno: "" }
+    { rank: "대리", mno: "", rpno: "", apstate: false },
+    { rank: "과장", mno: "", rpno: "", apstate: false },
+    { rank: "차장", mno: "", rpno: "", apstate: false },
+    { rank: "부장", mno: "", rpno: "", apstate: false }
   ]);
   const [ members, setMembers ] = useState([]);
   const [ reports, setReports ] = useState( [] );
@@ -97,7 +97,7 @@ export default function Report_Write(){
     // FormData 객체 생성
     const signFormData = new FormData();
     signFormData.append( 'signature', blob, 'signature.png' );  // 'signature.png'는 파일 이름
-    signFormData.append( 'approval', approval );
+    signFormData.append( 'aplist', approval );
     try{
       const option = { header: { "Content-Type" : "multipart/form-data" } }
       const response = await axios.post( 'http://localhost:8080/api/approval', signFormData, option );

@@ -52,10 +52,8 @@ public class ApprovalService {
 
                         // 다음 결재자가 있으면, 그 결재자의 rpstate를 true로 설정
                         if ( i + 1 < approvalList.size() ) {
-                            if( i != approvalList.size() ) {
-                                ApprovalDto nextApprovalDto = approvalList.get(i + 1);
-                                nextApprovalDto.setApstate(true);  // 다음 결재자 승인 대기 상태로 설정
-                            } // if end
+                            ApprovalDto nextApprovalDto = approvalList.get(i + 1);
+                            nextApprovalDto.setApstate(true);  // 다음 결재자 승인 대기 상태로 설정
                         } // if end
                     } // if end
                 } // if end
