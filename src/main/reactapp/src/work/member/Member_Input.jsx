@@ -118,110 +118,188 @@ export default function Member_Input ( props ) {
   });
 
 
-    return (
-      <>
-            <ThemeProvider theme={theme}>
-              <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', padding: '20px' }}>
-                <Card variant="outlined" sx={{ width: '100%', maxWidth: '850px', padding: '50px', marginTop: '50px', borderRadius: '12px', position: 'relative' }}>
-                  {/* 최상단 오른쪽 버튼들 (사원 등록 박스 내) */}
-                  <Box sx={{ position: 'absolute', top: 5, right: 5, display: 'flex', gap: 3 }}>
-                    {/* 밝기 모드 전환 버튼 추가 */}
-                    <IconButton color="primary" aria-label="color-mode-toggle" onClick={toggleColorMode} sx={{ fontSize: 30 }}>
-                      {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-                    </IconButton>
+return (
+  <>
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+          padding: '20px',
+        }}
+      >
+        <Card
+          variant="outlined"
+          sx={{
+            width: '100%',
+            maxWidth: '850px',
+            padding: '50px',
+            marginTop: '50px',
+            borderRadius: '12px',
+            position: 'relative',
+          }}
+        >
+          {/* 최상단 오른쪽 버튼들 (사원 등록 박스 내) */}
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 5,
+              right: 5,
+              display: 'flex',
+              gap: 3,
+            }}
+          >
+            {/* 밝기 모드 전환 버튼 추가 */}
+            <IconButton
+              color="primary"
+              aria-label="color-mode-toggle"
+              onClick={toggleColorMode}
+              sx={{ fontSize: 30 }}
+            >
+              {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
 
-                    {/* 세팅 버튼 */}
-                    <IconButton color="primary" aria-label="settings" component="span" sx={{ fontSize: 30 }}>
-                      <SettingsIcon />
-                    </IconButton>
+            {/* 세팅 버튼 */}
+            <IconButton
+              color="primary"
+              aria-label="settings"
+              component="span"
+              sx={{ fontSize: 30 }}
+            >
+              <SettingsIcon />
+            </IconButton>
 
-                    {/* 나머지 아이콘 버튼들 */}
-                    <IconButton color="primary" aria-label="minimize" component="span" sx={{ fontSize: 30 }}>
-                      <MinimizeIcon />
-                    </IconButton>
-                    <IconButton color="primary" aria-label="maximize" component="span" sx={{ fontSize: 30 }}>
-                      <MaximizeIcon />
-                    </IconButton>
-                    <IconButton color="primary" aria-label="close" component="span" sx={{ fontSize: 30 }}>
-                      <CloseIcon />
-                    </IconButton>
-                  </Box>
+            {/* 나머지 아이콘 버튼들 */}
+            <IconButton
+              color="primary"
+              aria-label="minimize"
+              component="span"
+              sx={{ fontSize: 30 }}
+            >
+              <MinimizeIcon />
+            </IconButton>
+            <IconButton
+              color="primary"
+              aria-label="maximize"
+              component="span"
+              sx={{ fontSize: 30 }}
+            >
+              <MaximizeIcon />
+            </IconButton>
+            <IconButton
+              color="primary"
+              aria-label="close"
+              component="span"
+              sx={{ fontSize: 30 }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Box>
 
-                  <Typography component="h1" variant="h4" sx={{ textAlign: 'center', marginBottom: '30px' }}>
-                    사원 등록
-                  </Typography>
+          <Typography
+            component="h1"
+            variant="h4"
+            sx={{ textAlign: 'center', marginBottom: '30px' }}
+          >
+            사원 등록
+          </Typography>
 
-                  <Box component="form" noValidate  sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                    <TextField
-                      label="사원 번호"
-                      type="number"
-name="mno" value={memberInfo.mno} onChange={onInputChange}
-                      fullWidth
-                      required
-                      variant="outlined"
-                    />
-                    <TextField
-                      label="이름"
-                      type="text"
-name="mname" value={memberInfo.mname} onChange={onInputChange}
-                      fullWidth
-                      required
-                      variant="outlined"
-                    />
-                    <TextField
-                      label="전화번호"
-                      type="text"
-name="mphone" value={memberInfo.mphone} onChange={onInputChange}
-                      fullWidth
-                      required
-                      variant="outlined"
-                    />
-                    <TextField
-                      label="이메일"
-                      type="email"
-name="memail" value={memberInfo.memail} onChange={onInputChange}
-                      fullWidth
-                      required
-                      variant="outlined"
-                    />
-                    <TextField
-                      label="직급"
-                      type="text"
-name="mrank" value={memberInfo.mrank} onChange={onInputChange}
-                      fullWidth
-                      required
-                      variant="outlined"
-                    />
+          <Box
+            component="form"
+            noValidate
+            sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
+          >
+            <TextField
+              label="사원 번호"
+              type="number"
+              name="mno"
+              value={memberInfo.mno}
+              onChange={onInputChange}
+              fullWidth
+              required
+              variant="outlined"
+            />
+            <TextField
+              label="이름"
+              type="text"
+              name="mname"
+              value={memberInfo.mname}
+              onChange={onInputChange}
+              fullWidth
+              required
+              variant="outlined"
+            />
+            <TextField
+              label="전화번호"
+              type="text"
+              name="mphone"
+              value={memberInfo.mphone}
+              onChange={onInputChange}
+              fullWidth
+              required
+              variant="outlined"
+            />
+            <TextField
+              label="이메일"
+              type="email"
+              name="memail"
+              value={memberInfo.memail}
+              onChange={onInputChange}
+              fullWidth
+              required
+              variant="outlined"
+            />
+            <TextField
+              label="직급"
+              type="text"
+              name="mrank"
+              value={memberInfo.mrank}
+              onChange={onInputChange}
+              fullWidth
+              required
+              variant="outlined"
+            />
+            <TextField
+              label="사진 등록"
+              type="file"
+              accept="image/*"
+              onChange={onFileUpload}
+              fullWidth
+              required
+              variant="outlined"
+            />
 
-                                        <TextField
-                                          label="사진 등록"
-                                          type="file"
-    accept="image/*" onChange={onFileUpload}
-                                          fullWidth
-                                          required
-                                          variant="outlined"
-                                        />
+            {preview && (
+              <>
+                미리보기 :
+                <img
+                  src={preview}
+                  style={{ width: '100px' }}
+                  alt="미리보기 이미지"
+                />
+              </>
+            )}
 
-                              {preview && (
-                                <>
-                                  미리보기 :
-                                  <img src={preview} style={{ width: "100px" }} alt="미리보기 이미지" />
-                                </>
-                              )}
+            <Button
+              type="button"
+              variant="contained"
+              color="primary"
+              fullWidth
+              sx={{ marginTop: '20px' }}
+              onClick={onSignup}
+            >
+              등록
+            </Button>
+          </Box>
+        </Card>
+      </Box>
+    </ThemeProvider>
+  </>
+); // R E
 
-                    <Button type="button" variant="contained" color="primary" fullWidth sx={{ marginTop: '20px' }} onClick={onSignup}>
-                      등록
-                    </Button>
-                  </Box>
-                </Card>
-              </Box>
-            </ThemeProvider>
-
-      </>
-    );
-}
-
-
+} //  C E
 
 
 

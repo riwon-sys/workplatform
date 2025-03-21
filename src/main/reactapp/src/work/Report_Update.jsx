@@ -135,7 +135,7 @@ export default function Report_Update() {
           </Grid>
           
           <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>
-            <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px', padding: 5 }} >
+            <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px', padding: 7 }} >
               { rpno && Number(rpno) > 0 ? 
               <>
                 <Report_Form 
