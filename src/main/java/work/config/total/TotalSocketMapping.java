@@ -1,4 +1,4 @@
-package work.config;
+package work.config.total;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -8,17 +8,16 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 
 @Configuration
 @EnableWebSocket
-public class WebSocketMapping implements WebSocketConfigurer {
+public class TotalSocketMapping implements WebSocketConfigurer {
 
     @Autowired
-    private  ChatSocket socket;
+    private TotalSocket totalSocket;
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(totalSocket, "/totalConnect")
+               .setAllowedOriginPatterns("*");
 
-        registry.addHandler(socket, "/chatConnect")
-                .setAllowedOrigins("*");
-
-        System.out.println("소켓 접속");
+        System.out.println("전체 채팅 소켓 접속");
     }
 }
