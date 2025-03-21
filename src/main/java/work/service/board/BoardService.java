@@ -38,7 +38,9 @@ public class BoardService {
         BoardDto boardDto = boardMapper.boardView(pid);
         //2.조회한 게시물의 댓글 리스트 조회
         List<CommentDto> commentDto = commentMapper.CommentFindAll(pid);
-        return boardMapper.boardView(pid);
+        //3.조회된 댓글 리스트를 게시물 dto에 담기
+        boardDto.setCommentList(commentDto);
+        return boardDto;
     }
 
     //[4]게시물 수정

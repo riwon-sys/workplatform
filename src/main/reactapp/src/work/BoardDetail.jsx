@@ -18,8 +18,8 @@ import ImageIcon from '@mui/icons-material/Image';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
+  padding: theme.spacing(5),
+  textAlign: 'left',
   height: '100%',
   color: theme.palette.text.secondary,
   ...theme.applyStyles?.('dark', {  // 옵셔널 체이닝 추가
@@ -83,7 +83,7 @@ export default function BoardDetail() {
         <Grid container spacing={0} sx={{ height: '100%' }}>
           {/* xs: 너비 조정 */}
           <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>  {/* size → xs 변경 */}
-            <Item>
+            <Item sx={{overflow:'scroll',overflowX:'hidden'}}>
 
                           {/* 헤더 부분 */}
             <Box sx={{ display: 'flex', alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid #eee' }}>
@@ -158,7 +158,7 @@ export default function BoardDetail() {
               {/* 댓글 섹션 */}
               <Box sx={{ padding: '16px', borderBottom: '1px solid #eee' }}>
                 <Typography sx={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px' }}>
-                  댓글 10
+                  댓글 {board.commentList && board.commentList.length}
               </Typography>
 
                {/* 댓글 작성 폼 */}
@@ -205,19 +205,33 @@ export default function BoardDetail() {
               </Box>
               {/*현재 게시물 해당하는 댓글조회 , 리스트명.map((반복변수,인덱스)),조건&&참 */}
               {board.commentList && board.commentList.map((comment,index)=>{
-                return(<>
-                  <div>
-                    <span>{comment.mno}</span>
-                    <span>{comment.reg_date}</span>
-                    <span>{comment.content}</span>
-                    <span>수정버튼, 삭제버튼</span>
-
-
-                  </div>
-                
-                
-                </>)
-              })}
+             return (
+              <Box 
+                key={index}
+                sx={{ 
+                  padding: '12px 16px', 
+                  borderBottom: '1px solid #eee',
+                  textAlign: 'left'
+                }}
+              >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#333' }}>
+                    {comment.mno}
+                  </Typography>
+                  <Typography sx={{ fontSize: '12px', color: '#999' }}>
+                    {comment.reg_date}
+                  </Typography>
+                </Box>
+                <Typography sx={{ fontSize: '14px', marginBottom: '12px', color: '#333' }}>
+                  {comment.content}
+                </Typography>
+                <Box sx={{ display: 'flex', gap: '8px' }}>
+                  <Button size="small" sx={{ fontSize: '12px', color: '#666', minWidth: 'auto', padding: '2px 8px' }}>수정</Button>
+                  <Button size="small" sx={{ fontSize: '12px', color: '#666', minWidth: 'auto', padding: '2px 8px' }}>삭제</Button>
+                </Box>
+              </Box>
+            );
+          })}
             </Item>
           </Grid>
         </Grid>
