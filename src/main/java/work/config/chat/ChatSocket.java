@@ -1,13 +1,16 @@
-package work.config;
+package work.config.chat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import work.config.Browser.BrowserSokcet;
+import work.log.LogClass;
+import work.log.LogReader;
 import work.model.dto.ChattingDto;
 import work.model.dto.MessageDto.MessageDto;
-import work.model.dto.room.RoomDto;
 import work.model.mapper.room.MessageMapper;
 import work.model.mapper.room.RoomMapper;
 
@@ -16,6 +19,7 @@ import java.util.*;
 
 // 채팅방별 메세지 전송관리
 @Component
+@RequiredArgsConstructor
 public class ChatSocket extends TextWebSocketHandler {
 
     @Autowired
@@ -24,8 +28,12 @@ public class ChatSocket extends TextWebSocketHandler {
     @Autowired
     private RoomMapper roomMapper;
 
+    private final LogClass logClass = new LogClass();
 
+    private  final LogReader logReader = new LogReader();
 
+    @Autowired
+    private BrowserSokcet browserSokcet;
     // 브라우저 접속 소켓
     private  final  Set<WebSocketSession> totalClients = new HashSet<>();
 
@@ -128,6 +136,12 @@ public class ChatSocket extends TextWebSocketHandler {
                     System.out.println(chattingDto.getMsgList());
                     boolean result = messageMapper.writeMessage(chattingDto); // 컨트롤러로 연결해야됨
                     System.out.println("메시지 저장 결과: " + result);
+                    // 로그처리
+                    logClass.logMsg(chattingDto);
+                    // 브라우저 소켓에 로그 전송
+                    browserSokcet.broadcastToBrowser();
+                    System.out.println("브라우저 소켓으로 로그 보냄");
+
                     break;
 
                 case 1: // 파일 메시지
@@ -137,6 +151,13 @@ public class ChatSocket extends TextWebSocketHandler {
                     System.out.println(chattingDto.getRno());
                     System.out.println(chattingDto.getMno());
                     boolean fileResult = messageMapper.writeFile(chattingDto);
+
+                    // 로그처리
+                    logClass.logMsg(chattingDto);
+
+                    // 브라우저 소켓에 로그 전송
+                    browserSokcet.broadcastToBrowser();
+                    System.out.println("브라우저 소켓으로 로그 보냄");
                     System.out.println(fileResult);
                     break;
 
@@ -152,6 +173,10 @@ public class ChatSocket extends TextWebSocketHandler {
                     System.out.println("알 수 없는 메시지 타입: " + chattingDto.getMstype());
                     break;
             }
+
+            // 로그 출력
+            LogReader.readLastLog();
+
         } catch (IOException e) {
             // JSON 파싱 실패시 예외 처리
             System.err.println("Error parsing message: " + e.getMessage());

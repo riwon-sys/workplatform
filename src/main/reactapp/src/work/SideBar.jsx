@@ -24,6 +24,14 @@ import ApprovalIcon from '@mui/icons-material/Approval';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonIcon from '@mui/icons-material/Person';
 
+import axios from 'axios';                      // rw 25-03-21
+import { useEffect , useState } from 'react';   // rw 25-03-21
+import { useNavigate } from "react-router-dom"; // rw 25-03-21
+
+import { useDispatch , useSelector } from 'react-redux'; // rw 25-03-21
+import { logout } from './member/reduxs/userSlice' // rw 25-03-21
+
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -109,6 +117,43 @@ export default function MiniDrawer() {
     { name: "사원 등록", path : "/member/post",icon: <PersonAddAlt1Icon />} // rw 25-03-18
   ];
 
+  // 로그인을 하였지만 비로그인 상태로 보일 경우// rw 25-03-20
+  // import axios from 'axios'; // rw 25-03-20
+  // import { useEffect , useState } from 'react'; // rw 25-03-20
+
+      // (1) 로그인 상태 저장 state | 객체 저장 예정 {빈 객체}를 초기값 선언 | rw 25-03-20
+      // ========= 리덕스 전역 변수 사용 =========        | rw 25-03-21
+      // (1-1) 전역상태에서 로그인된 회원정보 불러오기 user 라는 이이름의 리듀서 정보를 가져오기
+      const loginInfo = useSelector( (state) => state.user.userInfo );
+      // (2-1) 로그아웃 하기 위한 useDispatch()
+      const dispatch = useDispatch();
+      // const [ login , setLogin ] = useState ({});
+
+      // (2) axios  로그인 상태 요청 및 응답 받기
+      //const onLoginInfo = async()=>{
+      //    const response = await axios.get('http://localhost:8080/workplatform/myinfo' , {withCredentials: true} );
+      //    const result = response.data; console.log( response.data );
+      //    setLogin ( result );
+      //} // f e
+      // (3) useEffect 'onLoginInfo' // 최초 1회 실행
+      // useEffect( ()=>{onLoginInfo()}, [] )
+
+      // (4) axios 로그아웃 요청 및 응답 받기
+      const navigate = useNavigate();
+      const onLogout = async()=>{
+          const response = axios.get('http://localhost:8080/workplatform/logout' , {withCredentials: true});
+          alert('로그아웃 되었습니다.');
+
+           navigate('/'); // 네비게이트 부활 | rw 25-03-21
+           dispatch(logout());
+          // location.href="/"; // 로케이션 죽음 | rw 25-03-21
+      }
+
+
+
+
+
+
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
       <Drawer variant="permanent" open={open}>
@@ -184,12 +229,33 @@ export default function MiniDrawer() {
             </>
           ) : (
             <>
-              <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }} >
-                로그인 &nbsp;해주세요.
-              </Typography>
-              <Button variant="contained" color="info" >
-                <Link to = "/member/login" style={{ color: 'white' }} > 로그인 </Link>
-              </Button>
+
+            {loginInfo ? (<>
+                              <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }} >
+{/*                                 {loginInfo.mprofile} {loginInfo.mname}{loginInfo.mrank}{loginInfo.mno} 오늘도 화이팅! */}
+                                <img
+                                  src={
+                                    'http://localhost:8080/file/' +
+                                    (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)
+                                  }
+                                  style={{
+                                    width: '40px',
+                                    borderRadius: '40px',
+                                  }}
+                                />
+                              </Typography>
+                              <Button variant="contained" onClick={onLogout} color="info" >
+                                   로그아웃
+                              </Button>
+                </>) : (<>
+                                  <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }} >
+                                    로그인 &nbsp;해주세요.
+                                  </Typography>
+                                  <Button variant="contained" color="info" >
+                                    <Link to = "/member/login" style={{ color: 'white' }} > 로그인 </Link>
+                                  </Button>
+                    </>)
+            }
             </>
           )}
         </Box>

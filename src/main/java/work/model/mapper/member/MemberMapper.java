@@ -44,7 +44,8 @@ public interface MemberMapper {
                 if( mno != null ){
                     WHERE("mno LIKE '" + (mno / 100000) + "%'");
                 }
-                WHERE( "mtype = 0" );
+                WHERE("mtype = 0"); // 사원 기본 타입 설정 (기본값 : 0;재직자) | rw 25-03-21
+
                 ORDER_BY("mno ASC");
             }}.toString();
         }
