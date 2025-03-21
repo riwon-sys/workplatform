@@ -1,4 +1,6 @@
 import * as React from 'react';
+
+/* mui import */
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
@@ -6,6 +8,10 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import SignatureCanvas from 'react-signature-canvas'
+
+/* mui icon */
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const style = {
   position: 'absolute',
@@ -47,8 +53,11 @@ export default function PostModal( { onPost, signImgPath, resetSign, uploadFile 
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              서명
+              보고서 서명해주세요.
             </Typography>
+            <IconButton color="primary" aria-label="add to shopping cart">
+              <CloseIcon onClick={ handleClose } />
+            </IconButton>
             <Box>
             <SignatureCanvas
               canvasProps={{
@@ -60,10 +69,10 @@ export default function PostModal( { onPost, signImgPath, resetSign, uploadFile 
 
             <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
               <Button variant="contained" color="info" sx={{ mt: 3 }} onClick={ onPost } >
-                      등록
+                등록
               </Button>
-              <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ handleClose } >
-                      취소
+              <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }}  >
+                리셋
               </Button>
             </div>
             
