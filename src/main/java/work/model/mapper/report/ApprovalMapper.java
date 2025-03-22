@@ -13,7 +13,7 @@ import java.util.List;
 @Mapper
 public interface ApprovalMapper {
     // 1. 결재자 목록 등록
-    @Insert( "INSERT INTO Approval( mno, rpno, apstate, apsignature ) VALUES ( #{mno}, #{rpno}, #{apstate}, #{apsignature} )")
+    @Insert( "INSERT INTO Approval( mno, rpno, apdate, apstate, apsignature ) VALUES ( #{mno}, #{rpno}, #{apdate}, #{apstate}, #{apsignature} )")
     boolean write(ApprovalDto approvalDto);
 
     // 2. 승인 전체 목록 조회

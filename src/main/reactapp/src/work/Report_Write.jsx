@@ -6,7 +6,7 @@ import Report_Form from './Report_Form';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import PostModal from './PostModal';
-import SignatureCanvas from 'react-signature-canvas'
+import { useNavigate } from 'react-router-dom';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Report_Write(){
-
+  
   // Signature Canvas 참조
   const signCanvas = useRef(null);
 
@@ -40,15 +40,15 @@ export default function Report_Write(){
   const [ mrank, setMrank ] = useState('');
   const [ lastRpno, setLastRpno ] = useState(''); 
   const [ approval, setApproval ] = useState([
-    { rank: "대리", mno: "", rpno: "", apstate: false },
-    { rank: "과장", mno: "", rpno: "", apstate: false },
-    { rank: "차장", mno: "", rpno: "", apstate: false },
-    { rank: "부장", mno: "", rpno: "", apstate: false }
+    { rank: "대리", mno: null, rpno: "", apstate: false },
+    { rank: "과장", mno: null, rpno: "", apstate: false },
+    { rank: "차장", mno: null, rpno: "", apstate: false },
+    { rank: "부장", mno: null, rpno: "", apstate: false }
   ]);
   const [ members, setMembers ] = useState([]);
   const [ reports, setReports ] = useState( [] );
   const [ membersByRank, setMembersByRank ] = useState({}); // 직급별 멤버 상태
-  console.log( approval );
+  const navigate = useNavigate();
 
   const formDataChange = (e) => {
     setFormData( { ...formData, [ e.target.name ] : e.target.value } )
@@ -57,10 +57,10 @@ export default function Report_Write(){
   // Auto_increment 번호 조회
   const onLastRpno = async () => {
     const response = await axios.get( 'http://localhost:8080/api/report/lastrpno' );
-    setLastRpno( response.data );
+    setLastRpno( response.data+1 );
   } // f end
 
-  useEffect( () => { onLastRpno(); }, [] );
+  useEffect( () => { onLastRpno(); }, [ reports ] );
 
   // 보고서 등록 함수
   const onPost = async ( props ) => {
@@ -69,8 +69,8 @@ export default function Report_Write(){
       const response = await axios.post( 'http://localhost:8080/api/report', formData );
       if( response.data ){
         onApprovalPost();
-      }else{ alert('등록 실패') }
-    }catch( e ){ console.log( e ); }
+      }else{ alert('등록 실패'); }
+    }catch( e ){ console.log( e ); alert('등록 실패'); }
   } // f end 
 
   const onApprovalPost = async ( props ) => {
@@ -78,36 +78,36 @@ export default function Report_Write(){
     const signData = signCanvas.current.toDataURL();
     console.log("signData:", signData);
   
-    // Base64 데이터를 Blob으로 변환하는 함수
-    const convertBase64ToBlob = (base64Data, mimeType) => {
-      const byteCharacters = atob(base64Data.split(',')[1]);
-      const byteArrays = [];
-  
-      for (let offset = 0; offset < byteCharacters.length; offset++) {
-        const byte = byteCharacters.charCodeAt(offset);
-        byteArrays.push(byte);
+    // dataURL을 file로 변환
+    const convertDataUrlToFile = (dataURL, filename) => {
+      const arr = dataURL.split(",");
+      const mimeType = arr[0].match(/:(.*?);/)[1];
+      const byteString = atob(arr[1]);
+      const byteArray = new Uint8Array(byteString.length);
+    
+      for (let i = 0; i < byteString.length; i++) {
+        byteArray[i] = byteString.charCodeAt(i);
       }
-  
-      return new Blob([new Uint8Array(byteArrays)], { type: mimeType });
+    
+      return new File([byteArray], filename, { type: mimeType });
     };
-  
-    // Blob으로 변환
-    const blob = convertBase64ToBlob(signData, 'image/png');  // MIME 타입에 맞게 설정
-  
+
+    const file = convertDataUrlToFile( signData, 'signature.png' );
+
     // FormData 객체 생성
     const signFormData = new FormData();
-    signFormData.append( 'signature', blob, 'signature.png' );  // 'signature.png'는 파일 이름
-    signFormData.append( 'aplist', approval );
+    signFormData.append( 'uploadFile', file );
+    signFormData.append( 'jsonaplist', JSON.stringify(approval) );
     try{
-      const option = { header: { "Content-Type" : "multipart/form-data" } }
-      const response = await axios.post( 'http://localhost:8080/api/approval', signFormData, option );
+      console.log( signFormData );
+      const response = await axios.post( 'http://localhost:8080/api/approval', signFormData );
       if( response.data ){
         alert('등록 성공');
-        signCanvas.current.clear();
+        navigate('/report/view');
         setFormData( { rpname: '일일 업무 보고서', rpam: '', rppm: '', rpamnote: '', rppmnote: '',
           rpunprocessed: '', rpsignificant: '', rpexpected: '' } );
-      }else{ alert('등록 실패') }
-    }catch( e ){ console.log( e ); }
+      }else{ alert('등록 실패'); }
+    }catch( e ){ console.log( e ); alert('등록 실패'); }
   } // f end
 
   useEffect(() => {
@@ -135,7 +135,6 @@ export default function Report_Write(){
       )
     );
   };
-
 
   // 모든 직급의 멤버를 한 번에 로드
   useEffect(() => {

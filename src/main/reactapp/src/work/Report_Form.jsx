@@ -56,7 +56,7 @@ export default function Report_Form(
                     {
                       rank.apsignature ? 
                       <img 
-                      src={`http://localhost:8080/file/${rank.apsignature}.jpg`}
+                      src={`http://localhost:8080/file/${rank.apsignature}`}
                       style={{ width: '95%', padding: 5 }} 
                       alt="서명 이미지" /> : null
                     }
