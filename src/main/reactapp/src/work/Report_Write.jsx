@@ -100,7 +100,7 @@ export default function Report_Write(){
     signFormData.append( 'jsonaplist', JSON.stringify(approval) );
     try{
       console.log( signFormData );
-      const response = await axios.post( 'http://localhost:8080/api/approval', signFormData );
+      const response = await axios.post( 'http://localhost:8080/api/approval', signFormData , { withCredentials : true } );
       if( response.data ){
         alert('등록 성공');
         navigate('/report/view');
@@ -162,7 +162,7 @@ export default function Report_Write(){
 
   return(<>
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
-        <Grid container spacing={0} sx={{ height: '100%' }}> 
+        <Grid container spacing={0} sx={{ height: '100%' }} > 
           <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>
             <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px' }} >
               <Report_Form 
