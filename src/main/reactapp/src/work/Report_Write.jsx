@@ -99,7 +99,6 @@ export default function Report_Write(){
     signFormData.append( 'uploadFile', file );
     signFormData.append( 'jsonaplist', JSON.stringify(approval) );
     try{
-      console.log( signFormData );
       const response = await axios.post( 'http://localhost:8080/api/approval', signFormData , { withCredentials : true } );
       if( response.data ){
         alert('등록 성공');
