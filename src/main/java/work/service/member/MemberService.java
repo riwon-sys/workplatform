@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import work.model.dto.member.MemberDto;
+import work.model.dto.member.MemberUtils;
 import work.model.mapper.member.MemberMapper;
 import work.service.message.FileService;
 
@@ -45,6 +46,10 @@ public class MemberService {
         System.out.println("memberDto = " + memberDto);
         // return false;
         MemberDto result = memberMapper.onLogIn(memberDto);
+
+        String part = MemberUtils.getDepartmentFromMno( result.getMno() );
+        result.setDepartment( part );
+
         System.out.println(result);
         return result;
 
@@ -59,7 +64,14 @@ public class MemberService {
     public List<MemberDto> getAllMembers(String mrank, Integer mno){
         System.out.println("MemberService.getAllMembers");
         System.out.println("mrank = " + mrank + ", mno = " + mno);
-        return memberMapper.getAllMembers(mrank, mno);
+
+        List<MemberDto> result = memberMapper.getAllMembers(mrank, mno);
+        for( MemberDto memberDto : result ){
+            String part = MemberUtils.getDepartmentFromMno( memberDto.getMno() );
+            memberDto.setDepartment( part );
+        } // f end
+
+        return result;
     }
 
 

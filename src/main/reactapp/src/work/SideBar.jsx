@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect , useState } from 'react';   // rw 25-03-21
 import { Link } from "react-router-dom";
 
 /* mui import */
@@ -11,7 +12,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, useMediaQuery } from '@mui/material';
 
 /* mui icon */
 import IconButton from '@mui/material/IconButton';
@@ -23,9 +24,10 @@ import DvrTwoToneIcon from '@mui/icons-material/DvrTwoTone';
 import ApprovalIcon from '@mui/icons-material/Approval';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonIcon from '@mui/icons-material/Person';
+import LoginIcon from '@mui/icons-material/Login';
 
+/* redux */
 import axios from 'axios';                      // rw 25-03-21
-import { useEffect , useState } from 'react';   // rw 25-03-21
 import { useNavigate } from "react-router-dom"; // rw 25-03-21
 
 import { useDispatch , useSelector } from 'react-redux'; // rw 25-03-21
@@ -82,9 +84,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function MiniDrawer() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false); // 로그인 상태 관리
-  const [username, setUsername] = React.useState("");
+  const isMdUp = useMediaQuery(theme.breakpoints.up('xl')); // md 이상 여부 확인
+  const [open, setOpen] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 관리
+  const [username, setUsername] = useState(isMdUp);
 
   React.useEffect(() => {
     // localStorage에서 로그인 상태 불러오기
@@ -94,6 +97,10 @@ export default function MiniDrawer() {
       setUsername(storedUser);
     }
   }, []);
+
+  React.useEffect(() => {
+    setOpen(isMdUp); // 화면 크기가 변경될 때 open 상태 업데이트
+  }, [isMdUp]);
 
   const toggleDrawer = () => {
     setOpen((prevOpen) => !prevOpen);
@@ -105,12 +112,14 @@ export default function MiniDrawer() {
     localStorage.removeItem("username"); // 로그아웃 시 상태 삭제
   };
 
+  // 메인 메뉴 리스트
   const mainMenuItems = [
     { name: "메신저", path: "/chatting", icon: <QuestionAnswerIcon /> },
     { name: "보고서 작성", path: "/report/write", icon: <NoteAddIcon /> },
     { name: "나의 보고서", path: "/report/view", icon: <DescriptionIcon /> },
     { name: "결재 목록", path: "/report/approval", icon: <ApprovalIcon /> },
   ];
+  // 메뉴 리스트
   const menuItems = [
     { name: "게시판", path: "/board", icon: <DvrTwoToneIcon /> },
     { name: "나의 정보", path: "/board", icon: <PersonIcon /> },
@@ -148,30 +157,25 @@ export default function MiniDrawer() {
            dispatch(logout());
           // location.href="/"; // 로케이션 죽음 | rw 25-03-21
       }
-
-
-
-
-
-
+ 
   return (
     <Box sx={{ display: 'flex', height: '100vh' }}>
-      <Drawer variant="permanent" open={open}>
+      <Drawer variant="permanent" open={ open }>
         <DrawerHeader>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start', pr: 3 }}>
             <img
-              src="/logoname_blue.jpg"
+              src="/logoimg/logoname_blue.jpg"
               alt="Logo"
               style={{ width: open ? 140 : 30, height: open ? 40 : 30, transition: "0.3s" }}
             />
           </Box>
           <IconButton onClick={toggleDrawer}>
-            {open ? <ChevronLeftIcon /> : <img src='/logo_blue.jpg' style={{ width: '40px' , marginRight: -5 }} />}
+            {open ? <ChevronLeftIcon /> : <img src='/logoimg/logo_blue_icon.png' style={{ width: '40px' , marginRight: -5 }} />}
           </IconButton>
         </DrawerHeader>
         <Divider />
 
-        {/* 메뉴 리스트 */}
+        {/* 메인 메뉴 리스트 */}
         <List>
           {mainMenuItems.map((item, index) => 
             (
@@ -217,13 +221,17 @@ export default function MiniDrawer() {
         <Box sx={{ flexGrow: 1 }} />
 
         <Divider />
-        <Box sx={{ textAlign: "center", p: 2 }}>
+        <Box sx={{ textAlign: "center", p: open ? 2.05 : 1 }}>
           {isLoggedIn ? (
             <>
               <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                 {username}님
               </Typography>
-              <Button variant="contained" color="error" onClick={handleLogout} sx={{ mt: 1 }}>
+              <Button 
+                variant="contained" 
+                color="error" 
+                onClick={handleLogout} 
+                sx={{ mt: 1 }}>
                 로그아웃
               </Button>
             </>
@@ -248,12 +256,27 @@ export default function MiniDrawer() {
                                    로그아웃
                               </Button>
                 </>) : (<>
-                                  <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }} >
-                                    로그인 &nbsp;해주세요.
-                                  </Typography>
-                                  <Button variant="contained" color="info" >
-                                    <Link to = "/member/login" style={{ color: 'white' }} > 로그인 </Link>
-                                  </Button>
+                                {open ? (<>
+                                    <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }} >
+                                      로그인 &nbsp;해주세요.
+                                    </Typography>
+                                    <Button variant="contained" color="info" >
+                                      <Link to = "/member/login" style={{ color: 'white' }} > 로그인 </Link>
+                                    </Button>
+                                  </>) : (<>
+                                    <ListItemButton 
+                                      component={Link}
+                                      to="/member/login"
+                                      sx={{ 
+                                        minWidth: 70, 
+                                        justifyContent: 'center', 
+                                        ml: -1.5,
+                                        p: 1.8
+                                      }} >
+                                      <LoginIcon color='primary' />
+                                    </ListItemButton>
+                                  </>)
+                                }
                     </>)
             }
             </>

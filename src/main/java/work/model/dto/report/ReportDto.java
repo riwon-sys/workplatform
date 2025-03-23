@@ -2,6 +2,8 @@ package work.model.dto.report;
 
 import lombok.*;
 
+import java.sql.Timestamp;
+
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor
 public class ReportDto {
@@ -15,8 +17,13 @@ public class ReportDto {
     private String rpsignificant;
     private String rpexpected;
     private String rpdate;
+
     private int mno;
     private String mname;
     private String mdepartment;
     private String mrank;
+
+    private int apno;
+    private int apstate;
+
 }

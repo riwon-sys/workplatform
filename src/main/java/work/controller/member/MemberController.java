@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import work.model.dto.member.MemberDto;
+import work.model.dto.member.MemberUtils;
 import work.service.member.MemberService;
 
 import java.util.List;
@@ -83,7 +84,7 @@ public class MemberController {
     // 쿼리스트링 넣고 호출시 : SELECT * FROM member WHERE mrank = #{mrank} and mno = '#{mno}/100000%'
     @GetMapping("/allmembers")
     public List<MemberDto> getAllMembers(@RequestParam(required = false) String mrank,
-                                         @RequestParam(required = false) Integer mno){
+                                         HttpServletRequest req){
 
        /*
        [
@@ -93,9 +94,18 @@ public class MemberController {
         ]
        */
 
+        // loginMno 가져오기
+        if( MemberUtils.getLoginInfo(req) == null  ){
+            System.out.println("로그인 정보가 없음");
+            return null;
+        } // if end
+
+        MemberDto memberDto = MemberUtils.getLoginInfo(req);
+        int loginMno = memberDto.getMno();
+
         System.out.println("MemberController.getAllMembers");
-        System.out.println("mrank = " + mrank + ", mno = " + mno);
-        return memberService.getAllMembers(mrank, mno);
+        System.out.println("mrank = " + mrank + ", loginMno = " + loginMno);
+        return memberService.getAllMembers(mrank, loginMno);
     }
 
     // [5] 사원 수정  // http://localhost:8080/workplatform/update

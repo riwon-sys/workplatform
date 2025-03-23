@@ -409,16 +409,20 @@ create table approval(
 
 -- 결재 샘플 추가
 INSERT INTO approval( apdate, apstate, apsignature, mno, rpno ) VALUES
-( '2025-02-01 23:30:11', 1, '서명1', 100007, 6 ),
-( '2025-02-02 11:15:11', 1, '서명2', 100004, 6 ),
-( null, 0, null, 100002, 6 ),
+( '2025-02-01 23:30:11', 1, '서명1.jpg', 100007, 6 ),
+( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 6 ),
+( '2025-02-02 11:15:11', 0, null, 100002, 6 ),
 ( null, 0, null, 100001, 6 ),
-( '2025-02-05 23:30:11', 1, '서명5', 200012, 2 ),
+( '2025-02-05 23:30:11', 1, '서명5.jpg', 200012, 2 ),
 ( null , 0, '서명6', 200010, 2 ),
-( '2025-02-01 23:30:11', 1, '서명1', 100007, 20 ),
-( '2025-02-02 11:15:11', 1, '서명2', 100004, 20 ),
-( null, 0, null, 100002, 20 ),
-( null, 0, null, 100001, 20 );
+( '2025-02-01 23:30:11', 1, '서명1.jpg', 100007, 20 ),
+( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 20 ),
+( '2025-02-02 11:15:11', 0, null, 100002, 20 ),
+( null, 0, null, 100001, 20 ),
+( '2025-02-01 23:30:11', 1, '서명1.jpg', 100007, 21 ),
+( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 21 ),
+( '2025-02-02 11:15:11', 0, null, 100003, 21 ),
+( null, 0, null, 100001, 21 );
 
 select * from report;
 select rp.*, m.mname, m.mrank from report rp inner join member m on rp.mno = m.mno where rp.mno = 100004 && rpstate = true;
@@ -440,3 +444,11 @@ select * from board;
 
 select rpno from report order by rpno desc limit 1;
 SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'workplatform' AND TABLE_NAME = 'report';
+
+SELECT m.mno, m.mname, m.mrank, ap.apno, rp.* 
+FROM approval ap 
+INNER JOIN member m ON ap.mno = m.mno 
+INNER JOIN report rp ON ap.rpno = rp.rpno 
+WHERE m.mno = 100007 and
+apstate = true and apdate is not null
+ORDER BY rp.rpno DESC;

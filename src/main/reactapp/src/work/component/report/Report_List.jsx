@@ -1,7 +1,9 @@
-import Table from '@mui/joy/Table';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+
+/* mui import */
+import Table from '@mui/joy/Table';
 
 export default function Report_List( { rpno, reports, page, setReports, setPage, setTotalPages } ) {
   
@@ -11,7 +13,7 @@ export default function Report_List( { rpno, reports, page, setReports, setPage,
 
   const onFindByMno = async ( page ) => {
     try{
-      const response = await axios.get( `http://localhost:8080/api/report?page=${page}&pageSize=10` )
+      const response = await axios.get( `http://localhost:8080/api/report?page=${page}&pageSize=10`, { withCredentials : true } )
       setReports( response.data.list );
       setPage( response.data.pageNum );
       setTotalPages( response.data.pages );
@@ -25,8 +27,9 @@ export default function Report_List( { rpno, reports, page, setReports, setPage,
     <div style={{ height: '640px' }} >
       <Table 
         hoverRow 
+        // variant='outlined'
         sx={{ 
-          '& th' : { textAlign: 'center' }, 
+          '& th' : { textAlign: 'center', backgroundColor: '#e5edf7' }, 
           '& td' : { height: '60px' }
         }} 
       >
@@ -43,10 +46,12 @@ export default function Report_List( { rpno, reports, page, setReports, setPage,
           reports.length > 0 ?
             reports.map( ( row )  => (
               <tr key = { row.rpno } onClick={ () => onView( row.rpno ) } 
-                style={{ backgroundColor: rpno.rpno == row.rpno ? '#eeeeee'  : 'white' }}>
+                style={{ backgroundColor: rpno == row.rpno ? '#eeeeee'  : '' }}>
                 <td> { row.rpno } </td>
                 <td style={{ textAlign: 'left' }} > { row.rpname } </td>
-                <td> { row.mname }( { row.mdepartment } ) </td>
+                <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }} > 
+                  { row.mname } <div> ( { row.mdepartment } ) </div>  
+                </td>
                 <td> { row.rpdate } </td>
               </tr>
             )) :

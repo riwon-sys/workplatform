@@ -1,3 +1,5 @@
+
+/* jsx import */
 import BasicSelect from './BasicSelect';
 import CustomTextarea from './CustomTextarea';
 
@@ -13,7 +15,7 @@ export default function Report_Form(
   let day = year+''+month+''+date;
 
   return(<>
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px'   }} >
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }} >
       <div style={{ margin: '0 auto', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} >
         <h1 style={{ marginRight: 10 }} > 일일 업무 </h1>
         <h1> 보고서 </h1>
@@ -41,7 +43,7 @@ export default function Report_Form(
                 }) :
                 approval.map( (rank) => {
                   return(
-                    <th key={ rank.mname } width="100px">
+                    <th key={ rank.mname } width="100px" height="30px" >
                       { rank.mname }( { rank.mrank } )
                     </th>
                   )
@@ -75,7 +77,11 @@ export default function Report_Form(
         <tbody>
           <tr>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성일자 </th>
-            <td style={{ width: '30%' }} > {year}년 {month}월 {date}일 ({week}) </td>
+            <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', height: '100%', border: 'none' }} > 
+              <div> {year}년 {month}월 {date}일 </div>
+              <div> ({week}) </div>  
+            </td>
+            {/* <td style={{ width: '30%' }} > {year}년 {month}월 {date}일 ({week}) </td> */}
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성자 </th>
             <td style={{ width: '30%' }} > { formData.mname } </td>
           </tr>
