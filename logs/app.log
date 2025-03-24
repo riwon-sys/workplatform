@@ -1,273 +1,35 @@
-2025-03-24 08:45:14 - Starting AppStart using Java 17.0.12 with PID 33860 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
-2025-03-24 08:45:14 - No active profile set, falling back to 1 default profile: "default"
-2025-03-24 08:45:15 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-24 08:45:15 - Finished Spring Data repository scanning in 22 ms. Found 0 JPA repository interfaces.
-2025-03-24 08:45:16 - Tomcat initialized with port 8080 (http)
-2025-03-24 08:45:16 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-24 08:45:16 - Starting service [Tomcat]
-2025-03-24 08:45:16 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-24 08:45:16 - Initializing Spring embedded WebApplicationContext
-2025-03-24 08:45:16 - Root WebApplicationContext: initialization completed in 2174 ms
-2025-03-24 08:45:16 - HikariPool-1 - Starting...
-2025-03-24 08:45:16 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@285a4fe3
-2025-03-24 08:45:16 - HikariPool-1 - Start completed.
-2025-03-24 08:45:16 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-24 08:45:17 - HHH000412: Hibernate ORM core version 6.6.5.Final
-2025-03-24 08:45:17 - HHH000026: Second-level cache disabled
-2025-03-24 08:45:17 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-24 08:45:17 - HHH10001005: Database info:
+2025-03-24 15:43:14 - Starting AppStart using Java 17.0.12 with PID 7540 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
+2025-03-24 15:43:14 - No active profile set, falling back to 1 default profile: "default"
+2025-03-24 15:43:16 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-03-24 15:43:16 - Finished Spring Data repository scanning in 38 ms. Found 0 JPA repository interfaces.
+2025-03-24 15:43:18 - Tomcat initialized with port 8080 (http)
+2025-03-24 15:43:18 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-24 15:43:18 - Starting service [Tomcat]
+2025-03-24 15:43:18 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-24 15:43:18 - Initializing Spring embedded WebApplicationContext
+2025-03-24 15:43:18 - Root WebApplicationContext: initialization completed in 3413 ms
+2025-03-24 15:43:18 - HikariPool-1 - Starting...
+2025-03-24 15:43:19 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2589d787
+2025-03-24 15:43:19 - HikariPool-1 - Start completed.
+2025-03-24 15:43:19 - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-03-24 15:43:19 - HHH000412: Hibernate ORM core version 6.6.5.Final
+2025-03-24 15:43:19 - HHH000026: Second-level cache disabled
+2025-03-24 15:43:20 - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-03-24 15:43:21 - HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
-	Database version: 8.0.41
+	Database version: 8.0.40
 	Autocommit mode: undefined/unknown
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2025-03-24 08:45:18 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-24 08:45:18 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-24 08:45:18 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-24 08:45:18 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-24 08:45:19 - Started AppStart in 5.446 seconds (process running for 6.05)
-2025-03-24 09:18:33 - Starting AppStart using Java 17.0.12 with PID 52936 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
-2025-03-24 09:18:33 - No active profile set, falling back to 1 default profile: "default"
-2025-03-24 09:18:34 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-24 09:18:34 - Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
-2025-03-24 09:18:34 - Tomcat initialized with port 8080 (http)
-2025-03-24 09:18:34 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:18:34 - Starting service [Tomcat]
-2025-03-24 09:18:34 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-24 09:18:34 - Initializing Spring embedded WebApplicationContext
-2025-03-24 09:18:34 - Root WebApplicationContext: initialization completed in 1368 ms
-2025-03-24 09:18:34 - HikariPool-1 - Starting...
-2025-03-24 09:18:35 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@11f23038
-2025-03-24 09:18:35 - HikariPool-1 - Start completed.
-2025-03-24 09:18:35 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-24 09:18:35 - HHH000412: Hibernate ORM core version 6.6.5.Final
-2025-03-24 09:18:35 - HHH000026: Second-level cache disabled
-2025-03-24 09:18:36 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-24 09:18:36 - HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 8.0.41
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-03-24 09:18:37 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-24 09:18:37 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-24 09:18:38 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:18:38 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-24 09:18:38 - Started AppStart in 5.478 seconds (process running for 6.069)
-2025-03-24 09:18:38 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-24 09:18:38 - Initializing Servlet 'dispatcherServlet'
-2025-03-24 09:18:38 - Completed initialization in 1 ms
-2025-03-24 09:18:38 -  log info 
-2025-03-24 09:18:38 -  log info 
-2025-03-24 09:18:45 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:24:07 - Starting AppStart using Java 17.0.12 with PID 62888 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
-2025-03-24 09:24:07 - No active profile set, falling back to 1 default profile: "default"
-2025-03-24 09:24:07 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-24 09:24:07 - Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
-2025-03-24 09:24:08 - Tomcat initialized with port 8080 (http)
-2025-03-24 09:24:08 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:24:08 - Starting service [Tomcat]
-2025-03-24 09:24:08 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-24 09:24:09 - Initializing Spring embedded WebApplicationContext
-2025-03-24 09:24:09 - Root WebApplicationContext: initialization completed in 1837 ms
-2025-03-24 09:24:09 - HikariPool-1 - Starting...
-2025-03-24 09:24:09 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6a567f7b
-2025-03-24 09:24:09 - HikariPool-1 - Start completed.
-2025-03-24 09:24:09 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-24 09:24:10 - HHH000412: Hibernate ORM core version 6.6.5.Final
-2025-03-24 09:24:10 - HHH000026: Second-level cache disabled
-2025-03-24 09:24:10 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-24 09:24:11 - HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 8.0.41
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-03-24 09:24:11 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-24 09:24:11 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-24 09:24:12 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:24:12 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-24 09:24:12 - Started AppStart in 5.736 seconds (process running for 6.273)
-2025-03-24 09:24:12 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-24 09:24:12 - Initializing Servlet 'dispatcherServlet'
-2025-03-24 09:24:12 - Completed initialization in 1 ms
-2025-03-24 09:24:12 -  log info 
-2025-03-24 09:24:12 -  log info 
-2025-03-24 09:24:15 -  log info 
-2025-03-24 09:24:15 -  log info 
-2025-03-24 09:24:21 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=2313, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:24:23 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=3333, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:24:25 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:25:03 - Starting AppStart using Java 17.0.12 with PID 33580 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
-2025-03-24 09:25:03 - No active profile set, falling back to 1 default profile: "default"
-2025-03-24 09:25:03 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-24 09:25:03 - Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
-2025-03-24 09:25:04 - Tomcat initialized with port 8080 (http)
-2025-03-24 09:25:04 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:25:04 - Starting service [Tomcat]
-2025-03-24 09:25:04 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-24 09:25:04 - Initializing Spring embedded WebApplicationContext
-2025-03-24 09:25:04 - Root WebApplicationContext: initialization completed in 1334 ms
-2025-03-24 09:25:04 - HikariPool-1 - Starting...
-2025-03-24 09:25:05 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ce25e47
-2025-03-24 09:25:05 - HikariPool-1 - Start completed.
-2025-03-24 09:25:05 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-24 09:25:05 - HHH000412: Hibernate ORM core version 6.6.5.Final
-2025-03-24 09:25:05 - HHH000026: Second-level cache disabled
-2025-03-24 09:25:06 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-24 09:25:06 - HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 8.0.41
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-03-24 09:25:06 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-24 09:25:06 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-24 09:25:07 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:25:07 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-24 09:25:07 - Started AppStart in 4.939 seconds (process running for 5.474)
-2025-03-24 09:25:10 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-24 09:25:10 - Initializing Servlet 'dispatcherServlet'
-2025-03-24 09:25:10 - Completed initialization in 2 ms
-2025-03-24 09:25:10 -  log info 
-2025-03-24 09:25:10 -  log info 
-2025-03-24 09:25:17 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=121, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:25:19 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=333, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:25:22 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=4444, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:25:32 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=1212, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:25:38 - 일반메세지 : ChattingDto(mstype=0, rno=16, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㄹㄹㄴㅇ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:25:41 - 파일메세지 : ChattingDto(mstype=1, rno=16, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=16a118ba-31c8-4493-80d3-66604afdf69f_11.gif, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:26:35 - Starting AppStart using Java 17.0.12 with PID 42496 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
-2025-03-24 09:26:35 - No active profile set, falling back to 1 default profile: "default"
-2025-03-24 09:26:35 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-24 09:26:35 - Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
-2025-03-24 09:26:36 - Tomcat initialized with port 8080 (http)
-2025-03-24 09:26:36 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:26:36 - Starting service [Tomcat]
-2025-03-24 09:26:36 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-24 09:26:37 - Initializing Spring embedded WebApplicationContext
-2025-03-24 09:26:37 - Root WebApplicationContext: initialization completed in 1797 ms
-2025-03-24 09:26:37 - HikariPool-1 - Starting...
-2025-03-24 09:26:37 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1788cb61
-2025-03-24 09:26:37 - HikariPool-1 - Start completed.
-2025-03-24 09:26:37 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-24 09:26:37 - HHH000412: Hibernate ORM core version 6.6.5.Final
-2025-03-24 09:26:37 - HHH000026: Second-level cache disabled
-2025-03-24 09:26:38 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-24 09:26:38 - HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 8.0.41
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-03-24 09:26:38 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-24 09:26:38 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-24 09:26:40 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:26:40 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-24 09:26:40 - Started AppStart in 5.703 seconds (process running for 6.292)
-2025-03-24 09:26:41 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-24 09:26:41 - Initializing Servlet 'dispatcherServlet'
-2025-03-24 09:26:41 - Completed initialization in 2 ms
-2025-03-24 09:26:41 -  log info 
-2025-03-24 09:26:41 -  log info 
-2025-03-24 09:26:48 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=111, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:26:50 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=333, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:27:16 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:27:45 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:27:53 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=12313123, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:28:01 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:29:55 -  log info 
-2025-03-24 09:29:55 -  log info 
-2025-03-24 09:30:04 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:30:06 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:30:10 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=1234564, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:30:34 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=1, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:30:35 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=2, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:30:36 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=3, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:30:44 -  log info 
-2025-03-24 09:30:44 -  log info 
-2025-03-24 09:30:46 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:30:49 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=123123, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:30:54 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:34:50 - Starting AppStart using Java 17.0.12 with PID 7740 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
-2025-03-24 09:34:50 - No active profile set, falling back to 1 default profile: "default"
-2025-03-24 09:34:50 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-24 09:34:50 - Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
-2025-03-24 09:34:51 - Tomcat initialized with port 8080 (http)
-2025-03-24 09:34:51 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:34:51 - Starting service [Tomcat]
-2025-03-24 09:34:51 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-24 09:34:51 - Initializing Spring embedded WebApplicationContext
-2025-03-24 09:34:51 - Root WebApplicationContext: initialization completed in 1374 ms
-2025-03-24 09:34:51 - HikariPool-1 - Starting...
-2025-03-24 09:34:52 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4ce25e47
-2025-03-24 09:34:52 - HikariPool-1 - Start completed.
-2025-03-24 09:34:52 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-24 09:34:52 - HHH000412: Hibernate ORM core version 6.6.5.Final
-2025-03-24 09:34:52 - HHH000026: Second-level cache disabled
-2025-03-24 09:34:52 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-24 09:34:52 - HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 8.0.41
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-03-24 09:34:53 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-24 09:34:53 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-24 09:34:53 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:34:53 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-24 09:34:53 - Started AppStart in 3.889 seconds (process running for 4.417)
-2025-03-24 09:36:52 - Starting AppStart using Java 17.0.12 with PID 46056 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
-2025-03-24 09:36:52 - No active profile set, falling back to 1 default profile: "default"
-2025-03-24 09:36:53 - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-03-24 09:36:53 - Finished Spring Data repository scanning in 16 ms. Found 0 JPA repository interfaces.
-2025-03-24 09:36:54 - Tomcat initialized with port 8080 (http)
-2025-03-24 09:36:54 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:36:54 - Starting service [Tomcat]
-2025-03-24 09:36:54 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-24 09:36:54 - Initializing Spring embedded WebApplicationContext
-2025-03-24 09:36:54 - Root WebApplicationContext: initialization completed in 1479 ms
-2025-03-24 09:36:54 - HikariPool-1 - Starting...
-2025-03-24 09:36:54 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@16d431b4
-2025-03-24 09:36:54 - HikariPool-1 - Start completed.
-2025-03-24 09:36:54 - HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-03-24 09:36:55 - HHH000412: Hibernate ORM core version 6.6.5.Final
-2025-03-24 09:36:55 - HHH000026: Second-level cache disabled
-2025-03-24 09:36:55 - No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-03-24 09:36:55 - HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 8.0.41
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-03-24 09:36:55 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-03-24 09:36:55 - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-03-24 09:36:56 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-24 09:36:56 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-24 09:36:56 - Started AppStart in 4.15 seconds (process running for 4.712)
-2025-03-24 09:36:59 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-24 09:36:59 - Initializing Servlet 'dispatcherServlet'
-2025-03-24 09:36:59 - Completed initialization in 2 ms
-2025-03-24 09:36:59 -  log info 
-2025-03-24 09:36:59 -  log info 
-2025-03-24 09:37:02 -  log info 
-2025-03-24 09:37:02 -  log info 
-2025-03-24 09:37:05 -  log info 
-2025-03-24 09:37:05 -  log info 
-2025-03-24 09:37:12 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅋㅋㅋ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:37:14 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅎㅎ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-24 09:37:17 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=test, mscontent=null, mno=100001, msg=ㅎㅁㅎㅁ, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-24 15:43:22 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-03-24 15:43:22 - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-03-24 15:43:24 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-24 15:43:24 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-24 15:43:24 - Started AppStart in 10.96 seconds (process running for 12.033)
+2025-03-24 15:47:06 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-24 15:47:06 - Initializing Servlet 'dispatcherServlet'
+2025-03-24 15:47:06 - Completed initialization in 2 ms
+2025-03-24 15:47:07 -  log info 
+2025-03-24 15:47:07 -  log info 
