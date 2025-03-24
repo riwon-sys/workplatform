@@ -55,6 +55,7 @@ public class MemberService {
         // return false;
         // MemberDto result = memberMapper.onLogIn(memberDto);
 
+
         // (1) 암호화된 진짜 비밀번호는 DB존재
         // (2) 로그인에서 입력받은 아이디의 암호화 비밀번호 갖고오기
         String password = memberMapper.findPassword (memberDto.getMno() );
@@ -81,7 +82,14 @@ public class MemberService {
     public List<MemberDto> getAllMembers(String mrank, Integer mno){
         System.out.println("MemberService.getAllMembers");
         System.out.println("mrank = " + mrank + ", mno = " + mno);
-        return memberMapper.getAllMembers(mrank, mno);
+
+        List<MemberDto> result = memberMapper.getAllMembers(mrank, mno);
+        for( MemberDto memberDto : result ){
+            String part = MemberUtils.getDepartmentFromMno( memberDto.getMno() );
+            memberDto.setDepartment( part );
+        } // f end
+
+        return result;
     }
 
 
