@@ -10,10 +10,12 @@ export default function Report_Approval_List( { rpno, reports, page, setReports,
 
   useEffect( () => { onFindByMno( page, selectValue ); }, [ page, selectValue ] );
 
+  console.log( reports );
+
   const onFindByMno = async ( page, selectValue ) => {
     try{
       // select로 선택된 apstate 상태 부여
-      let apstateSQL = null;
+      let apstateSQL = '';
       if( selectValue != 2 ){ apstateSQL = `apstate=${selectValue}&`; }  
       const response = await axios.get( `http://localhost:8080/api/approval/list?${apstateSQL}page=${page}&pageSize=10`, { withCredentials : true } )
       setReports( response.data.list );

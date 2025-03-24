@@ -38,7 +38,7 @@ public interface ApprovalMapper {
 
         public static String buildGetList( final int loginMno, final Integer apstate ){
             return new SQL(){{
-                SELECT("m.mno, m.mname, m.mrank, ap.apno, rp.*");
+                SELECT("m.mno, m.mname, m.mrank, ap.*, rp.*");
                 FROM("approval ap");
                 INNER_JOIN("member m ON ap.mno = m.mno");
                 INNER_JOIN("report rp ON ap.rpno = rp.rpno");

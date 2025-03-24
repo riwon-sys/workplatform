@@ -24,6 +24,6 @@ public class ReportDto {
     private String mrank;
 
     private int apno;
-    private int apstate;
+    private boolean apstate;
 
 }
