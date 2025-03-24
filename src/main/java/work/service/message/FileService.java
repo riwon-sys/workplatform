@@ -25,6 +25,7 @@ public class FileService {
         // 실제 업로드할 디렉토리 설정
         String uuid = UUID.randomUUID().toString();
         String fileName = uuid + "_" + multipartFile.getOriginalFilename();
+        System.out.println( fileName );
         String filePath = uploadPath + fileName;
 
         File directory = new File(uploadPath);

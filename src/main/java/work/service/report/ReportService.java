@@ -24,13 +24,13 @@ public class ReportService {
     } // f end
 
     // 2. 회원별 보고서 조회( 페이징 적용 )
-    public PageInfo<ReportDto> findByMno(int mno, int page, int pageSize){
+    public PageInfo<ReportDto> findByMno(int loginMno, int page, int pageSize){
         System.out.println("ReportService.findByMno with paging");
-        System.out.println("mno = " + mno + ", page = " + page + ", pageSize = " + pageSize);
+        System.out.println("loginMno = " + loginMno + ", page = " + page + ", pageSize = " + pageSize);
 
         // PageHelper로 페이징 처리 적용
-        PageHelper.startPage(page, pageSize);
-        List<ReportDto> pagingResult = reportMapper.findByMno(mno);
+        PageHelper.startPage( page, pageSize );
+        List<ReportDto> pagingResult = reportMapper.findByMno( loginMno );
 
         // 부서명 설정 로직 적용
         for (ReportDto report : pagingResult) {
@@ -67,8 +67,7 @@ public class ReportService {
         return reportMapper.delete(rpno);
     } // f end
 
-    // 6. 보고서 번호
-
+    // 6. 마지막 보고서 번호 조회
     public int lastRpno(){
         System.out.println("ReportController.findAll");
         return reportMapper.lastRpno();
