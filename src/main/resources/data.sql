@@ -57,12 +57,12 @@ INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd ) VALUES
 (700054,  '김태호', '010-8888-9999', 'financeteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
 (700055,  '한웅재', '010-9999-0000', 'financeteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG');
 -- 외부출장자
-INSERT INTO member (mno, mname, mphone, memail, mtype, mrank) VALUES
-(300020,  '김리원', '010-4333-4333', 'salesteam_dari@example.com', 2, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
+INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd) VALUES
+(300020,  '김리원', '010-4444-5678', 'salesteam_dari@example.com', 2, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
 (300022,  '서진석', '010-6555-6555', 'salesteam_sawon@example.com', 2, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
 (600044,  '이산', '010-8777-9999', 'designteam_dari@example.com', 2, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG');
 -- 퇴사자
-INSERT INTO member (mno, mname, mphone, memail, mtype, mrank) VALUES
+INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd) VALUES
 (100005,  '유나영', '010-5678-9012', 'insateam_dari@example.com', 3, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
 (300019,  '차정원', '010-3222-3222', 'salesteam_team@example.com', 3, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
 (300023,  '김현수', '010-7666-7666', 'salesteam_sawon@example.com', 3, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
