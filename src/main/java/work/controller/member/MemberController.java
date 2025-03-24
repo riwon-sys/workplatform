@@ -16,26 +16,26 @@ import java.util.List;
 @RequestMapping("/workplatform")
 public class MemberController {
 
-  private final  MemberService memberService; // service 메소드를 사용하기 위한 객체 주입
+    private final  MemberService memberService; // service 메소드를 사용하기 위한 객체 주입
     // [1] 사원 등록 // http://localhost:8080/workplatform/signup
     @PostMapping("/signup")
-        // public boolean signUp(@RequestBody MemberDto memberDto){
-        // {"mno":"700055","mname": "한웅재", "mphone": "010-1234-5678", "memail": "financeteam_sawon@example.com", "mrank": "사원" }
-        public boolean signUp(MemberDto memberDto){ // multipart/form-data 사용; @RequestBody 생략
+    // public boolean signUp(@RequestBody MemberDto memberDto){
+    // {"mno":"700055","mname": "한웅재", "mphone": "010-1234-5678", "memail": "financeteam_sawon@example.com", "mrank": "사원" }
+    public boolean signUp(MemberDto memberDto){ // multipart/form-data 사용; @RequestBody 생략
         System.out.println("MemberController.signUp");
         System.out.println("memberDto = " + memberDto);
-        
+
         // return memberService.signUp(memberDto);  //    return true; // 성공시 true, 실패시 false
         boolean result = memberService.signUp(memberDto);
         System.out.println("result = " + result);
         return result; // 성공시 true, 실패시 false
-        
-        }
+
+    }
 
     // [2] 사원 로그인 // http://localhost:8080/workplatform/login
     // 로그인 세션 처리 기능 추가
     @PostMapping("/login")
-        public boolean onLogIn(@RequestBody MemberDto memberDto , HttpServletRequest req){
+    public boolean onLogIn(@RequestBody MemberDto memberDto , HttpServletRequest req){
         // {"mno": "700055", "mpwd": "1234"}
 
         System.out.println("MemberController.onLogIn");
@@ -54,12 +54,12 @@ public class MemberController {
     // 로그아웃 세션 처리 삭제 기능 추가
     // @DeleteMapping("/logout")
 
-   /* public void offLogOut() {
-        // {x}
-        memberService.offLogOut();
-        System.out.println("MemberController.offLogOut: 로그아웃 요청 완료");
-    }
-   */
+    /* public void offLogOut() {
+         // {x}
+         memberService.offLogOut();
+         System.out.println("MemberController.offLogOut: 로그아웃 요청 완료");
+     }
+    */
     @GetMapping("/logout")
     public boolean offLogOut(HttpServletRequest request){
         HttpSession session = request.getSession(); // 1. 세션 호출
@@ -120,3 +120,6 @@ public class MemberController {
 
 
 }
+
+
+
