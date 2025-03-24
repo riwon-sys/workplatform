@@ -25,10 +25,12 @@ drop table if exists board;
 DROP TABLE IF EXISTS member;
 
 
+
+
 -- 직원 테이블 생성
 CREATE TABLE member (
     mno INT UNSIGNED,
-    mpwd VARCHAR(60) DEFAULT '1234', -- 암호화 적용 시 평문 대비 길이 증가로 변경 (기존30 > 변경60) | rw 25-03-21
+    mpwd VARCHAR(255) DEFAULT '1234', -- 암호화 적용 시 평문 대비 길이 증가로 변경 (기존30 > 변경60) | rw 25-03-21
     mname VARCHAR(30),
     mphone VARCHAR(13) NOT NULL UNIQUE,
     memail VARCHAR(100),
@@ -136,7 +138,7 @@ create table approval(
 	apno int unsigned auto_increment,
     apdate datetime default null,
     apstate bool default false,
-    apsignature varchar(50) default null,
+    apsignature varchar(255) default null,
     mno int unsigned,			-- 승인할 회원번호
     rpno int unsigned,
     constraint primary key( apno ),

@@ -1,8 +1,10 @@
 package work.controller.report;
 
 import com.github.pagehelper.PageInfo;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import work.model.dto.member.MemberDto;
 import work.model.dto.member.MemberUtils;
 import work.model.dto.report.ReportDto;
 import work.service.report.ReportService;
@@ -18,24 +20,43 @@ public class ReportController {
 
     // 1. 보고서 등록
     @PostMapping
-    public boolean write(@RequestBody ReportDto reportDto){
+    public boolean write(@RequestBody ReportDto reportDto,
+                         HttpServletRequest req){
         System.out.println("ReportController.write");
-        // 세션 대용
-        int mno = 100007;
-        reportDto.setMno(mno);
+
+        // loginMno 가져오기
+        if( MemberUtils.getLoginInfo(req) == null  ){
+            System.out.println("로그인 정보가 없음");
+            return false;
+        } // if end
+
+        MemberDto memberDto = MemberUtils.getLoginInfo(req);
+        int loginMno = memberDto.getMno();
+
+        reportDto.setMno(loginMno);
         System.out.println("reportDto = " + reportDto);
         return reportService.write(reportDto);
     } // f end
 
     // 2. 회원별 보고서 조회( 페이징 처리 추가 )
     @GetMapping
-    public PageInfo<ReportDto> findByMno( @RequestParam(defaultValue = "3") int page,
-                                          @RequestParam(defaultValue = "10") int pageSize){
-        int mno = 100007;
+    public PageInfo<ReportDto> findByMno( @RequestParam(defaultValue = "1") int page,
+                                          @RequestParam(defaultValue = "10") int pageSize,
+                                          HttpServletRequest req ){
+
+        // loginMno 가져오기
+        if( MemberUtils.getLoginInfo(req) == null  ){
+            System.out.println("로그인 정보가 없음");
+            return null;
+        } // if end
+
+        MemberDto memberDto = MemberUtils.getLoginInfo(req);
+        int loginMno = memberDto.getMno();
+
         System.out.println("ReportController.findAll");
         System.out.println("page = " + page + ", pageSize = " + pageSize);
 
-        return reportService.findByMno(mno, page, pageSize);
+        return reportService.findByMno(loginMno, page, pageSize);
     } // f end
 
     // 3. 보고서 상세 조회

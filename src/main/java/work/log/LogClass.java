@@ -15,17 +15,23 @@ public class LogClass {
     public static  void logMsg(ChattingDto chattingDto){
         System.out.println("로그처리");
 
-        switch (chattingDto.getMstype()){
-            case 0 :
-                System.out.println(chattingDto);
-                log.info("일반메세지" + chattingDto);
-                System.out.println("메세지 로그 처리됨");
-                break;
-            case 1 :
-                System.out.println(chattingDto);
-                log.info("파일메세지" + chattingDto);
-                System.out.println("파일 로그 처리됨");
-                break;
+        if(chattingDto.getMstype() == 0 || chattingDto.getMstype() == 1) {
+
+            switch (chattingDto.getMstype()) {
+                case 0:
+                    System.out.println(chattingDto);
+                    log.info("일반메세지 : " + chattingDto);
+                    System.out.println("메세지 로그 처리됨");
+                    break;
+                case 1:
+                    System.out.println(chattingDto);
+                    log.info("파일메세지 : " + chattingDto);
+                    System.out.println("파일 로그 처리됨");
+                    break;
+
+                default:
+                    break;
+            }
         }
 
     }

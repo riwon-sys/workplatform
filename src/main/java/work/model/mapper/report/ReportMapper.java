@@ -36,7 +36,9 @@ public interface ReportMapper {
     boolean delete(int rpno);
 
     // 6. 보고서 번호
-    @Select( "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'workplatform' AND TABLE_NAME = 'report'" )
+    // 한번 insert 되기 전까지 실행안됨
+    // @Select( "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'workplatform' AND TABLE_NAME = 'report'" )
+    @Select( "SELECT rpno FROM report ORDER BY rpno DESC LIMIT 1" )
     int lastRpno();
 
 }

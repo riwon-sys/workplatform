@@ -34,15 +34,15 @@ public class MemberService {
                 memberDto.setMprofile(filename);
             }
             // (4) 비크립트 라이브러리 사용 | rw 25-03-21
-                // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
+            // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                // (4-(2)) 비밀번호 암호화 ( 자료에 encode )
+            // (4-(2)) 비밀번호 암호화 ( 자료에 encode )
             String hashedPassword = passwordEncoder.encode( "1234" );
             System.out.println( "hashedPassword = " + hashedPassword );
-                // (4-(3)) dto 에 encode 된 비밀번호 저장
+            // (4-(3)) dto 에 encode 된 비밀번호 저장
             memberDto.setMpwd( hashedPassword );
 
-        boolean result=memberMapper.signUp(memberDto);
+            boolean result=memberMapper.signUp(memberDto);
             System.out.println("result = " + result);
             return result;
         } catch (Exception e) {
@@ -55,7 +55,6 @@ public class MemberService {
         System.out.println("MemberService.onLogIn");
         System.out.println("memberDto = " + memberDto);
         // return false;
-        // MemberDto result = memberMapper.onLogIn(memberDto);
 
         // (1) 암호화된 진짜 비밀번호는 DB존재
         // (2) 로그인에서 입력받은 아이디의 암호화 비밀번호 갖고오기
@@ -67,11 +66,10 @@ public class MemberService {
         if( result == false ) return null;
 
         // (4) 로그인에서 입력한 아이디와 비밀번호가 모두 일치하면 회원정보 가져오기
-        MemberDto result2 = memberMapper.onLogIn( memberDto );
 
+        MemberDto result2 = memberMapper.onLogIn( memberDto );
         String part = MemberUtils.getDepartmentFromMno( result2.getMno() );
         result2.setDepartment( part );
-
         return result2;
 
     }
@@ -85,7 +83,14 @@ public class MemberService {
     public List<MemberDto> getAllMembers(String mrank, Integer mno){
         System.out.println("MemberService.getAllMembers");
         System.out.println("mrank = " + mrank + ", mno = " + mno);
-        return memberMapper.getAllMembers(mrank, mno);
+
+        List<MemberDto> result = memberMapper.getAllMembers(mrank, mno);
+        for( MemberDto memberDto : result ){
+            String part = MemberUtils.getDepartmentFromMno( memberDto.getMno() );
+            memberDto.setDepartment( part );
+        } // f end
+
+        return result;
     }
 
 

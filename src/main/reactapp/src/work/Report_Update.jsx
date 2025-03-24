@@ -1,23 +1,27 @@
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+
+/* mui */
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
-import Report_List from './Report_List';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { CssVarsProvider } from '@mui/joy/styles';
 
-import Report_Form from './Report_Form';
-import * as React from 'react';
-import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+/* jsx import */
+import Report_List from './component/report/Report_List';
+import Report_Form from './component/report/Report_Form';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
     ...theme.typography.body2,
-    padding: theme.spacing(1),
+    padding: theme.spacing(0),
+    paddingTop: '30px',
     textAlign: 'center',
     color: theme.palette.text.primary,
     height: '100%', // 높이 설정 추가
@@ -90,7 +94,7 @@ export default function Report_Update() {
 
   // 보고서 결재자 찾기
   const onApprovalByRpno = async (  ) => {
-    const response = await axios.get( `http://localhost:8080/api/approval?rpno=${rpno}`);
+    const response = await axios.get( `http://localhost:8080/api/approval?rpno=${rpno}`, { withCredentials : true });
     setApproval( response.data );
   } // f end
 
@@ -103,64 +107,104 @@ export default function Report_Update() {
   console.log(formData)
 
   return (
-      <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <Grid container spacing={0} sx={{ height: '100%' }}> 
-          {/* size: 너비 조정 */}
-          <Grid size={5} pt={2} sx={{ height: '100%' }} minWidth={ '420px' } > 
-            <Item>
-              <h1> 보고서 목록 </h1>
-              <br/>
-                <CssVarsProvider>
-                  <Report_List 
-                    rpno={ rpno } 
-                    reports={ reports } 
-                    page={ page }
-                    setReports={ setReports }
-                    setPage={ setPage }
-                    setTotalPages={ setTotalPages }                  
-                  />
-                </CssVarsProvider>
-
-                <Stack spacing={2} mt={1} >
-                  <Pagination 
-                    color="primary"
-                    page={ page }
-                    count={ totalPages } 
-                    defaultPage={ 1 }
-                    onChange={ handlePageChange }
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                  />
-                </Stack>
-            </Item>
-          </Grid>
-          
-          <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>
-            <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px', padding: 7 }} >
-              { rpno && Number(rpno) > 0 ? 
-              <>
-                <Report_Form 
-                  formData={ formData } 
-                  formDataChange={ formDataChange } 
-                  isReadOnly={ false } 
-                  isUpdate={ true } 
+    <Box 
+      sx={{ 
+        flexGrow: 1, 
+        height: '100vh', 
+        display: 'flex', 
+        flexDirection: 'column' 
+      }}
+    >
+      <Grid
+        container
+        spacing={0}
+        sx={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' }, // md 이상에서만 가로 배치
+        }}
+      >
+        {/* 좌측 리스트 */}
+        <Grid
+          item
+          sx={{
+            flex: 1.2, // 가능한 범위 내에서만 확장
+            minWidth: { xs: '700px', md: '420px' }, // md 이상에서는 최소 420px
+            maxWidth: { xs: '700px', md: '100%' }, // 최대 너비 제한
+            height: '100vh', // 높이 고정
+          }}
+        >
+          <Item>
+            <h1> 보고서 목록 </h1>
+            <br/>
+              <CssVarsProvider>
+                <Report_List 
                   rpno={ rpno } 
-                  approval={ approval } 
+                  reports={ reports } 
+                  page={ page }
+                  setReports={ setReports }
+                  setPage={ setPage }
+                  setTotalPages={ setTotalPages }                  
                 />
- 
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate() } >
-                      수정
-                  </Button>
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onCancle() } >
-                      취소
-                  </Button>
-                </div>
-              </> : 
-              null }
-            </Item>
-          </Grid>
-          
+              </CssVarsProvider>
+
+              <Stack spacing={2} mt={1} >
+                <Pagination 
+                  color="primary"
+                  page={ page }
+                  count={ totalPages } 
+                  defaultPage={ 1 }
+                  onChange={ handlePageChange }
+                  sx={{ display: 'flex', justifyContent: 'center' }}
+                />
+              </Stack>
+          </Item>
         </Grid>
-      </Box>
+        
+        {/* 우측 폼 */}
+        <Grid
+          item
+          sx={{
+            flex: 1.8,
+            minWidth: '700px', // xs(작은 화면)에서는 100% 사용
+            maxWidth: '100%', // 최대 100% 사용
+            width: '100%',
+            height: '100%'
+          }}
+        >
+          <Item 
+            sx={{
+              overflow: 'scroll',
+              overflowX: 'hidden',
+              padding: 10,
+              width: '100%', // 기본적으로 100% 차지
+              minHeight: { sm: '1350px', lg: '100%' }
+            }} 
+          >
+            { rpno && Number(rpno) > 0 ? 
+            <>
+              <Report_Form 
+                formData={ formData } 
+                formDataChange={ formDataChange } 
+                isReadOnly={ false } 
+                isUpdate={ true } 
+                rpno={ rpno } 
+                approval={ approval } 
+              />
+
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
+                <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate() } >
+                    수정
+                </Button>
+                <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onCancle() } >
+                    취소
+                </Button>
+              </div>
+            </> : 
+            null }
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
     );
 }

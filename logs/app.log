@@ -305,3 +305,37 @@ Error starting ApplicationContext. To display the condition evaluation report re
 2025-03-24 17:42:04 - 
 
 Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-03-24 18:15:42 - Starting AppStart using Java 17.0.12 with PID 4676 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
+2025-03-24 18:15:42 - No active profile set, falling back to 1 default profile: "default"
+2025-03-24 18:15:44 - Tomcat initialized with port 8080 (http)
+2025-03-24 18:15:44 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-24 18:15:44 - Starting service [Tomcat]
+2025-03-24 18:15:44 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-24 18:15:44 - Initializing Spring embedded WebApplicationContext
+2025-03-24 18:15:44 - Root WebApplicationContext: initialization completed in 1888 ms
+2025-03-24 18:15:44 - HikariPool-1 - Starting...
+2025-03-24 18:15:45 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61f377d1
+2025-03-24 18:15:45 - HikariPool-1 - Start completed.
+2025-03-24 18:15:46 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-24 18:15:46 - HikariPool-1 - Shutdown initiated...
+2025-03-24 18:15:46 - HikariPool-1 - Shutdown completed.
+2025-03-24 18:15:46 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-03-24 18:15:42 - Starting AppStart using Java 17.0.12 with PID 4676 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
+2025-03-24 18:15:42 - No active profile set, falling back to 1 default profile: "default"
+2025-03-24 18:15:44 - Tomcat initialized with port 8080 (http)
+2025-03-24 18:15:44 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-24 18:15:44 - Starting service [Tomcat]
+2025-03-24 18:15:44 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-24 18:15:44 - Initializing Spring embedded WebApplicationContext
+2025-03-24 18:15:44 - Root WebApplicationContext: initialization completed in 1888 ms
+2025-03-24 18:15:44 - HikariPool-1 - Starting...
+2025-03-24 18:15:45 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61f377d1
+2025-03-24 18:15:45 - HikariPool-1 - Start completed.
+2025-03-24 18:15:46 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-24 18:15:46 - HikariPool-1 - Shutdown initiated...
+2025-03-24 18:15:46 - HikariPool-1 - Shutdown completed.
+2025-03-24 18:15:46 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
