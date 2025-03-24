@@ -33,27 +33,46 @@ public class RoomController {
     @Autowired
     private RoomMapper roomMapper;
     // 테스트 샘플
-    int sample = 100001;
+    int loginMno = 0;
     // [1] 채팅방 등록
     @PostMapping
     public boolean write(@RequestBody RoomDto roomDto, HttpServletRequest req) {
         System.out.println("RoomController.write");
         System.out.println("roomDto = " + roomDto.getMnoList());
-        // 세션에서 로그인된 회원번호 가져오기
-        MemberDto memberDto = memberUtils.getLoginInfo(req);
-        System.out.println( "세션 정보 " + memberDto);
-        System.out.println("로그인된 회원번호 " + memberDto.getMno());
-        return roomService.write(roomDto, sample); // sample 나중에 mno 로 바꾸기
+        // loginMno 가져오기
+        if( MemberUtils.getLoginInfo(req) == null  ){
+            System.out.println("로그인 정보가 없음");
+            return false;
+        } // if end
+
+        MemberDto memberDto = MemberUtils.getLoginInfo(req);
+        loginMno = memberDto.getMno();
+        System.out.println("loginMno = " + loginMno);
+
+        System.out.println("세션 정보: " + memberDto);
+        System.out.println("로그인된 회원번호: " + loginMno);
+        return roomService.write(roomDto, loginMno); // sample 나중에 mno 로 바꾸기
 
     }
 
     // [2] 회원별 채팅방 전체 조회
     @GetMapping
-    public List<RoomDto> find() {
-        // 세션에서 로그인된 회원번호 가져오기
-        Integer loginMno = (Integer) httpSession.getAttribute("mno");
+    public List<RoomDto> find(HttpServletRequest req) {
+        // 세션에서 로그인된 MemberDto 가져오기
+        MemberDto memberDto = (MemberDto) req.getSession().getAttribute("memberDto");
 
-        List<RoomDto> result = roomService.find(sample);
+
+        if (memberDto == null) {
+            // 로그인되지 않은 경우 처리 (세션에 회원 정보가 없을 때)
+            return new ArrayList<>(); // 예시로 빈 리스트를 반환
+        }
+
+        // 세션에서 로그인된 회원 번호(mno) 가져오기
+        loginMno = memberDto.getMno(); // MemberDto에서 mno를 가져옴
+
+        System.out.println("로그인된 회원번호" +loginMno);
+        // 로그인된 회원번호를 find() 메소드의 매개변수로 전달
+        List<RoomDto> result = roomService.find(loginMno);
 
         // rno 중북 제거 후 return
         Set<Integer> uniqueRnos = new HashSet<>();
@@ -93,7 +112,7 @@ public class RoomController {
     public boolean delete(@RequestParam("rno") int rno) {
 
         // 나중에 본인 생성한 채팅방인지 유효성 검사 추가하기
-        return roomService.delete(rno, sample); // 나중에 로그인된 세션 mno 로 바꾸기
+        return roomService.delete(rno, loginMno); // 나중에 로그인된 세션 mno 로 바꾸기
     }
 
     // [6] 기존 채팅방에 회원 추가
@@ -125,8 +144,10 @@ public class RoomController {
 
         List<MemberDto> result = roomMapper.findMember();
 
+        System.out.println(result);
         // 각 회원의 mno에 대해 부서 정보를 가져와 department에 설정
         for (MemberDto member : result) {
+            System.out.println("회원번호" +member.getMno());
             // getDepartmentFromMno() 메소드를 호출하여 부서명을 설정
             String department = memberUtils.getDepartmentFromMno(member.getMno());
             member.setDepartment(department); // MemberDto에 부서 정보 설정
