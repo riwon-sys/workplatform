@@ -25,6 +25,8 @@ drop table if exists board;
 DROP TABLE IF EXISTS member;
 
 
+
+
 -- 직원 테이블 생성
 CREATE TABLE member (
     mno INT UNSIGNED,

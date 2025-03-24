@@ -13,6 +13,7 @@ public class MessageService {
     private final  MessageMapper messageMapper;
 
     public boolean writeFile(ChattingDto chattingDto){
-        return messageMapper.writeFile(chattingDto);
+        return false;
+        //return messageMapper.writeFile(chattingDto);
     }
 }
