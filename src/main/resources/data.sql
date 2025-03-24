@@ -2,7 +2,6 @@
 INSERT INTO member (mno, mname, mphone, memail, mtype, mrank) VALUES
 -- 재직자
 -- 인사팀
-(100001, '최민경', '010-1234-5678', 'insateam@example.com', 0, '부장'),
 (100002, '조윤서', '010-2345-6789', 'insateam_team@example.com', 0, '차장'),
 (100003, '박예진', '010-3456-7890', 'insateam_team@example.com', 0, '차장'),
 (100004, '이민호', '010-4567-8901', 'insateam_dari@example.com', 0, '과장'),
@@ -68,6 +67,9 @@ INSERT INTO member (mno, mname, mphone, memail, mtype, mrank) VALUES
 (300023,  '김현수', '010-7666-7666', 'salesteam_sawon@example.com', 3, '대리'),
 (600046,  '이민진', '010-0999-1111', 'designteam_sawon@example.com', 3, '대리'),
 (700056,  '현정우', '010-1001-1111', 'financeteam_sawon@example.com', 3, '대리');
+
+INSERT INTO member (mno,mpwd ,mname, mphone, memail, mtype, mrank) VALUES
+(100001,"1234", '최민경', '010-1234-5678', 'insateam@example.com', 0, '부장'),
 
 -- 채팅방 샘플 데이터 삽입
 INSERT INTO room (rname, rtype, mno, rlastdate) VALUES

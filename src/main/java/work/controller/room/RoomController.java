@@ -1,5 +1,6 @@
 package work.controller.room;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,7 @@ public class RoomController {
     private final HttpSession httpSession;
 
     private  final MemberUtils memberUtils;
+
     // 테스트 용
     @Autowired
     private RoomMapper roomMapper;
@@ -34,12 +36,13 @@ public class RoomController {
     int sample = 100001;
     // [1] 채팅방 등록
     @PostMapping
-    public boolean write(@RequestBody RoomDto roomDto) {
+    public boolean write(@RequestBody RoomDto roomDto, HttpServletRequest req) {
         System.out.println("RoomController.write");
         System.out.println("roomDto = " + roomDto.getMnoList());
         // 세션에서 로그인된 회원번호 가져오기
-        Integer loginMno = (Integer) httpSession.getAttribute("mno");
-
+        MemberDto memberDto = memberUtils.getLoginInfo(req);
+        System.out.println( "세션 정보 " + memberDto);
+        System.out.println("로그인된 회원번호 " + memberDto.getMno());
         return roomService.write(roomDto, sample); // sample 나중에 mno 로 바꾸기
 
     }

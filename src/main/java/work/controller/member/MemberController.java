@@ -41,6 +41,7 @@ public class MemberController {
         System.out.println("MemberController.onLogIn");
         System.out.println("memberDto = " + memberDto);
         MemberDto result = memberService.onLogIn(memberDto); // 성공시 MemberDto, 실패시 null
+        System.out.println(result);
         if( result ==null){return false;} // 로그인 서비스 결과가 null 이면 로그인 실패
         else{ // 서비스 결과가 null 이 아니면 로그인 성공 => 세션에 로그인 성공한 결과를 MemberDto 를 저장
             HttpSession session = req.getSession(); // 세션을 호출

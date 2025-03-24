@@ -48,8 +48,6 @@ public class MemberService {
         // return false;
         // MemberDto result = memberMapper.onLogIn(memberDto);
 
-        String part = MemberUtils.getDepartmentFromMno( result.getMno() );
-        result.setDepartment( part );
 
         // (1) 암호화된 진짜 비밀번호는 DB존재
         // (2) 로그인에서 입력받은 아이디의 암호화 비밀번호 갖고오기
@@ -63,9 +61,13 @@ public class MemberService {
         // (4) 로그인에서 입력한 아이디와 비밀번호가 모두 일치하면 회원정보 가져오기
         MemberDto result2 = memberMapper.onLogIn( memberDto );
 
+        String part = MemberUtils.getDepartmentFromMno( result2.getMno() );
+        result2.setDepartment( part );
+
         return result2;
 
     }
+
 
     // [3] 사원 로그아웃
     public void offLogOut(){
