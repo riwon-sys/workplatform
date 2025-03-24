@@ -1,3 +1,13 @@
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
+/* react pdf */
+import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+import ReactPDF from '@react-pdf/renderer';
+
+/* mui import */
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -5,15 +15,12 @@ import Grid from '@mui/material/Grid2';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { CssVarsProvider } from '@mui/joy/styles';
 
+/* jsx import */
 import Report_List from './component/report/Report_List';
 import Report_Form from './component/report/Report_Form';
-
-import * as React from 'react';
-import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import SavePDFButton from './component/report/SavePDFButton';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -25,8 +32,8 @@ const Item = styled(Paper)(({ theme }) => ({
     height: '100%', // 높이 설정 추가
 }));
 
-export default function Report_View() {
 
+export default function Report_View() {
   const { rpno } = useParams();
   const [ formData, setFormData ] = useState({
     rpname: '',
@@ -116,7 +123,6 @@ export default function Report_View() {
       >
         {/* 좌측 리스트 */}
         <Grid
-          item
           sx={{
             flex: 1.2, // 가능한 범위 내에서만 확장
             minWidth: { xs: '700px', md: '420px' }, // md 이상에서는 최소 420px
@@ -129,22 +135,22 @@ export default function Report_View() {
             <br />
             <CssVarsProvider>
               <Report_List
-                rpno={rpno}
-                reports={reports}
-                page={page}
-                setReports={setReports}
-                setPage={setPage}
-                setTotalPages={setTotalPages}
+                rpno={ rpno }
+                reports={ reports }
+                page={ page }
+                setReports={ setReports }
+                setPage={ setPage }
+                setTotalPages={ setTotalPages }
               />
             </CssVarsProvider>
     
             <Stack spacing={2} mt={1}>
               <Pagination
                 color="primary"
-                page={page}
-                count={totalPages}
-                defaultPage={1}
-                onChange={handlePageChange}
+                page={ page }
+                count={ totalPages }
+                defaultPage={ 1 }
+                onChange={ handlePageChange }
                 sx={{ display: 'flex', justifyContent: 'center' }}
               />
             </Stack>
@@ -153,7 +159,6 @@ export default function Report_View() {
     
         {/* 우측 폼 */}
         <Grid
-          item
           sx={{
             flex: 1.8,
             minWidth: '700px' , // xs(작은 화면)에서는 100% 사용
@@ -173,13 +178,19 @@ export default function Report_View() {
           >
             {rpno && Number(rpno) > 0 ? (
               <>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <Button variant="contained" color="info" sx={{ mb: 3, ml: 3 }} >
+                    PDF 저장
+                  </Button>
+                  <SavePDFButton> PDF 저장 </SavePDFButton>
+                </div>
                 <Report_Form
-                  formData={formData}
-                  formDataChange={formDataChange}
-                  isReadOnly={true}
-                  isUpdate={false}
-                  rpno={rpno}
-                  approval={approval}
+                  formData={ formData }
+                  formDataChange={ formDataChange }
+                  isReadOnly={ true }
+                  isUpdate={ false }
+                  rpno={ rpno }
+                  approval={ approval }
                 />
     
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
