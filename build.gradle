@@ -44,7 +44,7 @@ dependencies {
     // [6] webSocket 관련 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     // paging
     implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
@@ -52,10 +52,10 @@ dependencies {
     // [7] 비크립트 알고리즘 라이브러리
     implementation 'org.springframework.security:spring-security-crypto:6.4.3'
     // 트랜젝션
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'  // Spring Data JPA 의존성 예시
-    implementation 'mysql:mysql-connector-java'  // MySQL 연결 의존성 예시
+    //  'org.springframework.boot:spring-boot-starter-data-jpa'  // Spring Data JPA 의존성 예시
+    // implementation 'mysql:mysql-connector-java'  // MySQL 연결 의존성 예시
 
-    implementation 'mysql:mysql-connector-java:8.0.30'
+    //implementation 'mysql:mysql-connector-java:8.0.30'
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.18.3'
 

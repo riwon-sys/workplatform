@@ -1,7 +1,5 @@
 package work.model.mapper.report;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.transaction.Transactional;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
 import work.model.dto.report.ApprovalDto;
