@@ -136,7 +136,7 @@ create table approval(
 	apno int unsigned auto_increment,
     apdate datetime default null,
     apstate bool default false,
-    apsignature varchar(50) default null,
+    apsignature varchar(255) default null,
     mno int unsigned,			-- 승인할 회원번호
     rpno int unsigned,
     constraint primary key( apno ),

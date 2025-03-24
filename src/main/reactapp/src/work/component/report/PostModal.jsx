@@ -25,7 +25,7 @@ const style = {
   p: 4,
 };
 
-export default function PostModal( { onPost, signCanvas } ) {
+export default function PostModal( { signCanvas, onPost, onApproval, btnName } ) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -42,7 +42,7 @@ export default function PostModal( { onPost, signCanvas } ) {
         variant="contained" 
         color="info" sx={{ mt: 3 }} 
         onClick={handleOpen}>
-            작성
+            { btnName }
       </Button>
       <Modal
         aria-labelledby="transition-modal-title"
@@ -85,9 +85,15 @@ export default function PostModal( { onPost, signCanvas } ) {
             </Box>
 
             <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-              <Button variant="contained" color="info" sx={{ mt: 2 }} onClick={ onPost } >
-                등록
-              </Button>
+              {
+                btnName == "작성" ?
+                  <Button variant="contained" color="info" sx={{ mt: 2 }} onClick={ onPost } >
+                    등록
+                  </Button> :
+                  <Button variant="contained" color="info" sx={{ mt: 2 }} onClick={ onApproval } >
+                    승인
+                  </Button>
+              }
               <Button variant="contained" color="info" sx={{ mt: 2, ml: 3 }} onClick={ onClear } >
                 전체 지우기
               </Button>

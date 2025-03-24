@@ -23,6 +23,9 @@ export default function BasicSelect( { rank, handleChange, members, value } ) {
           "& .MuiSelect-select": { padding: "4px 8px" }, // 패딩 조정
         }}
       >
+        <MenuItem value={ null } > 
+          <em> 선택안함 </em>
+        </MenuItem>
         {
           members.map( (member) => (
             <MenuItem key={ member.mno } value={ member.mno } > { member.mname } </MenuItem>

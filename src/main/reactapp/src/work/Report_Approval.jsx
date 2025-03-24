@@ -1,3 +1,8 @@
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+
+/* mui import */
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -5,30 +10,32 @@ import Grid from '@mui/material/Grid2';
 import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { CssVarsProvider } from '@mui/joy/styles';
 
-import Report_List from './Report_List';
-import Report_Form from './Report_Form';
-
-import * as React from 'react';
-import { StyledEngineProvider, CssVarsProvider } from '@mui/joy/styles';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+/* jsx import */
+import Report_Approval_List from './component/report/Report_Approval_List';
+import Report_Form from './component/report/Report_Form';
+import SelectSmall from './component/report/SeleclSmall';
+import PostModal from './component/report/PostModal';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
     ...theme.typography.body2,
-    padding: theme.spacing(1),
+    padding: theme.spacing(0),
+    paddingTop: '30px',
     textAlign: 'center',
     color: theme.palette.text.primary,
     height: '100%', // 높이 설정 추가
 }));
 
-export default function Report_View() {
+export default function Report_Approval() {
+
+  // Signature Canvas 참조
+  const signCanvas = useRef( null );
 
   const { rpno } = useParams();
   const [ formData, setFormData ] = useState({
-    rpname: '일일 업무 보고서' ,
+    rpname: '',
     rpam: '',
     rppm: '',
     rpamnote: '',
@@ -38,16 +45,24 @@ export default function Report_View() {
     rpexpected: '',
     mname: '',
     mrank: '',
-    mdepartment: '' 
+    mdepartment: '',
+    apno: '' 
   });
   const [ reports, setReports ] = useState( [] );
   const [ page, setPage ] = useState(1); // 현재 페이지
   const [ totalPages, setTotalPages ] = useState(1); // 전체 페이지 수
   const [ approval, setApproval ] = useState( [] );
+  const [ selectValue , setSelectValue ] = useState( 0 );
   const navigate = useNavigate();
   
+  // select
+  const selectValueChange = ( e ) => {
+    setSelectValue( e.target.value );
+  };
+
+  // formData
   const formDataChange = (e) => {
-    setFormData( { ...formData, [ e.target.name ] : e.target.value } )
+    setFormData( { ...formData, [ e.target.name ] : e.target.value } );
   } // f end
 
   // 보고서 상세 조회 함수
@@ -60,27 +75,58 @@ export default function Report_View() {
     try{
       const response = await axios.get( `http://localhost:8080/api/report/view?rpno=${rpno}` );
       setFormData( response.data );
-    }catch( e ){ console.log( e ) }
+    }catch( e ){ console.log( e ); }
   } // f end
 
-  // 수정 페이지 이동 함수
-  const onUpdate = async () => { await navigate( `/report/update/${rpno}` ) }
+  // 보고서 결재
+  const onApproval = async ( props ) => {
+    if( signCanvas.current.isEmpty() ){ alert('서명 후 등록이 가능합니다.'); return; }
 
-  // 보고서 삭제 함수
-  const onDelete = async () => {  
-    if( !confirm('보고서를 삭제하시겠습니까?') ){ return; }
+    if( !confirm('보고서 결재를 완료하시겠습니까?') ){ return; }
     try{
-      const response = await axios.put( `http://localhost:8080/api/report/delete?rpno=${rpno}` )
-      if( response.data ){
-        alert('보고서 삭제가 완료되었습니다.')
-        navigate( 0 ); // 0 : 페이지 새로고침
-        navigate( '/report/view' );
-      }else{ alert('보고서 삭제 실패'); }
-    }catch( e ){ console.log( e ); }
-  }
+      const report = reports.filter( ( report ) => report.rpno == rpno );
+      const apno = report[0].apno;
+
+      const updateApproval = approval.filter( ( approve ) => 
+        approve.apsignature == null && ( approve.apno <= apno+1 ) );
+      console.log( updateApproval );
+
+      // signData는 Base64로 인코딩된 서명 이미지 데이터
+      const signData = signCanvas.current.toDataURL();
+
+      // dataURL을 file로 변환
+      const convertDataUrlToFile = (dataURL, filename) => {
+        const arr = dataURL.split(",");
+        const mimeType = arr[0].match(/:(.*?);/)[1];
+        const byteString = atob(arr[1]);
+        const byteArray = new Uint8Array(byteString.length);
+      
+        for (let i = 0; i < byteString.length; i++) {
+          byteArray[i] = byteString.charCodeAt(i);
+        }
+      
+        return new File([byteArray], filename, { type: mimeType });
+      };
+
+      // file name 설정
+      const file = convertDataUrlToFile( signData, 'signature.png' );
+
+      // FormData 객체 생성
+      const signFormData = new FormData();
+      signFormData.append( 'uploadFile', file );
+      signFormData.append( 'jsonaplist', JSON.stringify(updateApproval) );
+
+      const response = await axios.put( `http://localhost:8080/api/approval`, signFormData, { withCredentials : true } )
+      if( response ){
+        alert('보고서 결재를 완료하였습니다.');
+        navigate( 0 );
+      }else{ alert('보고서 결제 실패') }
+    }catch( e ){ console.log( e ); alert('보고서 결제 실패'); }
+
+  } // f end
 
   // mui 페이지네이션 페이지 번호 가져오기
-  const handlePageChange = ( e, value ) => {
+  const handlePageChange = ( value ) => {
     setPage( value );
   }
 
@@ -90,70 +136,110 @@ export default function Report_View() {
   // 보고서 결재자 찾기
   const onApprovalByRpno = async ( rpno ) => {
     try{
-      const response = await axios.get( `http://localhost:8080/api/approval?rpno=${rpno}`);
+      const response = await axios.get( `http://localhost:8080/api/approval?rpno=${rpno}`, { withCredentials : true } );
       setApproval( response.data );
     }catch( e ){ console.log( e ); } 
   } // f end
 
   return (
-      <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
-        <Grid container spacing={0} sx={{ height: '100%' }}> 
-          {/* size: 너비 조정 */}
-          <Grid size={5} pt={2} sx={{ height: '100%' }} minWidth={ '420px' } > 
-            <Item>
-              <h1> 보고서 결재 목록 </h1>
-              <br/>
-              <CssVarsProvider>
-                <Report_List 
-                  rpno={ rpno } 
-                  reports={ reports } 
-                  page={ page }
-                  setReports={ setReports }
-                  setPage={ setPage }
-                  setTotalPages={ setTotalPages }              
-                />
-              </CssVarsProvider>
+    <Box 
+      sx={{ 
+        flexGrow: 1, 
+        height: '100vh', 
+        display: 'flex', 
+        flexDirection: 'column' 
+      }}
+    >
+      <Grid
+        container
+        spacing={0}
+        sx={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' }, // md 이상에서만 가로 배치
+        }}
+      >
+        {/* 좌측 리스트 */}
+        <Grid
+          sx={{
+            flex: 1.2, // 가능한 범위 내에서만 확장
+            minWidth: { xs: '700px', md: '420px' }, // md 이상에서는 최소 420px
+            maxWidth: { xs: '700px', md: '100%' }, // 최대 너비 제한
+            height: '100vh', // 높이 고정
+          }}
+        >
+          <Item>
+            <h1> 보고서 결재 목록 </h1>
 
-              <Stack spacing={2} mt={1} >
-                <Pagination 
-                  color="primary"
-                  page={ page }
-                  count={ totalPages } 
-                  defaultPage={ 1 }
-                  onChange={ handlePageChange }
-                  sx={{ display: 'flex', justifyContent: 'center' }}
-                />
-              </Stack>
-            </Item>
-          </Grid>
-          
-          <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>
-            <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px', padding: 7 }} >
-              { rpno && Number(rpno) > 0 ? 
-              <>
-                <Report_Form 
-                  formData={ formData } 
-                  formDataChange={ formDataChange } 
-                  isReadOnly={ true } 
-                  isUpdate={ false } 
-                  rpno={ rpno } 
-                  approval={ approval } 
-                />
-              
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }} >
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onUpdate() } >
-                      결재
-                  </Button>
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={ () => onDelete() } >
-                      삭제
-                  </Button>
-                </div>
-              </> : 
-              null }
-            </Item>
-          </Grid>
-          
+            <SelectSmall 
+              select={ selectValue }
+              handleChange={ selectValueChange }
+            />
+            
+            <CssVarsProvider>
+              <Report_Approval_List
+                rpno={ rpno }
+                reports={ reports }
+                page={ page }
+                setReports={ setReports }
+                setPage={ setPage }
+                setTotalPages={ setTotalPages }
+                selectValue={ selectValue }
+              />
+            </CssVarsProvider>
+    
+            <Stack spacing={2} mt={1}>
+              <Pagination
+                color="primary"
+                page={ page }
+                count={ totalPages }
+                defaultPage={ 1 }
+                onChange={ handlePageChange }
+                sx={{ display: 'flex', justifyContent: 'center' }}
+              />
+            </Stack>
+          </Item>
         </Grid>
-      </Box>
+    
+        {/* 우측 폼 */}
+        <Grid
+          sx={{
+            flex: 1.8,
+            minWidth: '700px', // xs(작은 화면)에서는 100% 사용
+            maxWidth: '100%', // 최대 100% 사용
+            width: '100%',
+            height: '100%'
+          }}
+        >
+          <Item
+            sx={{
+              overflow: 'scroll',
+              overflowX: 'hidden',
+              padding: 10,
+              width: '100%', // 기본적으로 100% 차지
+              minHeight: { sm: '1350px', lg: '100%' }
+            }}
+          >
+            {rpno && Number(rpno) > 0 ? (
+              <>
+                <Report_Form
+                  formData={ formData }
+                  formDataChange={ formDataChange }
+                  isReadOnly={ true }
+                  isUpdate={ false }
+                  rpno={ rpno }
+                  approval={ approval }
+                />
+    
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <PostModal signCanvas={ signCanvas } btnName={ "결재" } onApproval={ onApproval } />
+                </div>
+              </>
+            ) : null}
+          </Item>
+        </Grid>
+      </Grid>
+    </Box>
+  
     );
 }

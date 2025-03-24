@@ -218,7 +218,7 @@ create table board(
 );
 
 # 게시판 샘플데이터 삽입
-insert into board (pid,title,content,views,mno)values
+insert into board (pid,title,content,views,mno) values
 (1, '주변에 맛집있나요?', '매콤한게땡김', 11, 100001),
 (2, '칼퇴해도됩니까?', '칼퇴각', 32, 100002),
 (3, '집에가고싶은데', '집가도됨?', 10, 100003),
@@ -241,13 +241,6 @@ create table report(
     constraint primary key( rpno ),
     constraint foreign key( mno ) references member ( mno ) on update cascade on delete cascade
 );
-
--- 보고서 샘플 추가
-insert into comment (cid, content, reg_date, pid, mno) VALUES
-(1, '저는 한식당 추천합니다! 2번 출구 나가셔서 왼쪽에 있는 고깃집이 진짜 맛있어요.', '2025-03-15 10:23:45', 1, 100001),
-(2, '매콤한거 좋아하시면 3번 출구 옆 중국집 마라탕이 좋을 것 같아요!', '2025-03-15 11:30:22', 2, 100002),
-(3, '오늘은 야근각이네요ㅠㅠ', '2025-03-16 14:15:33', 3, 100003),
-(4, '저도 집에 가고 싶어요... 퇴근시간 언제 오나요', '2025-03-17 16:45:12', 4, 100004);
 
 -- 보고서 샘플 추가
 INSERT INTO report( rpname, rpam, rppm, rpamnote, rppmnote, rpunprocessed, rpsignificant, rpexpected, rpdate, mno ) VALUES
@@ -406,7 +399,7 @@ create table approval(
 	apno int unsigned auto_increment,
     apdate datetime default null,
     apstate bool default false,
-    apsignature varchar(50) default null,
+    apsignature varchar(255) default null,
     mno int unsigned,			-- 승인할 회원번호
     rpno int unsigned,
     constraint primary key( apno ),
@@ -416,16 +409,20 @@ create table approval(
 
 -- 결재 샘플 추가
 INSERT INTO approval( apdate, apstate, apsignature, mno, rpno ) VALUES
-( '2025-02-01 23:30:11', 1, '서명1', 100007, 6 ),
-( '2025-02-02 11:15:11', 1, '서명2', 100004, 6 ),
-( null, 0, null, 100002, 6 ),
+( '2025-02-01 23:30:11', 1, '서명1.jpg', 100007, 6 ),
+( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 6 ),
+( '2025-02-02 11:15:11', 0, null, 100002, 6 ),
 ( null, 0, null, 100001, 6 ),
-( '2025-02-05 23:30:11', 1, '서명5', 200012, 2 ),
+( '2025-02-05 23:30:11', 1, '서명5.jpg', 200012, 2 ),
 ( null , 0, '서명6', 200010, 2 ),
-( '2025-02-01 23:30:11', 1, '서명1', 100007, 20 ),
-( '2025-02-02 11:15:11', 1, '서명2', 100004, 20 ),
-( null, 0, null, 100002, 20 ),
-( null, 0, null, 100001, 20 );
+( '2025-02-01 23:30:11', 1, '서명1.jpg', 100007, 20 ),
+( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 20 ),
+( '2025-02-02 11:15:11', 0, null, 100002, 20 ),
+( null, 0, null, 100001, 20 ),
+( '2025-02-01 23:30:11', 1, '서명1.jpg', 100007, 21 ),
+( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 21 ),
+( '2025-02-02 11:15:11', 0, null, 100003, 21 ),
+( null, 0, null, 100001, 21 );
 
 select * from report;
 select rp.*, m.mname, m.mrank from report rp inner join member m on rp.mno = m.mno where rp.mno = 100004 && rpstate = true;
@@ -447,3 +444,11 @@ select * from board;
 
 select rpno from report order by rpno desc limit 1;
 SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'workplatform' AND TABLE_NAME = 'report';
+
+SELECT m.mno, m.mname, m.mrank, ap.apno, rp.* 
+FROM approval ap 
+INNER JOIN member m ON ap.mno = m.mno 
+INNER JOIN report rp ON ap.rpno = rp.rpno 
+WHERE m.mno = 100007 and
+apstate = true and apdate is not null
+ORDER BY rp.rpno DESC;
