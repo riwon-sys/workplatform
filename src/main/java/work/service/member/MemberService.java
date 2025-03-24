@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import work.model.dto.member.MemberDto;
+import work.model.dto.member.MemberUtils;
 import work.model.mapper.member.MemberMapper;
 import work.service.message.FileService;
 
@@ -67,6 +68,9 @@ public class MemberService {
 
         // (4) 로그인에서 입력한 아이디와 비밀번호가 모두 일치하면 회원정보 가져오기
         MemberDto result2 = memberMapper.onLogIn( memberDto );
+
+        String part = MemberUtils.getDepartmentFromMno( result2.getMno() );
+        result2.setDepartment( part );
 
         return result2;
 
