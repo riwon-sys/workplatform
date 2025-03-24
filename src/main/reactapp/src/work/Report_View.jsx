@@ -6,6 +6,8 @@ import axios from 'axios';
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
 import ReactPDF from '@react-pdf/renderer';
+import html2pdf from 'html2pdf.js';
+import {useReactToPrint} from 'react-to-print';
 
 /* mui import */
 import { styled } from '@mui/material/styles';
@@ -20,7 +22,6 @@ import { CssVarsProvider } from '@mui/joy/styles';
 /* jsx import */
 import Report_List from './component/report/Report_List';
 import Report_Form from './component/report/Report_Form';
-import SavePDFButton from './component/report/SavePDFButton';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -103,6 +104,20 @@ export default function Report_View() {
     }catch( e ){ console.log( e ); } 
   } // f end
 
+  const downloadPDF = async () => {
+    const html2pdf = (await import("html2pdf.js")).default;
+    const element = document.getElementById("pdf-download"); // PDF로 변환할 요소 선택
+    const options = {
+      margin: 10,
+      filename: "my_file.pdf",
+      image: { type: "jpeg", quality: 1 },
+      html2canvas: { scale: 3, useCORS: true }, // 해상도 및 CORS 문제 해결
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    };
+  
+    html2pdf().from(element).set(options).save();
+  };
+
   return (
     <Box 
       sx={{ 
@@ -179,12 +194,12 @@ export default function Report_View() {
             {rpno && Number(rpno) > 0 ? (
               <>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Button variant="contained" color="info" sx={{ mb: 3, ml: 3 }} >
+                  <Button variant="contained" color="info" sx={{ mb: 3, ml: 3 }} onClick={ downloadPDF } >
                     PDF 저장
                   </Button>
-                  <SavePDFButton> PDF 저장 </SavePDFButton>
                 </div>
                 <Report_Form
+                  id='pdf-download'
                   formData={ formData }
                   formDataChange={ formDataChange }
                   isReadOnly={ true }

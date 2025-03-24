@@ -4,7 +4,7 @@ import BasicSelect from './BasicSelect';
 import CustomTextarea from './CustomTextarea';
 
 export default function Report_Form( 
-  { formData, formDataChange, isReadOnly, approval, handleApprovalChange, membersByRank, isUpdate } ){
+  { id, formData, formDataChange, isReadOnly, approval, handleApprovalChange, membersByRank, isUpdate } ){
 
   let today = new Date();
   let year = today.getFullYear(); // 년도
@@ -15,6 +15,7 @@ export default function Report_Form(
   let day = year+''+month+''+date;
 
   return(<>
+    <div id={ id } >
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }} >
       <div style={{ margin: '0 auto', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} >
         <h1 style={{ marginRight: 10 }} > 일일 업무 </h1>
@@ -22,7 +23,7 @@ export default function Report_Form(
       </div>
       
       <form>
-        <table border={2} style={{ borderCollapse: 'collapse' }} >
+        <table border={3} style={{ borderCollapse: 'collapse' }} >
           <tbody >
             <tr>
               {
@@ -31,7 +32,7 @@ export default function Report_Form(
                   const selectedMno = approval.find((item) => item.rank === rank)?.mno || "";
 
                   return (
-                    <td key={ rank } width="100px">
+                    <td key={ rank } width="100px" style={ thTdStyle } >
                       <BasicSelect
                         rank={ rank }
                         members={ membersByRank[rank] || [] }
@@ -73,7 +74,7 @@ export default function Report_Form(
     </div>
 
     <form>
-      <table border={2} style={{ borderCollapse: 'collapse', width: '100%', height: '70px', marginBottom: '30px', fontSize: '15px' }} >
+      <table border={3} style={{ borderCollapse: 'collapse', width: '100%', height: '70px', marginBottom: '30px', fontSize: '15px' }} >
         <tbody>
           <tr>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성일자 </th>
@@ -95,7 +96,7 @@ export default function Report_Form(
         </tbody>
       </table>
 
-      <table border={2} style={{ borderCollapse: 'collapse', width: '100%', height: '850px', fontSize: '15px' }}>
+      <table border={3} style={{ borderCollapse: 'collapse', width: '100%', height: '850px', fontSize: '15px' }}>
         <tbody>
           <tr>
             <th style={{ width: '15%', backgroundColor: '#eeeeee' }} rowSpan={3} > 금일<br/>실시사항 </th>
@@ -153,5 +154,6 @@ export default function Report_Form(
         </tbody>
       </table>
     </form>
+    </div>
   </>);
 } // f end

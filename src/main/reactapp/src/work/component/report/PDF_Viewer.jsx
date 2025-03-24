@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 
 /* jsx import */
 import Report_Form from './Report_Form';
+import { StyleSheet } from '@react-pdf/renderer';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -16,16 +17,18 @@ const Item = styled(Paper)(({ theme }) => ({
   height: '100%', // 높이 설정 추가
 }));
 
+const styles = StyleSheet.create({
+  page: { padding: 20 },
+  section: { marginBottom: 10 },
+  title: { fontSize: 20, fontWeight: "bold", marginBottom: 10 },
+  text: { fontSize: 14 },
+});
+
 export default function PDF_Viewer( { formData, rpno, approval } ){
   return(<>
-    <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Button variant="contained" color="info" sx={{ mb: 3, ml: 3 }} >
-        이전
-      </Button>
-      {/* <Button variant="contained" color="info" sx={{ mb: 3, ml: 3 }} >
-        PDF 저장
-      </Button> */}
-    </div>
+    <Document>
+      <Page size="A4" style={styles.page}>
+        <View style={styles.section}>
     <Item
       sx={{
         overflow: 'scroll',
@@ -47,5 +50,8 @@ export default function PDF_Viewer( { formData, rpno, approval } ){
         </>
       ) : null}
     </Item>
+      </View>
+    </Page>
+  </Document>
   </>);
 }
