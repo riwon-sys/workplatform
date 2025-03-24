@@ -180,7 +180,7 @@ public class ChatSocket extends TextWebSocketHandler {
         } catch (IOException e) {
             // JSON 파싱 실패시 예외 처리
             System.err.println("Error parsing message: " + e.getMessage());
-            e.printStackTrace();
+            e.printStackTrace(); // 예외 콘솔에 출력
             // 클라이언트에게 오류 메시지 전송
             session.sendMessage(new TextMessage("Error: Invalid message format."));
         } catch (Exception e) {

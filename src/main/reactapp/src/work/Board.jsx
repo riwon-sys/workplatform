@@ -44,14 +44,14 @@ export default function () {
   
   return (<>
     <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
-      <Item 
-        sx={{ 
-          overflow: 'scroll', 
-          overflowX: 'hidden', 
-          minWidth: '700px', 
-          maxWidth: '1000px', 
+      <Item
+        sx={{
+          overflow: 'scroll',
+          overflowX: 'hidden',
+          minWidth: '700px',
+          maxWidth: '1000px',
           width: '100%'
-        }} 
+        }}
       >
           <CssVarsProvider>
           <Table>
@@ -59,17 +59,18 @@ export default function () {
               </thead>
               <tbody>
                 {
-                  boards.map( ( board , index )=> { 
-                    return(<> 
+                  boards.map( ( board , index )=> {
+                    return(<>
                       <tr>
                         <td> <span>OTT뭐볼까?(카테고리)</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
                         <td> <span>👍1</span> <span> 💬10 </span></td>
                       </tr>
-                    </>) 
+                    </>)
                   } )
                 }
               </tbody>
             </Table>
+            <button onClick={()=>{navigate("/board/write")}}>글쓰기</button>
           </CssVarsProvider>
       </Item>
     </Box>

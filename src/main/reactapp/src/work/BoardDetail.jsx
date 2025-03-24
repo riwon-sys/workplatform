@@ -76,7 +76,80 @@ export default function BoardDetail() {
     if(response.data == true){alert('댓글이 등록 되었습니다.');setComment('');getview();}
     else{alert('댓글 작성을 실패했습니다.');}
   }
-  
+
+
+  //댓글 수정 모달열기
+  const openEditModal = (comment) => {
+    setEditComment({
+      cid: comment.cid,
+      content: comment.content
+    });
+    setIsEditModalOpen(true);
+  };
+
+  //댓글 수정 모달 닫기
+
+    // 댓글 수정 모달 닫기
+    const closeEditModal = () => {
+      setIsEditModalOpen(false);
+      setEditComment({ cid: null, content: '' });
+    };
+
+    // 댓글 수정 함수
+    const updateComment = async() => {
+      if(!editComment.content.trim()) {
+        alert('댓글 내용을 입력해주세요.');
+        return;
+      }
+
+
+        
+    const sendData = { 
+      cid: editComment.cid, 
+      mno: mno, 
+      content: editComment.content 
+    };
+
+    try {
+      const response = await axios.put('http://localhost:8080/work/reply', sendData);
+      if(response.data === true) {
+        alert('댓글이 수정되었습니다.');
+        closeEditModal();
+        getview(); // 댓글 목록 새로고침
+      } else {
+        alert('댓글 수정에 실패했습니다.');
+      }
+    } catch(error) {
+      console.error('댓글 수정 오류:', error);
+      alert('댓글 수정 중 오류가 발생했습니다.');
+    }
+  };
+
+
+  //댓글 삭제 함수
+
+
+  const deleteComment = async(cid) => {
+    if(!window.confirm('정말 이 댓글을 삭제하시겠습니까?')) {
+      return;
+    }
+
+
+       
+    try {
+      const response = await axios.delete(`http://localhost:8080/work/reply?cid=${cid}&mno=${mno}`);
+      if(response.data === true) {
+        alert('댓글이 삭제되었습니다.');
+        getview(); // 댓글 목록 새로고침
+      } else {
+        alert('댓글 삭제에 실패했습니다.');
+      }
+    } catch(error) {
+      console.error('댓글 삭제 오류:', error);
+      alert('댓글 삭제 중 오류가 발생했습니다.');
+    }
+  };
+
   return (
     <>
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>

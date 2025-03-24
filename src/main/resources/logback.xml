@@ -1,3 +1,4 @@
+
 <!-- Logback 설정 파일 최상위 요소 -->
 <configuration>
 
@@ -28,12 +29,29 @@
         </filter>
     </appender>
 
+    <!-- 콘솔 로그 설정 (WARN 이상 출력) -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} - %level - %msg%n</pattern>
+        </encoder>
+        <!-- 레벨을 WARN 이상으로 설정 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
     <!-- 로그 레벨 설정 -->
     <!-- root : 전체 로그 시스템의 기본 로그 레벨 설정 -->
     <!-- level : 로그 기록 수준 설정 (현재 info 수준 이상만 기록  -->
     <root level="info">
         <!-- 위에서 설정한 로그 파일 경로에 로그 기록 -->
         <appender-ref ref="rollingFile" />
+        <appender-ref ref="console" /> <!-- 콘솔에도 출력 추가 -->
+
     </root>
+
+
 
 </configuration>
