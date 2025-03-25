@@ -23,7 +23,7 @@ export default function Report_Form(
       </div>
       
       <form>
-        <table border={3} style={{ borderCollapse: 'collapse' }} >
+        <table border={2} style={{ borderCollapse: 'collapse' }} >
           <tbody >
             <tr>
               {
@@ -32,7 +32,7 @@ export default function Report_Form(
                   const selectedMno = approval.find((item) => item.rank === rank)?.mno || "";
 
                   return (
-                    <td key={ rank } width="100px" style={ thTdStyle } >
+                    <td key={ rank } width="100px" >
                       <BasicSelect
                         rank={ rank }
                         members={ membersByRank[rank] || [] }
@@ -59,9 +59,15 @@ export default function Report_Form(
                     {
                       rank.apsignature ? 
                       <img 
-                      src={`http://localhost:8080/file/${rank.apsignature}`}
-                      style={{ width: '95%', padding: 5 }} 
-                      alt="서명 이미지" /> : null
+                        src={`http://localhost:8080/file/${rank.apsignature}`}
+                        style={{ 
+                          width: '95%', 
+                          padding: 5
+                        }} 
+                        alt="서명 이미지" 
+                        onFocus={(e) => e.target.style.border = 'none'} // focus 시 테두리 제거
+                        onBlur={(e) => e.target.style.border = 'none'}
+                      /> : null
                     }
                   </td>
                 )) :
@@ -74,13 +80,15 @@ export default function Report_Form(
     </div>
 
     <form>
-      <table border={3} style={{ borderCollapse: 'collapse', width: '100%', height: '70px', marginBottom: '30px', fontSize: '15px' }} >
+      <table border={2} style={{ borderCollapse: 'collapse', width: '100%', height: '70px', marginBottom: '30px', fontSize: '15px' }} >
         <tbody>
           <tr>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성일자 </th>
-            <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', height: '100%', border: 'none' }} > 
-              <div> {year}년 {month}월 {date}일 </div>
-              <div> ({week}) </div>  
+            <td style={{ width: '30%' }} > 
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', height: '100%', }} >
+                <div> {year}년 {month}월 {date}일 </div>
+                <div> ({week}) </div>  
+              </div>
             </td>
             {/* <td style={{ width: '30%' }} > {year}년 {month}월 {date}일 ({week}) </td> */}
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성자 </th>
@@ -96,17 +104,17 @@ export default function Report_Form(
         </tbody>
       </table>
 
-      <table border={3} style={{ borderCollapse: 'collapse', width: '100%', height: '850px', fontSize: '15px' }}>
+      <table border={2} style={{ borderCollapse: 'collapse', width: '100%', height: '850px', fontSize: '15px' }}>
         <tbody>
           <tr>
             <th style={{ width: '15%', backgroundColor: '#eeeeee' }} rowSpan={3} > 금일<br/>실시사항 </th>
-            <th style={{ width: '65%', height: '5%', backgroundColor: '#eeeeee' }} colSpan={2} > 금일 업무보고 </th>
-            <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 비 고 </th>   
+            <th style={{ width: '55%', height: '5%', backgroundColor: '#eeeeee' }} colSpan={2} > 금일 업무보고 </th>
+            <th style={{ width: '30%', backgroundColor: '#eeeeee' }} > 비 고 </th>   
           </tr>
 
           <tr>
             <th style={{ width: '5%', backgroundColor: '#eeeeee' }} > 오전 </th>   
-            <td style={{ width: '60%' }} > 
+            <td style={{ width: '50%' }} > 
               <CustomTextarea name="rpam" value={formData.rpam} 
                 onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>  
@@ -118,7 +126,7 @@ export default function Report_Form(
 
           <tr>
             <th style={{ width: '5%', backgroundColor: '#eeeeee' }} > 오후 </th> 
-            <td style={{ width: '60%' }} > 
+            <td style={{ width: '50%' }} > 
               <CustomTextarea name="rppm" value={formData.rppm} 
                 onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>  

@@ -3,11 +3,15 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 /* react pdf */
-import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
-import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
-import ReactPDF from '@react-pdf/renderer';
-import html2pdf from 'html2pdf.js';
-import {useReactToPrint} from 'react-to-print';
+// import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
+// import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
+// import ReactPDF from '@react-pdf/renderer';
+// import html2pdf from 'html2pdf.js';
+// import { useReactToPrint } from 'react-to-print';
+// import html2canvas from "html2canvas";
+import domtoimage from "dom-to-image";
+import { jsPDF } from "jspdf";
+
 
 /* mui import */
 import { styled } from '@mui/material/styles';
@@ -104,19 +108,58 @@ export default function Report_View() {
     }catch( e ){ console.log( e ); } 
   } // f end
 
-  const downloadPDF = async () => {
-    const html2pdf = (await import("html2pdf.js")).default;
-    const element = document.getElementById("pdf-download"); // PDF로 변환할 요소 선택
-    const options = {
-      margin: 10,
-      filename: "my_file.pdf",
-      image: { type: "jpeg", quality: 1 },
-      html2canvas: { scale: 3, useCORS: true }, // 해상도 및 CORS 문제 해결
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
-    };
+  // const downloadPDF = async () => {
+  //   const html2pdf = (await import("html2pdf.js")).default;
+  //   const element = document.getElementById("pdf-download"); // PDF로 변환할 요소 선택
+  //   const options = {
+  //     margin: 20,
+  //     filename: "my_file.pdf",
+  //     image: { type: "jpeg", quality: 1 },
+  //     html2canvas: { scale: 3, useCORS: true }, // 해상도 및 CORS 문제 해결
+  //     jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+  //   };
   
-    html2pdf().from(element).set(options).save();
+  //   html2pdf().from(element).set(options).save();
+  // };
+
+  const convertToPdf = async () => {
+    const element = document.getElementById("pdf-download");
+    if (!element) {
+      console.error("PDF 변환할 요소를 찾을 수 없습니다.");
+      return;
+    }
+  
+    // 너비 고정 (A4 가로 크기에 맞게 설정)
+    element.style.width = "800px"; 
+    element.style.height = "auto"; 
+    element.style.maxWidth = "none"; 
+    element.style.background = "white";  // 배경 흰색으로 설정 (투명 배경 방지)
+
+    try {
+      const dataUrl = await domtoimage.toPng(element, {
+        bgcolor: 'white', // 배경 투명시 테두리생기는 현상 수정
+        scale: 2
+      });
+      const doc = new jsPDF("p", "mm", "a4");
+  
+      const img = new Image();
+      img.src = dataUrl;
+      img.onload = () => {
+        const pageWidth = doc.internal.pageSize.getWidth();
+        const pageHeight = doc.internal.pageSize.getHeight();
+        const padding = 10; // 패딩 설정
+        const imgWidth = pageWidth * 0.9; // 90% 크기 조정
+        // const imgHeight = (img.height * imgWidth) / img.width; // 비율 유지
+        const imgHeight = pageHeight * 0.9; // 비율 유지
+  
+        doc.addImage(img, "PNG", padding, padding, imgWidth, imgHeight, '', 'FAST');
+        doc.save("screenshot.pdf");
+      };
+    } catch (error) {
+      console.error("PDF 변환 오류:", error);
+    }
   };
+  
 
   return (
     <Box 
@@ -186,7 +229,7 @@ export default function Report_View() {
             sx={{
               overflow: 'scroll',
               overflowX: 'hidden',
-              padding: 10,
+              paddingX: 10,
               width: '100%', // 기본적으로 100% 차지
               minHeight: { sm: '1350px', lg: '100%' }
             }}
@@ -194,8 +237,8 @@ export default function Report_View() {
             {rpno && Number(rpno) > 0 ? (
               <>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Button variant="contained" color="info" sx={{ mb: 3, ml: 3 }} onClick={ downloadPDF } >
-                    PDF 저장
+                  <Button variant="contained" color="info" sx={{ mb: 3, ml: 3 }} onClick={ convertToPdf } >
+                    PDF 저장 3
                   </Button>
                 </div>
                 <Report_Form
