@@ -32,119 +32,119 @@ DROP TABLE IF EXISTS member;
 
 -- 직원 테이블 생성
 CREATE TABLE member (
-    mno INT UNSIGNED,
-    mpwd VARCHAR(255) DEFAULT '1234', -- 암호화 적용 시 평문 대비 길이 증가로 변경 (기존30 > 변경255) | rw 25-03-24
-    mname VARCHAR(30),
-    mphone VARCHAR(13) NOT NULL UNIQUE,
-    memail VARCHAR(100),
-    mtype INT DEFAULT 0,
-    mrank VARCHAR(10) NOT NULL,
-    mprofile VARCHAR(255) DEFAULT 'default.jpg',
-    PRIMARY KEY (mno)
+                        mno INT UNSIGNED,
+                        mpwd VARCHAR(255) DEFAULT '1234', -- 암호화 적용 시 평문 대비 길이 증가로 변경 (기존30 > 변경255) | rw 25-03-24
+                        mname VARCHAR(30),
+                        mphone VARCHAR(13) NOT NULL UNIQUE,
+                        memail VARCHAR(100),
+                        mtype INT DEFAULT 0,
+                        mrank VARCHAR(10) NOT NULL,
+                        mprofile VARCHAR(255) DEFAULT 'default.jpg',
+                        PRIMARY KEY (mno)
 );
 
 -- 채팅방 테이블
 create table room (
-   rno int unsigned auto_increment,
-    rname varchar(50) not null,
-    rtype varchar(30) not null,
-    rdate datetime default now(),
-    rlastdate datetime,
-    rstate boolean default true,
-    mno int unsigned,
-    constraint primary key (rno),
-    constraint foreign key (mno) references member (mno) on update cascade on delete cascade
+                      rno int unsigned auto_increment,
+                      rname varchar(50) not null,
+                      rtype varchar(30) not null,
+                      rdate datetime default now(),
+                      rlastdate datetime,
+                      rstate boolean default true,
+                      mno int unsigned,
+                      constraint primary key (rno),
+                      constraint foreign key (mno) references member (mno) on update cascade on delete cascade
 );
 
 -- 참여현황 테이블
 create table paritcipant(
-   pno int unsigned auto_increment,
-    pdate datetime default now(),
-    mno int unsigned,
-    rno int unsigned,
-    constraint primary key (pno),
-    constraint foreign key (mno) references member (mno) on update cascade on delete cascade,
-    constraint foreign key (rno) references room (rno) on update cascade on delete cascade
+                            pno int unsigned auto_increment,
+                            pdate datetime default now(),
+                            mno int unsigned,
+                            rno int unsigned,
+                            constraint primary key (pno),
+                            constraint foreign key (mno) references member (mno) on update cascade on delete cascade,
+                            constraint foreign key (rno) references room (rno) on update cascade on delete cascade
 );
 
 -- 메세지 테이블
 create table message(
-   msno int unsigned auto_increment,
-    msg text ,
-    msdate datetime default now(),
-    msstate int default 0,
-    pno int unsigned,
-    constraint primary key (msno),
-    constraint foreign key (pno) references paritcipant (pno) on update cascade on delete cascade
+                        msno int unsigned auto_increment,
+                        msg text ,
+                        msdate datetime default now(),
+                        msstate int default 0,
+                        pno int unsigned,
+                        constraint primary key (msno),
+                        constraint foreign key (pno) references paritcipant (pno) on update cascade on delete cascade
 );
 
 -- 파일 테이블
 create table fileshare(
-   fno int unsigned auto_increment,
-    fname varchar(30),
-    flocation varchar(255),
-    fdate datetime default now(),
-    pno int unsigned,
-    constraint primary key (fno),
-    constraint foreign key (pno) references paritcipant (pno) on update cascade on delete cascade
+                          fno int unsigned auto_increment,
+                          fname varchar(30),
+                          flocation varchar(255),
+                          fdate datetime default now(),
+                          pno int unsigned,
+                          constraint primary key (fno),
+                          constraint foreign key (pno) references paritcipant (pno) on update cascade on delete cascade
 );
 
 -- 게시판 테이블
 create table board(
-    pid int unsigned auto_increment,
-    title varchar(50) not null,
-    content varchar(1000) not null,
-    views int unsigned default 0,
-    mno int unsigned,
-     constraint primary key (pid),
-    constraint foreign key(mno)references member(mno)
-    on update cascade
-    on delete cascade
+                      pid int unsigned auto_increment,
+                      title varchar(50) not null,
+                      content varchar(1000) not null,
+                      views int unsigned default 0,
+                      mno int unsigned,
+                      constraint primary key (pid),
+                      constraint foreign key(mno)references member(mno)
+                          on update cascade
+                          on delete cascade
 );
 
 -- 댓글 테이블
 create table comment(
- cid int unsigned auto_increment,
- content varchar(200) not null,
- reg_date datetime default current_timestamp,
- pid int unsigned,
- mno int unsigned,
- primary key (cid),
- foreign key(pid) references board(pid)
- on update cascade
- on delete cascade,
- foreign key(mno) references Member(mno)
- on update cascade
- on delete cascade
+                        cid int unsigned auto_increment,
+                        content varchar(200) not null,
+                        reg_date datetime default current_timestamp,
+                        pid int unsigned,
+                        mno int unsigned,
+                        primary key (cid),
+                        foreign key(pid) references board(pid)
+                            on update cascade
+                            on delete cascade,
+                        foreign key(mno) references Member(mno)
+                            on update cascade
+                            on delete cascade
 );
 
 -- 보고서 테이블
 create table report(
-   rpno int unsigned auto_increment,
-    rpname varchar(50) not null,
-   rpam varchar(300) not null,
-    rppm varchar(300) not null,
-    rpamnote varchar(300) not null,
-    rppmnote varchar(300) not null,
-    rpunprocessed varchar(300),
-    rpsignificant varchar(300),
-    rpexpected varchar(300),
-    rpdate datetime default now(),
-    rpstate bool default true,
-    mno int unsigned,
-    constraint primary key( rpno ),
-    constraint foreign key( mno ) references member ( mno ) on update cascade on delete cascade
+                       rpno int unsigned auto_increment,
+                       rpname varchar(50) not null,
+                       rpam varchar(300) not null,
+                       rppm varchar(300) not null,
+                       rpamnote varchar(300) not null,
+                       rppmnote varchar(300) not null,
+                       rpunprocessed varchar(300),
+                       rpsignificant varchar(300),
+                       rpexpected varchar(300),
+                       rpdate datetime default now(),
+                       rpstate bool default true,
+                       mno int unsigned,
+                       constraint primary key( rpno ),
+                       constraint foreign key( mno ) references member ( mno ) on update cascade on delete cascade
 );
 
 -- 결재 테이블
 create table approval(
-   apno int unsigned auto_increment,
-    apdate datetime default null,
-    apstate bool default false,
-    apsignature varchar(255) default null,
-    mno int unsigned,         -- 승인할 회원번호
-    rpno int unsigned,
-    constraint primary key( apno ),
-    constraint foreign key( mno ) references member ( mno ) on update cascade on delete cascade,
-    constraint foreign key( rpno ) references report ( rpno ) on update cascade on delete cascade
+                         apno int unsigned auto_increment,
+                         apdate datetime default null,
+                         apstate bool default false,
+                         apsignature varchar(255) default null,
+                         mno int unsigned,         -- 승인할 회원번호
+                         rpno int unsigned,
+                         constraint primary key( apno ),
+                         constraint foreign key( mno ) references member ( mno ) on update cascade on delete cascade,
+                         constraint foreign key( rpno ) references report ( rpno ) on update cascade on delete cascade
 );

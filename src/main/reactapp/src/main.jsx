@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 
 const root = createRoot(document.querySelector('#root'))
 
-import Test from './work/App.jsx'
+import App from './work/App.jsx'
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -21,7 +21,7 @@ root.render(
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 autoHideDuration={3000}
             >
-                <Test />
+                <App />
             </SnackbarProvider>
         </PersistGate>
     </Provider>

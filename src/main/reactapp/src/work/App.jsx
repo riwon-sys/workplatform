@@ -24,7 +24,7 @@ import Report_Approval from "./Report_Approval.jsx";
 
 /* redux */
 import { store , persistor } from './member/reduxs/store' // rw 25-03-21
-import { Provider } from 'react-redux'; // rw 25-03-21
+import {Provider, useSelector} from 'react-redux'; // rw 25-03-21
 import { PersistGate } from 'redux-persist/integration/react';; // PersistGate 라이브러리 가져오기 | rw 25-03-21
 
 
@@ -35,8 +35,10 @@ import { useEffect, useState } from "react";
 
 
 import ReportSocket from "./ReportSocket.jsx";
+import BoardWrite from "./BoardWrite.jsx";
 
 export default function App(props) {
+    const loginInfo = useSelector( (state) => state.user.userInfo ); // 🔸 로그인 정보 가져오기
     const [reportState, setReportState] = useState(false);
     const [mnos, setMnos] = useState([])
     const [ data, setData ] = useState({
@@ -55,69 +57,49 @@ export default function App(props) {
 
       console.log(reportState)
     return (
-        <Provider store={store}>  {/* 리덕스 스토어 적용 | rw 25-03-21 */}
 
-           <PersistGate persistor={persistor} loading={ null }> {/* 퍼시스턴스 적용 할 컴포넌트 모두 적용 | rw 25-03-21 */}
-              <ThemeProvider theme={theme}>
-                   <CssBaseline />
-                   <BrowserRouter>
-                       <Box sx={{ display: 'flex' }}>
-                           <SideBar />
-                           <Routes>
-                                 <Route path="/" element={<ChatTeset />} />
-                                 <Route path="/chatting" element={<ChatTeset />} />
-                                 <Route path="/report/write" element={<Report_Write />} />
-                                 <Route path="/report/view" element={<Report_View />} />
-                                 <Route path="/report/view/:rpno" element={<Report_View />} />
-                                 <Route path="/report/approval" element={<Report_Approval />} />
-                                 <Route path="/report/approval/:rpno" element={<Report_Approval />} />
-                                 <Route path="/board" element={<Board />} />
-                                 <Route path="/board/detail" element={<BoardDetail />} />
-                                 <Route path="/board/write" element={<BoardWrite />} />
-                                 <Route path="/report/list" element={<Report_List />} />
-                                 <Route path="/report/Form" element={<Report_Form />} />
-                                 <Route path="/report/update/:rpno" element={<Report_Update />} />
-                                 <Route path="/member/post" element={<Member_Post />} />
-                                 <Route path="/member/login" element={<Member_Login />} />
-                           </Routes>
-                       </Box>
-                   </BrowserRouter>
-              </ThemeProvider>
-           </PersistGate>
-            <PersistGate persistor={persistor} loading={null}> {/* 퍼시스턴스 적용 할 컴포넌트 모두 적용 | rw 25-03-21 */}
-                <ThemeProvider theme={theme}>
-                    <CssBaseline />
-                    <BrowserRouter>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <BrowserRouter>
+                {
+                    loginInfo ? (
+                        // 로그인 되어 있을 때: 사이드바 + 라우트 전체 출력
                         <Box sx={{ display: 'flex' }}>
                             <SideBar
-                            reportState={reportState}
-                            setReportState={setReportState}
-                            mnos={mnos}
-                            setMnos={setMnos}
-                            data={data}
-                            />
+                                reportState={reportState}
+                                setReportState={setReportState}
+                                mnos={mnos}
+                                setMnos={setMnos}
+                                data={data} />
                             <Routes>
                                 <Route path="/" element={<ChatTeset />} />
                                 <Route path="/chatting" element={<ChatTeset />} />
                                 <Route path="/report/write" element={<Report_Write setReportState={setReportState} setMnos={setMnos} setData={setData} />} />
+
                                 <Route path="/report/view" element={<Report_View />} />
                                 <Route path="/report/view/:rpno" element={<Report_View />} />
                                 <Route path="/report/approval" element={<Report_Approval />} />
                                 <Route path="/report/approval/:rpno" element={<Report_Approval />} />
                                 <Route path="/board" element={<Board />} />
                                 <Route path="/board/detail" element={<BoardDetail />} />
+                                <Route path="/board/write" element={<BoardWrite />} />
                                 <Route path="/report/list" element={<Report_List />} />
                                 <Route path="/report/Form" element={<Report_Form />} />
                                 <Route path="/report/update/:rpno" element={<Report_Update />} />
                                 <Route path="/member/post" element={<Member_Post />} />
                                 <Route path="/member/login" element={<Member_Login />} />
-
                             </Routes>
                         </Box>
+                    ) : (
+                        // 로그인 안 되어 있을 때: 로그인 화면만 보여줌
+                        <Routes>
+                            <Route path="*" element={<Member_Login />} />
+                        </Routes>
+                    )
+                }
+            </BrowserRouter>
+        </ThemeProvider>
 
-                    </BrowserRouter>
-                </ThemeProvider>
-            </PersistGate>
-        </Provider>
+
     );
 }
