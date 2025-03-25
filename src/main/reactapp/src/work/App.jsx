@@ -23,7 +23,7 @@ import Report_Approval from "./Report_Approval.jsx";
 
 
 /* redux */
-import { store, persistor } from './member/reduxs/store' // rw 25-03-21
+import { store , persistor } from './member/reduxs/store' // rw 25-03-21
 import { Provider } from 'react-redux'; // rw 25-03-21
 import { PersistGate } from 'redux-persist/integration/react';; // PersistGate 라이브러리 가져오기 | rw 25-03-21
 
@@ -46,7 +46,7 @@ export default function App(props) {
         rpamnote: '',
         rppmnote: '',
         rpunprocessed: '',
-        rpsignificant: '', 
+        rpsignificant: '',
         rpexpected: '',
         mname: '',
         mdepartment: '',
@@ -57,12 +57,39 @@ export default function App(props) {
     return (
         <Provider store={store}>  {/* 리덕스 스토어 적용 | rw 25-03-21 */}
 
+           <PersistGate persistor={persistor} loading={ null }> {/* 퍼시스턴스 적용 할 컴포넌트 모두 적용 | rw 25-03-21 */}
+              <ThemeProvider theme={theme}>
+                   <CssBaseline />
+                   <BrowserRouter>
+                       <Box sx={{ display: 'flex' }}>
+                           <SideBar />
+                           <Routes>
+                                 <Route path="/" element={<ChatTeset />} />
+                                 <Route path="/chatting" element={<ChatTeset />} />
+                                 <Route path="/report/write" element={<Report_Write />} />
+                                 <Route path="/report/view" element={<Report_View />} />
+                                 <Route path="/report/view/:rpno" element={<Report_View />} />
+                                 <Route path="/report/approval" element={<Report_Approval />} />
+                                 <Route path="/report/approval/:rpno" element={<Report_Approval />} />
+                                 <Route path="/board" element={<Board />} />
+                                 <Route path="/board/detail" element={<BoardDetail />} />
+                                 <Route path="/board/write" element={<BoardWrite />} />
+                                 <Route path="/report/list" element={<Report_List />} />
+                                 <Route path="/report/Form" element={<Report_Form />} />
+                                 <Route path="/report/update/:rpno" element={<Report_Update />} />
+                                 <Route path="/member/post" element={<Member_Post />} />
+                                 <Route path="/member/login" element={<Member_Login />} />
+                           </Routes>
+                       </Box>
+                   </BrowserRouter>
+              </ThemeProvider>
+           </PersistGate>
             <PersistGate persistor={persistor} loading={null}> {/* 퍼시스턴스 적용 할 컴포넌트 모두 적용 | rw 25-03-21 */}
                 <ThemeProvider theme={theme}>
                     <CssBaseline />
                     <BrowserRouter>
                         <Box sx={{ display: 'flex' }}>
-                            <SideBar 
+                            <SideBar
                             reportState={reportState}
                             setReportState={setReportState}
                             mnos={mnos}
@@ -84,10 +111,10 @@ export default function App(props) {
                                 <Route path="/report/update/:rpno" element={<Report_Update />} />
                                 <Route path="/member/post" element={<Member_Post />} />
                                 <Route path="/member/login" element={<Member_Login />} />
-                                
+
                             </Routes>
                         </Box>
-                        
+
                     </BrowserRouter>
                 </ThemeProvider>
             </PersistGate>

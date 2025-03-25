@@ -3,6 +3,7 @@ package work.model.mapper.board;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.annotations.UpdateProvider;
@@ -13,12 +14,12 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     //1[게시물 전체조회]
-    @Select("select * from board")
+    @Select("select * from board b inner join category c on b.category_id=c.category_id")
     public List<BoardDto>allView();
 
     //2[게시물등록]
-    @Insert("insert into board( title,content,mno ) " +
-            " values ( #{ title } , #{ content },#{ mno } )")
+    @Insert("insert into board( title,content,mno,category_id ) " +
+            " values ( #{ title } , #{ content },#{ mno },#{ category } )")
     public boolean boardCreate( BoardDto boardCreate );
 
     //3[게시물 상세조회]
@@ -39,6 +40,6 @@ public interface BoardMapper {
 
     //[5]게시물 삭제
 
-    @Delete("delete from board where pid=#{pid}")
-    public boolean boardDelete(int pid);
+    @Delete("delete from board where pid=#{pid} and mno=#{mno}")
+    public boolean boardDelete(@Param("pid") int pid , @Param("mno")int mno);
 }

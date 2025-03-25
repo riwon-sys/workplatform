@@ -4,14 +4,14 @@ use workplatform;
 
 -- 직원 테이블 생성
 CREATE TABLE member (
-    mno INT UNSIGNED,
-    mpwd VARCHAR(255) DEFAULT '1234', -- 암호화 적용 시 평문 대비 길이 증가로 변경 (기존30 > 변경60) | rw 25-03-21
-    mname VARCHAR(30),
-    mphone VARCHAR(13) NOT NULL UNIQUE,
-    memail VARCHAR(100),
-    mtype INT DEFAULT 0,
-    mrank VARCHAR(10) NOT NULL,
-    mprofile VARCHAR(255) DEFAULT 'default.jpg',
+    mno INT UNSIGNED,                            # unsigned : 직별부여 및 사번부여( 1: 인사팀 2: 마케팅팀 3: 영업팀 4: 운영팀 5:기술팀 6:디자인팀 7:재무팀) (맨 앞자리 부서/ 자바에서부여)
+    mpwd VARCHAR(30) DEFAULT '1234',             # default '1234' :  비밀번호 기본값 설정
+    mname VARCHAR(30),                           # not null : 사원 이름
+    mphone VARCHAR(13) NOT NULL UNIQUE,          # not null unique : 사원 전화번호, 고유값 설정
+    memail VARCHAR(100),                         # not null : 사원 사내 이메일
+    mtype INT DEFAULT 0,                         # default 0 : 사원 현재 상태 (0: 활동, 1: 부재, 2: 외부업무, 3: 퇴사)
+    mrank VARCHAR(10) NOT NULL,                  # not null 사원 직급 : 대리 - 과장 - 차장 - 부장
+    mprofile VARCHAR(255) DEFAULT 'default.jpg', # default 'default.jpg' : 프로필 사진 기본값 설정
     PRIMARY KEY (mno)
 );
 
@@ -59,36 +59,36 @@ INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd ) VALUES
 (500039,  '이수빈', '010-3222-4444', 'technologyteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 (500040,  '손석희', '010-4333-5555', 'technologyteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 -- 디자인팀
-(600041,  '윤수한', '010-5444-6666', 'designteam@example.com', 0, '부장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600042,  '최소연', '010-6555-7777', 'designteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600043,  '박성운', '010-7666-8888', 'designteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600045,  '차원희', '010-9888-0000', 'designteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600047,  '박윤주', '010-1111-2222', 'designteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600048,  '김유진', '010-2222-3333', 'designteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
+(600041,  '윤수한', '010-5444-6666', 'designteam@example.com', 0, '부장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600042,  '최소연', '010-6555-7777', 'designteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600043,  '박성운', '010-7666-8888', 'designteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600045,  '차원희', '010-9888-0000', 'designteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600047,  '박윤주', '010-1111-2222', 'designteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600048,  '김유진', '010-2222-3333', 'designteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 -- 재무팀
-(700049,  '김자현', '010-3333-4444', 'financeteam@example.com', 0, '부장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700050,  '김주영', '010-4444-5555', 'financeteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700051,  '김지민', '010-5555-6666', 'financeteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700052,  '차종현', '010-6666-7777', 'financeteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700053,  '도지원', '010-7777-8888', 'financeteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700054,  '김태호', '010-8888-9999', 'financeteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700055,  '한웅재', '010-9999-0000', 'financeteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG');
+(700049,  '김자현', '010-3333-4444', 'financeteam@example.com', 0, '부장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700050,  '김주영', '010-4444-5555', 'financeteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700051,  '김지민', '010-5555-6666', 'financeteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700052,  '차종현', '010-6666-7777', 'financeteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700053,  '도지원', '010-7777-8888', 'financeteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700054,  '김태호', '010-8888-9999', 'financeteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700055,  '한웅재', '010-9999-0000', 'financeteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG');
 -- 외부출장자
 INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd) VALUES
-(300020,  '김리원', '010-4444-5678', 'salesteam_dari@example.com', 2, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(300022,  '서진석', '010-6555-6555', 'salesteam_sawon@example.com', 2, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600044,  '이산', '010-8777-9999', 'designteam_dari@example.com', 2, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG');
+(300020,  '김리원', '010-4444-5678', 'salesteam_dari@example.com', 2, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(300022,  '서진석', '010-6555-6555', 'salesteam_sawon@example.com', 2, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600044,  '이산', '010-8777-9999', 'designteam_dari@example.com', 2, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG');
 -- 퇴사자
 INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd) VALUES
-(100005,  '유나영', '010-5678-9012', 'insateam_dari@example.com', 3, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(300019,  '차정원', '010-3222-3222', 'salesteam_team@example.com', 3, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(300023,  '김현수', '010-7666-7666', 'salesteam_sawon@example.com', 3, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600046,  '이민진', '010-0999-1111', 'designteam_sawon@example.com', 3, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700056,  '현정우', '010-1001-1111', 'financeteam_sawon@example.com', 3, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG');
+(100005,  '유나영', '010-5678-9012', 'insateam_dari@example.com', 3, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(300019,  '차정원', '010-3222-3222', 'salesteam_team@example.com', 3, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(300023,  '김현수', '010-7666-7666', 'salesteam_sawon@example.com', 3, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600046,  '이민진', '010-0999-1111', 'designteam_sawon@example.com', 3, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700056,  '현정우', '010-1001-1111', 'financeteam_sawon@example.com', 3, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG');
 
 # 채팅방 테이블
 create table room (
-    rno int unsigned auto_increment,
+   rno int unsigned auto_increment,
     rname varchar(50) not null,
     rtype varchar(30) not null,
     rdate datetime default now(),
@@ -118,7 +118,7 @@ INSERT INTO room (rname, rtype, mno, rlastdate) VALUES
 ('운영팀-운영 회의', '1', 100003, NOW()); -- 운영팀 운영 회의
 
 create table paritcipant(
-    pno int unsigned auto_increment,
+	pno int unsigned auto_increment,
     pdate datetime default now(),
     mno int unsigned,
     rno int unsigned,
@@ -148,7 +148,7 @@ INSERT INTO paritcipant (mno, rno) VALUES
 
 # 메세지 테이블
 create table message(
-    msno int unsigned auto_increment,
+	msno int unsigned auto_increment,
     msg text ,
     msdate datetime default now(),
     msstate int default 0,
@@ -177,7 +177,7 @@ INSERT INTO message (msg, msdate, pno) VALUES
 
 # 파일 테이블
 create table fileshare(
-    fno int unsigned auto_increment,
+	fno int unsigned auto_increment,
     fname varchar(30),
     flocation varchar(255),
     fdate datetime default now(),
@@ -204,9 +204,23 @@ INSERT INTO fileshare (fname, flocation, pno) VALUES
 ('회의 일지.txt', '/uploads/회의_일지.txt', 14), -- 박시연 (마케팅팀 대리 회의)
 ('분석 자료.xlsx', '/uploads/분석_자료.xlsx', 15); -- 윤지호 (마케팅팀 전체)
 
+-- 카테고리 테이블
+create table category(
+    category_id int unsigned auto_increment primary key,
+    category_name varchar(20) not null,
+    category_desc varchar(100)
+);
+
+-- 카테고리 데이터 추가
+insert into category(category_name, category_desc) values
+('자유게시판', '자유롭게 글을 작성할 수 있는 게시판'),
+('스포츠', '스포츠 관련 토론 게시판'),
+('마음의소리', '고민이나 상담을 나눌 수 있는 게시판'),
+('중고거래', '물품 거래를 위한 게시판');
+
 # 게시판 테이블
 create table board(
-    pid int unsigned auto_increment,
+	pid int unsigned auto_increment,
     title varchar(50) not null,
     content varchar(1000) not null,
     views int unsigned default 0,
@@ -214,21 +228,24 @@ create table board(
     constraint primary key( pid ),
     foreign key(mno)references member(mno)
     on update cascade
-    on delete cascade
+    on delete cascade,
+    constraint foreign key(category_id) references category(category_id)
 );
 
 # 게시판 샘플데이터 삽입
-insert into board (pid,title,content,views,mno) values
-(1, '주변에 맛집있나요?', '매콤한게땡김', 11, 100001),
-(2, '칼퇴해도됩니까?', '칼퇴각', 32, 100002),
-(3, '집에가고싶은데', '집가도됨?', 10, 100003),
-(4, '팀장님들 요즘 왜이럼?', '떡볶이 vs 곱창 추천좀', 30, 100004);
+insert into board (pid,title,content,views,mno,category_id) values
+(1, '주변에 맛집있나요?', '매콤한게땡김', 11, 100001,1),
+(2, '칼퇴해도됩니까?', '칼퇴각', 32, 100002,1),
+(3, '집에가고싶은데', '집가도됨?', 10, 100003,2),
+(4, '팀장님들 요즘 왜이럼?', '떡볶이 vs 곱창 추천좀', 30, 100004,3);
+
+
 
 # 보고서 테이블
 create table report(
-    rpno int unsigned auto_increment,
+	rpno int unsigned auto_increment,
     rpname varchar(50) not null,
-    rpam varchar(300) not null,
+	rpam varchar(300) not null,
     rppm varchar(300) not null,
     rpamnote varchar(300) not null,
     rppmnote varchar(300) not null,
@@ -441,6 +458,8 @@ select * from message ;
 select * from fileshare;
 select * from approval;
 select * from board;
+select * from boardwrite;
+select * from member;
 
 select rpno from report order by rpno desc limit 1;
 SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'workplatform' AND TABLE_NAME = 'report';

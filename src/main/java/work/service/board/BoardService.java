@@ -64,9 +64,9 @@ public class BoardService {
 
 
     //[5]게시물 삭제
-    public boolean boardDelete(int pid){
+    public boolean boardDelete(int pid , int mno){
         System.out.println("BoardService.boardDelete");
-        System.out.println("pid = " + pid);
-        return boardMapper.boardDelete(pid);
+        System.out.println("pid = " + pid + ", mno = " + mno);
+        return boardMapper.boardDelete(pid,mno);
     }
 }
