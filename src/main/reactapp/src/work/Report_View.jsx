@@ -129,11 +129,20 @@ export default function Report_View() {
       return;
     }
   
+    // 기존 스타일 저장
+    const originalStyle = {
+      width: element.style.width,
+      height: element.style.height,
+      maxWidth: element.style.maxWidth,
+      visibility: element.style.visibility,
+    };
+
     // 너비 고정 (A4 가로 크기에 맞게 설정)
     element.style.width = "800px"; 
     element.style.height = "auto"; 
     element.style.maxWidth = "none"; 
     element.style.background = "white";  // 배경 흰색으로 설정 (투명 배경 방지)
+    element.style.visibility = "hidden"; // 깜빡임 방지
 
     try {
       const dataUrl = await domtoimage.toPng(element, {
@@ -147,17 +156,21 @@ export default function Report_View() {
       img.onload = () => {
         const pageWidth = doc.internal.pageSize.getWidth();
         const pageHeight = doc.internal.pageSize.getHeight();
-        const padding = 10; // 패딩 설정
-        const imgWidth = pageWidth * 0.9; // 90% 크기 조정
+        const padding = 15; // 패딩 설정
+        const imgWidth = pageWidth * 0.85; // 90% 크기 조정
         // const imgHeight = (img.height * imgWidth) / img.width; // 비율 유지
-        const imgHeight = pageHeight * 0.9; // 비율 유지
+        const imgHeight = pageHeight * 0.; // 비율 유지
   
         doc.addImage(img, "PNG", padding, padding, imgWidth, imgHeight, '', 'FAST');
         doc.save("screenshot.pdf");
+
+        // 원래 스타일 복원
+        Object.assign(element.style, originalStyle);
       };
     } catch (error) {
       console.error("PDF 변환 오류:", error);
     }
+    // element.style.width = "100%"; 
   };
   
 

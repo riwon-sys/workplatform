@@ -90,7 +90,6 @@ export default function Report_Form(
                 <div> ({week}) </div>  
               </div>
             </td>
-            {/* <td style={{ width: '30%' }} > {year}년 {month}월 {date}일 ({week}) </td> */}
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성자 </th>
             <td style={{ width: '30%' }} > { formData.mname } </td>
           </tr>
