@@ -40,3 +40,11 @@
 .read-the-docs {
   color: #888;
 }
+
+/*  Member_Login.jsx 애니메이션 정의 | rw 25-03-25 생성 */
+@keyframes fadeInMove {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -24,6 +24,11 @@ body{ min-height: 100%;}
 #sideMenu .logoLink > img{ width: 40px; margin: 10px; }
 #sideMenu .logoLink > span{ font-weight: bold; font-size: 20px;}
 
-
-
+/*  Member_Login.jsx 애니메이션 정의 | rw 25-03-25 생성 */
+@keyframes fadeInMove {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 

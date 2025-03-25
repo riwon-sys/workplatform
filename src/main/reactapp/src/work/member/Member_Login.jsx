@@ -1,96 +1,259 @@
-import { useState } from "react";                // rw 25-03-20
-import axios from "axios";                       // rw 25-03-20
-import { useNavigate } from "react-router-dom";  // rw 25-03-20
+import { useEffect, useState, useRef } from "react"; // 가장 위에 추가 및 use 통합 | rw 25-03-25
+import axios from "axios"; // rw 25-03-20
+import { useNavigate } from "react-router-dom"; // rw 25-03-20
 
-import { useDispatch } from 'react-redux';        //  로그인 > 회원정보 요청 store 저장  | rw 25-03-21
-import { login } from '../member/reduxs/userSlice' // rw 25-03-21
+import { useDispatch } from "react-redux"; //  로그인 > 회원정보 요청 store 저장  | rw 25-03-21
+import { login } from "../member/reduxs/userSlice"; // rw 25-03-21
 
-import { ThemeProvider, createTheme } from "@mui/material/styles";                           // rw 25-03-20
-import { Box, Card, IconButton, TextField, Button, Typography, Stack } from "@mui/material"; // rw 25-03-20
-import { Brightness7, Brightness4, Settings, Close } from "@mui/icons-material";             // rw 25-03-20
+import {
+    ThemeProvider,
+    createTheme,
+    Box,
+    Card,
+    IconButton,
+    TextField,
+    Button,
+    Typography,
+    Stack
+} from "@mui/material";
+import {
+    Brightness7,
+    Brightness4,
+    Settings,
+    Close,
+    Visibility,
+    VisibilityOff
+} from "@mui/icons-material";
+import { useSnackbar } from "notistack"; // 토스트 메시지
 
 export default function Member_Login() {
-  // ========= 리덕스 전역 변수 사용 =========        | rw 25-03-21
-  // (1-1) 리덕스 사용하기 위한 useDispatch 함수 가져오기 | rw 25-03-21
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
 
+    const [memberInfo, setMemberInfo] = useState({ mno: "", mpwd: "" });
+    const [loginError, setLoginError] = useState("");
+    const [autoLogin, setAutoLogin] = useState(false);
+    const [loading, setLoading] = useState(false);
 
-  // (1) 입력 값 저장 (state)  | rw 25-03-20
-  const [memberInfo, setMemberInfo] = useState({ mno: "", mpwd: "" });
+    useEffect(() => {
+        const savedMno = localStorage.getItem("autoLoginMno");
+        if (savedMno) {
+            setMemberInfo((prev) => ({ ...prev, mno: savedMno }));
+            setAutoLogin(true);
+        }
+    }, []);
 
-  // (2) 입력값 변경 처리  | rw 25-03-20
-  const onInputChange = (event) => {
-    setMemberInfo({ ...memberInfo, [event.target.name]: event.target.value });
-  };
+    const onInputChange = (e) => {
+        setMemberInfo({ ...memberInfo, [e.target.name]: e.target.value });
+    };
 
-  // (3) 로그인 요청 처리 | rw 25-03-20
-  const navigate = useNavigate();
-  const onLogin = async () => {
-    try {
-      const response = await axios.post("http://localhost:8080/workplatform/login", memberInfo , {withCredentials: true});
-      const result = response.data;
-      if (result == true) {
-          // (4) 로그인 성공 할 경우 로그인 성공한 회원 정보 가져오기 | rw 25-03-21
-          const response2 = await axios.get('http://localhost:8080/workplatform/myinfo', {withCredentials :true});
-        alert("Login successful");
-        navigate("/"); // 네비게이트 부활 | rw 25-03-21
-        // location.href="/"; // 로케이션 죽음 | rw 25-03-21
-        // ========= 리덕스 전역 변수 사용 ========= | rw 25-03-21
-        // (2-1) useDispatch 함수를 이용한 리듀서 함수 액션 하기; 로그인 액션에 회원정보를 대입한다( 전역변수 대입 )| rw 25-03-21
-        dispatch ( login ( response2.data )); // useState(지역) 아닌 store (전역)에 저장 response.data:payload | rw 25-03-21
+    const onLogin = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.post(
+                "http://localhost:8080/workplatform/login",
+                memberInfo,
+                { withCredentials: true }
+            );
+            const result = response.data;
 
-      } else {
-        alert("Login failed");
-      }
-    } catch (error) {
-      alert("서버 오류 발생");
-      console.error(error);
-    }
-  };
+            if (result === true) {
+                const response2 = await axios.get(
+                    "http://localhost:8080/workplatform/myinfo",
+                    { withCredentials: true }
+                );
 
-  return <LoginScreen memberInfo={memberInfo} onInputChange={onInputChange} onLogin={onLogin} />;
+                // ✅ 직렬화 가능한 값만 추출해서 구성
+                const safeUserInfo = {
+                    mno: response2.data.mno,
+                    mname: response2.data.mname,
+                    mrank: response2.data.mrank,
+                    mprofile: response2.data.mprofile
+                };
+
+                dispatch(login(safeUserInfo)); // ✅ 안전하게 리덕스에 저장
+
+                if (autoLogin) {
+                    localStorage.setItem("autoLoginMno", memberInfo.mno);
+                } else {
+                    localStorage.removeItem("autoLoginMno");
+                }
+
+                enqueueSnackbar("로그인 성공! 사원님 오늘도 화이팅! 🎉", {
+                    variant: "success"
+                });
+
+                navigate("/");
+            } else {
+                setLoginError("사원번호 또는 비밀번호가 올바르지 않습니다.");
+            }
+        } catch (error) {
+            setLoginError("서버 오류 발생. 관리자에게 문의하세요.");
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return (
+        <LoginScreen
+            memberInfo={memberInfo}
+            onInputChange={onInputChange}
+            onLogin={onLogin}
+            loginError={loginError}
+            autoLogin={autoLogin}
+            setAutoLogin={setAutoLogin}
+            loading={loading}
+        />
+    );
 }
 
-// (4) 로그인 화면 UI
-const LoginScreen = ({ memberInfo, onInputChange, onLogin }) => {
-  const [darkMode, setDarkMode] = useState(false);
-  const toggleColorMode = () => setDarkMode(!darkMode);
-  const theme = createTheme({
-    palette: {
-      mode: darkMode ? "dark" : "light",
-    },
-  });
+const LoginScreen = ({
+                         memberInfo,
+                         onInputChange,
+                         onLogin,
+                         loginError,
+                         autoLogin,
+                         setAutoLogin,
+                         loading
+                     }) => {
+    const [darkMode, setDarkMode] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
+    const mpwdInputRef = useRef(null);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", padding: "20px" }}>
-        <Card variant="outlined" sx={{ width: "100%", maxWidth: "400px", padding: "40px", borderRadius: "12px", position: "relative" }}>
-          {/* 우측 상단 버튼 */}
-          <Box sx={{ position: "absolute", top: 5, right: 5, display: "flex", gap: 1 }}>
-            <IconButton color="primary" onClick={toggleColorMode}>
-              {darkMode ? <Brightness7 /> : <Brightness4 />}
-            </IconButton>
-            <IconButton color="primary">
-              <Settings />
-            </IconButton>
-            <IconButton color="primary">
-              <Close />
-            </IconButton>
-          </Box>
+    const toggleColorMode = () => setDarkMode(!darkMode);
+    const toggleShowPassword = () => setShowPassword((prev) => !prev);
 
-          {/* 로그인 폼 */}
-          <Typography variant="h5" align="center" gutterBottom>
-            로그인
-          </Typography>
-          <Stack spacing={2}>
-            <TextField label="사원번호" name="mno" value={memberInfo.mno} onChange={onInputChange} variant="outlined" fullWidth />
-            <TextField label="비밀번호" name="mpwd" type="password" value={memberInfo.mpwd} onChange={onInputChange} variant="outlined" fullWidth />
-            <Button variant="contained" color="primary" fullWidth onClick={onLogin}>
-              로그인
-            </Button>
-          </Stack>
-        </Card>
-      </Box>
-    </ThemeProvider>
-  );
+    const theme = createTheme({
+        palette: {
+            mode: darkMode ? "dark" : "light"
+        }
+    });
+
+    return (
+        <ThemeProvider theme={theme}>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh",
+                    padding: "20px"
+                }}
+            >
+                <Card
+                    variant="outlined"
+                    sx={{
+                        width: "100%",
+                        maxWidth: "600px",
+                        padding: "60px",
+                        borderRadius: "16px",
+                        position: "relative",
+                        opacity: 0,
+                        transform: "translateY(30px)",
+                        animation: "fadeInMove 0.8s ease forwards"
+                    }}
+                >
+                    {/* 우측 상단 아이콘 */}
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: 5,
+                            right: 5,
+                            display: "flex",
+                            gap: 1
+                        }}
+                    >
+                        <IconButton color="primary" onClick={toggleColorMode}>
+                            {darkMode ? <Brightness7 /> : <Brightness4 />}
+                        </IconButton>
+                        <IconButton color="primary">
+                            <Settings />
+                        </IconButton>
+                        <IconButton color="error" onClick={() => navigate("/")}>
+                            <Close />
+                        </IconButton>
+                    </Box>
+
+                    <Typography variant="h4" align="center" gutterBottom>
+                        WorkPlatform 로그인
+                    </Typography>
+
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            onLogin();
+                        }}
+                    >
+                        <Stack spacing={3} sx={{ mt: 3 }}>
+                            <TextField
+                                label="사원번호"
+                                name="mno"
+                                value={memberInfo.mno}
+                                onChange={onInputChange}
+                                fullWidth
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        e.preventDefault();
+                                        mpwdInputRef.current?.focus();
+                                    }
+                                }}
+                            />
+
+                            <TextField
+                                label="비밀번호"
+                                name="mpwd"
+                                type={showPassword ? "text" : "password"}
+                                value={memberInfo.mpwd}
+                                onChange={onInputChange}
+                                inputRef={mpwdInputRef}
+                                fullWidth
+                                InputProps={{
+                                    endAdornment: (
+                                        <IconButton onClick={toggleShowPassword} edge="end">
+                                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                                        </IconButton>
+                                    )
+                                }}
+                            />
+
+                            {loginError && (
+                                <Typography variant="body2" color="error" align="center">
+                                    {loginError}
+                                </Typography>
+                            )}
+
+                            <Box sx={{ display: "flex", alignItems: "center" }}>
+                                <input
+                                    type="checkbox"
+                                    checked={autoLogin}
+                                    onChange={(e) => setAutoLogin(e.target.checked)}
+                                    id="autoLogin"
+                                />
+                                <label htmlFor="autoLogin" style={{ marginLeft: 8 }}>
+                                    자동 로그인
+                                </label>
+                            </Box>
+
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                fullWidth
+                                type="submit"
+                                disabled={loading}
+                            >
+                                {loading ? "로그인 중입니다..." : "로그인"}
+                            </Button>
+
+                            <Typography variant="caption" color="textSecondary" align="center">
+                                로그인 관련 문의사항은 <strong>insateam@example.com</strong> 으로 연락 바랍니다.
+                            </Typography>
+                        </Stack>
+                    </form>
+                </Card>
+            </Box>
+        </ThemeProvider>
+    );
 };

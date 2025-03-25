@@ -2,72 +2,72 @@
 INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd ) VALUES
 -- 재직자
 -- 인사팀
-(100001, '최민경', '010-1234-5678', 'insateam@example.com', 0, '부장' , '$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(100002, '조윤서', '010-2345-6789', 'insateam_team@example.com', 0, '차장' , '$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(100003, '박예진', '010-3456-7890', 'insateam_team@example.com', 0, '차장' ,'$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(100004, '이민호', '010-4567-8901', 'insateam_dari@example.com', 0, '과장' ,'$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(100006, '이시훈', '010-6789-0123', 'insateam_sawon@example.com', 0, '과장' ,'$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(100007, '김은서', '010-7890-1234', 'insateam_sawon@example.com', 0, '대리' ,'$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(100008, '최진우', '010-8901-2345', 'insateam_sawon@example.com', 0, '대리' ,'$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
+(100001, '최민경', '010-1234-5678', 'insateam@example.com', 0, '부장' , '$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(100002, '조윤서', '010-2345-6789', 'insateam_team@example.com', 0, '차장' , '$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(100003, '박예진', '010-3456-7890', 'insateam_team@example.com', 0, '차장' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(100004, '이민호', '010-4567-8901', 'insateam_dari@example.com', 0, '과장' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(100006, '이시훈', '010-6789-0123', 'insateam_sawon@example.com', 0, '과장' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(100007, '김은서', '010-7890-1234', 'insateam_sawon@example.com', 0, '대리' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(100008, '최진우', '010-8901-2345', 'insateam_sawon@example.com', 0, '대리' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 -- 마케팅팀
-(200009, '윤지호', '010-1122-3344', 'marketingteam@example.com', 0, '부장' ,'$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(200010, '정지환', '010-2233-4455', 'marketingteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(200011, '이진아', '010-3344-5566', 'marketingteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(200012, '박시연', '010-4455-6677', 'marketingteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(200013, '김도현', '010-5566-7788', 'marketingteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(200014, '전윤아', '010-6677-8899', 'marketingteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(200015, '송지훈', '010-7788-9900', 'marketingteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(200016, '김도하', '010-8899-0011', 'marketingteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
+(200009, '윤지호', '010-1122-3344', 'marketingteam@example.com', 0, '부장' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(200010, '정지환', '010-2233-4455', 'marketingteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(200011, '이진아', '010-3344-5566', 'marketingteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(200012, '박시연', '010-4455-6677', 'marketingteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(200013, '김도현', '010-5566-7788', 'marketingteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(200014, '전윤아', '010-6677-8899', 'marketingteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(200015, '송지훈', '010-7788-9900', 'marketingteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(200016, '김도하', '010-8899-0011', 'marketingteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 -- 영업팀
-(300017,  '김재영', '010-1001-1001', 'salesteam@example.com', 0, '부장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(300018,  '이서진', '010-2111-2111', 'salesteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(300021,  '박희만', '010-5444-5444', 'salesteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(300024,  '박현수', '010-8777-8777', 'salesteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
+(300017,  '김재영', '010-1001-1001', 'salesteam@example.com', 0, '부장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(300018,  '이서진', '010-2111-2111', 'salesteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(300021,  '박희만', '010-5444-5444', 'salesteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(300024,  '박현수', '010-8777-8777', 'salesteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 -- 운영팀
-(400025,  '차현수', '010-9888-9888', 'operationteam@example.com', 0, '부장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(400026,  '모현수', '010-9999-0001', 'operationteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(400027,  '도현수', '010-0000-1111', 'operationteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(400028,  '고현수', '010-1111-2232', 'operationteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(400029,  '김민준', '010-2222-7333', 'operationteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(400030,  '이서현', '010-3333-4744', 'operationteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(400031,  '차현우', '010-4444-5545', 'operationteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(400032,  '장우진', '010-5555-6636', 'operationteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
+(400025,  '차현수', '010-9888-9888', 'operationteam@example.com', 0, '부장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(400026,  '모현수', '010-9999-0001', 'operationteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(400027,  '도현수', '010-0000-1111', 'operationteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(400028,  '고현수', '010-1111-2232', 'operationteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(400029,  '김민준', '010-2222-7333', 'operationteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(400030,  '이서현', '010-3333-4744', 'operationteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(400031,  '차현우', '010-4444-5545', 'operationteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(400032,  '장우진', '010-5555-6636', 'operationteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 -- 기술팀
-(500033,  '박시원', '010-6666-7771', 'technologyteam@example.com', 0, '부장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(500034,  '이건우', '010-7777-8882', 'technologyteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(500035,  '나건주', '010-8888-9993', 'technologyteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(500036,  '김동백', '010-9999-4534', 'technologyteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(500037,  '신동일', '010-1001-2222', 'technologyteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(500038,  '김보민', '010-2111-3333', 'technologyteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(500039,  '이수빈', '010-3222-4444', 'technologyteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(500040,  '손석희', '010-4333-5555', 'technologyteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
+(500033,  '박시원', '010-6666-7771', 'technologyteam@example.com', 0, '부장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(500034,  '이건우', '010-7777-8882', 'technologyteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(500035,  '나건주', '010-8888-9993', 'technologyteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(500036,  '김동백', '010-9999-4534', 'technologyteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(500037,  '신동일', '010-1001-2222', 'technologyteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(500038,  '김보민', '010-2111-3333', 'technologyteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(500039,  '이수빈', '010-3222-4444', 'technologyteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(500040,  '손석희', '010-4333-5555', 'technologyteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 -- 디자인팀
-(600041,  '윤수한', '010-5444-6666', 'designteam@example.com', 0, '부장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600042,  '최소연', '010-6555-7777', 'designteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600043,  '박성운', '010-7666-8888', 'designteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600045,  '차원희', '010-9888-0000', 'designteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600047,  '박윤주', '010-1111-2222', 'designteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600048,  '김유진', '010-2222-3333', 'designteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
+(600041,  '윤수한', '010-5444-6666', 'designteam@example.com', 0, '부장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600042,  '최소연', '010-6555-7777', 'designteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600043,  '박성운', '010-7666-8888', 'designteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600045,  '차원희', '010-9888-0000', 'designteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600047,  '박윤주', '010-1111-2222', 'designteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600048,  '김유진', '010-2222-3333', 'designteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 -- 재무팀
-(700049,  '김자현', '010-3333-4444', 'financeteam@example.com', 0, '부장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700050,  '김주영', '010-4444-5555', 'financeteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700051,  '김지민', '010-5555-6666', 'financeteam_team@example.com', 0, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700052,  '차종현', '010-6666-7777', 'financeteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700053,  '도지원', '010-7777-8888', 'financeteam_dari@example.com', 0, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700054,  '김태호', '010-8888-9999', 'financeteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700055,  '한웅재', '010-9999-0000', 'financeteam_sawon@example.com', 0, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG');
+(700049,  '김자현', '010-3333-4444', 'financeteam@example.com', 0, '부장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700050,  '김주영', '010-4444-5555', 'financeteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700051,  '김지민', '010-5555-6666', 'financeteam_team@example.com', 0, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700052,  '차종현', '010-6666-7777', 'financeteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700053,  '도지원', '010-7777-8888', 'financeteam_dari@example.com', 0, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700054,  '김태호', '010-8888-9999', 'financeteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700055,  '한웅재', '010-9999-0000', 'financeteam_sawon@example.com', 0, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG');
 -- 외부출장자
 INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd) VALUES
-(300020,  '김리원', '010-4444-5678', 'salesteam_dari@example.com', 2, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(300022,  '서진석', '010-6555-6555', 'salesteam_sawon@example.com', 2, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600044,  '이산', '010-8777-9999', 'designteam_dari@example.com', 2, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG');
+(300020,  '김리원', '010-4444-5678', 'salesteam_dari@example.com', 2, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(300022,  '서진석', '010-6555-6555', 'salesteam_sawon@example.com', 2, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600044,  '이산', '010-8777-9999', 'designteam_dari@example.com', 2, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG');
 -- 퇴사자
 INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd) VALUES
-(100005,  '유나영', '010-5678-9012', 'insateam_dari@example.com', 3, '과장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(300019,  '차정원', '010-3222-3222', 'salesteam_team@example.com', 3, '차장','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(300023,  '김현수', '010-7666-7666', 'salesteam_sawon@example.com', 3, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(600046,  '이민진', '010-0999-1111', 'designteam_sawon@example.com', 3, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG'),
-(700056,  '현정우', '010-1001-1111', 'financeteam_sawon@example.com', 3, '대리','$2a$10$zHUwvZq9jU0ow2MZlZ5meucC4FnzEc5hC0I0tBRaZ89LzDAnuEbUG');
+(100005,  '유나영', '010-5678-9012', 'insateam_dari@example.com', 3, '과장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(300019,  '차정원', '010-3222-3222', 'salesteam_team@example.com', 3, '차장','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(300023,  '김현수', '010-7666-7666', 'salesteam_sawon@example.com', 3, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(600046,  '이민진', '010-0999-1111', 'designteam_sawon@example.com', 3, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(700056,  '현정우', '010-1001-1111', 'financeteam_sawon@example.com', 3, '대리','$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG');
 
 -- 채팅방 샘플 데이터 삽입
 INSERT INTO room (rname, rtype, mno, rlastdate) VALUES
@@ -141,12 +141,13 @@ INSERT INTO fileshare (fname, flocation, pno) VALUES
 ('회의 일지.txt', '/uploads/회의_일지.txt', 14), -- 박시연 (마케팅팀 대리 회의)
 ('분석 자료.xlsx', '/uploads/분석_자료.xlsx', 15); -- 윤지호 (마케팅팀 전체)
 
--- 게시판 샘플데이터 삽입
-insert into board (pid,title,content,views,mno)values
+# 게시판 샘플데이터 삽입
+insert into board (pid,title,content,views,mno) values
 (1, '주변에 맛집있나요?', '매콤한게땡김', 11, 100001),
 (2, '칼퇴해도됩니까?', '칼퇴각', 32, 100002),
 (3, '집에가고싶은데', '집가도됨?', 10, 100003),
 (4, '팀장님들 요즘 왜이럼?', '떡볶이 vs 곱창 추천좀', 30, 100004);
+
 
 
 --- 댓글 샘플데이터 삽입
