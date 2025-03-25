@@ -13,8 +13,10 @@ import Board from './Board.jsx';
 import BoardDetail from './BoardDetail.jsx'
 import theme from './theme';
 import ChatTeset from "../chatsocket/chat/ChattingTest.jsx";
-import Report_List from './component/report/Report_List';
-import Report_Form from './component/report/Report_Form.jsx';
+import Report_List from "./component/report/Report_List.jsx";
+import Report_Form from "./component/report/Report_Form.jsx";
+
+
 import Member_Post from "./member/Member_Post.jsx";
 import Member_Login from "./member/Member_Login.jsx";
 
@@ -23,7 +25,7 @@ import Report_Approval from "./Report_Approval.jsx";
 
 
 /* redux */
-
+import { store , persistor } from './member/reduxs/store' // rw 25-03-21
 import { Provider } from 'react-redux'; // rw 25-03-21
 import { PersistGate } from 'redux-persist/integration/react';; // PersistGate 라이브러리 가져오기 | rw 25-03-21
 

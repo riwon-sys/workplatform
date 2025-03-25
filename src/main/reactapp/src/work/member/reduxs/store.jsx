@@ -28,7 +28,11 @@ const persistedReducer = persistReducer( persistConfig, userReducer )
 export const store = configureStore({
    // reducer : { user : userReducer } // 퍼시스턴스 적용하기전의 리듀서
 // (12-(9)) 퍼시스턴스 적용된 리듀서 | rw 25-03-21
-   reducer : { user : persistedReducer }
+   reducer : { user : persistedReducer },
+   middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: false, // 직렬화 체크 비활성화
+      })
 })
 
 // (12-(10)) persistor 만들기 | rw 25-03-21

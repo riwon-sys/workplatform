@@ -4,7 +4,7 @@ import BasicSelect from './BasicSelect';
 import CustomTextarea from './CustomTextarea';
 
 export default function Report_Form( 
-  { formData, formDataChange, isReadOnly, approval, handleApprovalChange, membersByRank, isUpdate } ){
+  { id, formData, formDataChange, isReadOnly, approval, handleApprovalChange, membersByRank, isUpdate } ){
 
   let today = new Date();
   let year = today.getFullYear(); // 년도
@@ -15,6 +15,7 @@ export default function Report_Form(
   let day = year+''+month+''+date;
 
   return(<>
+    <div id={ id } >
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }} >
       <div style={{ margin: '0 auto', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} >
         <h1 style={{ marginRight: 10 }} > 일일 업무 </h1>
@@ -31,7 +32,7 @@ export default function Report_Form(
                   const selectedMno = approval.find((item) => item.rank === rank)?.mno || "";
 
                   return (
-                    <td key={ rank } width="100px">
+                    <td key={ rank } width="100px" >
                       <BasicSelect
                         rank={ rank }
                         members={ membersByRank[rank] || [] }
@@ -58,9 +59,15 @@ export default function Report_Form(
                     {
                       rank.apsignature ? 
                       <img 
-                      src={`http://localhost:8080/file/${rank.apsignature}`}
-                      style={{ width: '95%', padding: 5 }} 
-                      alt="서명 이미지" /> : null
+                        src={`http://localhost:8080/file/${rank.apsignature}`}
+                        style={{ 
+                          width: '95%', 
+                          padding: 5
+                        }} 
+                        alt="서명 이미지" 
+                        onFocus={(e) => e.target.style.border = 'none'} // focus 시 테두리 제거
+                        onBlur={(e) => e.target.style.border = 'none'}
+                      /> : null
                     }
                   </td>
                 )) :
@@ -77,11 +84,12 @@ export default function Report_Form(
         <tbody>
           <tr>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성일자 </th>
-            <td style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', height: '100%', border: 'none' }} > 
-              <div> {year}년 {month}월 {date}일 </div>
-              <div> ({week}) </div>  
+            <td style={{ width: '30%' }} > 
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', height: '100%', }} >
+                <div> {year}년 {month}월 {date}일 </div>
+                <div> ({week}) </div>  
+              </div>
             </td>
-            {/* <td style={{ width: '30%' }} > {year}년 {month}월 {date}일 ({week}) </td> */}
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성자 </th>
             <td style={{ width: '30%' }} > { formData.mname } </td>
           </tr>
@@ -99,13 +107,13 @@ export default function Report_Form(
         <tbody>
           <tr>
             <th style={{ width: '15%', backgroundColor: '#eeeeee' }} rowSpan={3} > 금일<br/>실시사항 </th>
-            <th style={{ width: '65%', height: '5%', backgroundColor: '#eeeeee' }} colSpan={2} > 금일 업무보고 </th>
-            <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 비 고 </th>   
+            <th style={{ width: '55%', height: '5%', backgroundColor: '#eeeeee' }} colSpan={2} > 금일 업무보고 </th>
+            <th style={{ width: '30%', backgroundColor: '#eeeeee' }} > 비 고 </th>   
           </tr>
 
           <tr>
             <th style={{ width: '5%', backgroundColor: '#eeeeee' }} > 오전 </th>   
-            <td style={{ width: '60%' }} > 
+            <td style={{ width: '50%' }} > 
               <CustomTextarea name="rpam" value={formData.rpam} 
                 onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>  
@@ -117,7 +125,7 @@ export default function Report_Form(
 
           <tr>
             <th style={{ width: '5%', backgroundColor: '#eeeeee' }} > 오후 </th> 
-            <td style={{ width: '60%' }} > 
+            <td style={{ width: '50%' }} > 
               <CustomTextarea name="rppm" value={formData.rppm} 
                 onChange={formDataChange} isReadOnly={isReadOnly} />
             </td>  
@@ -153,5 +161,6 @@ export default function Report_Form(
         </tbody>
       </table>
     </form>
+    </div>
   </>);
 } // f end
