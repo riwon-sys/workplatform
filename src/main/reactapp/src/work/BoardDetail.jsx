@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
 
-import {useSearchParams} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Table } from '@mui/material';
@@ -12,6 +12,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import ImageIcon from '@mui/icons-material/Image';
+import { useSelector } from 'react-redux';
 
 
 
@@ -45,8 +46,12 @@ export default function BoardDetail() {
   const pid = searchParams.get("pid");
 
   const [board,setBoard] = useState({});
- 
 
+  const loginInfo = useSelector( (state) => state.user.userInfo );
+ 
+    //페이지 이동을 위한 navigate
+      const navigate = useNavigate();
+  
 
 
   useEffect(()=>{//게시물 상세페이지 관리
@@ -66,90 +71,45 @@ export default function BoardDetail() {
 
   //HTML에서 입력한 데이터를 STATE에서 관리
   const[comment,setComment] = useState('');
-  //작성자 샘플 : 리덕스에서 가져올 예정
-  const mno = 100001;
 
   //댓글 등록함수
   const createComment = async() => {
-    const sendData = {mno:mno , pid:pid , content : comment }
+      //작성자 샘플 : 리덕스에서 가져올 예정
+
+  const mno = loginInfo.mno;
+
+    const sendData = {mno:mno , pid:pid , content : comment}
     const response = await axios.post('http://localhost:8080/work/reply' , sendData )
     if(response.data == true){alert('댓글이 등록 되었습니다.');setComment('');getview();}
     else{alert('댓글 작성을 실패했습니다.');}
   }
 
+   
+   // 게시물 삭제 함수
+const deleteBoard = async() => {
 
-  //댓글 수정 모달열기
-  const openEditModal = (comment) => {
-    setEditComment({
-      cid: comment.cid,
-      content: comment.content
-    });
-    setIsEditModalOpen(true);
-  };
+  //if (!password) return;  // 취소 버튼 클릭 시
 
-  //댓글 수정 모달 닫기
-
-    // 댓글 수정 모달 닫기
-    const closeEditModal = () => {
-      setIsEditModalOpen(false);
-      setEditComment({ cid: null, content: '' });
-    };
-
-    // 댓글 수정 함수
-    const updateComment = async() => {
-      if(!editComment.content.trim()) {
-        alert('댓글 내용을 입력해주세요.');
-        return;
-      }
-
-
-        
-    const sendData = { 
-      cid: editComment.cid, 
-      mno: mno, 
-      content: editComment.content 
-    };
-
-    try {
-      const response = await axios.put('http://localhost:8080/work/reply', sendData);
-      if(response.data === true) {
-        alert('댓글이 수정되었습니다.');
-        closeEditModal();
-        getview(); // 댓글 목록 새로고침
-      } else {
-        alert('댓글 수정에 실패했습니다.');
-      }
-    } catch(error) {
-      console.error('댓글 수정 오류:', error);
-      alert('댓글 수정 중 오류가 발생했습니다.');
+  const mno = loginInfo.mno
+  try {
+    const response = await axios.delete(`http://localhost:8080/work/board?pid=${pid}&mno=${mno}`);
+    if (response.data === true) {
+      alert('게시물이 삭제되었습니다.');
+      navigate('/');
+    } else {
+      alert('게시물 삭제에 실패했습니다. 비밀번호를 확인해주세요.');
     }
-  };
+  } catch (error) {
+    console.error('게시물 삭제 오류:', error);
+    alert('게시물 삭제 중 오류가 발생했습니다.');
+  }
+};
+    
+    
 
 
-  //댓글 삭제 함수
 
-
-  const deleteComment = async(cid) => {
-    if(!window.confirm('정말 이 댓글을 삭제하시겠습니까?')) {
-      return;
-    }
-
-
-       
-    try {
-      const response = await axios.delete(`http://localhost:8080/work/reply?cid=${cid}&mno=${mno}`);
-      if(response.data === true) {
-        alert('댓글이 삭제되었습니다.');
-        getview(); // 댓글 목록 새로고침
-      } else {
-        alert('댓글 삭제에 실패했습니다.');
-      }
-    } catch(error) {
-      console.error('댓글 삭제 오류:', error);
-      alert('댓글 삭제 중 오류가 발생했습니다.');
-    }
-  };
-
+      
   return (
     <>
       <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
@@ -179,7 +139,7 @@ export default function BoardDetail() {
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Box sx={{ color: '#0068c3', fontSize: '14px', fontWeight: 'medium' }}>
-                    삼성물산 
+                    회사원
                   </Box>
                   <Box sx={{ color: '#999', fontSize: '14px', marginLeft: '4px' }}>
                     ********
@@ -219,6 +179,10 @@ export default function BoardDetail() {
                   <ChatBubbleOutlineOutlinedIcon sx={{ fontSize: '18px', mr: 0.5 }} /> 
                   10
                 </Button>
+                 {/* 삭제 버튼 추가 */}
+                 <Button variant="text" sx={{ color: '#d32f2f', fontSize: '14px', mr: 1 }} onClick={deleteBoard}>
+  삭제
+</Button>
                 <Box sx={{ marginLeft: 'auto', display: 'flex' }}>
                   <Avatar sx={{ bgcolor: '#FFD700', width: 24, height: 24, fontSize: '12px', mr: 1 }}>K</Avatar>
                   <Avatar sx={{ bgcolor: '#3b5998', width: 24, height: 24, fontSize: '12px', mr: 1 }}>f</Avatar>

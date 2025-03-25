@@ -8,6 +8,7 @@ import axios from 'axios';
 import Table from '@mui/joy/Table';
 import {  CssVarsProvider } from '@mui/joy/styles';
 import { Button, TextField, Typography, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -23,12 +24,18 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function BoardWrite(){
+    //페이지 이동을 위한 navigate
+    const navigate = useNavigate();
+
+
+  const loginInfo = useSelector( (state) => state.user.userInfo );
+
     // 게시물 정보를 저장할 상태 변수
     const [boardForm,setBoardForm] = useState({
         title : '',
         content: '',
-        category: '자유게시판',
-        mno : '100001'
+        category: '1',
+        mno : loginInfo.mno
 
     });
 
@@ -37,8 +44,7 @@ export default function BoardWrite(){
         setBoardForm({...boardForm,[e.target.name]:e.target.value})
     };
 
-    //페이지 이동을 위한 navigate
-    const navigate = useNavigate();
+
 
     //게시물 등록 함수
 
@@ -58,7 +64,7 @@ export default function BoardWrite(){
         const response = await axios.post('http://localhost:8080/work/board', boardForm);
         if(response.data === true){
             alert('게시물 등록되었습니다.');
-            navigate('/');
+            navigate('/board');
         }else{
             alert('게시물 등록에 실패했습니다.');
         }
@@ -71,7 +77,7 @@ export default function BoardWrite(){
 
    //취소버튼 클릭 처리
    const onCancel = ()=>{
-    navigate('/');
+    navigate('/board');
 }
     
 
@@ -97,10 +103,10 @@ export default function BoardWrite(){
                   label="카테고리"
                   onChange={onValueChange}
                 >
-                  <MenuItem value="자유게시판">자유게시판</MenuItem>
-                  <MenuItem value="스포츠">스포츠</MenuItem>
-                  <MenuItem value="마음의소리">마음의소리</MenuItem>
-                  <MenuItem value="중고거래">중고거래</MenuItem>
+                  <MenuItem value="1">자유게시판</MenuItem>
+                  <MenuItem value="2">스포츠</MenuItem>
+                  <MenuItem value="3">마음의소리</MenuItem>
+                  <MenuItem value="4">중고거래</MenuItem>
                   
                 </Select>
               </FormControl>

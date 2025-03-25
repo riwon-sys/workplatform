@@ -32,6 +32,7 @@ import { PersistGate } from 'redux-persist/integration/react';; // PersistGate ë
 import './App.css';
 import Report_Update from "./Report_Update.jsx";
 import { useEffect, useState } from "react";
+import BoardWrite from "./BoardWrite.jsx";
 
 export default function Test(props) {
     // const [log, setLog] = useState();
@@ -87,6 +88,7 @@ export default function Test(props) {
                                  <Route path="/report/approval/:rpno" element={<Report_Approval />} />
                                  <Route path="/board" element={<Board />} />
                                  <Route path="/board/detail" element={<BoardDetail />} />
+                                 <Route path="/board/write" element={<BoardWrite />} />
                                  <Route path="/report/list" element={<Report_List />} />
                                  <Route path="/report/Form" element={<Report_Form />} />
                                  <Route path="/report/update/:rpno" element={<Report_Update />} />

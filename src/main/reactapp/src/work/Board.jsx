@@ -33,6 +33,7 @@ export default function () {
 
   // 자바 서버로부터 게시물목록 가져오는 함수 
   const getboards = async()=>{
+  
 
     //const respons  = await axios.메소드명( "자바주소" )
    const response =await axios.get("http://localhost:8080/work/board")
@@ -60,10 +61,11 @@ export default function () {
               <tbody>
                 {
                   boards.map( ( board , index )=> {
+                    const commentCount = board.commentList ? board.commentList.length : 0;
                     return(<>
                       <tr>
-                        <td> <span>OTT뭐볼까?(카테고리)</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
-                        <td> <span>👍1</span> <span> 💬10 </span></td>
+                        <td> <span>{board.category_name || '카테고리 없음'}</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
+                        <td> <span>👍0</span> <span> 💬{commentCount} </span></td>
                       </tr>
                     </>)
                   } )
@@ -71,6 +73,7 @@ export default function () {
               </tbody>
             </Table>
             <button onClick={()=>{navigate("/board/write")}}>글쓰기</button>
+          
           </CssVarsProvider>
       </Item>
     </Box>

@@ -61,10 +61,10 @@ public class BoardController {
 
     //[5]게시물 삭제
     @DeleteMapping("")
-    public boolean boardDelete(@RequestParam int pid){
+    public boolean boardDelete(@RequestParam int pid , @RequestParam int mno){
         System.out.println("BoardController.boardDelete");
-        System.out.println("pid = " + pid);
-        return boardService.boardDelete(pid);
+        System.out.println("BoardController.boardDelete");
+        return boardService.boardDelete(pid,mno);
     }
 
 
