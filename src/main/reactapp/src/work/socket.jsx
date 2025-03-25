@@ -8,7 +8,13 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 
-export default function Socket() {
+
+export default function Socket({isReportPosted}) {
+
+    // 리덕스
+      const loginInfo = useSelector((state) => state.user.userInfo);
+      console.log("로그인된 정보 : ", loginInfo)
+    
     const [roomInfo, setRoomInfo] = useState(null);
     const [state, setState] = React.useState({
         open: true, // 처음에 닫혀 있는 상태로 설정
@@ -107,55 +113,56 @@ export default function Socket() {
 
     // [3-2] 서버에서 채팅방 목록 response 받기
     const [rooms, setRooms] = useState([{ rno: "", rname: "", mnoList: [] }]); // 채팅방 목록
-      
-  const findAllRoom = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/chattingroom", { withCredentials: true });
 
-      // 해당 사용자가 참여 중인 채팅 목록이 존재 시
-      if (response.data) {
-        setRooms(response.data); // Rooms 상태 변수에 저장
-      }
-    } catch (e) {
-      console.log("채팅방 조회 오류 : ", e);
-    }
-  };
-useEffect(() => {findAllRoom()}, [roomInfo])
-console.log(rooms)
+    const findAllRoom = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/chattingroom", { withCredentials: true });
+
+            // 해당 사용자가 참여 중인 채팅 목록이 존재 시
+            if (response.data) {
+                setRooms(response.data); // Rooms 상태 변수에 저장
+            }
+        } catch (e) {
+            console.log("채팅방 조회 오류 : ", e);
+        }
+    };
+    useEffect(() => { findAllRoom() }, [roomInfo])
+    console.log(rooms)
+
 
     return (
         <>
-      <Box sx={{ width: 800, backgroundColor: 'red' }}>
-      {rooms && rooms.map((room) => {
-        // roomInfo가 null인 경우와 rno가 없는 경우를 체크
-        if (roomInfo && roomInfo.rno && room.rno === roomInfo.rno && showMessage && findLog && roomInfo) {
-          return (
-            <Snackbar
-              key={room.rno}
-              anchorOrigin={{ vertical, horizontal }}
-              open={open}
-              onClose={handleClose}
-              message={
-                <>
-                  {roomInfo.rname} 번 채팅방
-                  <hr />
-                  <br />
-                  {findLog.mname} :{' '}
-                  {findLog.msg ? findLog.msg : findLog.flocation || ''}
-                </>
-              }
-              ContentProps={{
-                sx: {
-                  backgroundColor: 'white',
-                  color: 'black',
-                },
-              }}
-            />
-          );
-        }
-        return null; // 조건이 맞지 않으면 렌더링 X
-      })}
-    </Box>
+            <Box sx={{ width: 800, backgroundColor: 'red' }}>
+                {rooms && rooms.map((room) => {
+                    // roomInfo가 null인 경우와 rno가 없는 경우를 체크
+                    if (roomInfo && roomInfo.rno && room.rno === roomInfo.rno && showMessage && findLog && roomInfo) {
+                        return (
+                            <Snackbar
+                                key={room.rno}
+                                anchorOrigin={{ vertical, horizontal }}
+                                open={open}
+                                onClose={handleClose}
+                                message={
+                                    <>
+                                        {roomInfo.rname} 번 채팅방
+                                        <hr />
+                                        <br />
+                                        {findLog.mname} :{' '}
+                                        {findLog.msg ? findLog.msg : findLog.flocation || ''}
+                                    </>
+                                }
+                                ContentProps={{
+                                    sx: {
+                                        backgroundColor: 'white',
+                                        color: 'black',
+                                    },
+                                }}
+                            />
+                        );
+                    }
+                    return null; // 조건이 맞지 않으면 렌더링 X
+                })}
+            </Box>
 
         </>
     );

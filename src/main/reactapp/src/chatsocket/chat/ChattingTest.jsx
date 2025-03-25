@@ -33,8 +33,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 }));
 
-// 샘플 로그인 아이디(나중에 스프링에서 session 으로 가져오기)
-const mno = "100001";
+
 export default function ChatTeset() {
   // 리덕스
   const loginInfo = useSelector((state) => state.user.userInfo);

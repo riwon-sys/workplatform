@@ -138,6 +138,7 @@ export default function Report_Approval() {
     try{
       const response = await axios.get( `http://localhost:8080/api/approval?rpno=${rpno}`, { withCredentials : true } );
       setApproval( response.data );
+      console.log("결재자" , response.data)
     }catch( e ){ console.log( e ); } 
   } // f end
 

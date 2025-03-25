@@ -34,7 +34,7 @@ import { useDispatch , useSelector } from 'react-redux'; // rw 25-03-21
 import { logout } from './member/reduxs/userSlice' // rw 25-03-21
 
 import Socket from "./socket.jsx";
-
+import ReportSocket from './ReportSocket.jsx';
 
 const drawerWidth = 240;
 
@@ -84,7 +84,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   })
 );
 
-export default function MiniDrawer() {
+export default function SideBar({ reportState, setReportState, mnos, setMnos, data }) {
+  
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('xl')); // md 이상 여부 확인
   const [open, setOpen] = useState(true);
@@ -219,9 +220,14 @@ export default function MiniDrawer() {
 
         <Divider />
 
-        <Socket/>
-
-
+        <Socket/> {/*브라우저 소켓 추가*/}
+        <ReportSocket
+        reportState={reportState}
+        mnos={mnos}
+        data={data}
+        setReportState={setReportState}
+      />
+      
         {/* 로그인 영역 */}
         <Box sx={{ flexGrow: 1 }} />
 
