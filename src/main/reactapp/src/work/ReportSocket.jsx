@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+
+import Snackbar from '@mui/material/Snackbar';
 
 export default function ReportSocket(
     { reportState, mnos, data, setReportState }) {
@@ -11,29 +15,45 @@ export default function ReportSocket(
     console.log(reportState);
     const [reportSocket, setReportSocket] = useState(null); // 소켓 상태 관리
     const [receivedData, setReceivedData] = useState(null); // 수신된 데이터 상태 관리
+    const [checkMnos, setCheckMnos] = useState([])
+    const mnoList = mnos.filter(item => item.mno !== null).map(item => item.mno);
 
+    console.log(mnoList)
     // 보고서 소켓 연결
+
+
+    const [state, setState] = React.useState({
+        open: true, // 처음에 닫혀 있는 상태로 설정
+        vertical: 'top',
+        horizontal: 'right',
+        backgroundColor: 'white'
+    });
+    const { vertical, horizontal, open } = state;
+
+
+    const handleClose = () => {
+        setState({ ...state, open: false }); // Snackbar를 닫음
+    };
 
     useEffect(() => {
         // 소켓이 처음 연결될 때 한 번만 실행
         const socket = new WebSocket("ws://localhost:8080/reportConnect");
 
         socket.onopen = () => {
-            console.log('보고서 소켓 연결 성공');
-            // 연결 성공 후 reportState와 loginInfo가 있을 때 데이터 전송
-            if (data != null) {
-                const sendData = JSON.stringify(data);
-                socket.send(sendData);
+            // console.log('보고서 소켓 연결 성공');
+            // // 연결 성공 후 reportState와 loginInfo가 있을 때 데이터 전송
+            // if (data != null) {
+            //     const sendData = JSON.stringify(data);
+            //     socket.send(sendData);
 
-                console.log('서버가 보낸정보: ', data);
+            //     console.log('서버가 보낸정보: ', data);
 
-            }
+            // }
         }
 
         socket.onmessage = (event) => {
             console.log('메시지 수신: ', event.data);
-            setReceivedData(event.data); // 메시지를 상태로 저장
-            // setMnos("")
+            setReceivedData(JSON.parse(event.data));
 
         };
 
@@ -61,18 +81,18 @@ export default function ReportSocket(
             if (reportSocket.readyState === WebSocket.OPEN) {
                 console.log(data)
                 const obj = {
-                    mdepartment : data.mdepartment,
-                    mname : data.mname,
-                    mrank  : data.mrank,
-                    rpam : data.rpam,
-                    rpamnote : data.rpamnote,
-                    rpexpected : data.rpexpected,
-                    rpname : data.rpname,
-                    rppm : data.rppm ,
-                    rppmnote : data.rppmnote,
+                    mdepartment: data.mdepartment,
+                    mname: data.mname,
+                    mrank: data.mrank,
+                    rpam: data.rpam,
+                    rpamnote: data.rpamnote,
+                    rpexpected: data.rpexpected,
+                    rpname: data.rpname,
+                    rppm: data.rppm,
+                    rppmnote: data.rppmnote,
                     rpsignificant: data.rpsignificant,
-                    rpunprocessed :data.rpunprocessed,
-                    mnoList : mnos
+                    rpunprocessed: data.rpunprocessed,
+                    mnoList: mnoList
                 }
                 console.log(obj)
                 const sendData = JSON.stringify(obj);
@@ -84,26 +104,71 @@ export default function ReportSocket(
                 console.log('소켓이 아직 연결되지 않았습니다.');
             }
         }
-    }, [reportState, mnos, data, setReportState]); // reportState, reportSocket, loginInfo가 변경될 때마다 실행
+    }, [reportState, mnos, data, setReportState]); 
 
-    console.log(receivedData)
-    console.log(mnos)
-    console.log(loginInfo)
+    // receivedData가 변경될 때마다 실행되는 useEffect
+    useEffect(() => {
+        if (receivedData) {
+            console.log('receivedData:', receivedData);
+            console.log('receivedData.mnoList:', receivedData.mnoList); // 정상적으로 mnoList를 접근할 수 있습니다.
+        }
+    }, [receivedData]); // receivedData가 변경될 때마다 실행
+    
+    useEffect(() => {
+        if (receivedData) {
+            setState(prevState => ({
+                ...prevState,
+                open: true // 새로운 로그 메시지가 오면 Snackbar 열기
+            }));
+        }
+
+        //  메시지를 숨기는 타이머 설정
+        const timer = setTimeout(() => {
+            setReceivedData(prevState => ({
+                ...prevState,
+                open: false // 메시지를 숨김
+            }));
+            setReceivedData(null); // 메시지 내용 초기화
+        }, 40000);
+
+        // 컴포넌트가 언마운트될 때 타이머 정리
+        return () => clearTimeout(timer);
+
+    }, [receivedData]);
 
     return (
-        <div>
-            {/* mnos 배열에서 mno가 loginInfo.mno와 일치하는 경우만 렌더링 */}
-            {Array.isArray(mnos) && mnos.map((mno, index) => {
-                if (mno.mno === loginInfo.mno) {
+        <Box sx={{ width: 800, backgroundColor: 'red' }}>
+            {/* receivedData가 null이 아니고 mnoList가 존재할 때만 렌더링 */}
+            {receivedData && Array.isArray(receivedData.mnoList) && receivedData.mnoList.map((mno, index) => {
+                if (mno === loginInfo.mno) {
                     return (
-                        <div key={index}>
-                            <p>로그인된 사용자: {loginInfo.mname}</p>
-                            <p>보고서 이름: {receivedData.rpname}</p>
-                        </div>
+                        <Snackbar
+                            key={mno}
+                            anchorOrigin={{ vertical, horizontal }}
+                            open={open}
+                            onClose={handleClose}
+                            message={<>
+
+
+                                <p>{receivedData.mname}</p>
+                                <hr />
+                                <br />
+                                <p>{receivedData.rpname}</p>
+
+
+                            </>
+                            }
+                            ContentProps={{
+                                sx: {
+                                    backgroundColor: 'black',
+                                    color: 'white',
+                                },
+                            }}
+                        />
                     );
                 }
-                return null;  // 일치하지 않으면 아무것도 렌더링하지 않음
+                return null; // 일치하지 않으면 아무것도 렌더링하지 않음
             })}
-        </div>
+        </Box>
     );
 }

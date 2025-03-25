@@ -162,7 +162,7 @@ export default function ChatTeset() {
           msg: chattingDto.msg, // 텍스트 메시지 내용
           mstype: chattingDto.mstype, // 메시지 타입 (파일일 때 1)
           mname: chattingDto.mname,
-          mno: chattingDto.mno,
+          mno: loginInfo.mno,
           fname: chattingDto.fname, // 파일 이름
           flocation: chattingDto.flocation // 파일 경로
         };
@@ -176,13 +176,13 @@ export default function ChatTeset() {
 
   // [2-5] 파일 메세지 서버로 전송 (multipart/form-data 타입으로)
   const sendFile = async () => {
-    if (clientSocket && fileObject && selectedRoomId && mno) {
+    if (clientSocket && fileObject && selectedRoomId && loginInfo.mno) {
       // FormData로 파일 준비
       const formData = new FormData();
       formData.append("file", fileObject);
       formData.append("rno", selectedRoomId);
       formData.append("mstype", 1); // 파일 메시지 타입
-      formData.append("mno", mno);
+      formData.append("mno", loginInfo.mno);
 
       console.log(formData);
 
@@ -1078,7 +1078,7 @@ export default function ChatTeset() {
                               {/* 참여 회원에 해당하는 mno가 있을 경우 checked로, 없으면 mnoList에 있는지 확인 */}
                               <input type='checkbox'
                                 value={m.mno}
-                                checked={mnoList.includes(m.mno)}
+                                checked={participationMember.some(on => on.mno === m.mno) || mnoList.includes(m.mno)} // 조건에 맞으면 체크
                                 onChange={() => handleCheckboxChange(m.mno)} />
 
                             </ListItemIcon>

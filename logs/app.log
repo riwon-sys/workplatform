@@ -341,3 +341,107 @@
 2025-03-25 18:49:10 -  log info 
 2025-03-25 18:51:50 -  log info 
 2025-03-25 18:51:50 -  log info 
+2025-03-25 19:03:14 - Starting AppStart using Java 17.0.12 with PID 62268 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-25 19:03:14 - No active profile set, falling back to 1 default profile: "default"
+2025-03-25 19:03:15 - Tomcat initialized with port 8080 (http)
+2025-03-25 19:03:15 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-25 19:03:15 - Starting service [Tomcat]
+2025-03-25 19:03:15 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-25 19:03:15 - Initializing Spring embedded WebApplicationContext
+2025-03-25 19:03:15 - Root WebApplicationContext: initialization completed in 1200 ms
+2025-03-25 19:03:15 - HikariPool-1 - Starting...
+2025-03-25 19:03:15 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5c18d6d4
+2025-03-25 19:03:15 - HikariPool-1 - Start completed.
+2025-03-25 19:03:16 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-25 19:03:16 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-25 19:03:16 - Started AppStart in 2.622 seconds (process running for 3.115)
+2025-03-25 19:04:36 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-25 19:04:36 - Initializing Servlet 'dispatcherServlet'
+2025-03-25 19:04:36 - Completed initialization in 4 ms
+2025-03-25 19:04:37 -  log info 
+2025-03-25 19:04:37 -  log info 
+2025-03-25 19:04:37 -  log info 
+2025-03-25 19:04:37 -  log info 
+2025-03-25 19:04:55 -  log info 
+2025-03-25 19:04:55 -  log info 
+2025-03-25 19:05:02 -  log info 
+2025-03-25 19:05:06 - 일반메세지 : ChattingDto(mstype=0, rno=25, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=bxbxb, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-25 19:06:31 -  log info 
+2025-03-25 19:06:31 -  log info 
+2025-03-25 19:06:34 -  log info 
+2025-03-25 19:06:34 -  log info 
+2025-03-25 19:06:52 -  log info 
+2025-03-25 19:06:52 -  log info 
+2025-03-25 19:06:52 -  log info 
+2025-03-25 19:06:52 -  log info 
+2025-03-25 19:07:10 -  log info 
+2025-03-25 19:07:10 -  log info 
+2025-03-25 19:07:10 -  log info 
+2025-03-25 19:07:10 -  log info 
+2025-03-25 19:07:14 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=57979ed4-bcb9-42b4-9d03-6b2c64ddb64e_11.gif, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-25 19:07:18 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=e912a1d5-6277-4075-bbac-33205a7033b4_11.gif, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-25 19:10:10 - Starting AppStart using Java 17.0.12 with PID 4208 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-25 19:10:10 - No active profile set, falling back to 1 default profile: "default"
+2025-03-25 19:10:11 - Tomcat initialized with port 8080 (http)
+2025-03-25 19:10:11 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-25 19:10:11 - Starting service [Tomcat]
+2025-03-25 19:10:11 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-25 19:10:11 - Initializing Spring embedded WebApplicationContext
+2025-03-25 19:10:11 - Root WebApplicationContext: initialization completed in 1343 ms
+2025-03-25 19:10:11 - HikariPool-1 - Starting...
+2025-03-25 19:10:11 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@38fb50f8
+2025-03-25 19:10:11 - HikariPool-1 - Start completed.
+2025-03-25 19:10:12 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-25 19:10:12 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-25 19:10:12 - Started AppStart in 2.764 seconds (process running for 3.276)
+2025-03-25 19:11:58 - Starting AppStart using Java 17.0.12 with PID 33156 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-25 19:11:58 - No active profile set, falling back to 1 default profile: "default"
+2025-03-25 19:11:59 - Tomcat initialized with port 8080 (http)
+2025-03-25 19:11:59 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-25 19:11:59 - Starting service [Tomcat]
+2025-03-25 19:11:59 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-25 19:11:59 - Initializing Spring embedded WebApplicationContext
+2025-03-25 19:11:59 - Root WebApplicationContext: initialization completed in 1497 ms
+2025-03-25 19:11:59 - HikariPool-1 - Starting...
+2025-03-25 19:12:00 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6cbb175
+2025-03-25 19:12:00 - HikariPool-1 - Start completed.
+2025-03-25 19:12:00 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-25 19:12:00 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-25 19:12:00 - Started AppStart in 3.033 seconds (process running for 3.528)
+2025-03-25 19:12:37 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-25 19:12:37 - Initializing Servlet 'dispatcherServlet'
+2025-03-25 19:12:37 - Completed initialization in 2 ms
+2025-03-25 19:12:38 -  log info 
+2025-03-25 19:12:38 -  log info 
+2025-03-25 19:12:46 -  log info 
+2025-03-25 19:12:46 -  log info 
+2025-03-25 19:28:44 -  log info 
+2025-03-25 19:28:44 -  log info 
+2025-03-25 19:30:12 -  log info 
+2025-03-25 19:30:12 -  log info 
+2025-03-25 19:31:53 -  log info 
+2025-03-25 19:31:53 -  log info 
+2025-03-25 19:32:03 -  log info 
+2025-03-25 19:32:03 -  log info 
+2025-03-25 19:32:39 -  log info 
+2025-03-25 19:32:39 -  log info 
+2025-03-25 19:48:45 -  log info 
+2025-03-25 19:48:45 -  log info 
+2025-03-25 19:51:11 -  log info 
+2025-03-25 19:51:11 -  log info 
+2025-03-25 19:51:14 -  log info 
+2025-03-25 19:51:14 -  log info 
+2025-03-25 19:52:35 -  log info 
+2025-03-25 19:52:35 -  log info 
+2025-03-25 19:54:30 -  log info 
+2025-03-25 19:54:30 -  log info 
+2025-03-25 19:54:44 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=zzzzzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-25 19:58:40 -  log info 
+2025-03-25 19:58:40 -  log info 
+2025-03-25 19:58:44 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=zzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-25 19:58:50 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=ggggggggggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-25 19:59:11 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=ggggggggggggggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-25 19:59:45 -  log info 
+2025-03-25 19:59:45 -  log info 
+2025-03-25 19:59:45 -  log info 
+2025-03-25 19:59:45 -  log info 
