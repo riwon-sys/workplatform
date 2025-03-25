@@ -12,6 +12,8 @@ import Paper from '@mui/material/Paper';
 import Report_Form from './component/report/Report_Form';
 import PostModal from './component/report/PostModal';
 
+import Socket from './socket.jsx'
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
@@ -20,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
   height: '100%',
 }));
 
-export default function Report_Write(){
+export default function Report_Write({setReportState, setMnos, setData}){
   const loginInfo = useSelector((state) => state.user.userInfo);
   console.log( loginInfo )
 
@@ -57,6 +59,8 @@ export default function Report_Write(){
   const [ members, setMembers ] = useState([]);
   const [ reports, setReports ] = useState( [] );
   const [ membersByRank, setMembersByRank ] = useState({}); // 직급별 멤버 상태
+  // 보고서 소켓으로 전달할 state 변수
+ 
   const navigate = useNavigate();
 
   const formDataChange = (e) => {
@@ -80,6 +84,9 @@ export default function Report_Write(){
       const response = await axios.post( 'http://localhost:8080/api/report', formData, { withCredentials : true } );
       if( response.data ){
         onApprovalPost();
+
+        
+
       }else{ alert('등록 실패'); }
     }catch( e ){ console.log( e ); alert('등록 실패'); }
   } // f end 
@@ -117,6 +124,12 @@ export default function Report_Write(){
         navigate('/report/view');
         setFormData( { rpname: '일일 업무 보고서', rpam: '', rppm: '', rpamnote: '', rppmnote: '',
           rpunprocessed: '', rpsignificant: '', rpexpected: '' } );
+
+
+        // props 로 보고서 소켓으로 전달할 state 변수
+        setReportState(true);
+        setData(formData)
+        console.log(formData)
       }else{ alert('등록 실패'); }
     }catch( e ){ console.log( e ); alert('등록 실패'); }
   } // f end
@@ -145,7 +158,12 @@ export default function Report_Write(){
       item.rank === rank ? { ...item, mno: selectedMno, rpno: lastRpno } : item
       )
     );
+console.log(approval)
+    setMnos(approval);
+    console.log(selectedMno)
+
   };
+  console.log(approval)
 
   // 모든 직급의 멤버를 한 번에 로드
   useEffect(() => {
@@ -200,7 +218,6 @@ export default function Report_Write(){
       </Item>
     </Box>
 
-      
   </>)
 }
     

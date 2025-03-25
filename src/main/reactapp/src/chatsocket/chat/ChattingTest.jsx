@@ -20,7 +20,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import InboxIcon from '@mui/icons-material/Inbox';
 import StarBorder from '@mui/icons-material/StarBorder';
 
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import log from "../../work/member/reduxs/logSlice"
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -33,12 +33,11 @@ const Item = styled(Paper)(({ theme }) => ({
 
 }));
 
-// 샘플 로그인 아이디(나중에 스프링에서 session 으로 가져오기)
-const mno = "100001";
+
 export default function ChatTeset() {
   // 리덕스
-  const log = useSelector((state) => state.log)
-console.log("로그 리덕스" , log)
+  const loginInfo = useSelector((state) => state.user.userInfo);
+  console.log("로그인된 정보 : ", loginInfo)
 
   const [rooms, setRooms] = useState([{ rno: "", rname: "", mnoList: [] }]); // 채팅방 목록
   const [members, setMembers] = useState([]); // 전체 회원 목록
@@ -129,9 +128,9 @@ console.log("로그 리덕스" , log)
 
     mstype: 1,       // 메시지 타입 (1: 파일)
     rno: selectedRoomId,
-    mname: "test", // 보내는 사람의 이름 (나중에 서버에서 현재 로그인된 mno 의 이름으로 반환받기)
+    mname: loginInfo.mname, // 보내는 사람의 이름 (나중에 서버에서 현재 로그인된 mno 의 이름으로 반환받기)
     fname: "파일 전송 중", // 메시지 내용
-    mno: mno,        // 회원 번호 (나중에 서버에서 현재 로그인된 mno 로 받아오기)
+    mno: loginInfo.mno,        // 회원 번호 (나중에 서버에서 현재 로그인된 mno 로 받아오기)
     msg: "",         // 텍스트 메시지 내용
     flocation: ""    // 파일 경로
   });
@@ -208,8 +207,8 @@ console.log("로그 리덕스" , log)
           rno: selectedRoomId,
           msg: "", // 텍스트 메시지 비워두기
           mstype: 1, // 파일 메시지 타입
-          mname: "test", // 메시지 작성자 (예시)
-          mno: mno,
+          mname: loginInfo.mname, // 메시지 작성자 (예시)
+          mno: loginInfo.mno,
           flocation: response.data, // 서버로부터 받은 파일 경로
           fname, // 서버로부터 받은 파일명
         };
@@ -239,7 +238,7 @@ console.log("로그 리덕스" , log)
   // [3-2] 서버에서 채팅방 목록 response 받기
   const findAllRoom = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/chattingroom");
+      const response = await axios.get("http://localhost:8080/chattingroom", { withCredentials: true });
 
       // 해당 사용자가 참여 중인 채팅 목록이 존재 시
       if (response.data) {
@@ -257,7 +256,7 @@ console.log("로그 리덕스" , log)
   // [4-2] 서버에서 전체 회원목록 받아오기
   const findAllMember = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/chattingroom/member");
+      const response = await axios.get("http://localhost:8080/chattingroom/member", { withCredentials: true });
 
       if (response.data) {
         setMembers(response.data); // Members 상태 변수에 저장
@@ -280,6 +279,23 @@ console.log("로그 리덕스" , log)
 
   };
 
+  // const handleCheckboxChange = (mno, loginMno) => {
+  //   setMnoList((prevMnoList) => {
+  //     // loginMno는 항상 리스트에 포함되게 처리
+  //     const updatedMnoList = [...prevMnoList, loginMno];
+
+  //     if (updatedMnoList.includes(mno)) {
+  //       // 이미 선택된 번호는 삭제
+  //       return updatedMnoList.filter(item => item !== mno);
+  //     } else {
+  //       // 새로 선택된 번호는 추가
+  //       return [...updatedMnoList, mno];
+  //     }
+  //   });
+  // };
+
+
+
   // [5-2] 채팅방 생성
   const creatR = async () => {
     let rname = null;
@@ -289,7 +305,7 @@ console.log("로그 리덕스" , log)
 
     console.log("방목록 리렌더링 완료")
 
-    if(mnoList.length === 0){
+    if (mnoList.length === 0) {
       alert("채팅방에 참여할 회원을 선택하세요.")
     }
 
@@ -298,7 +314,7 @@ console.log("로그 리덕스" , log)
       console.log("mnolist 있음")
       rname = prompt("채팅방 이름");
 
-      if(rname === ""){
+      if (rname === "") {
         alert("채팅방 이름을 입력하세요.")
         return;
       }
@@ -312,7 +328,7 @@ console.log("로그 리덕스" , log)
 
       try {
         // 새로운 채팅방 생성 요청
-        const response = await axios.post("http://localhost:8080/chattingroom", obj);
+        const response = await axios.post("http://localhost:8080/chattingroom", obj, { withCredentials: true });
 
         if (response.data === true) {
           alert("채팅방 등록 성공");
@@ -334,7 +350,6 @@ console.log("로그 리덕스" , log)
       setMnoList([]); // 회원선택 초기화
     }
   };
-
 
   // [6-1] 채팅방 접속 WebSocket
 
@@ -420,8 +435,8 @@ console.log("로그 리덕스" , log)
           rno: selectedRoomId,
           msg: message,
           mstype: 0, // 일반 메세지 타입 서버로 전송
-          mname: 'test', // 나중에 세션에 저장된 로그인된 회원으로 변경
-          mno: mno, // 나중에 세션에 저장된 로그인된 회원으로 변경
+          mname: loginInfo.mname, // 나중에 세션에 저장된 로그인된 회원으로 변경
+          mno: loginInfo.mno, // 나중에 세션에 저장된 로그인된 회원으로 변경
         };
 
         console.log(messageData)
@@ -466,7 +481,7 @@ console.log("로그 리덕스" , log)
   //   if (clientSocket && selectedRoomId) { // 만약 소켓이 열려있고 채팅방이 선택됐으면
   //     const handleMessage = (event) => { // 메세지를 받으면 실행
   //       console.log(event.data);
-        
+
   //       let receivedMessage;
   //       try {
   //         receivedMessage = JSON.parse(event.data); // 서버가 준 메세지 파싱
@@ -474,10 +489,10 @@ console.log("로그 리덕스" , log)
   //         console.error('Invalid message received:', event.data);
   //         return;
   //       }
-  
+
   //       // 이미 같은 파일 메시지가 messages에 존재하는지 확인
   //       const messageExists = messages.some((msg) => msg.flocation === receivedMessage.flocation);
-  
+
   //       // 메세지 출력
   //       if (receivedMessage.mstype !== 4 && (receivedMessage.mstype === null || !receivedMessage.isSent)) {
   //         console.log("실행됨");
@@ -492,7 +507,7 @@ console.log("로그 리덕스" , log)
   //           setMessages((prevMessages) => [...prevMessages, receivedMessage]);
   //         }
   //       }
-  
+
   //       // 기존 채팅방에 회원이 새로 추가돼서 서버소켓이 mstype 4를 반환했을 때
   //       if (receivedMessage.mstype === 4 || receivedMessage.mnameList) {
   //         console.log("444444");
@@ -501,17 +516,17 @@ console.log("로그 리덕스" , log)
   //         console.log(mNameList);
   //       }
   //     };
-  
+
   //     // 소켓 이벤트 핸들러 설정 (한 번만 설정)
   //     clientSocket.onmessage = handleMessage;
-  
+
   //     // 컴포넌트가 언마운트되거나 clientSocket이 변경될 때 핸들러 제거
   //     return () => {
   //       clientSocket.onmessage = null;
   //     };
   //   }
   // }, [clientSocket, selectedRoomId, messages]); // clientSocket, selectedRoomId, messages 변경 시 실행
-  
+
 
   // [7-2] 소켓으로 받은 메세지 처리
   useEffect(() => {
@@ -591,7 +606,7 @@ console.log("로그 리덕스" , log)
     //   mnoList: newMnoList, // 새로 추가된 mnoList 상태 업데이트
     // }));
 
-    if(mnoList.length === 0 ){
+    if (mnoList.length === 0) {
       alert("추가할 회원을 선택하세요.")
       return;
     }
@@ -601,8 +616,9 @@ console.log("로그 리덕스" , log)
         mnoList: mnoList, // 추가할 회원번호 목록
       };
 
+      console.log(mnoList)
       // 서버로 채팅방에 추가할 회원번호 보내고 회원이름 반환받기
-      const response = await axios.post("http://localhost:8080/chattingroom/addmember", obj);
+      const response = await axios.post("http://localhost:8080/chattingroom/addmember", obj, { withCredentials: true });
       console.log(response.data);
 
       if (response.data != null) {
@@ -646,7 +662,7 @@ console.log("로그 리덕스" , log)
   }, [mNameList]);
 
 
-  // [9] 채팅방 삭제
+  // [9] 채팅방 나가기
   const deleteRoom = async (rno) => {
     try {
       const response = await axios.delete(`http://localhost:8080/chattingroom?rno=${rno}`)
@@ -749,17 +765,27 @@ console.log("로그 리덕스" , log)
       <Grid container spacing={0} sx={{ height: '100%' }}>
         <Grid size={2.8} sx={{ height: '100%' }}>
           <Item >
-            <div style={{
-              justifyContent: "center",
-              alignItems: "center",
-              textAlign: "center",
-              marginBottom: "3%",
-              height: "4.3%"
-            }}>
-              <h3 style={{ fontSize: "180%" }}>채팅방 선택</h3> {/* 나중에 로그인된 회원정보 출력으로 바꾸기 */}
-
-
-            </div>
+            
+              <div style={{display : "flex", justifyContent : "center", alignItems : "center",
+                marginBottom: "3%", height: "4.3%", marginLeft : "-12%"}}>
+                <Typography variant="body2" color="textSecondary" 
+                sx={{ display: 'inline-block', mr: 1 , marginLeft : "0%"}} >
+                  {/*                                 {loginInfo.mprofile} {loginInfo.mname}{loginInfo.mrank}{loginInfo.mno} 오늘도 화이팅! */}
+                  <img
+                    src={
+                      'http://localhost:8080/file/' +
+                      (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)
+                    }
+                    style={{
+                      width: '40px',
+                      borderRadius: '40px',
+                    }}
+                  />
+                </Typography>
+                <span style={{marginLeft : "5%"}}><b> {loginInfo.mname} 님 </b> ({loginInfo.mrank}) {loginInfo.department}팀 
+                  <br /> 이메일 : {loginInfo.memail}</span>
+              </div>
+            
             <hr></hr>
 
             <div style={{ margin: " 0 auto", overflow: "scroll", overflowX: 'hidden', height: '94.8%' }}>
@@ -1028,7 +1054,8 @@ console.log("로그 리덕스" , log)
                               <input type='checkbox'
                                 value={m.mno}
                                 checked={mnoList.includes(m.mno)}
-                                onChange={() => handleCheckboxChange(m.mno)} />
+                                onChange={() => handleCheckboxChange(m.mno)}
+                              />
 
 
                             </ListItemIcon>
@@ -1049,12 +1076,11 @@ console.log("로그 리덕스" , log)
                             />
                             <ListItemIcon>
                               {/* 참여 회원에 해당하는 mno가 있을 경우 checked로, 없으면 mnoList에 있는지 확인 */}
-                              <input
-                                type='checkbox'
+                              <input type='checkbox'
                                 value={m.mno}
-                                checked={participationMember.some(on => on.mno === m.mno) || mnoList.includes(m.mno)} // 조건에 맞으면 체크
-                                onChange={() => handleCheckboxChange(m.mno)}
-                              />
+                                checked={mnoList.includes(m.mno)}
+                                onChange={() => handleCheckboxChange(m.mno)} />
+
                             </ListItemIcon>
                             <Divider variant="inset" component="li" />
                           </ListItemButton>

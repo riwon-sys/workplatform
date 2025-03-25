@@ -30,7 +30,6 @@ export default function Report_Form(
                 !isReadOnly && !isUpdate ?
                 ["대리", "과장", "차장", "부장"].map((rank) => {
                   const selectedMno = approval.find((item) => item.rank === rank)?.mno || "";
-
                   return (
                     <td key={ rank } width="100px" >
                       <BasicSelect

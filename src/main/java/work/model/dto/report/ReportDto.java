@@ -3,6 +3,7 @@ package work.model.dto.report;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter @Setter @ToString
 @NoArgsConstructor @AllArgsConstructor
@@ -25,5 +26,7 @@ public class ReportDto {
 
     private int apno;
     private boolean apstate;
+
+    private List<Integer> mnoList ;
 
 }
