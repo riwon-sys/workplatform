@@ -47,7 +47,6 @@ public class RoomController {
 
         MemberDto memberDto = MemberUtils.getLoginInfo(req);
         loginMno = memberDto.getMno();
-        System.out.println("loginMno = " + loginMno);
 
         System.out.println("세션 정보: " + memberDto);
         System.out.println("로그인된 회원번호: " + loginMno);
@@ -110,7 +109,7 @@ public class RoomController {
     // [5] 채팅방 나가기
     @DeleteMapping
     public boolean delete(@RequestParam("rno") int rno) {
-
+        System.out.println("로그인된 회원번호 : " + loginMno);
         // 나중에 본인 생성한 채팅방인지 유효성 검사 추가하기
         return roomService.delete(rno, loginMno); // 나중에 로그인된 세션 mno 로 바꾸기
     }

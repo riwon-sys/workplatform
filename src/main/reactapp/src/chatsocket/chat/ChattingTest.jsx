@@ -239,7 +239,7 @@ export default function ChatTeset() {
   // [3-2] 서버에서 채팅방 목록 response 받기
   const findAllRoom = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/chattingroom", {withCredentials: true});
+      const response = await axios.get("http://localhost:8080/chattingroom", { withCredentials: true });
 
       // 해당 사용자가 참여 중인 채팅 목록이 존재 시
       if (response.data) {
@@ -267,8 +267,8 @@ export default function ChatTeset() {
     }
   };
 
-   // [5-1] 채팅방 생성 시 참여할 회원 번호 체크박스 여러개 선택 처리
-   const handleCheckboxChange = (mno) => {
+  // [5-1] 채팅방 생성 시 참여할 회원 번호 체크박스 여러개 선택 처리
+  const handleCheckboxChange = (mno) => {
 
     setMnoList((prevMnoList) => {
       if (prevMnoList.includes(mno)) {
@@ -306,7 +306,7 @@ export default function ChatTeset() {
 
     console.log("방목록 리렌더링 완료")
 
-    if(mnoList.length === 0){
+    if (mnoList.length === 0) {
       alert("채팅방에 참여할 회원을 선택하세요.")
     }
 
@@ -315,7 +315,7 @@ export default function ChatTeset() {
       console.log("mnolist 있음")
       rname = prompt("채팅방 이름");
 
-      if(rname === ""){
+      if (rname === "") {
         alert("채팅방 이름을 입력하세요.")
         return;
       }
@@ -329,7 +329,7 @@ export default function ChatTeset() {
 
       try {
         // 새로운 채팅방 생성 요청
-        const response = await axios.post("http://localhost:8080/chattingroom", obj,{withCredentials : true});
+        const response = await axios.post("http://localhost:8080/chattingroom", obj, { withCredentials: true });
 
         if (response.data === true) {
           alert("채팅방 등록 성공");
@@ -663,7 +663,7 @@ export default function ChatTeset() {
   }, [mNameList]);
 
 
-  // [9] 채팅방 삭제
+  // [9] 채팅방 나가기
   const deleteRoom = async (rno) => {
     try {
       const response = await axios.delete(`http://localhost:8080/chattingroom?rno=${rno}`)
@@ -766,17 +766,27 @@ export default function ChatTeset() {
       <Grid container spacing={0} sx={{ height: '100%' }}>
         <Grid size={2.8} sx={{ height: '100%' }}>
           <Item >
-            <div style={{
-              justifyContent: "center",
-              alignItems: "center",
-              textAlign: "center",
-              marginBottom: "3%",
-              height: "4.3%"
-            }}>
-              <h3 style={{ fontSize: "180%" }}>채팅방 선택</h3> {/* 나중에 로그인된 회원정보 출력으로 바꾸기 */}
-
-
-            </div>
+            
+              <div style={{display : "flex", justifyContent : "center", alignItems : "center",
+                marginBottom: "3%", height: "4.3%", marginLeft : "-12%"}}>
+                <Typography variant="body2" color="textSecondary" 
+                sx={{ display: 'inline-block', mr: 1 , marginLeft : "0%"}} >
+                  {/*                                 {loginInfo.mprofile} {loginInfo.mname}{loginInfo.mrank}{loginInfo.mno} 오늘도 화이팅! */}
+                  <img
+                    src={
+                      'http://localhost:8080/file/' +
+                      (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)
+                    }
+                    style={{
+                      width: '40px',
+                      borderRadius: '40px',
+                    }}
+                  />
+                </Typography>
+                <span style={{marginLeft : "5%"}}><b> {loginInfo.mname} 님 </b> ({loginInfo.mrank}) {loginInfo.department}팀 
+                  <br /> 이메일 : {loginInfo.memail}</span>
+              </div>
+            
             <hr></hr>
 
             <div style={{ margin: " 0 auto", overflow: "scroll", overflowX: 'hidden', height: '94.8%' }}>
@@ -1042,10 +1052,10 @@ export default function ChatTeset() {
                             <ListItemIcon>
 
 
-                            <input type='checkbox'
+                              <input type='checkbox'
                                 value={m.mno}
                                 checked={mnoList.includes(m.mno)}
-                                onChange={() => handleCheckboxChange(m.mno)} 
+                                onChange={() => handleCheckboxChange(m.mno)}
                               />
 
 
