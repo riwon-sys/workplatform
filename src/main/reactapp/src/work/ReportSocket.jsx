@@ -124,13 +124,14 @@ export default function ReportSocket(
 
     }, []); // 의존성 배열에 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행됨
 
-    // reportState가 true일 때 소켓으로 데이터 전송
+
     useEffect(() => {
-        if (reportState && reportSocket && loginInfo && loginInfo.mno) {
-            // 소켓이 연결되었을 때만 메시지를 전송
-            if (reportSocket.readyState === WebSocket.OPEN) {
-                console.log(lowestIndexItem.mno);  // 정상 출력
-                console.log(data)
+        // receivedData.mnoList가 존재하고, 배열일 때만 실행
+        if (receivedData && receivedData.mnoList && Array.isArray(receivedData.mnoList) && receivedData.mnoList.length > 0) {
+            console.log("mnoList가 존재합니다. useEffect 실행됨");
+    
+            // 여기에 소켓으로 데이터를 보내거나 원하는 작업 수행
+            if (reportSocket && reportSocket.readyState === WebSocket.OPEN) {
                 const obj = {
                     mdepartment: data.mdepartment,
                     mname: data.mname,
@@ -143,27 +144,59 @@ export default function ReportSocket(
                     rppmnote: data.rppmnote,
                     rpsignificant: data.rpsignificant,
                     rpunprocessed: data.rpunprocessed,
-                    mnoList: mnoList,
+                    mnoList: receivedData.mnoList,
                     apmno: lowestIndexItem.mno
-                }
-                console.log(obj)
+                };
                 const sendData = JSON.stringify(obj);
                 reportSocket.send(sendData);
-                console.log('서버에서 보낸 데이터 : ', data);
-                console.log("서버소켓으로 보내기 성공~~~~~")
-                setReportState(false)
-            } else {
-                console.log('소켓이 아직 연결되지 않았습니다.');
+                console.log("서버로 보내기 성공!");
+                setReportState(false);  // 전송 후 상태 변경
             }
+        } else {
+            console.log('mnoList가 존재하지 않거나 빈 배열입니다.');
         }
-    }, [reportState]);
+    }, [receivedData]);  // receivedData가 변경될 때마다 실행
+    
+    // // reportState가 true일 때 소켓으로 데이터 전송
+    // useEffect(() => {
+    //     if (reportState && reportSocket && loginInfo && loginInfo.mno) {
+    //         // 소켓이 연결되었을 때만 메시지를 전송
+    //         if (reportSocket.readyState === WebSocket.OPEN) {
+    //             console.log(lowestIndexItem.mno);  // 정상 출력
+    //             console.log(data)
+    //             const obj = {
+    //                 mdepartment: data.mdepartment,
+    //                 mname: data.mname,
+    //                 mrank: data.mrank,
+    //                 rpam: data.rpam,
+    //                 rpamnote: data.rpamnote,
+    //                 rpexpected: data.rpexpected,
+    //                 rpname: data.rpname,
+    //                 rppm: data.rppm,
+    //                 rppmnote: data.rppmnote,
+    //                 rpsignificant: data.rpsignificant,
+    //                 rpunprocessed: data.rpunprocessed,
+    //                 mnoList: mnoList,
+    //                 apmno: lowestIndexItem.mno
+    //             }
+    //             console.log(obj)
+    //             const sendData = JSON.stringify(obj);
+    //             reportSocket.send(sendData);
+    //             console.log('서버에서 보낸 데이터 : ', data);
+    //             console.log("서버소켓으로 보내기 성공~~~~~")
+    //             setReportState(false)
+    //         } else {
+    //             console.log('소켓이 아직 연결되지 않았습니다.');
+    //         }
+    //     }
+    // }, [reportState]);
 
 
     console.log("결재상태 : ", nextApState)
 
     // nextApState가 true일 때 소켓으로 데이터 전송
     useEffect(() => {
-        if (nextMno && nextMno.mno && nextApState && reportSocket && loginInfo && loginInfo.mno) {
+        if (receivedData && receivedData.nextMno && nextMno && nextMno.mno && nextApState && reportSocket && loginInfo && loginInfo.mno) {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket.readyState === WebSocket.OPEN) {
                 console.log(nextMno.mno);  // 정상 출력
@@ -195,7 +228,7 @@ export default function ReportSocket(
                 console.log('소켓이 아직 연결되지 않았습니다.');
             }
         }
-    }, [nextApState]);
+    }, [receivedData]);
 
     // receivedData가 변경될 때마다 실행되는 useEffect
     useEffect(() => {
