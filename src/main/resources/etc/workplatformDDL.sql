@@ -5,8 +5,8 @@ use workplatform;
 -- 직원 테이블 생성
 CREATE TABLE member (
     mno INT UNSIGNED,                            # unsigned : 직별부여 및 사번부여( 1: 인사팀 2: 마케팅팀 3: 영업팀 4: 운영팀 5:기술팀 6:디자인팀 7:재무팀) (맨 앞자리 부서/ 자바에서부여)
-    mpwd VARCHAR(30) DEFAULT '1234',             # default '1234' :  비밀번호 기본값 설정
-    mname VARCHAR(30),                           # not null : 사원 이름
+    mpwd VARCHAR(255) DEFAULT '1234',             # default '1234' :  비밀번호 기본값 설정
+    mname VARCHAR(255),                           # not null : 사원 이름
     mphone VARCHAR(13) NOT NULL UNIQUE,          # not null unique : 사원 전화번호, 고유값 설정
     memail VARCHAR(100),                         # not null : 사원 사내 이메일
     mtype INT DEFAULT 0,                         # default 0 : 사원 현재 상태 (0: 활동, 1: 부재, 2: 외부업무, 3: 퇴사)
@@ -218,10 +218,13 @@ insert into category(category_name, category_desc) values
 ('마음의소리', '고민이나 상담을 나눌 수 있는 게시판'),
 ('중고거래', '물품 거래를 위한 게시판');
 
+
+
 # 게시판 테이블
 create table board(
 	pid int unsigned auto_increment,
     title varchar(50) not null,
+    category_id int unsigned,
     content varchar(1000) not null,
     views int unsigned default 0,
     mno int unsigned,
@@ -238,6 +241,28 @@ insert into board (pid,title,content,views,mno,category_id) values
 (2, '칼퇴해도됩니까?', '칼퇴각', 32, 100002,1),
 (3, '집에가고싶은데', '집가도됨?', 10, 100003,2),
 (4, '팀장님들 요즘 왜이럼?', '떡볶이 vs 곱창 추천좀', 30, 100004,3);
+
+# 댓글테이블
+CREATE TABLE Comment (
+    cid INT UNSIGNED AUTO_INCREMENT,
+    content VARCHAR(500) NOT NULL,
+    reg_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    pid INT UNSIGNED,
+    mno INT UNSIGNED,
+    PRIMARY KEY (cid),
+    FOREIGN KEY (pid) REFERENCES Board(pid) 
+        ON UPDATE CASCADE 
+        ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES Member(mno)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+insert into comment(cid,content,reg_date,pid,mno)values
+(1, '저는 한식당 추천합니다! 2번 출구 나가셔서 왼쪽에 있는 고깃집이 진짜 맛있어요.', '2025-03-15 10:23:45', 1, 100001),
+(2, '매콤한거 좋아하시면 3번 출구 옆 중국집 마라탕이 좋을 것 같아요!', '2025-03-15 11:30:22', 2, 100002),
+(3, '오늘은 야근각이네요ㅠㅠ', '2025-03-16 14:15:33', 3, 100003),
+(4, '저도 집에 가고 싶어요... 퇴근시간 언제 오나요', '2025-03-17 16:45:12', 4, 100004);
 
 
 
@@ -458,7 +483,7 @@ select * from message ;
 select * from fileshare;
 select * from approval;
 select * from board;
-select * from boardwrite;
+select * from Comment;
 select * from member;
 
 select rpno from report order by rpno desc limit 1;
