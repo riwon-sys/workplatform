@@ -82,6 +82,8 @@ export default function App(props) {
       console.log(nextAp)
       console.log(nextApMno)
       console.log(nextApState)
+
+      const [ lastRpno, setLastRpno ] = useState(''); 
       return (
 
         <ThemeProvider theme={theme}>
@@ -103,12 +105,15 @@ export default function App(props) {
                                 setNextApState={setNextApState} 
                                 nextApState={nextApState}
                                 nextAp={nextAp}
-                                nextApMno={nextApMno} />
+                                nextApMno={nextApMno}
+                                setLastRpno={setLastRpno} lastRpno={lastRpno} />
                             <Routes>
                                 <Route path="/" element={<ChatTeset />} />
                                 <Route path="/chatting" element={<ChatTeset />} />
                                 <Route path="/report/write" element={<Report_Write setReportState={setReportState} setMnos={setMnos} 
-                                                                                    setData={setData} reportState={reportState} />} />
+                                                                                    setData={setData} reportState={reportState}
+                                                                                    setLastRpno={setLastRpno} lastRpno={lastRpno}
+                                                                                    />} />
 
                                 <Route path="/report/view" element={<Report_View />} />
                                 <Route path="/report/view/:rpno" element={<Report_View />} />

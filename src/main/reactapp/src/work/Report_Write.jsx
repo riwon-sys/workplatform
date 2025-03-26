@@ -22,7 +22,9 @@ const Item = styled(Paper)(({ theme }) => ({
   height: '100%',
 }));
 
-export default function Report_Write({setReportState, setMnos, setData, reportState}){
+export default function Report_Write({setReportState, setMnos, setData, reportState
+  , setLastRpno , lastRpno
+}){
   const loginInfo = useSelector((state) => state.user.userInfo);
   console.log( loginInfo )
 
@@ -49,7 +51,7 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
     mrank: loginInfo.mrank
   });
   const [ mrank, setMrank ] = useState('');
-  const [ lastRpno, setLastRpno ] = useState(''); 
+  // const [ lastRpno, setLastRpno ] = useState(''); 
   const [ approval, setApproval ] = useState([
     { rank: "대리", mno: null, rpno: lastRpno, apstate: false },
     { rank: "과장", mno: null, rpno: lastRpno, apstate: false },

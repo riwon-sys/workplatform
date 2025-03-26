@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ReportSocket(
     { reportState, mnos, data, setReportState,
-        setNextApMno, setNextAp, setNextApState, nextApState, nextApMno, nextAp }) {
+        setNextApMno, setNextAp, setNextApState, nextApState, nextApMno, nextAp, setLastRpno, lastRpno }) {
 
     console.log(mnos)
     console.log(data)
@@ -21,6 +21,7 @@ export default function ReportSocket(
     const [checkMnos, setCheckMnos] = useState([])
     const mnoList = mnos.filter(item => item.mno !== null).map(item => item.mno);
 
+    console.log(lastRpno)
     console.log(mnoList)
     // 보고서 소켓 연결
 
@@ -66,9 +67,11 @@ export default function ReportSocket(
 
     const handleClose = () => {
         setState({ ...state, open: false }); // Snackbar를 닫음
-        if (receivedData.rpno == null) {
-            navigate('/report/approval');
-        } else {
+        if (receivedData.lastRpno > 0 && receivedData.rpno == 0) {
+            console.log(receivedData.lastRpno)
+            navigate(`/report/approval/${receivedData.lastRpno}`);
+        } else if(receivedData.rpno > 0 && receivedData.lastRpno == 0){
+            console.log(receivedData.rpno)
             navigate(`/report/approval/${receivedData.rpno}`);
 
         }
@@ -144,7 +147,8 @@ export default function ReportSocket(
                     rpsignificant: data.rpsignificant,
                     rpunprocessed: data.rpunprocessed,
                     mnoList: mnoList,
-                    apmno: lowestIndexItem.mno
+                    apmno: lowestIndexItem.mno,
+                    lastRpno : lastRpno
                 }
                 console.log(obj)
                 const sendData = JSON.stringify(obj);
