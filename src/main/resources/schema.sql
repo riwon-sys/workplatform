@@ -30,17 +30,18 @@ DROP TABLE IF EXISTS member;
 
 
 
--- 직원 테이블 생성
+-- 직원 테이블 생성 | rw 25-03-26 생성
 CREATE TABLE member (
-                        mno INT UNSIGNED,
-                        mpwd VARCHAR(255) DEFAULT '1234', -- 암호화 적용 시 평문 대비 길이 증가로 변경 (기존30 > 변경255) | rw 25-03-24
-                        mname VARCHAR(30),
-                        mphone VARCHAR(13) NOT NULL UNIQUE,
-                        memail VARCHAR(100),
-                        mtype INT DEFAULT 0,
-                        mrank VARCHAR(10) NOT NULL,
-                        mprofile VARCHAR(255) DEFAULT 'default.jpg',
-                        PRIMARY KEY (mno)
+                        mno INT UNSIGNED,                            -- unsigned : 부서 기반 사번 (1: 인사팀 ~ 7: 재무팀)
+                        mpwd VARCHAR(255) DEFAULT '1234',            -- 기본 비밀번호 설정
+                        moldPwd VARCHAR(100),                        -- 이전 비밀번호 저장용
+                        mname VARCHAR(255) NOT NULL,                 -- 사원 이름 (필수)
+                        mphone VARCHAR(13) NOT NULL UNIQUE,          -- 사원 전화번호 (필수, 유일값)
+                        memail VARCHAR(100) NOT NULL,                -- 사내 이메일 (필수)
+                        mtype INT DEFAULT 0,                         -- 활동 상태 (0: 활동, 1: 부재, 2: 외부업무, 3: 퇴사)
+                        mrank VARCHAR(10) NOT NULL,                  -- 직급 (필수): 대리, 과장, 차장, 부장
+                        mprofile VARCHAR(255) DEFAULT 'default.jpg', -- 프로필 사진 기본값
+                        PRIMARY KEY (mno)                            -- 사번 기본키
 );
 
 -- 채팅방 테이블

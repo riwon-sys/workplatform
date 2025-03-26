@@ -2,17 +2,18 @@ drop database if exists workplatform;
 create database workplatform;
 use workplatform;
 
--- 직원 테이블 생성
+-- 직원 테이블 생성 | rw 25-03-26 생성 
 CREATE TABLE member (
-    mno INT UNSIGNED,                            # unsigned : 직별부여 및 사번부여( 1: 인사팀 2: 마케팅팀 3: 영업팀 4: 운영팀 5:기술팀 6:디자인팀 7:재무팀) (맨 앞자리 부서/ 자바에서부여)
-    mpwd VARCHAR(255) DEFAULT '1234',             # default '1234' :  비밀번호 기본값 설정
-    mname VARCHAR(255),                           # not null : 사원 이름
-    mphone VARCHAR(13) NOT NULL UNIQUE,          # not null unique : 사원 전화번호, 고유값 설정
-    memail VARCHAR(100),                         # not null : 사원 사내 이메일
-    mtype INT DEFAULT 0,                         # default 0 : 사원 현재 상태 (0: 활동, 1: 부재, 2: 외부업무, 3: 퇴사)
-    mrank VARCHAR(10) NOT NULL,                  # not null 사원 직급 : 대리 - 과장 - 차장 - 부장
-    mprofile VARCHAR(255) DEFAULT 'default.jpg', # default 'default.jpg' : 프로필 사진 기본값 설정
-    PRIMARY KEY (mno)
+    mno INT UNSIGNED,                            -- unsigned : 부서 기반 사번 (1: 인사팀 ~ 7: 재무팀)
+    mpwd VARCHAR(255) DEFAULT '1234',            -- 기본 비밀번호 설정
+    moldPwd VARCHAR(100),                        -- 이전 비밀번호 저장용
+    mname VARCHAR(255) NOT NULL,                 -- 사원 이름 (필수)
+    mphone VARCHAR(13) NOT NULL UNIQUE,          -- 사원 전화번호 (필수, 유일값)
+    memail VARCHAR(100) NOT NULL,                -- 사내 이메일 (필수)
+    mtype INT DEFAULT 0,                         -- 활동 상태 (0: 활동, 1: 부재, 2: 외부업무, 3: 퇴사)
+    mrank VARCHAR(10) NOT NULL,                  -- 직급 (필수): 대리, 과장, 차장, 부장
+    mprofile VARCHAR(255) DEFAULT 'default.jpg', -- 프로필 사진 기본값
+    PRIMARY KEY (mno)                            -- 사번 기본키
 );
 
 -- 부서별 직원 데이터 삽입

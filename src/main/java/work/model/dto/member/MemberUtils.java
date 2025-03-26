@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class MemberUtils {
 
     // 1. 부서 조회
-    private static final String[] PARTS = { "인사", "마케팅", "영업", "운영", "기술", "디자인", "채무" };
+    private static final String[] PARTS = { "인사", "마케팅", "영업", "운영", "기술", "디자인", "재무" };
 
     public static String getDepartmentFromMno(int mno) {
         int mnoPart = mno / 100000; // 첫 번째 자리 숫자 추출

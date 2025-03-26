@@ -21,6 +21,9 @@ public class MemberDto {
 
     private  String department;
 
-    // +  첨부파일 ( O )
-    private MultipartFile uploadFile; // 25-03-20 첨부파일 기능 추가
+    // 첨부파일 기능 추가 | rw 25-03-20 생성
+    private MultipartFile uploadFile;
+
+    // 기존 비밀번호 확인용 | rw 25-03-26 생성
+    private String moldPwd;
 }

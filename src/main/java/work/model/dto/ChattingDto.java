@@ -38,4 +38,5 @@ public class ChattingDto {
 
     private List<RoomDto> rooms;
     private  String action;
+    private  String mprofile;
 }
