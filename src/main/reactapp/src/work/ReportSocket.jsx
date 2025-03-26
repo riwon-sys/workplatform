@@ -8,7 +8,8 @@ import { Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function ReportSocket(
-    { reportState, mnos, data, setReportState,  setNextApMno, setNextAp, setNextApState, nextApState }) {
+    { reportState, mnos, data, setReportState, 
+         setNextApMno, setNextAp, setNextApState, nextApState, nextApMno, nextAp }) {
 
     console.log(mnos)
     console.log(data)
@@ -36,6 +37,7 @@ export default function ReportSocket(
 
 
     // 다음결재자
+    console.log(nextAp)
     console.log()
 
     const navigate = useNavigate();
