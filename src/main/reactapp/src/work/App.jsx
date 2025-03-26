@@ -56,7 +56,31 @@ export default function App(props) {
       });
 
       console.log(reportState)
-    return (
+
+      // 상세조회된 보고서 정보를 받아올 state 변수
+      const [nextAp, setNextAp] = useState({
+        rpname: '',
+        rpam: '',
+        rppm: '',
+        rpamnote: '',
+        rppmnote: '',
+        rpunprocessed: '',
+        rpsignificant: '', 
+        rpexpected: '',
+        mname: '',
+        mrank: '',
+        mdepartment: '',
+        apno: '' 
+      });
+      // 다음결재자를 받아올 state 변수
+      const [nextApMno , setNextApMno] = useState(null)
+      // 결재 상태를 받아올 state 변수
+      const [nextApState, setNextApState] = useState(false)
+
+      console.log(nextAp)
+      console.log(nextApMno)
+      console.log(nextApState)
+      return (
 
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -70,16 +94,28 @@ export default function App(props) {
                                 setReportState={setReportState}
                                 mnos={mnos}
                                 setMnos={setMnos}
-                                data={data} />
+                                data={data}
+                                
+                                setNextApMno={setNextApMno} 
+                                setNextAp={setNextAp} 
+                                setNextApState={setNextApState} 
+                                nextApState={nextApState}
+                                nextAp={nextAp}
+                                nextApMno={nextApMno} />
                             <Routes>
                                 <Route path="/" element={<ChatTeset />} />
                                 <Route path="/chatting" element={<ChatTeset />} />
-                                <Route path="/report/write" element={<Report_Write setReportState={setReportState} setMnos={setMnos} setData={setData} />} />
+                                <Route path="/report/write" element={<Report_Write setReportState={setReportState} setMnos={setMnos} 
+                                                                                    setData={setData} reportState={reportState} />} />
 
                                 <Route path="/report/view" element={<Report_View />} />
                                 <Route path="/report/view/:rpno" element={<Report_View />} />
                                 <Route path="/report/approval" element={<Report_Approval />} />
-                                <Route path="/report/approval/:rpno" element={<Report_Approval />} />
+                                <Route path="/report/approval/:rpno" element={<Report_Approval 
+                                setNextApMno={setNextApMno} 
+                                setNextAp={setNextAp} 
+                                setNextApState={setNextApState} 
+                                nextApState={nextApState} />} />
                                 <Route path="/board" element={<Board />} />
                                 <Route path="/board/detail" element={<BoardDetail />} />
                                 <Route path="/board/write" element={<BoardWrite />} />

@@ -26,6 +26,7 @@ public class ReportDto {
 
     private int apno;
     private boolean apstate;
+    private int apmno;
 
     private List<Integer> mnoList ;
 

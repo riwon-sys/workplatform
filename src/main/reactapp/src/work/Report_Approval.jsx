@@ -28,7 +28,7 @@ const Item = styled(Paper)(({ theme }) => ({
     height: '100%', // 높이 설정 추가
 }));
 
-export default function Report_Approval() {
+export default function Report_Approval({ setNextApMno, setNextAp, setNextApState, nextApState }) {
 
   // Signature Canvas 참조
   const signCanvas = useRef( null );
@@ -75,8 +75,16 @@ export default function Report_Approval() {
     try{
       const response = await axios.get( `http://localhost:8080/api/report/view?rpno=${rpno}` );
       setFormData( response.data );
+      setNextAp(response.data) // 소켓으로 보낼 보고서 정보
     }catch( e ){ console.log( e ); }
   } // f end
+
+   // 소켓으로 보낼 reportState가 변경될 때마다 실행되는 useEffect
+   useEffect(() => {
+    if (nextApState) {
+      console.log('nextApState 값이 변경되어 true로 설정되었습니다.');
+    }
+  }, [nextApState]);  // reportState가 변경될 때마다 실행
 
   // 보고서 결재
   const onApproval = async ( props ) => {
@@ -120,6 +128,8 @@ export default function Report_Approval() {
       if( response ){
         alert('보고서 결재를 완료하였습니다.');
         navigate( 0 );
+        
+        setNextApState(true)
       }else{ alert('보고서 결제 실패') }
     }catch( e ){ console.log( e ); alert('보고서 결제 실패'); }
 
@@ -139,6 +149,7 @@ export default function Report_Approval() {
       const response = await axios.get( `http://localhost:8080/api/approval?rpno=${rpno}`, { withCredentials : true } );
       setApproval( response.data );
       console.log("결재자" , response.data)
+      setNextApMno(response.data) // 소켓으로 보낼 다음 결재자 mno
     }catch( e ){ console.log( e ); } 
   } // f end
 

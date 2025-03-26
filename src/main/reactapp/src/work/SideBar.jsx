@@ -7,6 +7,7 @@ import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
+
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -33,7 +34,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from './member/reduxs/userSlice';
 
 /* toast | rw 25-03-25 */
-import { useSnackbar } from 'notistack'; // 토스트 메시지
+import { useSnackbar } from 'notistack'; // ✅ 토스트 메시지
 
 import Socket from "./socket.jsx";
 import ReportSocket from './ReportSocket.jsx';
@@ -71,23 +72,24 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-      width: drawerWidth,
-      flexShrink: 0,
-      whiteSpace: 'nowrap',
-      boxSizing: 'border-box',
-      ...(open && {
-        ...openedMixin(theme),
-        '& .MuiDrawer-paper': openedMixin(theme),
-      }),
-      ...(!open && {
-        ...closedMixin(theme),
-        '& .MuiDrawer-paper': closedMixin(theme),
-      }),
-    })
+  ({ theme, open }) => ({
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    boxSizing: 'border-box',
+    ...(open && {
+      ...openedMixin(theme),
+      '& .MuiDrawer-paper': openedMixin(theme),
+    }),
+    ...(!open && {
+      ...closedMixin(theme),
+      '& .MuiDrawer-paper': closedMixin(theme),
+    }),
+  })
 );
 
-export default function SideBar({ reportState, setReportState, mnos, setMnos, data }) {
+export default function SideBar({ reportState, setReportState, mnos, setMnos, data
+  , setNextApMno, nextApMno, setNextAp, nextAp, setNextApState, nextApState }) {
 
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('xl'));
@@ -213,13 +215,20 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
 
         <Divider />
 
-        <Socket/> {/*브라우저 소켓 추가*/}
+        <Socket /> {/*브라우저 소켓 추가*/}
         <ReportSocket
-        reportState={reportState}
-        mnos={mnos}
-        data={data}
-        setReportState={setReportState}
-      />
+          reportState={reportState}
+          mnos={mnos}
+          data={data}
+          setReportState={setReportState}
+
+          setNextApMno={setNextApMno}
+          setNextAp={setNextAp}
+          setNextApState={setNextApState}
+          nextApState={nextApState}
+          nextAp={nextAp}
+          nextApMno={nextApMno}
+        />
 
         {/* 로그인 영역 */}
         <Box sx={{ flexGrow: 1 }} />
@@ -233,25 +242,25 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
                       <img
                         src={'http://localhost:8080/file/' + (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)}
                         alt="profile"
-                        style={{ 
-                          width: '40px', 
+                        style={{
+                          width: '40px',
                           borderRadius: '40px'
                         }}
                         />
-                      <div 
-                        style={{ 
-                          fontSize: '18px', 
+                      <div
+                        style={{
+                          fontSize: '18px',
                           fontWeight: 'bold',
                           color: 'gray',
-                          margin: '3px 5px 0px 10px' 
+                          margin: '3px 5px 0px 10px'
                         }}
-                      > 
+                      >
                         { loginInfo.mname } 님 ({ loginInfo.mrank })
                       </div>
                     </Box>
                     <IconButton onClick={onLogout} sx={{ marginRight: "-7px" }} >
-                      { open ? 
-                        <LogoutIcon color='primary' /> : 
+                      { open ?
+                        <LogoutIcon color='primary' /> :
                         <img
                           src={'http://localhost:8080/file/' + (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)}
                           alt="profile"
@@ -274,9 +283,9 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
                           style={{ width: '40px', borderRadius: '40px' }}
                         />
                       </ListItemIcon>
-                      <ListItemText 
-                        // primary={item.name} 
-                        sx={{ opacity: open ? 1 : 0 }} 
+                      <ListItemText
+                        // primary={item.name}
+                        sx={{ opacity: open ? 1 : 0 }}
                       />
                     </ListItemButton>
                   </ListItem> */}
