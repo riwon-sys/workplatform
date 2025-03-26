@@ -118,7 +118,7 @@ export default function Report_View() {
 
   const convertToPdf = async () => {
     const element = document.getElementById("pdf-download");
-    if (!element) {
+    if ( !element ) {
       console.error("PDF 변환할 요소를 찾을 수 없습니다.");
       return;
     }

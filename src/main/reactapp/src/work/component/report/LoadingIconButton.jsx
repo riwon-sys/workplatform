@@ -1,25 +1,39 @@
 import * as React from 'react';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import { Button, Tooltip, CircularProgress } from "@mui/material";
 
 export default function LoadingIconButton( { convertToPdf } ) {
-  const [loading, setLoading] = React.useState(false);
+  const [ loading, setLoading ] = React.useState(false);
   React.useEffect(() => {
     const timeout = setTimeout(() => {
       setLoading(false);
     }, 500);
     return () => clearTimeout(timeout);
   });
+
+
   return (
-    <Tooltip title="Click to see loading">
-      <IconButton 
-        onClick={() => { setLoading(true); convertToPdf(); } } 
-        loading={loading}
-        color='primary'
+    <Tooltip title="PDF Download">
+      <Button
+        onClick={async () => {
+          setLoading(true);
+          await convertToPdf(); // PDF 변환 함수 실행
+          setLoading(false);
+        }}
+        variant="contained"
+        color="info"
+        sx={{
+          width: "45px", // 가로 너비 설정
+          minWidth: "unset", // 기본 min-width 제거
+          padding: "8px", // 패딩 적용
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+        disabled={loading} // 로딩 중이면 버튼 비활성화
       >
-        <PictureAsPdfIcon variant="contained" />
-      </IconButton>
+        {loading ? <CircularProgress size={24} color="inherit" /> : <PictureAsPdfIcon />}
+      </Button>
     </Tooltip>
   );
 }
