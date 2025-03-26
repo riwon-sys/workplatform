@@ -240,6 +240,28 @@ insert into board (pid,title,content,views,mno,category_id) values
 (3, '집에가고싶은데', '집가도됨?', 10, 100003,2),
 (4, '팀장님들 요즘 왜이럼?', '떡볶이 vs 곱창 추천좀', 30, 100004,3);
 
+# 댓글테이블
+CREATE TABLE Comment (
+    cid INT UNSIGNED AUTO_INCREMENT,
+    content VARCHAR(500) NOT NULL,
+    reg_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    pid INT UNSIGNED,
+    mno INT UNSIGNED,
+    PRIMARY KEY (cid),
+    FOREIGN KEY (pid) REFERENCES Board(pid)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES Member(mno)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+insert into comment(cid,content,reg_date,pid,mno)values
+(1, '저는 한식당 추천합니다! 2번 출구 나가셔서 왼쪽에 있는 고깃집이 진짜 맛있어요.', '2025-03-15 10:23:45', 1, 100001),
+(2, '매콤한거 좋아하시면 3번 출구 옆 중국집 마라탕이 좋을 것 같아요!', '2025-03-15 11:30:22', 2, 100002),
+(3, '오늘은 야근각이네요ㅠㅠ', '2025-03-16 14:15:33', 3, 100003),
+(4, '저도 집에 가고 싶어요... 퇴근시간 언제 오나요', '2025-03-17 16:45:12', 4, 100004);
+
 
 
 # 보고서 테이블
@@ -459,7 +481,7 @@ select * from message ;
 select * from fileshare;
 select * from approval;
 select * from board;
-
+select * from Comment;
 select * from member;
 
 select rpno from report order by rpno desc limit 1;
