@@ -7,13 +7,15 @@ import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import Divider from '@mui/material/Divider';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { Button, Typography, useMediaQuery } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
+
+/* mui icon */
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
@@ -23,6 +25,7 @@ import ApprovalIcon from '@mui/icons-material/Approval';
 import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import PersonIcon from '@mui/icons-material/Person';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 /* redux  | rw 25-03-21 */
 import axios from 'axios';
@@ -30,7 +33,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from './member/reduxs/userSlice';
 
 /* toast | rw 25-03-25 */
-import { useSnackbar } from 'notistack'; // ✅ 토스트 메시지
+import { useSnackbar } from 'notistack'; // 토스트 메시지
 
 import Socket from "./socket.jsx";
 import ReportSocket from './ReportSocket.jsx';
@@ -115,6 +118,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
 
   // ✅ 로그아웃 함수: 토스트 포함
   const onLogout = async () => {
+    if( !confirm('로그아웃 하시겠습니까?') ){ return; }
     try {
       await axios.get('http://localhost:8080/workplatform/logout', { withCredentials: true });
       dispatch(logout());
@@ -144,9 +148,9 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
           <DrawerHeader>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start', pr: 3 }}>
               <img
-                  src="/logoimg/logoname_blue.jpg"
-                  alt="Logo"
-                  style={{ width: open ? 140 : 30, height: open ? 40 : 30, transition: "0.3s" }}
+                src="/logoimg/logoname_blue.jpg"
+                alt="Logo"
+                style={{ width: open ? 140 : 30, height: open ? 40 : 30, transition: "0.3s" }}
               />
             </Box>
             <IconButton onClick={toggleDrawer}>
@@ -157,18 +161,18 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
 
           <List>
             {mainMenuItems.map((item) => (
-                <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                      component={Link}
-                      to={item.path}
-                      sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
-                  >
-                    <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
-                  </ListItemButton>
-                </ListItem>
+              <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
+                    component={Link}
+                    to={item.path}
+                    sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
+                >
+                  <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
             ))}
           </List>
 
@@ -176,20 +180,20 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
 
           <List>
             {menuItems.map((item) => (
-                <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                      component={Link}
-                      to={item.path}
-                      sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
-                  >
-                    <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
-                  </ListItemButton>
-                </ListItem>
+              <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
+                  component={Link}
+                  to={item.path}
+                  sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
+                >
+                  <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
+                    {item.icon}
+                  </ListItemIcon>
+                  <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
             ))}
-            {/* ✅ 인사팀이면 사원등록 메뉴 보여주기 */}
+            {/* 인사팀이면 사원등록 메뉴 보여주기 */}
             {String(loginInfo?.mno).startsWith("1") &&
                 (loginInfo?.mrank === "차장" || loginInfo?.mrank === "부장") && (
                     <ListItem key="사원 등록" disablePadding sx={{ display: 'block' }}>
@@ -221,10 +225,62 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
         <Box sx={{ flexGrow: 1 }} />
 
           <Divider />
-          <Box sx={{ textAlign: "center", p: open ? 2.05 : 1 }}>
+          <Box sx={{ textAlign: "center", p: "2px" }}>
             {loginInfo ? (
                 <>
-                  <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }}>
+                  <DrawerHeader>
+                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start' }}>
+                      <img
+                        src={'http://localhost:8080/file/' + (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)}
+                        alt="profile"
+                        style={{ 
+                          width: '40px', 
+                          borderRadius: '40px'
+                        }}
+                        />
+                      <div 
+                        style={{ 
+                          fontSize: '18px', 
+                          fontWeight: 'bold',
+                          color: 'gray',
+                          margin: '3px 5px 0px 10px' 
+                        }}
+                      > 
+                        { loginInfo.mname } 님 ({ loginInfo.mrank })
+                      </div>
+                    </Box>
+                    <IconButton onClick={onLogout} sx={{ marginRight: "-7px" }} >
+                      { open ? 
+                        <LogoutIcon color='primary' /> : 
+                        <img
+                          src={'http://localhost:8080/file/' + (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)}
+                          alt="profile"
+                          style={{ width: '40px', borderRadius: '40px' }}
+                        />
+                      }
+                    </IconButton>
+                  </DrawerHeader>
+
+                  {/* <ListItem disablePadding sx={{ display: 'block' }}>
+                    <ListItemButton
+                      component={Link}
+                      onClick={onLogout}
+                      sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
+                    >
+                      <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
+                        <img
+                          src={'http://localhost:8080/file/' + (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)}
+                          alt="profile"
+                          style={{ width: '40px', borderRadius: '40px' }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText 
+                        // primary={item.name} 
+                        sx={{ opacity: open ? 1 : 0 }} 
+                      />
+                    </ListItemButton>
+                  </ListItem> */}
+                  {/* <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }}>
                     <img
                         src={'http://localhost:8080/file/' + (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)}
                         alt="profile"
@@ -233,7 +289,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
                   </Typography>
                   <Button variant="contained" onClick={onLogout} color="info">
                     로그아웃
-                  </Button>
+                  </Button> */}
                 </>
             ) : (
                 <>
