@@ -17,10 +17,6 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   height: '100%',
-  color: theme.palette.text.secondary,
-  ...theme.applyStyles?.('dark', {  // 옵셔널 체이닝 추가
-    backgroundColor: '#1A2027',
-  }),
 }));
 
 export default function BoardWrite(){
@@ -83,81 +79,85 @@ export default function BoardWrite(){
 
     return (
         <>
-          <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
-            <Grid container spacing={0} sx={{ height: '100%' }}>
-              {/* xs: 너비 조정 */}
-              <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>  {/* size → xs 변경 */}
-                <Item>
-                <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>
-                        게시물 작성
-                </Typography>
-                <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+          <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
+            <Item
+              sx={{
+                overflow: 'scroll',
+                overflowX: 'hidden',
+                minWidth: '700px',
+                maxWidth: '1000px',
+                width: '100%',
+                padding: '50px 70px'
+              }}
+            >
+            <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 3 }}>
+                    게시물 작성
+            </Typography>
+            <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
 
-                    {/* 카테고리 선택 */}
-              <FormControl fullWidth>
-                <InputLabel id="category-label">카테고리</InputLabel>
-                <Select
-                  labelId="category-label"
-                  name="category"
-                  value={boardForm.category}
-                  label="카테고리"
-                  onChange={onValueChange}
-                >
-                  <MenuItem value="1">자유게시판</MenuItem>
-                  <MenuItem value="2">스포츠</MenuItem>
-                  <MenuItem value="3">마음의소리</MenuItem>
-                  <MenuItem value="4">중고거래</MenuItem>
-                  
-                </Select>
-              </FormControl>
-               {/* 제목 입력 */}
-               <TextField
-                fullWidth
-                label="제목"
-                name="title"
-                value={boardForm.title}
-                onChange={onValueChange}
-                placeholder="제목을 입력하세요"
-                variant="outlined"
-              />
+                {/* 카테고리 선택 */}
+          <FormControl fullWidth>
+            <InputLabel id="category-label">카테고리</InputLabel>
+            <Select
+              labelId="category-label"
+              name="category"
+              value={boardForm.category}
+              label="카테고리"
+              onChange={onValueChange}
+            >
+              <MenuItem value="1">자유게시판</MenuItem>
+              <MenuItem value="2">스포츠</MenuItem>
+              <MenuItem value="3">마음의소리</MenuItem>
+              <MenuItem value="4">중고거래</MenuItem>
+              
+            </Select>
+          </FormControl>
+            {/* 제목 입력 */}
+            <TextField
+            fullWidth
+            label="제목"
+            name="title"
+            value={boardForm.title}
+            onChange={onValueChange}
+            placeholder="제목을 입력하세요"
+            variant="outlined"
+          />
 
-               {/* 내용 입력 */}
-               <TextField
-                fullWidth
-                label="내용"
-                name="content"
-                value={boardForm.content}
-                onChange={onValueChange}
-                placeholder="내용을 입력하세요"
-                multiline
-                rows={10}
-                variant="outlined"
-              />
-                </Box>
-                <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 2 }}>
-                <Button 
-                  variant="outlined" 
-                  onClick={onCancel}
-                  sx={{ px: 3 }}
-                >
-                  취소
-                </Button>
-                <Button 
-                  variant="contained" 
-                  onClick={createBoard}
-                  sx={{ 
-                    px: 3,
-                    backgroundColor: '#0068c3', 
-                    '&:hover': { backgroundColor: '#0056a3' }
-                  }}
-                >
-                  등록
-                </Button>
-                </Box>
-                
-                </Item>
-              </Grid>
-            </Grid>
+            {/* 내용 입력 */}
+            <TextField
+            fullWidth
+            label="내용"
+            name="content"
+            value={boardForm.content}
+            onChange={onValueChange}
+            placeholder="내용을 입력하세요"
+            multiline
+            rows={10}
+            variant="outlined"
+          />
+            </Box>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', gap: 2, mt: 2 }}>
+            <Button 
+              variant="outlined" 
+              onClick={onCancel}
+              sx={{ px: 3 }}
+            >
+              취소
+            </Button>
+            <Button 
+              variant="contained" 
+              onClick={createBoard}
+              sx={{ 
+                px: 3,
+                backgroundColor: '#0068c3', 
+                '&:hover': { backgroundColor: '#0056a3' }
+              }}
+            >
+              등록
+            </Button>
+            </Box>
+            
+            </Item>
           </Box>
         </>
       );

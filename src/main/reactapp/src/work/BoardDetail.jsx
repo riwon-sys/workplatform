@@ -46,7 +46,6 @@ export default function BoardDetail() {
   const pid = searchParams.get("pid");
 
   const [board,setBoard] = useState({});
-
   const loginInfo = useSelector( (state) => state.user.userInfo );
  
     //페이지 이동을 위한 navigate
@@ -112,11 +111,16 @@ const deleteBoard = async() => {
       
   return (
     <>
-      <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
-        <Grid container spacing={0} sx={{ height: '100%' }}>
-          {/* xs: 너비 조정 */}
-          <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>  {/* size → xs 변경 */}
-            <Item sx={{overflow:'scroll',overflowX:'hidden'}}>
+      <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
+        <Item
+          sx={{
+            overflow: 'scroll',
+            overflowX: 'hidden',
+            minWidth: '700px',
+            maxWidth: '1000px',
+            width: '100%'
+          }}
+        >
 
                           {/* 헤더 부분 */}
             <Box sx={{ display: 'flex', alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid #eee' }}>
@@ -269,9 +273,7 @@ const deleteBoard = async() => {
               </Box>
             );
           })}
-            </Item>
-          </Grid>
-        </Grid>
+        </Item>
       </Box>
     </>
   );

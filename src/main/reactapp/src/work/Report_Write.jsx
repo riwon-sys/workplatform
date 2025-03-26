@@ -51,10 +51,10 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
   const [ mrank, setMrank ] = useState('');
   const [ lastRpno, setLastRpno ] = useState(''); 
   const [ approval, setApproval ] = useState([
-    { rank: "대리", mno: null, rpno: "", apstate: false },
-    { rank: "과장", mno: null, rpno: "", apstate: false },
-    { rank: "차장", mno: null, rpno: "", apstate: false },
-    { rank: "부장", mno: null, rpno: "", apstate: false }
+    { rank: "대리", mno: null, apstate: false },
+    { rank: "과장", mno: null, apstate: false },
+    { rank: "차장", mno: null, apstate: false },
+    { rank: "부장", mno: null, apstate: false }
   ]);
   const [ members, setMembers ] = useState([]);
   const [ reports, setReports ] = useState( [] );
@@ -67,13 +67,13 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
     setFormData( { ...formData, [ e.target.name ] : e.target.value } )
   } // f end
 
-  // Auto_increment 번호 조회
-  const onLastRpno = async () => {
-    const response = await axios.get( 'http://localhost:8080/api/report/lastrpno' );
-    setLastRpno( response.data+1 );
-  } // f end
+  // // 등록한 보고서 번호 조회
+  // const onLastRpno = async () => {
+  //   const response = await axios.get( 'http://localhost:8080/api/report/lastrpno' );
+  //   setLastRpno( response.data );
+  // } // f end
 
-  useEffect( () => { onLastRpno(); }, [ reports ] );
+  // useEffect( () => { onLastRpno(); }, [ reports ] );
 
    // 소켓으로 보낼 reportState가 변경될 때마다 실행되는 useEffect
    useEffect(() => {
@@ -84,20 +84,33 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
 
 
   // 보고서 등록 함수
-  const onPost = async ( props ) => {
-    if( signCanvas.current.isEmpty() ){ alert('서명 후 등록이 가능합니다.'); return; }
-
-    if( !confirm('보고서 작성을 완료하시겠습니까?') ){ return; }
+  const onPost = async (props) => {
+    if ( signCanvas.current.isEmpty() ){
+      alert('서명 후 등록이 가능합니다.');
+      return;
+    }
+  
+    if ( !confirm('보고서 작성을 완료하시겠습니까?') ){ return; }
+  
     try{
-      const response = await axios.post( 'http://localhost:8080/api/report', formData, { withCredentials : true } );
-      if( response.data ){
+      const response = await axios.post('http://localhost:8080/api/report', formData, { withCredentials: true });
+  
+      if ( response.data ) {
+        const ApprovalRpnoResponse = await axios.get('http://localhost:8080/api/report/lastrpno');
+        const ApprovalRpno = ApprovalRpnoResponse.data;
+  
+        setLastRpno( ApprovalRpno ); // 상태 업데이트
+        console.log( ApprovalRpno );
+  
+        setApproval((prevApproval) =>
+          prevApproval.map((item) => ({ ...item, rpno: ApprovalRpno }))
+        );
+  
+        console.log('Updated approval:', approval);
         onApprovalPost();
-
-        
-
-      }else{ alert('등록 실패'); }
-    }catch( e ){ console.log( e ); alert('등록 실패'); }
-  } // f end 
+      } else { alert('등록 실패'); }
+    } catch (e) { console.log(e); alert('등록 실패'); }
+  };
 
   const onApprovalPost = async ( props ) => {
     try{
@@ -162,17 +175,13 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
     // }
   
   // 기존 approval 배열에서 동일한 rank 항목만 업데이트 (중복 추가 방지)
-  setApproval((prevApproval) =>
+    setApproval((prevApproval) =>
     prevApproval.map((item) =>
-      item.rank === rank ? { ...item, mno: selectedMno, rpno: lastRpno } : item
+      item.rank === rank ? { ...item, mno: selectedMno } : item
       )
     );
-console.log(approval)
     setMnos(approval);
-    console.log(selectedMno)
-
   };
-  console.log(approval)
 
   // 모든 직급의 멤버를 한 번에 로드
   useEffect(() => {

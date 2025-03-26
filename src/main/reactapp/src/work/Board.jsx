@@ -15,10 +15,6 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   height: '100%',
-  color: theme.palette.text.secondary,
-  ...theme.applyStyles?.('dark', {  // 옵셔널 체이닝 추가
-    backgroundColor: '#1A2027',
-  }),
 }));
 
 export default function () {
@@ -51,7 +47,8 @@ export default function () {
           overflowX: 'hidden',
           minWidth: '700px',
           maxWidth: '1000px',
-          width: '100%'
+          width: '100%',
+          padding: '50px 70px'
         }}
       >
           <CssVarsProvider>
