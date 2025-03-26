@@ -143,6 +143,14 @@ INSERT INTO fileshare (fname, flocation, pno) VALUES
                                                   ('회의 일지.txt', '/uploads/회의_일지.txt', 14), -- 박시연 (마케팅팀 대리 회의)
                                                   ('분석 자료.xlsx', '/uploads/분석_자료.xlsx', 15); -- 윤지호 (마케팅팀 전체)
 
+-- 카테고리 데이터 추가
+insert into category(category_name, category_desc) values
+                                                       ('자유게시판', '자유롭게 글을 작성할 수 있는 게시판'),
+                                                       ('스포츠', '스포츠 관련 토론 게시판'),
+                                                       ('마음의소리', '고민이나 상담을 나눌 수 있는 게시판'),
+                                                       ('중고거래', '물품 거래를 위한 게시판');
+
+
 # 게시판 샘플데이터 삽입
 insert into board (pid,title,content,views,mno) values
 (1, '주변에 맛집있나요?', '매콤한게땡김', 11, 100001),
