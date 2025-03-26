@@ -68,7 +68,7 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
   // 보고서 상세 조회 함수
   useEffect(() => { 
     if ( rpno ) { onFindByRpno(); } 
-  }, [ rpno ]);
+  }, [ rpno,nextApState ]);
 
   const onFindByRpno = async ( props ) => {
     if( !rpno ){ return; }
@@ -83,7 +83,7 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
      useEffect(() => {
       if (nextApState) {
         console.log('nextApState 값이 변경되어 true로 설정되었습니다.');
-        
+        //onFindByRpno();
       }
     }, [nextApState]);  
 
@@ -128,7 +128,7 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
       const response = await axios.put( `http://localhost:8080/api/approval`, signFormData, { withCredentials : true } )
       if( response ){
         alert('보고서 결재를 완료하였습니다.');
-        // navigate( 0 );
+        navigate("/report/approval")
         
         // 소켓으로 보낼 상태 변수
         setNextApState(true)
@@ -202,6 +202,7 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
                 setPage={ setPage }
                 setTotalPages={ setTotalPages }
                 selectValue={ selectValue }
+                nextApState={nextApState}
               />
             </CssVarsProvider>
     
