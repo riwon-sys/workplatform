@@ -5,7 +5,7 @@ use workplatform;
 -- 직원 테이블 생성
 CREATE TABLE member (
     mno INT UNSIGNED,                            # unsigned : 직별부여 및 사번부여( 1: 인사팀 2: 마케팅팀 3: 영업팀 4: 운영팀 5:기술팀 6:디자인팀 7:재무팀) (맨 앞자리 부서/ 자바에서부여)
-    mpwd VARCHAR(30) DEFAULT '1234',             # default '1234' :  비밀번호 기본값 설정
+    mpwd VARCHAR(255) DEFAULT '1234',            # default '1234' :  비밀번호 기본값 설정
     mname VARCHAR(30),                           # not null : 사원 이름
     mphone VARCHAR(13) NOT NULL UNIQUE,          # not null unique : 사원 전화번호, 고유값 설정
     memail VARCHAR(100),                         # not null : 사원 사내 이메일
