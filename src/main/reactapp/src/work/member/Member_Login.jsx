@@ -14,7 +14,8 @@ import {
     TextField,
     Button,
     Typography,
-    Stack
+    Stack,
+    CssBaseline
 } from "@mui/material";
 import {
     Brightness7,
@@ -147,8 +148,8 @@ const LoginScreen = ({
                     variant="outlined"
                     sx={{
                         width: "100%",
-                        maxWidth: "600px",
-                        padding: "60px",
+                        maxWidth: "500px",
+                        padding: "50px 70px",
                         borderRadius: "16px",
                         position: "relative",
                         opacity: 0,
@@ -166,7 +167,7 @@ const LoginScreen = ({
                             gap: 1
                         }}
                     >
-                        <IconButton color="primary" onClick={toggleColorMode}>
+                        {/* <IconButton color="primary" onClick={toggleColorMode}>
                             {darkMode ? <Brightness7 /> : <Brightness4 />}
                         </IconButton>
                         <IconButton color="primary">
@@ -174,12 +175,17 @@ const LoginScreen = ({
                         </IconButton>
                         <IconButton color="error" onClick={() => navigate("/")}>
                             <Close />
-                        </IconButton>
+                        </IconButton> */}
                     </Box>
 
-                    <Typography variant="h4" align="center" gutterBottom>
-                        WorkPlatform 로그인
-                    </Typography>
+                    <img 
+                        src="/logoimg/logoname_blue.jpg" 
+                        style={{ width: "100%", align: "center", padding: "0px 70px"  }} 
+                    />
+                    <h1 align="center" > 로그인 </h1> 
+                    {/* <Typography variant="h4" align="center" gutterBottom>
+                        로그인
+                    </Typography> */}
 
                     <form
                         onSubmit={(e) => {
@@ -232,8 +238,8 @@ const LoginScreen = ({
                                     onChange={(e) => setAutoLogin(e.target.checked)}
                                     id="autoLogin"
                                 />
-                                <label htmlFor="autoLogin" style={{ marginLeft: 8 }}>
-                                    자동 로그인
+                                <label htmlFor="autoLogin" style={{ marginLeft: 8, margin: "-15px 0px" }}>
+                                    &nbsp;자동 로그인
                                 </label>
                             </Box>
 
@@ -243,6 +249,12 @@ const LoginScreen = ({
                                 fullWidth
                                 type="submit"
                                 disabled={loading}
+                                sx={{ 
+                                    fontSize: "20px",
+                                    fontWeight: "bold",
+                                    fontFamily: "Nanum Gothic",
+                                    padding: "8px"
+                                }}
                             >
                                 {loading ? "로그인 중입니다..." : "로그인"}
                             </Button>

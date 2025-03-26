@@ -88,6 +88,13 @@ create table fileshare(
                           constraint primary key (fno),
                           constraint foreign key (pno) references paritcipant (pno) on update cascade on delete cascade
 );
+-- 카테고리 테이블
+create table category(
+                         category_id int unsigned auto_increment primary key,
+                         category_name varchar(20) not null,
+                         category_desc varchar(100)
+);
+
 
 -- 게시판 테이블
 create table board(
