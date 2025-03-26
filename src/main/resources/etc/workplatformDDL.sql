@@ -1,19 +1,17 @@
-
-
 drop database if exists workplatform;
 create database workplatform;
 use workplatform;
 
 -- 직원 테이블 생성
 CREATE TABLE member (
-    mno INT UNSIGNED,
-    mpwd VARCHAR(255) DEFAULT '1234', -- 암호화 적용 시 평문 대비 길이 증가로 변경 (기존30 > 변경255) | rw 25-03-24
-    mname VARCHAR(30),
-    mphone VARCHAR(13) NOT NULL UNIQUE,
-    memail VARCHAR(100),
-    mtype INT DEFAULT 0,
-    mrank VARCHAR(10) NOT NULL,
-    mprofile VARCHAR(255) DEFAULT 'default.jpg',
+    mno INT UNSIGNED,                            # unsigned : 직별부여 및 사번부여( 1: 인사팀 2: 마케팅팀 3: 영업팀 4: 운영팀 5:기술팀 6:디자인팀 7:재무팀) (맨 앞자리 부서/ 자바에서부여)
+    mpwd VARCHAR(255) DEFAULT '1234',            # default '1234' :  비밀번호 기본값 설정
+    mname VARCHAR(30),                           # not null : 사원 이름
+    mphone VARCHAR(13) NOT NULL UNIQUE,          # not null unique : 사원 전화번호, 고유값 설정
+    memail VARCHAR(100),                         # not null : 사원 사내 이메일
+    mtype INT DEFAULT 0,                         # default 0 : 사원 현재 상태 (0: 활동, 1: 부재, 2: 외부업무, 3: 퇴사)
+    mrank VARCHAR(10) NOT NULL,                  # not null 사원 직급 : 대리 - 과장 - 차장 - 부장
+    mprofile VARCHAR(255) DEFAULT 'default.jpg', # default 'default.jpg' : 프로필 사진 기본값 설정
     PRIMARY KEY (mno)
 );
 
@@ -120,7 +118,7 @@ INSERT INTO room (rname, rtype, mno, rlastdate) VALUES
 ('운영팀-운영 회의', '1', 100003, NOW()); -- 운영팀 운영 회의
 
 create table paritcipant(
-   pno int unsigned auto_increment,
+	pno int unsigned auto_increment,
     pdate datetime default now(),
     mno int unsigned,
     rno int unsigned,
@@ -150,7 +148,7 @@ INSERT INTO paritcipant (mno, rno) VALUES
 
 # 메세지 테이블
 create table message(
-   msno int unsigned auto_increment,
+	msno int unsigned auto_increment,
     msg text ,
     msdate datetime default now(),
     msstate int default 0,
@@ -179,7 +177,7 @@ INSERT INTO message (msg, msdate, pno) VALUES
 
 # 파일 테이블
 create table fileshare(
-   fno int unsigned auto_increment,
+	fno int unsigned auto_increment,
     fname varchar(30),
     flocation varchar(255),
     fdate datetime default now(),
@@ -222,7 +220,7 @@ insert into category(category_name, category_desc) values
 
 # 게시판 테이블
 create table board(
-   pid int unsigned auto_increment,
+	pid int unsigned auto_increment,
     title varchar(50) not null,
     category_id int unsigned, -- 외래키로 카테고리 참조
     content varchar(1000) not null,
@@ -246,9 +244,9 @@ insert into board (pid,title,content,views,mno,category_id) values
 
 # 보고서 테이블
 create table report(
-    rpno int unsigned auto_increment,
+	rpno int unsigned auto_increment,
     rpname varchar(50) not null,
-    rpam varchar(300) not null,
+	rpam varchar(300) not null,
     rppm varchar(300) not null,
     rpamnote varchar(300) not null,
     rppmnote varchar(300) not null,
@@ -413,14 +411,14 @@ INSERT INTO report( rpname, rpam, rppm, rpamnote, rppmnote, rpunprocessed, rpsig
   '일부 페이지 UX 문제 확인\n디자인 수정 요청 필요',
   '내일 개발팀과 추가 논의 후 적용\nA/B 테스트 계획 수립',
   '2025-02-16 16:39:51', 100007);
-
+  
 # 결재 테이블
 create table approval(
-   apno int unsigned auto_increment,
+	apno int unsigned auto_increment,
     apdate datetime default null,
     apstate bool default false,
     apsignature varchar(255) default null,
-    mno int unsigned,         -- 승인할 회원번호
+    mno int unsigned,			-- 승인할 회원번호
     rpno int unsigned,
     constraint primary key( apno ),
     constraint foreign key( mno ) references member ( mno ) on update cascade on delete cascade,
@@ -461,15 +459,16 @@ select * from message ;
 select * from fileshare;
 select * from approval;
 select * from board;
+
 select * from member;
 
 select rpno from report order by rpno desc limit 1;
 SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'workplatform' AND TABLE_NAME = 'report';
 
-SELECT m.mno, m.mname, m.mrank, ap.apno, rp.*
-FROM approval ap
-INNER JOIN member m ON ap.mno = m.mno
-INNER JOIN report rp ON ap.rpno = rp.rpno
+SELECT m.mno, m.mname, m.mrank, ap.apno, rp.* 
+FROM approval ap 
+INNER JOIN member m ON ap.mno = m.mno 
+INNER JOIN report rp ON ap.rpno = rp.rpno 
 WHERE m.mno = 100007 and
 apstate = true and apdate is not null
 ORDER BY rp.rpno DESC;
