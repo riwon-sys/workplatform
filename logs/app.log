@@ -1,445 +1,100 @@
-2025-03-25 15:01:10 - Starting AppStart using Java 17.0.12 with PID 9308 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 15:01:10 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 15:01:12 - Tomcat initialized with port 8080 (http)
-2025-03-25 15:01:12 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 15:01:12 - Starting service [Tomcat]
-2025-03-25 15:01:12 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 15:01:12 - Initializing Spring embedded WebApplicationContext
-2025-03-25 15:01:12 - Root WebApplicationContext: initialization completed in 2013 ms
-2025-03-25 15:01:12 - HikariPool-1 - Starting...
-2025-03-25 15:01:12 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@324b6a56
-2025-03-25 15:01:12 - HikariPool-1 - Start completed.
-2025-03-25 15:01:14 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 15:01:14 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 15:01:14 - Started AppStart in 4.428 seconds (process running for 5.299)
-2025-03-25 15:05:48 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 15:05:48 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 15:05:48 - Completed initialization in 2 ms
-2025-03-25 15:05:49 -  log info 
-2025-03-25 15:05:49 -  log info 
-2025-03-25 15:05:52 -  log info 
-2025-03-25 15:05:52 -  log info 
-2025-03-25 15:09:40 - Starting AppStart using Java 17.0.12 with PID 18104 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 15:09:40 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 15:09:41 - Tomcat initialized with port 8080 (http)
-2025-03-25 15:09:41 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 15:09:41 - Starting service [Tomcat]
-2025-03-25 15:09:41 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 15:09:41 - Initializing Spring embedded WebApplicationContext
-2025-03-25 15:09:41 - Root WebApplicationContext: initialization completed in 1768 ms
-2025-03-25 15:09:42 - HikariPool-1 - Starting...
-2025-03-25 15:09:42 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@38fb50f8
-2025-03-25 15:09:42 - HikariPool-1 - Start completed.
-2025-03-25 15:09:43 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 15:09:43 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 15:09:43 - Started AppStart in 3.774 seconds (process running for 4.561)
-2025-03-25 15:09:45 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 15:09:45 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 15:09:45 - Completed initialization in 1 ms
-2025-03-25 15:13:45 - Starting AppStart using Java 17.0.12 with PID 5340 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 15:13:45 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 15:13:47 - Tomcat initialized with port 8080 (http)
-2025-03-25 15:13:47 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 15:13:47 - Starting service [Tomcat]
-2025-03-25 15:13:47 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 15:13:47 - Initializing Spring embedded WebApplicationContext
-2025-03-25 15:13:47 - Root WebApplicationContext: initialization completed in 2052 ms
-2025-03-25 15:13:48 - HikariPool-1 - Starting...
-2025-03-25 15:13:48 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ab802f4
-2025-03-25 15:13:48 - HikariPool-1 - Start completed.
-2025-03-25 15:13:49 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 15:13:49 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 15:13:49 - Started AppStart in 4.086 seconds (process running for 4.855)
-2025-03-25 15:14:49 - Starting AppStart using Java 17.0.12 with PID 5248 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 15:14:49 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 15:14:51 - Tomcat initialized with port 8080 (http)
-2025-03-25 15:14:51 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 15:14:51 - Starting service [Tomcat]
-2025-03-25 15:14:51 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 15:14:51 - Initializing Spring embedded WebApplicationContext
-2025-03-25 15:14:51 - Root WebApplicationContext: initialization completed in 1577 ms
-2025-03-25 15:14:51 - HikariPool-1 - Starting...
-2025-03-25 15:14:51 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5c18d6d4
-2025-03-25 15:14:51 - HikariPool-1 - Start completed.
-2025-03-25 15:14:52 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 15:14:52 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 15:14:52 - Started AppStart in 3.823 seconds (process running for 4.526)
-2025-03-25 15:14:56 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 15:14:56 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 15:14:56 - Completed initialization in 1 ms
-2025-03-25 15:20:47 -  log info 
-2025-03-25 15:20:47 -  log info 
-2025-03-25 15:23:03 -  log info 
-2025-03-25 15:23:03 -  log info 
-2025-03-25 15:27:56 -  log info 
-2025-03-25 15:27:56 -  log info 
-2025-03-25 15:30:13 -  log info 
-2025-03-25 15:30:13 -  log info 
-2025-03-25 15:53:19 - Starting AppStart using Java 17.0.12 with PID 8472 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 15:53:19 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 15:53:21 - Tomcat initialized with port 8080 (http)
-2025-03-25 15:53:21 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 15:53:21 - Starting service [Tomcat]
-2025-03-25 15:53:21 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 15:53:21 - Initializing Spring embedded WebApplicationContext
-2025-03-25 15:53:21 - Root WebApplicationContext: initialization completed in 2340 ms
-2025-03-25 15:53:21 - HikariPool-1 - Starting...
-2025-03-25 15:53:21 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5c18d6d4
-2025-03-25 15:53:21 - HikariPool-1 - Start completed.
-2025-03-25 15:53:23 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 15:53:23 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 15:53:23 - Started AppStart in 4.746 seconds (process running for 5.608)
-2025-03-25 15:53:32 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 15:53:32 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 15:53:32 - Completed initialization in 1 ms
-2025-03-25 15:58:45 -  log info 
-2025-03-25 15:58:45 -  log info 
-2025-03-25 16:09:04 -  log info 
-2025-03-25 16:09:04 -  log info 
-2025-03-25 16:21:14 - Starting AppStart using Java 17.0.12 with PID 1908 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 16:21:14 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 16:21:15 - Tomcat initialized with port 8080 (http)
-2025-03-25 16:21:15 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 16:21:15 - Starting service [Tomcat]
-2025-03-25 16:21:15 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 16:21:15 - Initializing Spring embedded WebApplicationContext
-2025-03-25 16:21:15 - Root WebApplicationContext: initialization completed in 1861 ms
-2025-03-25 16:21:16 - HikariPool-1 - Starting...
-2025-03-25 16:21:16 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6cbb175
-2025-03-25 16:21:16 - HikariPool-1 - Start completed.
-2025-03-25 16:21:17 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 16:21:17 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 16:21:17 - Started AppStart in 3.904 seconds (process running for 4.58)
-2025-03-25 16:21:23 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 16:21:23 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 16:21:23 - Completed initialization in 1 ms
-2025-03-25 16:32:36 -  log info 
-2025-03-25 16:32:36 -  log info 
-2025-03-25 16:34:32 -  log info 
-2025-03-25 16:34:32 -  log info 
-2025-03-25 16:40:11 -  log info 
-2025-03-25 16:40:11 -  log info 
-2025-03-25 16:40:40 -  log info 
-2025-03-25 16:40:40 -  log info 
-2025-03-25 16:43:19 - Starting AppStart using Java 17.0.12 with PID 4920 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 16:43:19 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 16:43:20 - Tomcat initialized with port 8080 (http)
-2025-03-25 16:43:20 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 16:43:20 - Starting service [Tomcat]
-2025-03-25 16:43:20 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 16:43:21 - Initializing Spring embedded WebApplicationContext
-2025-03-25 16:43:21 - Root WebApplicationContext: initialization completed in 1925 ms
-2025-03-25 16:43:21 - HikariPool-1 - Starting...
-2025-03-25 16:43:21 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@38fb50f8
-2025-03-25 16:43:21 - HikariPool-1 - Start completed.
-2025-03-25 16:43:22 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 16:43:22 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 16:43:22 - Started AppStart in 4.079 seconds (process running for 4.822)
-2025-03-25 16:44:01 - Starting AppStart using Java 17.0.12 with PID 5640 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 16:44:01 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 16:44:03 - Tomcat initialized with port 8080 (http)
-2025-03-25 16:44:03 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 16:44:03 - Starting service [Tomcat]
-2025-03-25 16:44:03 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 16:44:03 - Initializing Spring embedded WebApplicationContext
-2025-03-25 16:44:03 - Root WebApplicationContext: initialization completed in 1669 ms
-2025-03-25 16:44:03 - HikariPool-1 - Starting...
-2025-03-25 16:44:03 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c538eb2
-2025-03-25 16:44:03 - HikariPool-1 - Start completed.
-2025-03-25 16:44:04 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 16:44:04 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 16:44:04 - Started AppStart in 3.88 seconds (process running for 4.572)
-2025-03-25 16:44:13 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 16:44:13 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 16:44:13 - Completed initialization in 8 ms
-2025-03-25 16:44:16 -  log info 
-2025-03-25 16:44:16 -  log info 
-2025-03-25 16:44:23 -  log info 
-2025-03-25 16:44:23 -  log info 
-2025-03-25 16:47:30 - Starting AppStart using Java 17.0.12 with PID 17936 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 16:47:30 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 16:47:32 - Tomcat initialized with port 8080 (http)
-2025-03-25 16:47:32 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 16:47:32 - Starting service [Tomcat]
-2025-03-25 16:47:32 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 16:47:32 - Initializing Spring embedded WebApplicationContext
-2025-03-25 16:47:32 - Root WebApplicationContext: initialization completed in 1712 ms
-2025-03-25 16:47:32 - HikariPool-1 - Starting...
-2025-03-25 16:47:32 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3cdff901
-2025-03-25 16:47:32 - HikariPool-1 - Start completed.
-2025-03-25 16:47:33 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 16:47:33 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 16:47:33 - Started AppStart in 3.778 seconds (process running for 4.473)
-2025-03-25 16:47:59 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 16:47:59 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 16:47:59 - Completed initialization in 1 ms
-2025-03-25 17:29:34 -  log info 
-2025-03-25 17:29:34 -  log info 
-2025-03-25 17:29:41 -  log info 
-2025-03-25 17:29:41 -  log info 
-2025-03-25 17:31:12 - Starting AppStart using Java 17.0.12 with PID 504 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 17:31:12 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 17:31:13 - Tomcat initialized with port 8080 (http)
-2025-03-25 17:31:13 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 17:31:13 - Starting service [Tomcat]
-2025-03-25 17:31:13 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 17:31:13 - Initializing Spring embedded WebApplicationContext
-2025-03-25 17:31:13 - Root WebApplicationContext: initialization completed in 1734 ms
-2025-03-25 17:31:13 - HikariPool-1 - Starting...
-2025-03-25 17:31:14 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ab802f4
-2025-03-25 17:31:14 - HikariPool-1 - Start completed.
-2025-03-25 17:31:15 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 17:31:15 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 17:31:15 - Started AppStart in 4.105 seconds (process running for 4.871)
-2025-03-25 17:32:10 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 17:32:10 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 17:32:10 - Completed initialization in 1 ms
-2025-03-25 17:39:26 -  log info 
-2025-03-25 17:39:26 -  log info 
-2025-03-25 17:44:38 - Starting AppStart using Java 17.0.12 with PID 14304 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 17:44:38 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 17:44:40 - Tomcat initialized with port 8080 (http)
-2025-03-25 17:44:40 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 17:44:40 - Starting service [Tomcat]
-2025-03-25 17:44:40 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 17:44:40 - Initializing Spring embedded WebApplicationContext
-2025-03-25 17:44:40 - Root WebApplicationContext: initialization completed in 1925 ms
-2025-03-25 17:44:40 - HikariPool-1 - Starting...
-2025-03-25 17:44:41 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61f377d1
-2025-03-25 17:44:41 - HikariPool-1 - Start completed.
-2025-03-25 17:44:42 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 17:44:42 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 17:44:42 - Started AppStart in 3.958 seconds (process running for 4.661)
-2025-03-25 17:44:58 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 17:44:58 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 17:44:58 - Completed initialization in 1 ms
-2025-03-25 17:51:31 - Starting AppStart using Java 17.0.12 with PID 9720 (C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform\build\classes\java\main started by tj-bu-702-12 in C:\Users\tj-bu-702-12\Desktop\jeenimari\workplatform)
-2025-03-25 17:51:31 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 17:51:32 - Tomcat initialized with port 8080 (http)
-2025-03-25 17:51:32 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 17:51:32 - Starting service [Tomcat]
-2025-03-25 17:51:32 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 17:51:32 - Initializing Spring embedded WebApplicationContext
-2025-03-25 17:51:32 - Root WebApplicationContext: initialization completed in 1709 ms
-2025-03-25 17:51:33 - HikariPool-1 - Starting...
-2025-03-25 17:51:33 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62ade015
-2025-03-25 17:51:33 - HikariPool-1 - Start completed.
-2025-03-25 17:51:34 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 17:51:34 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 17:51:34 - Started AppStart in 3.934 seconds (process running for 4.847)
-2025-03-25 17:51:41 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 17:51:41 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 17:51:41 - Completed initialization in 2 ms
-2025-03-25 17:51:44 -  log info 
-2025-03-25 17:51:44 -  log info 
-2025-03-25 17:51:48 -  log info 
-2025-03-25 17:51:48 -  log info 
-2025-03-25 17:51:55 -  log info 
-2025-03-25 17:51:55 -  log info 
-2025-03-25 18:19:32 - Starting AppStart using Java 17.0.12 with PID 13216 (C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform\build\classes\java\main started by TJ-BU-702-P24 in C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform)
-2025-03-25 18:19:32 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 18:19:34 - Tomcat initialized with port 8080 (http)
-2025-03-25 18:19:34 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 18:19:34 - Starting service [Tomcat]
-2025-03-25 18:19:34 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 18:19:34 - Initializing Spring embedded WebApplicationContext
-2025-03-25 18:19:34 - Root WebApplicationContext: initialization completed in 1776 ms
-2025-03-25 18:19:34 - HikariPool-1 - Starting...
-2025-03-25 18:19:34 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61f377d1
-2025-03-25 18:19:34 - HikariPool-1 - Start completed.
-2025-03-25 18:19:35 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 18:19:35 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 18:19:35 - Started AppStart in 3.829 seconds (process running for 4.573)
-2025-03-25 18:24:16 - Starting AppStart using Java 17.0.12 with PID 14892 (C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform\build\classes\java\main started by TJ-BU-702-P24 in C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform)
-2025-03-25 18:24:16 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 18:24:18 - Tomcat initialized with port 8080 (http)
-2025-03-25 18:24:18 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 18:24:18 - Starting service [Tomcat]
-2025-03-25 18:24:18 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 18:24:18 - Initializing Spring embedded WebApplicationContext
-2025-03-25 18:24:18 - Root WebApplicationContext: initialization completed in 1807 ms
-2025-03-25 18:24:18 - HikariPool-1 - Starting...
-2025-03-25 18:24:19 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@59636c47
-2025-03-25 18:24:19 - HikariPool-1 - Start completed.
-2025-03-25 18:24:20 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 18:24:20 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 18:24:20 - Started AppStart in 3.862 seconds (process running for 4.637)
-2025-03-25 18:25:02 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 18:25:02 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 18:25:02 - Completed initialization in 1 ms
-2025-03-25 18:25:03 -  log info 
-2025-03-25 18:25:03 -  log info 
-2025-03-25 18:25:03 -  log info 
-2025-03-25 18:25:03 -  log info 
-2025-03-25 18:25:31 - Starting AppStart using Java 17.0.12 with PID 12872 (C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform\build\classes\java\main started by TJ-BU-702-P24 in C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform)
-2025-03-25 18:25:31 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 18:25:33 - Tomcat initialized with port 8080 (http)
-2025-03-25 18:25:33 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 18:25:33 - Starting service [Tomcat]
-2025-03-25 18:25:33 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 18:25:33 - Initializing Spring embedded WebApplicationContext
-2025-03-25 18:25:33 - Root WebApplicationContext: initialization completed in 1762 ms
-2025-03-25 18:25:33 - HikariPool-1 - Starting...
-2025-03-25 18:25:33 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62ade015
-2025-03-25 18:25:33 - HikariPool-1 - Start completed.
-2025-03-25 18:25:34 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 18:25:34 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 18:25:34 - Started AppStart in 3.821 seconds (process running for 4.571)
-2025-03-25 18:34:37 - Starting AppStart using Java 17.0.12 with PID 14700 (C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform\build\classes\java\main started by TJ-BU-702-P24 in C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform)
-2025-03-25 18:34:37 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 18:34:39 - Tomcat initialized with port 8080 (http)
-2025-03-25 18:34:39 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 18:34:39 - Starting service [Tomcat]
-2025-03-25 18:34:39 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 18:34:39 - Initializing Spring embedded WebApplicationContext
-2025-03-25 18:34:39 - Root WebApplicationContext: initialization completed in 1754 ms
-2025-03-25 18:34:39 - HikariPool-1 - Starting...
-2025-03-25 18:34:39 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4dad8ec0
-2025-03-25 18:34:39 - HikariPool-1 - Start completed.
-2025-03-25 18:34:40 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 18:34:40 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 18:34:40 - Started AppStart in 3.868 seconds (process running for 4.561)
-2025-03-25 18:35:48 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 18:35:48 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 18:35:48 - Completed initialization in 1 ms
-2025-03-25 18:35:49 -  log info 
-2025-03-25 18:35:49 -  log info 
-2025-03-25 18:36:02 -  log info 
-2025-03-25 18:36:02 -  log info 
-2025-03-25 18:36:19 -  log info 
-2025-03-25 18:36:19 -  log info 
-2025-03-25 18:38:10 -  log info 
-2025-03-25 18:38:10 -  log info 
-2025-03-25 18:38:35 -  log info 
-2025-03-25 18:38:38 - 일반메세지 : ChattingDto(mstype=0, rno=15, msDate=null, loginMno=0, mname=김리원, mscontent=null, mno=100089, msg=sdfsdf, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-25 18:38:50 -  log info 
-2025-03-25 18:38:50 -  log info 
-2025-03-25 18:38:57 - 일반메세지 : ChattingDto(mstype=0, rno=15, msDate=null, loginMno=0, mname=김리원, mscontent=null, mno=100089, msg=sdfsdf, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-25 18:39:01 - 일반메세지 : ChattingDto(mstype=0, rno=15, msDate=null, loginMno=0, mname=김리원, mscontent=null, mno=100089, msg=gsdgsd, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
-2025-03-25 18:39:56 -  log info 
-2025-03-25 18:39:56 -  log info 
-2025-03-25 18:45:44 -  log info 
-2025-03-25 18:45:44 -  log info 
-2025-03-25 18:46:04 - Starting AppStart using Java 17.0.12 with PID 13308 (C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform\build\classes\java\main started by TJ-BU-702-P24 in C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform)
-2025-03-25 18:46:04 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 18:46:06 - Tomcat initialized with port 8080 (http)
-2025-03-25 18:46:06 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 18:46:06 - Starting service [Tomcat]
-2025-03-25 18:46:06 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 18:46:06 - Initializing Spring embedded WebApplicationContext
-2025-03-25 18:46:06 - Root WebApplicationContext: initialization completed in 1964 ms
-2025-03-25 18:46:06 - HikariPool-1 - Starting...
-2025-03-25 18:46:07 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@70997a94
-2025-03-25 18:46:07 - HikariPool-1 - Start completed.
-2025-03-25 18:46:08 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 18:46:08 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 18:46:08 - Started AppStart in 4.517 seconds (process running for 5.527)
-2025-03-25 18:46:09 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 18:46:09 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 18:46:09 - Completed initialization in 1 ms
-2025-03-25 18:49:10 -  log info 
-2025-03-25 18:49:10 -  log info 
-2025-03-25 18:51:50 -  log info 
-2025-03-25 18:51:50 -  log info 
-2025-03-25 19:03:14 - Starting AppStart using Java 17.0.12 with PID 2124 (C:\Users\tj-bu-702-11\IdeaProjects\workplatform\build\classes\java\main started by tj-bu-702-11 in C:\Users\tj-bu-702-11\IdeaProjects\workplatform)
-2025-03-25 19:03:14 - No active profile set, falling back to 1 default profile: "default"
-2025-03-25 19:03:16 - Tomcat initialized with port 8080 (http)
-2025-03-25 19:03:16 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-25 19:03:16 - Starting service [Tomcat]
-2025-03-25 19:03:16 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-25 19:03:16 - Initializing Spring embedded WebApplicationContext
-2025-03-25 19:03:16 - Root WebApplicationContext: initialization completed in 1289 ms
-2025-03-25 19:03:16 - HikariPool-1 - Starting...
-2025-03-25 19:03:16 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@62ade015
-2025-03-25 19:03:16 - HikariPool-1 - Start completed.
-2025-03-25 19:03:17 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-25 19:03:17 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-25 19:03:17 - Started AppStart in 2.871 seconds (process running for 3.368)
-2025-03-25 19:03:21 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-25 19:03:21 - Initializing Servlet 'dispatcherServlet'
-2025-03-25 19:03:21 - Completed initialization in 4 ms
-2025-03-25 19:03:29 -  log info 
-2025-03-25 19:03:29 -  log info 
-2025-03-25 19:03:35 -  log info 
-2025-03-25 19:03:35 -  log info 
-2025-03-25 19:03:40 -  log info 
-2025-03-25 19:03:40 -  log info 
-2025-03-25 19:15:00 -  log info 
-2025-03-25 19:15:00 -  log info 
-2025-03-26 09:03:42 - Starting AppStart using Java 17.0.12 with PID 14760 (C:\Users\tj-bu-702-02\IdeaProjects\workplatform\build\classes\java\main started by tj-bu-702-02 in C:\Users\tj-bu-702-02\IdeaProjects\workplatform)
-2025-03-26 09:03:42 - No active profile set, falling back to 1 default profile: "default"
-2025-03-26 09:03:44 - Tomcat initialized with port 8080 (http)
-2025-03-26 09:03:44 - Initializing ProtocolHandler ["http-nio-8080"]
-2025-03-26 09:03:44 - Starting service [Tomcat]
-2025-03-26 09:03:44 - Starting Servlet engine: [Apache Tomcat/10.1.34]
-2025-03-26 09:03:44 - Initializing Spring embedded WebApplicationContext
-2025-03-26 09:03:44 - Root WebApplicationContext: initialization completed in 1381 ms
-2025-03-26 09:03:44 - HikariPool-1 - Starting...
-2025-03-26 09:03:44 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@608cd501
-2025-03-26 09:03:44 - HikariPool-1 - Start completed.
-2025-03-26 09:03:45 - Starting ProtocolHandler ["http-nio-8080"]
-2025-03-26 09:03:45 - Tomcat started on port 8080 (http) with context path '/'
-2025-03-26 09:03:45 - Started AppStart in 2.965 seconds (process running for 3.525)
-2025-03-26 09:05:41 - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-03-26 09:05:41 - Initializing Servlet 'dispatcherServlet'
-2025-03-26 09:05:41 - Completed initialization in 2 ms
-2025-03-26 09:05:41 -  log info 
-2025-03-26 09:05:41 -  log info 
-2025-03-26 09:05:55 -  log info 
-2025-03-26 09:05:55 -  log info 
-2025-03-26 09:27:19 -  log info 
-2025-03-26 09:27:19 -  log info 
-2025-03-26 09:37:20 -  log info 
-2025-03-26 09:37:20 -  log info 
-2025-03-26 09:37:29 -  log info 
-2025-03-26 09:37:29 -  log info 
-2025-03-26 09:59:25 -  log info 
-2025-03-26 09:59:25 -  log info 
-2025-03-26 10:10:31 -  log info 
-2025-03-26 10:10:31 -  log info 
-2025-03-26 10:10:51 -  log info 
-2025-03-26 10:10:51 -  log info 
-2025-03-26 10:10:56 -  log info 
-2025-03-26 10:10:56 -  log info 
-2025-03-26 10:11:03 -  log info 
-2025-03-26 10:11:03 -  log info 
-2025-03-26 10:11:11 -  log info 
-2025-03-26 10:11:11 -  log info 
-2025-03-26 10:51:28 -  log info 
-2025-03-26 10:51:28 -  log info 
-2025-03-26 10:59:34 -  log info 
-2025-03-26 10:59:34 -  log info 
-2025-03-26 11:01:53 -  log info 
-2025-03-26 11:01:53 -  log info 
-2025-03-26 11:33:59 -  log info 
-2025-03-26 11:33:59 -  log info 
-2025-03-26 11:35:09 -  log info 
-2025-03-26 11:35:09 -  log info 
-2025-03-26 11:35:50 -  log info 
-2025-03-26 11:35:50 -  log info 
-2025-03-26 11:47:02 -  log info 
-2025-03-26 11:47:02 -  log info 
-2025-03-26 11:48:31 -  log info 
-2025-03-26 11:48:31 -  log info 
-2025-03-26 11:49:24 -  log info 
-2025-03-26 11:49:24 -  log info 
-2025-03-26 12:25:24 -  log info 
-2025-03-26 12:25:24 -  log info 
-2025-03-26 12:25:59 -  log info 
-2025-03-26 12:25:59 -  log info 
-2025-03-26 12:26:28 -  log info 
-2025-03-26 12:26:28 -  log info 
-2025-03-26 12:26:48 -  log info 
-2025-03-26 12:26:48 -  log info 
-2025-03-26 12:34:23 -  log info 
-2025-03-26 12:34:23 -  log info 
-2025-03-26 12:34:55 -  log info 
-2025-03-26 12:34:55 -  log info 
-2025-03-26 12:35:55 -  log info 
-2025-03-26 12:35:55 -  log info 
-2025-03-26 12:36:12 -  log info 
-2025-03-26 12:36:12 -  log info 
-2025-03-26 12:36:40 -  log info 
-2025-03-26 12:36:40 -  log info 
-2025-03-26 12:37:28 -  log info 
-2025-03-26 12:37:28 -  log info 
+2025-03-26 14:56:15 - Starting AppStart using Java 17.0.12 with PID 3700 (C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform\build\classes\java\main started by TJ-BU-702-P24 in C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform)
+2025-03-26 14:56:15 - No active profile set, falling back to 1 default profile: "default"
+2025-03-26 14:56:17 - Tomcat initialized with port 8080 (http)
+2025-03-26 14:56:17 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-26 14:56:17 - Starting service [Tomcat]
+2025-03-26 14:56:17 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-26 14:56:17 - Initializing Spring embedded WebApplicationContext
+2025-03-26 14:56:17 - Root WebApplicationContext: initialization completed in 1896 ms
+2025-03-26 14:56:17 - HikariPool-1 - Starting...
+2025-03-26 14:56:18 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@70997a94
+2025-03-26 14:56:18 - HikariPool-1 - Start completed.
+2025-03-26 14:56:19 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-26 14:56:19 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-26 14:56:19 - Started AppStart in 4.015 seconds (process running for 4.683)
+2025-03-26 14:58:01 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-26 14:58:01 - Initializing Servlet 'dispatcherServlet'
+2025-03-26 14:58:01 - Completed initialization in 1 ms
+2025-03-26 14:58:01 -  log info 
+2025-03-26 14:58:01 -  log info 
+2025-03-26 14:58:13 -  log info 
+2025-03-26 14:58:13 -  log info 
+2025-03-26 16:34:09 -  log info 
+2025-03-26 16:34:09 -  log info 
+2025-03-26 16:34:35 -  log info 
+2025-03-26 16:34:35 -  log info 
+2025-03-26 16:58:04 -  log info 
+2025-03-26 16:58:04 -  log info 
+2025-03-26 16:58:25 -  log info 
+2025-03-26 16:58:25 -  log info 
+2025-03-26 17:33:05 - Starting AppStart using Java 17.0.12 with PID 13212 (C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform\build\classes\java\main started by TJ-BU-702-P24 in C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform)
+2025-03-26 17:33:05 - No active profile set, falling back to 1 default profile: "default"
+2025-03-26 17:33:08 - Tomcat initialized with port 8080 (http)
+2025-03-26 17:33:08 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-26 17:33:08 - Starting service [Tomcat]
+2025-03-26 17:33:08 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-26 17:33:08 - Initializing Spring embedded WebApplicationContext
+2025-03-26 17:33:08 - Root WebApplicationContext: initialization completed in 2512 ms
+2025-03-26 17:33:08 - HikariPool-1 - Starting...
+2025-03-26 17:33:09 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6c538eb2
+2025-03-26 17:33:09 - HikariPool-1 - Start completed.
+2025-03-26 17:33:10 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-26 17:33:10 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-26 17:33:10 - Started AppStart in 5.074 seconds (process running for 5.886)
+2025-03-26 17:33:34 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-26 17:33:34 - Initializing Servlet 'dispatcherServlet'
+2025-03-26 17:33:34 - Completed initialization in 1 ms
+2025-03-26 17:33:35 -  log info 
+2025-03-26 17:33:35 -  log info 
+2025-03-26 17:34:05 -  log info 
+2025-03-26 17:34:05 -  log info 
+2025-03-26 17:34:26 -  log info 
+2025-03-26 17:34:26 -  log info 
+2025-03-26 17:38:30 -  log info 
+2025-03-26 17:38:30 -  log info 
+2025-03-26 17:47:13 -  log info 
+2025-03-26 17:47:13 -  log info 
+2025-03-26 17:47:50 -  log info 
+2025-03-26 17:47:50 -  log info 
+2025-03-26 17:47:56 -  log info 
+2025-03-26 17:47:56 -  log info 
+2025-03-26 17:55:18 - Starting AppStart using Java 17.0.12 with PID 10304 (C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform\build\classes\java\main started by TJ-BU-702-P24 in C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform)
+2025-03-26 17:55:18 - No active profile set, falling back to 1 default profile: "default"
+2025-03-26 17:55:20 - Tomcat initialized with port 8080 (http)
+2025-03-26 17:55:20 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-26 17:55:20 - Starting service [Tomcat]
+2025-03-26 17:55:20 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-26 17:55:20 - Initializing Spring embedded WebApplicationContext
+2025-03-26 17:55:20 - Root WebApplicationContext: initialization completed in 1745 ms
+2025-03-26 17:55:20 - HikariPool-1 - Starting...
+2025-03-26 17:55:21 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@ccd341d
+2025-03-26 17:55:21 - HikariPool-1 - Start completed.
+2025-03-26 17:55:22 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-26 17:55:22 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-26 17:55:22 - Started AppStart in 3.8 seconds (process running for 4.53)
+2025-03-26 17:55:22 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-26 17:55:22 - Initializing Servlet 'dispatcherServlet'
+2025-03-26 17:55:22 - Completed initialization in 0 ms
+2025-03-26 17:55:38 -  log info 
+2025-03-26 17:55:38 -  log info 
+2025-03-26 17:58:22 - Starting AppStart using Java 17.0.12 with PID 4548 (C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform\build\classes\java\main started by TJ-BU-702-P24 in C:\Users\TJ-BU-702-P24\IdeaProjects\workplatform)
+2025-03-26 17:58:22 - No active profile set, falling back to 1 default profile: "default"
+2025-03-26 17:58:24 - Tomcat initialized with port 8080 (http)
+2025-03-26 17:58:24 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-26 17:58:24 - Starting service [Tomcat]
+2025-03-26 17:58:24 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-26 17:58:24 - Initializing Spring embedded WebApplicationContext
+2025-03-26 17:58:24 - Root WebApplicationContext: initialization completed in 1840 ms
+2025-03-26 17:58:24 - HikariPool-1 - Starting...
+2025-03-26 17:58:25 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@61f377d1
+2025-03-26 17:58:25 - HikariPool-1 - Start completed.
+2025-03-26 17:58:25 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-26 17:58:25 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-26 17:58:25 - Started AppStart in 3.883 seconds (process running for 4.567)
+2025-03-26 17:58:36 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-26 17:58:36 - Initializing Servlet 'dispatcherServlet'
+2025-03-26 17:58:36 - Completed initialization in 1 ms
+2025-03-26 17:58:37 -  log info 
+2025-03-26 17:58:37 -  log info 
+2025-03-26 17:58:50 -  log info 
+2025-03-26 17:58:50 -  log info 
