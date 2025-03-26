@@ -782,8 +782,8 @@ export default function ChatTeset() {
                     }}
                   />
                 </Typography>
-                <span style={{marginLeft : "5%"}}><b> {loginInfo.mname} 님 </b> ({loginInfo.mrank}) {loginInfo.department}팀 
-                  <br /> 이메일 : {loginInfo.memail}</span>
+                <span style={{marginLeft : "5%"}}><b> {loginInfo.mname} 님 </b> ({loginInfo.mrank})
+                </span>
               </div>
             
             <hr></hr>

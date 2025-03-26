@@ -22,7 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
   height: '100%',
 }));
 
-export default function Report_Write({setReportState, setMnos, setData}){
+export default function Report_Write({setReportState, setMnos, setData, reportState}){
   const loginInfo = useSelector((state) => state.user.userInfo);
   console.log( loginInfo )
 
@@ -74,6 +74,14 @@ export default function Report_Write({setReportState, setMnos, setData}){
   } // f end
 
   useEffect( () => { onLastRpno(); }, [ reports ] );
+
+   // 소켓으로 보낼 reportState가 변경될 때마다 실행되는 useEffect
+   useEffect(() => {
+    if (reportState) {
+      console.log('reportState 값이 변경되어 true로 설정되었습니다.');
+    }
+  }, [reportState]);  // reportState가 변경될 때마다 실행
+
 
   // 보고서 등록 함수
   const onPost = async ( props ) => {
@@ -128,6 +136,7 @@ export default function Report_Write({setReportState, setMnos, setData}){
 
         // props 로 보고서 소켓으로 전달할 state 변수
         setReportState(true);
+        console.log(reportState) // 소켓으로 전달할 상태 확인
         setData(formData)
         console.log(formData)
       }else{ alert('등록 실패'); }

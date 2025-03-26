@@ -68,23 +68,24 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-      width: drawerWidth,
-      flexShrink: 0,
-      whiteSpace: 'nowrap',
-      boxSizing: 'border-box',
-      ...(open && {
-        ...openedMixin(theme),
-        '& .MuiDrawer-paper': openedMixin(theme),
-      }),
-      ...(!open && {
-        ...closedMixin(theme),
-        '& .MuiDrawer-paper': closedMixin(theme),
-      }),
-    })
+  ({ theme, open }) => ({
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap',
+    boxSizing: 'border-box',
+    ...(open && {
+      ...openedMixin(theme),
+      '& .MuiDrawer-paper': openedMixin(theme),
+    }),
+    ...(!open && {
+      ...closedMixin(theme),
+      '& .MuiDrawer-paper': closedMixin(theme),
+    }),
+  })
 );
 
-export default function SideBar({ reportState, setReportState, mnos, setMnos, data }) {
+export default function SideBar({ reportState, setReportState, mnos, setMnos, data
+  , setNextApMno, nextApMno, setNextAp, nextAp, setNextApState, nextApState }) {
 
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('xl'));
@@ -139,133 +140,140 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
   ];
 
   return (
-      <Box sx={{ display: 'flex', height: '100vh' }}>
-        <Drawer variant="permanent" open={open}>
-          <DrawerHeader>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start', pr: 3 }}>
-              <img
-                  src="/logoimg/logoname_blue.jpg"
-                  alt="Logo"
-                  style={{ width: open ? 140 : 30, height: open ? 40 : 30, transition: "0.3s" }}
-              />
-            </Box>
-            <IconButton onClick={toggleDrawer}>
-              {open ? <ChevronLeftIcon /> : <img src='/logoimg/logo_blue_icon.png' style={{ width: '40px', marginRight: -5 }} />}
-            </IconButton>
-          </DrawerHeader>
-          <Divider />
+    <Box sx={{ display: 'flex', height: '100vh' }}>
+      <Drawer variant="permanent" open={open}>
+        <DrawerHeader>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: open ? 'center' : 'flex-start', pr: 3 }}>
+            <img
+              src="/logoimg/logoname_blue.jpg"
+              alt="Logo"
+              style={{ width: open ? 140 : 30, height: open ? 40 : 30, transition: "0.3s" }}
+            />
+          </Box>
+          <IconButton onClick={toggleDrawer}>
+            {open ? <ChevronLeftIcon /> : <img src='/logoimg/logo_blue_icon.png' style={{ width: '40px', marginRight: -5 }} />}
+          </IconButton>
+        </DrawerHeader>
+        <Divider />
 
-          <List>
-            {mainMenuItems.map((item) => (
-                <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                      component={Link}
-                      to={item.path}
-                      sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
-                  >
-                    <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
-                  </ListItemButton>
-                </ListItem>
-            ))}
-          </List>
-
-          <Divider />
-
-          <List>
-            {menuItems.map((item) => (
-                <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
-                  <ListItemButton
-                      component={Link}
-                      to={item.path}
-                      sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
-                  >
-                    <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
-                      {item.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
-                  </ListItemButton>
-                </ListItem>
-            ))}
-            {/* ✅ 인사팀이면 사원등록 메뉴 보여주기 */}
-            {String(loginInfo?.mno).startsWith("1") &&
-                (loginInfo?.mrank === "차장" || loginInfo?.mrank === "부장") && (
-                    <ListItem key="사원 등록" disablePadding sx={{ display: 'block' }}>
-                      <ListItemButton
-                          component={Link}
-                          to="/member/post"
-                          sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
-                      >
-                        <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
-                          <PersonAddAlt1Icon />
-                        </ListItemIcon>
-                        <ListItemText primary="사원 등록" sx={{ opacity: open ? 1 : 0 }} />
-                      </ListItemButton>
-                    </ListItem>
-                )}
-          </List>
+        <List>
+          {mainMenuItems.map((item) => (
+            <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                component={Link}
+                to={item.path}
+                sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
+              >
+                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
 
         <Divider />
 
-        <Socket/> {/*브라우저 소켓 추가*/}
+        <List>
+          {menuItems.map((item) => (
+            <ListItem key={item.name} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                component={Link}
+                to={item.path}
+                sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
+              >
+                <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.name} sx={{ opacity: open ? 1 : 0 }} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+          {/* ✅ 인사팀이면 사원등록 메뉴 보여주기 */}
+          {String(loginInfo?.mno).startsWith("1") &&
+            (loginInfo?.mrank === "차장" || loginInfo?.mrank === "부장") && (
+              <ListItem key="사원 등록" disablePadding sx={{ display: 'block' }}>
+                <ListItemButton
+                  component={Link}
+                  to="/member/post"
+                  sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
+                >
+                  <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
+                    <PersonAddAlt1Icon />
+                  </ListItemIcon>
+                  <ListItemText primary="사원 등록" sx={{ opacity: open ? 1 : 0 }} />
+                </ListItemButton>
+              </ListItem>
+            )}
+        </List>
+
+        <Divider />
+
+        <Socket /> {/*브라우저 소켓 추가*/}
         <ReportSocket
-        reportState={reportState}
-        mnos={mnos}
-        data={data}
-        setReportState={setReportState}
-      />
+          reportState={reportState}
+          mnos={mnos}
+          data={data}
+          setReportState={setReportState}
+
+          setNextApMno={setNextApMno}
+          setNextAp={setNextAp}
+          setNextApState={setNextApState}
+          nextApState={nextApState}
+          nextAp={nextAp}
+          nextApMno={nextApMno}
+        />
 
         {/* 로그인 영역 */}
         <Box sx={{ flexGrow: 1 }} />
 
-          <Divider />
-          <Box sx={{ textAlign: "center", p: open ? 2.05 : 1 }}>
-            {loginInfo ? (
+        <Divider />
+        <Box sx={{ textAlign: "center", p: open ? 2.05 : 1 }}>
+          {loginInfo ? (
+            <>
+              <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }}>
+                <img
+                  src={'http://localhost:8080/file/' + (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)}
+                  alt="profile"
+                  style={{ width: '40px', borderRadius: '40px' }}
+                />
+              </Typography>
+              <Button variant="contained" onClick={onLogout} color="info">
+                로그아웃
+              </Button>
+            </>
+          ) : (
+            <>
+              {open ? (
                 <>
                   <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }}>
-                    <img
-                        src={'http://localhost:8080/file/' + (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)}
-                        alt="profile"
-                        style={{ width: '40px', borderRadius: '40px' }}
-                    />
+                    로그인 &nbsp;해주세요.
                   </Typography>
-                  <Button variant="contained" onClick={onLogout} color="info">
-                    로그아웃
+                  <Button variant="contained" color="info">
+                    <Link to="/member/login" style={{ color: 'white' }}>
+                      로그인
+                    </Link>
                   </Button>
                 </>
-            ) : (
-                <>
-                  {open ? (
-                      <>
-                        <Typography variant="body2" color="textSecondary" sx={{ display: 'inline-block', mr: 1 }}>
-                          로그인 &nbsp;해주세요.
-                        </Typography>
-                        <Button variant="contained" color="info">
-                          <Link to="/member/login" style={{ color: 'white' }}>
-                            로그인
-                          </Link>
-                        </Button>
-                      </>
-                  ) : (
-                      <ListItemButton
-                          component={Link}
-                          to="/member/login"
-                          sx={{
-                            minWidth: 70,
-                            justifyContent: 'center',
-                            ml: -1.5,
-                            p: 1.8
-                          }}
-                      >
-                        <LoginIcon color='primary' />
-                      </ListItemButton>
-                  )}
-                </>
-            )}
-          </Box>
-        </Drawer>
-      </Box>
+              ) : (
+                <ListItemButton
+                  component={Link}
+                  to="/member/login"
+                  sx={{
+                    minWidth: 70,
+                    justifyContent: 'center',
+                    ml: -1.5,
+                    p: 1.8
+                  }}
+                >
+                  <LoginIcon color='primary' />
+                </ListItemButton>
+              )}
+            </>
+          )}
+        </Box>
+      </Drawer>
+    </Box>
   );
 }

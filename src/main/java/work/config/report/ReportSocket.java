@@ -67,6 +67,7 @@ public class ReportSocket extends TextWebSocketHandler {
 
         System.out.println("보낼 메시지: " + reportDto);
         System.out.println("메시지를 보낼 소켓: " + reportClients.toString());
+        System.out.println("결재자 : " + reportDto.getApmno());
 
         System.out.println(reportDto.getMnoList());
         if (reportClients != null && !reportClients.isEmpty()) {
