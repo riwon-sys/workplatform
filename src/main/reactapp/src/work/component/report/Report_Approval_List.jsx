@@ -5,10 +5,10 @@ import axios from 'axios';
 /* mui import */
 import Table from '@mui/joy/Table';
 
-export default function Report_Approval_List( { rpno, reports, page, setReports, setPage, setTotalPages, selectValue } ) {
+export default function Report_Approval_List( { rpno, reports, page, setReports, setPage, setTotalPages, selectValue, nextApState } ) {
   if( rpno == null ){ rpno = '' };
 
-  useEffect( () => { onFindByMno( page, selectValue ); }, [ page, selectValue ] );
+  useEffect( () => { onFindByMno( page, selectValue ); }, [ page, selectValue, nextApState ] );
 
   console.log( reports );
 

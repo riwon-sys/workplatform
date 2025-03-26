@@ -74,7 +74,7 @@ export default function App(props) {
         apno: '' 
       });
       // 다음결재자를 받아올 state 변수
-      const [nextApMno , setNextApMno] = useState(null)
+      const [nextApMno , setNextApMno] = useState([])
       // 결재 상태를 받아올 state 변수
       const [nextApState, setNextApState] = useState(false)
 
