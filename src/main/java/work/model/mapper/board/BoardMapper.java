@@ -19,19 +19,20 @@ public interface BoardMapper {
 
     //2[게시물등록]
     @Insert("insert into board( title,content,mno,category_id ) " +
-            " values ( #{ title } , #{ content },#{ mno },#{ category } )")
+            " values ( #{ title } , #{ content },#{ mno },#{ category_id } )")
     public boolean boardCreate( BoardDto boardCreate );
 
     //3[게시물 상세조회]
-    @Select("select * from board where pid =#{pid}")
+    @Select("select * from board b inner join category c on b.category_id=c.category_id where b.pid =#{pid}")
     public BoardDto boardView(int pid);
 
     //[4 게시물 수정]
     @Update("UPDATE board SET " +
             "title = #{title}, " +
-            "content = #{content} " +
+            "content = #{content}, " +
+            "category_id =#{category_id} " +
 
-            "WHERE pid = #{pid}")
+            "WHERE mno = #{mno} and pid =#{pid}")
 //@UpdateProvider(type = BoardProvider.class,method = "boardUpdateSql")
     public boolean boardUpdate(BoardDto boardDto);
 // "<if test='mno > 0'>, mno = #{mno}</if> " +  // 동적 SQL을 위한 부분

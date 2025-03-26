@@ -21,8 +21,8 @@ public class BoardDto {
     private String title;
     private String content;
     private int views;
-    private int category;   //카테고리
-    private String category_name;
+    private int category_id;   //카테고리 번호
+    private String category_name; // 카테고리 이름
 
 //    @Builder.Default
     private int mno;

@@ -15,10 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   height: '100%',
-  color: theme.palette.text.secondary,
-  ...theme.applyStyles?.('dark', {  // 옵셔널 체이닝 추가
-    backgroundColor: '#1A2027',
-  }),
+ 
 }));
 
 export default function () {
@@ -44,16 +41,17 @@ export default function () {
 
   
   return (<>
-    <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
-      <Item
-        sx={{
-          overflow: 'scroll',
-          overflowX: 'hidden',
-          minWidth: '700px',
-          maxWidth: '1000px',
-          width: '100%'
-        }}
-      >
+            <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
+            <Item
+              sx={{
+                overflow: 'scroll',
+                overflowX: 'hidden',
+                minWidth: '700px',
+                maxWidth: '1000px',
+                width: '100%',
+                padding: '50px 70px'
+              }}
+            >
           <CssVarsProvider>
           <Table>
               <thead>

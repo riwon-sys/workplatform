@@ -36,6 +36,7 @@ import { useEffect, useState } from "react";
 
 import ReportSocket from "./ReportSocket.jsx";
 import BoardWrite from "./BoardWrite.jsx";
+import BoardUpdate from "./BoardUpdate.jsx";
 
 export default function App(props) {
     const loginInfo = useSelector( (state) => state.user.userInfo ); // 🔸 로그인 정보 가져오기
@@ -119,6 +120,7 @@ export default function App(props) {
                                 <Route path="/board" element={<Board />} />
                                 <Route path="/board/detail" element={<BoardDetail />} />
                                 <Route path="/board/write" element={<BoardWrite />} />
+                                <Route path="/board/update" element={<BoardUpdate />} />
                                 <Route path="/report/list" element={<Report_List />} />
                                 <Route path="/report/Form" element={<Report_Form />} />
                                 <Route path="/report/update/:rpno" element={<Report_Update />} />
