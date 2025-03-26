@@ -70,7 +70,10 @@ export default function Member_Login() {
                     mno: response2.data.mno,
                     mname: response2.data.mname,
                     mrank: response2.data.mrank,
-                    mprofile: response2.data.mprofile
+                    mprofile: response2.data.mprofile,
+                    mphone: response2.data.mphone,
+                    mtype: response2.data.mtype,
+                    memail: response2.data.memail
                 };
 
                 dispatch(login(safeUserInfo)); // ✅ 안전하게 리덕스에 저장

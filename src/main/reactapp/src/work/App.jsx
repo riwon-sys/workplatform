@@ -36,6 +36,7 @@ import { useEffect, useState } from "react";
 
 import ReportSocket from "./ReportSocket.jsx";
 import BoardWrite from "./BoardWrite.jsx";
+import Member_Mypage from "./member/Member_Mypage.jsx";
 import BoardUpdate from "./BoardUpdate.jsx";
 
 export default function App(props) {
@@ -124,6 +125,7 @@ export default function App(props) {
                                 <Route path="/report/list" element={<Report_List />} />
                                 <Route path="/report/Form" element={<Report_Form />} />
                                 <Route path="/report/update/:rpno" element={<Report_Update />} />
+                                <Route path="/member/mypage" element={<Member_Mypage/>} /> {/* 마이페이지 롸우터 경로를 등록 | rw 25-03-26 생성 */}
                                 <Route path="/member/post" element={<Member_Post />} />
                                 <Route path="/member/login" element={<Member_Login />} />
                             </Routes>

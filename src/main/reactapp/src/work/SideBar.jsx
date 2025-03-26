@@ -141,7 +141,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
 
   const menuItems = [
     { name: "게시판", path: "/board", icon: <DvrTwoToneIcon /> },
-    { name: "나의 정보", path: "/board", icon: <PersonIcon /> },
+    { name: "내 정보", path: "/member/mypage", icon: <PersonIcon /> }, // 정의한 롸우터 경로를 입력 | rw 25-03-26 생성
   ];
 
   return (
