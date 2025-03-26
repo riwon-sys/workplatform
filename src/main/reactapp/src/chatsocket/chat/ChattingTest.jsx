@@ -23,6 +23,8 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import { useSelector } from 'react-redux';
 import log from "../../work/member/reduxs/logSlice"
 
+import LogoutIcon from '@mui/icons-material/Logout';
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
@@ -164,7 +166,8 @@ export default function ChatTeset() {
           mname: chattingDto.mname,
           mno: loginInfo.mno,
           fname: chattingDto.fname, // 파일 이름
-          flocation: chattingDto.flocation // 파일 경로
+          flocation: chattingDto.flocation, // 파일 경로
+          mprofile :loginInfo.mprofile
         };
 
         clientSocket.send(JSON.stringify(messageData)); // 소켓으로 메시지 전송
@@ -183,6 +186,7 @@ export default function ChatTeset() {
       formData.append("rno", selectedRoomId);
       formData.append("mstype", 1); // 파일 메시지 타입
       formData.append("mno", loginInfo.mno);
+      formData.append("mprofile", loginInfo.mprofile)
 
       console.log(formData);
 
@@ -211,6 +215,7 @@ export default function ChatTeset() {
           mno: loginInfo.mno,
           flocation: response.data, // 서버로부터 받은 파일 경로
           fname, // 서버로부터 받은 파일명
+          mprofile :response.data.mprofile ////////////////////////
         };
         console.log(newMessage)
 
@@ -437,6 +442,7 @@ export default function ChatTeset() {
           mstype: 0, // 일반 메세지 타입 서버로 전송
           mname: loginInfo.mname, // 나중에 세션에 저장된 로그인된 회원으로 변경
           mno: loginInfo.mno, // 나중에 세션에 저장된 로그인된 회원으로 변경
+          mprofile :loginInfo.mprofile
         };
 
         console.log(messageData)
@@ -765,27 +771,29 @@ export default function ChatTeset() {
       <Grid container spacing={0} sx={{ height: '100%' }}>
         <Grid size={2.8} sx={{ height: '100%' }}>
           <Item >
-            
-              <div style={{display : "flex", justifyContent : "center", alignItems : "center",
-                marginBottom: "3%", height: "4.3%", marginLeft : "-12%"}}>
-                <Typography variant="body2" color="textSecondary" 
-                sx={{ display: 'inline-block', mr: 1 , marginLeft : "0%"}} >
-                  {/*                                 {loginInfo.mprofile} {loginInfo.mname}{loginInfo.mrank}{loginInfo.mno} 오늘도 화이팅! */}
-                  <img
-                    src={
-                      'http://localhost:8080/file/' +
-                      (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)
-                    }
-                    style={{
-                      width: '40px',
-                      borderRadius: '40px',
-                    }}
-                  />
-                </Typography>
-                <span style={{marginLeft : "5%"}}><b> {loginInfo.mname} 님 </b> ({loginInfo.mrank})
-                </span>
-              </div>
-            
+
+            <div style={{
+              display: "flex", justifyContent: "center", alignItems: "center",
+              marginBottom: "3%", height: "4.3%", marginLeft: "-12%"
+            }}>
+              <Typography variant="body2" color="textSecondary"
+                sx={{ display: 'inline-block', mr: 1, marginLeft: "0%" }} >
+                {/*                                 {loginInfo.mprofile} {loginInfo.mname}{loginInfo.mrank}{loginInfo.mno} 오늘도 화이팅! */}
+                <img
+                  src={
+                    'http://localhost:8080/file/' +
+                    (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)
+                  }
+                  style={{
+                    width: '40px',
+                    borderRadius: '40px',
+                  }}
+                />
+              </Typography>
+              <span style={{ marginLeft: "5%" }}><b> {loginInfo.mname} 님 </b> ({loginInfo.mrank})
+              </span>
+            </div>
+
             <hr></hr>
 
             <div style={{ margin: " 0 auto", overflow: "scroll", overflowX: 'hidden', height: '94.8%' }}>
@@ -796,9 +804,7 @@ export default function ChatTeset() {
                     <div>
                       <ListItem style={{ width: "100%" }}>
                         <ListItemAvatar>
-                          <Avatar>
-                            <ImageIcon />
-                          </Avatar>
+                          <Avatar alt={room.rname} src={room.avatarUrl || '/static/images/avatar/1.jpg'} />
                         </ListItemAvatar>
                         <ListItemText
                           key={index} onClick={() => handleRoomSelect(room.rno)}
@@ -847,17 +853,18 @@ export default function ChatTeset() {
                     type="button"
                     onClick={() => deleteRoom(selectedRoomId)}
                     component="label"
-                    variant="contained"
+                    variant="contained" color='info'
 
-                    sx={{ width: "15%", marginLeft: "-10%", marginRight: "10%", backgroundColor: "#ff7a7a" }}
+                    sx={{ width: "7%", marginLeft: "-10%", marginRight: "10%"}}
                   >
-                    나가기
+                    
+                    <LogoutIcon />
                   </Button>
                 </div>
                 <hr />
 
                 <div id="space" ref={mySpaceRef} style={{ overflow: "scroll", overflowX: 'hidden', height: '2000%' }}>
-                  <div>
+                  <div style={{backgroundColor : "#f2f4f8"}}>
                     {/* 메시지 영역 */}
                     {messages.map((msg, index) => (
                       <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
@@ -870,12 +877,31 @@ export default function ChatTeset() {
 
                         {/* 기존 메시지 출력 */}
                         {msg.msg ? (
-                          <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
+                          <Card sx={{ minWidth: 100 }}  style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
                             <CardContent>
-                              <Typography variant="body2">
-                                <h3 style={{ color: "black" }}>{msg.msno}{msg.mname}</h3>
-                                <br />
-                                {msg.msg}
+                              <Typography variant="body2" >
+                                <div style={{ display: "flex" }}>
+                                  <img
+                                    src={
+                                      'http://localhost:8080/file/' +
+                                      (msg.mprofile === 'default.jpg' ? 'default.jpg' : msg.mprofile)
+                                    }
+                                    style={{
+                                      width: '40px',
+                                      borderRadius: '40px',
+                                      marginRight: "5%"
+                                    }}
+                                  />
+                                  <h3 style={{ color: "black" , marginTop : "3%"}}>
+                                    {msg.mname}</h3>
+                                    
+                                  <br />
+
+                                  
+                                </div>
+                                
+                                <p style={{marginTop : "7%", marginLeft : "1%"}}>{msg.msg}
+                                </p>
                               </Typography>
                             </CardContent>
                             <CardActions>
@@ -886,9 +912,22 @@ export default function ChatTeset() {
                           <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '300px', textAlign: "start" }}>
                             <CardContent>
                               <Typography variant="body2">
-                                <h3 style={{ color: "black" }}>{msg.mname}</h3>
-                                <br />
-                                {msg.flocation}
+                              <div style={{ display: "flex" }}>
+                                  <img
+                                    src={
+                                      'http://localhost:8080/file/' +
+                                      (msg.mprofile === 'default.jpg' ? 'default.jpg' : msg.mprofile)
+                                    }
+                                    style={{
+                                      width: '40px',
+                                      borderRadius: '40px',
+                                      marginRight: "5%"
+                                    }}
+                                  />
+                               <h3 style={{ color: "black" , marginTop : "3%"}}>{msg.mname}</h3>
+                               </div>
+                                <p style={{marginTop : "7%", marginLeft : "1%"}}>
+                                {msg.flocation}</p>
                               </Typography>
                             </CardContent>
                             <CardActions>
@@ -1041,12 +1080,22 @@ export default function ChatTeset() {
 
                         {!selectedRoomId && groupedMembers[department].map((m) => (
                           <ListItemButton sx={{ pl: 4 }} key={m.mno}>
-                            <ListItemAvatar>
-                              <Avatar alt={m.mname} src={m.avatarUrl || '/static/images/avatar/1.jpg'} />
-                            </ListItemAvatar>
+
+                            <img
+                              src={
+                                'http://localhost:8080/file/' +
+                                (m.mprofile === 'default.jpg' ? 'default.jpg' : m.mprofile)
+                              }
+                              style={{
+                                width: '40px',
+                                borderRadius: '40px',
+                                marginRight: "7%",
+                                marginBottom: "1%"
+                              }}
+                            />
                             <ListItemText
-                              primary={`${m.mname} (${m.mno})`} // 회원명과 사원번호
-                              secondary={m.mrank} // 직급
+                              primary={`${m.mname} | ${m.mrank} `} // 회원명과 사원번호
+                              secondary={`(${m.mno})`} // 직급
                             />
                             <ListItemIcon>
 
@@ -1067,13 +1116,23 @@ export default function ChatTeset() {
                         ))}
                         {selectedRoomId && groupedMembers[department].map((m) => (
                           <ListItemButton sx={{ pl: 4 }} key={m.mno}>
-                            <ListItemAvatar>
-                              <Avatar alt={m.mname} src={m.avatarUrl || '/static/images/avatar/1.jpg'} />
-                            </ListItemAvatar>
-                            <ListItemText
-                              primary={`${m.mname} (${m.mno})`} // 회원명과 사원번호
-                              secondary={m.mrank} // 직급
+                             <img
+                              src={
+                                'http://localhost:8080/file/' +
+                                (m.mprofile === 'default.jpg' ? 'default.jpg' : m.mprofile)
+                              }
+                              style={{
+                                width: '40px',
+                                borderRadius: '40px',
+                                marginRight: "7%",
+                                marginBottom: "1%"
+                              }}
                             />
+                            <ListItemText
+                              primary={`${m.mname} | ${m.mrank} `} // 회원명과 사원번호
+                              secondary={`(${m.mno})`} // 직급
+                            />
+
                             <ListItemIcon>
                               {/* 참여 회원에 해당하는 mno가 있을 경우 checked로, 없으면 mnoList에 있는지 확인 */}
                               <input type='checkbox'

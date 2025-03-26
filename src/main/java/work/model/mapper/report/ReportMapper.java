@@ -39,6 +39,6 @@ public interface ReportMapper {
     // 한번 insert 되기 전까지 실행안됨
     // @Select( "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'workplatform' AND TABLE_NAME = 'report'" )
     @Select( "SELECT rpno FROM report WHERE mno = #{loginMno} ORDER BY rpdate DESC LIMIT 1" )
-    int lastRpno( int loginMno );
+    Integer lastRpno( int loginMno );
 
 }
