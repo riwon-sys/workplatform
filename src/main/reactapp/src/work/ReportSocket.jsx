@@ -163,7 +163,7 @@ export default function ReportSocket(
 
     // nextApState가 true일 때 소켓으로 데이터 전송
     useEffect(() => {
-        if (nextApState && reportSocket && loginInfo && loginInfo.mno) {
+        if (nextMno && nextMno.mno && nextApState && reportSocket && loginInfo && loginInfo.mno) {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket.readyState === WebSocket.OPEN) {
                 console.log(nextMno.mno);  // 정상 출력
