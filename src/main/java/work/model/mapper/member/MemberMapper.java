@@ -59,5 +59,34 @@ public interface MemberMapper {
             }}.toString();
         }
     }
+    // ( #{mno} , #{mname} , #{mphone},#{memail} , #{mrank} , #{mprofile} , #{mpwd} )
+    // [5] 사원 수정 | rw 25-03-26 생성 */
+    @Update("""
+        UPDATE member 
+        SET 
+          mpwd = #{mpwd}, 
+          moldPwd = #{moldPwd},
+          mphone = #{mphone}, 
+          mtype = CASE 
+                     WHEN #{mtype} IN (0, 1, 2) THEN #{mtype} 
+                     ELSE 3 
+                  END,
+          mprofile = #{mprofile},
+          memail = CASE 
+                     WHEN #{mtype} = 3 THEN CONCAT('retired_', #{mno}, '@company.com') 
+                     ELSE memail 
+                  END
+        WHERE mno = #{mno}
+    """)
+    public boolean updateMember(MemberDto memberDto);
 
+    // [2] 기존 암호화 비밀번호 조회
+    @Select("SELECT mpwd FROM member WHERE mno = #{mno}")
+    public String getCurrentPassword(@Param("mno") int mno);
+
+    // [3] 연락처 중복 검사
+    @Select("SELECT COUNT(*) FROM member WHERE mphone = #{mphone} AND mno != #{mno}")
+    public int checkPhoneDuplicate(@Param("mphone") String mphone, @Param("mno") int mno);
 }
+
+

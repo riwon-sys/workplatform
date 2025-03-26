@@ -1,11 +1,28 @@
-/*  Member_Mypage.jsx 마이페이지 UI 및 기능 구현 | rw 25-03-26 생성 */
+/*  Member_Mypage.jsx 마이페이지 UI 및 MUI 기능 + 보안/제한적 수정 기능 반영 | rw 25-03-26 수정 */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Container, Typography, Box, TextField, Button, Avatar } from '@mui/material';
-import {styled} from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
+import {
+    Container,
+    Typography,
+    Box,
+    TextField,
+    Button,
+    Avatar,
+    IconButton,
+    Card,
+    MenuItem,
+} from '@mui/material';
+import {
+    Brightness4 as Brightness4Icon,
+    Brightness7 as Brightness7Icon,
+    Settings as SettingsIcon,
+    Minimize as MinimizeIcon,
+    Fullscreen as MaximizeIcon,
+    Close as CloseIcon,
+} from '@mui/icons-material';
+import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 
-// 기본 고정 틀 반드시 필요
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
     ...theme.typography.body2,
@@ -13,27 +30,35 @@ const Item = styled(Paper)(({ theme }) => ({
     textAlign: 'center',
     height: '100%',
     color: theme.palette.text.secondary,
-    ...theme.applyStyles?.('dark', {  // 옵셔널 체이닝 추가
+    ...theme.applyStyles?.('dark', {
         backgroundColor: '#1A2027',
     }),
 }));
 
-
-
 const Member_Mypage = () => {
     const loginUser = useSelector((state) => state.user.userInfo);
-    const [verified, setVerified] = useState(false); // 비밀번호 확인 여부
-    const [inputPwd, setInputPwd] = useState(''); // 사용자 입력 비밀번호
-
-    // 추후 서버에서 로그인 유저 정보 가져오기 (비밀번호 확인 후)
+    const [verified, setVerified] = useState(false);
+    const [inputPwd, setInputPwd] = useState('');
     const [memberData, setMemberData] = useState(null);
+    const [editMode, setEditMode] = useState(false);
+    const [formData, setFormData] = useState({});
+    const [darkMode, setDarkMode] = useState(false);
+    const [newPwd, setNewPwd] = useState('');
+    const [profileFile, setProfileFile] = useState(null);
+
+    const toggleColorMode = () => setDarkMode(!darkMode);
+
+    const theme = createTheme({
+        palette: {
+            primary: { main: '#1976d2' },
+            secondary: { main: '#dc004e' },
+            mode: darkMode ? 'dark' : 'light',
+        },
+    });
 
     const handlePasswordCheck = () => {
-        // 실제 API 요청으로 교체 필요
-        if (inputPwd === '1234') { //  실제 구현 시 서버에서 암호화된 비밀번호 비교 필요
-            setVerified(true);
-            // 예시 데이터 (실제 서버 연동 시 fetch/axios 사용)
-            setMemberData({
+        if (inputPwd === '1234') {
+            const data = {
                 mno: loginUser.mno,
                 mname: loginUser.mname,
                 mphone: loginUser.mphone,
@@ -41,74 +66,121 @@ const Member_Mypage = () => {
                 mtype: loginUser.mtype,
                 mrank: loginUser.mrank,
                 mprofile: loginUser.mprofile,
-            });
+                mpwd: loginUser.mpwd,
+            };
+            setMemberData(data);
+            setFormData(data);
+            setVerified(true);
         } else {
-            alert("비밀번호가 올바르지 않습니다.");
+            alert('비밀번호가 올바르지 않습니다.');
         }
     };
 
-    return (
-        <Container maxWidth="sm">
-            <Box
-                sx={{
-                    flexGrow: 1,
-                    height: '100vh',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    backgroundColor: '#eeeeee',
-                }}
-            >
-                <Item
-                    sx={{
-                        overflow: 'auto', // scroll → auto 권장
-                        overflowX: 'hidden',
-                        minWidth: '700px',
-                        maxWidth: '1000px',
-                        width: '100%',
-                    }}
-                >
-                    <Typography variant="h4" gutterBottom>
-                        마이페이지
-                    </Typography>
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
 
-                    {!verified ? (
-                        <>
-                            <Typography variant="body1" gutterBottom>
-                                보안을 위해 비밀번호를 다시 입력해주세요.
-                            </Typography>
-                            <TextField
-                                type="password"
-                                label="비밀번호 입력"
-                                fullWidth
-                                value={inputPwd}
-                                onChange={(e) => setInputPwd(e.target.value)}
-                                sx={{ my: 2 }}
-                            />
-                            <Button variant="contained" onClick={handlePasswordCheck}>
-                                확인
-                            </Button>
-                        </>
-                    ) : (
-                        memberData && (
-                            <Box sx={{ mt: 4, textAlign: 'left' }}>
-                                <Typography>사번: {memberData.mno}</Typography>
-                                <Typography>이름: {memberData.mname}</Typography>
-                                <Typography>이메일: {memberData.memail}</Typography>
-                                <Typography>연락처: {memberData.mphone}</Typography>
-                                <Typography>직급: {memberData.mrank}</Typography>
-                                <Typography>상태: {memberData.mtype}</Typography>
-                                <Box sx={{ my: 2 }}>
-                                    <Avatar
-                                        src={'http://localhost:8080/file/' + (memberData.mprofile === 'default.jpg' ? 'default.jpg' : memberData.mprofile)}
-                                        sx={{ width: 100, height: 100, mx: 'auto' }}
-                                    />
+    const handleProfileUpload = (e) => {
+        const file = e.target.files[0];
+        setProfileFile(file);
+    };
+
+    const handleSave = () => {
+        if (!/^010\d{8}$/.test(formData.mphone)) {
+            alert('전화번호 형식이 올바르지 않습니다. 예: 01012345678');
+            return;
+        }
+        if (formData.mtype === '3') {
+            alert('퇴사 상태(3)로는 변경할 수 없습니다.');
+            return;
+        }
+        if (newPwd.trim() !== '') {
+            formData.mpwd = newPwd;
+        }
+        if (profileFile) {
+            formData.mprofile = profileFile.name;
+        }
+        alert('수정이 완료되었습니다. (실제 서버 연동 필요)');
+        setMemberData(formData);
+        setEditMode(false);
+    };
+
+    return (
+        <ThemeProvider theme={theme}>
+            <Container maxWidth="md">
+                <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', bgcolor: '#eeeeee' }}>
+                    <Card sx={{ width: '100%', maxWidth: '850px', p: 4, borderRadius: '12px', position: 'relative' }}>
+                        <Box sx={{ position: 'absolute', top: 5, right: 5, display: 'flex', gap: 2 }}>
+                            <IconButton onClick={toggleColorMode}>{darkMode ? <Brightness7Icon /> : <Brightness4Icon />}</IconButton>
+                            <IconButton><SettingsIcon /></IconButton>
+                            <IconButton><MinimizeIcon /></IconButton>
+                            <IconButton><MaximizeIcon /></IconButton>
+                            <IconButton><CloseIcon /></IconButton>
+                        </Box>
+
+                        <Typography variant="h4" sx={{ mb: 3, textAlign: 'center' }}>
+                            마이페이지
+                        </Typography>
+
+                        {!verified ? (
+                            <>
+                                <Typography variant="body1" gutterBottom>
+                                    보안을 위해 비밀번호를 다시 입력해주세요.
+                                </Typography>
+                                <TextField
+                                    type="password"
+                                    label="비밀번호 입력"
+                                    fullWidth
+                                    value={inputPwd}
+                                    onChange={(e) => setInputPwd(e.target.value)}
+                                    sx={{ my: 2 }}
+                                />
+                                <Button variant="contained" onClick={handlePasswordCheck} fullWidth>
+                                    확인
+                                </Button>
+                            </>
+                        ) : (
+                            memberData && (
+                                <Box sx={{ mt: 3 }}>
+                                    <TextField label="사번" value={formData.mno} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+                                    <TextField label="이름" value={formData.mname} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+                                    <TextField label="이메일" value={formData.memail} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+                                    <TextField label="연락처" value={formData.mphone} name="mphone" onChange={handleChange} fullWidth margin="normal" InputProps={{ readOnly: !editMode }} />
+                                    <TextField label="직급" value={formData.mrank} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+                                    <TextField select label="상태" name="mtype" value={formData.mtype} onChange={handleChange} fullWidth margin="normal" disabled={!editMode}>
+                                        <MenuItem value="0">활동</MenuItem>
+                                        <MenuItem value="1">부재</MenuItem>
+                                        <MenuItem value="2">외부업무</MenuItem>
+                                    </TextField>
+                                    {editMode && (
+                                        <>
+                                            <TextField label="기존 비밀번호" type="password" value="********" fullWidth margin="normal" disabled />
+                                            <TextField label="새 비밀번호" type="password" value={newPwd} onChange={(e) => setNewPwd(e.target.value)} fullWidth margin="normal" />
+                                            <Button variant="outlined" component="label" fullWidth sx={{ mt: 1 }}>
+                                                프로필 사진 업로드
+                                                <input type="file" accept="image/*" hidden onChange={handleProfileUpload} />
+                                            </Button>
+                                        </>
+                                    )}
+                                    <Box sx={{ mt: 3, textAlign: 'center' }}>
+                                        <Avatar src={`http://localhost:8080/file/${formData.mprofile}`} sx={{ width: 100, height: 100, mx: 'auto' }} />
+                                    </Box>
+                                    <Box sx={{ display: 'flex', gap: 2, mt: 3 }}>
+                                        {!editMode ? (
+                                            <Button variant="outlined" fullWidth onClick={() => setEditMode(true)}>수정하기</Button>
+                                        ) : (
+                                            <Button variant="contained" color="primary" fullWidth onClick={handleSave}>저장</Button>
+                                        )}
+                                    </Box>
                                 </Box>
-                            </Box>
-                        )
-                    )}
-                </Item>
-            </Box>
-        </Container>
+                            )
+                        )}
+                    </Card>
+                </Box>
+            </Container>
+        </ThemeProvider>
     );
 };
+
 export default Member_Mypage;

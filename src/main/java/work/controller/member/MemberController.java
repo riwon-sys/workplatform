@@ -109,15 +109,13 @@ public class MemberController {
         return memberService.getAllMembers(mrank, loginMno);
     }
 
-    // [5] 사원 수정  // http://localhost:8080/workplatform/update
+    // [5] 사원 수정  // http://localhost:8080/workplatform/update | rw 25-03-26 생성
     @PutMapping("/update")
-    public void updateMember(@RequestBody MemberDto memberDto){
-
+    public boolean updateMember(@RequestBody MemberDto memberDto) {
         System.out.println("MemberController.updateMember");
-
+        System.out.println("memberDto = " + memberDto);
+        return memberService.updateMember(memberDto);
     }
-
-
 
 
 }
