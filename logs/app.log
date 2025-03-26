@@ -538,3 +538,278 @@
 2025-03-26 15:11:36 -  log info 
 2025-03-26 15:16:16 -  log info 
 2025-03-26 15:16:16 -  log info 
+2025-03-26 15:17:28 - Starting AppStart using Java 17.0.12 with PID 31964 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-26 15:17:28 - No active profile set, falling back to 1 default profile: "default"
+2025-03-26 15:17:30 - Tomcat initialized with port 8080 (http)
+2025-03-26 15:17:30 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-26 15:17:30 - Starting service [Tomcat]
+2025-03-26 15:17:30 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-26 15:17:30 - Initializing Spring embedded WebApplicationContext
+2025-03-26 15:17:30 - Root WebApplicationContext: initialization completed in 1232 ms
+2025-03-26 15:17:30 - HikariPool-1 - Starting...
+2025-03-26 15:17:30 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5aa62ee7
+2025-03-26 15:17:30 - HikariPool-1 - Start completed.
+2025-03-26 15:17:31 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-26 15:17:31 - HikariPool-1 - Shutdown initiated...
+2025-03-26 15:17:31 - HikariPool-1 - Shutdown completed.
+2025-03-26 15:17:31 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-03-26 15:20:19 - Starting AppStart using Java 17.0.12 with PID 62704 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-26 15:20:19 - No active profile set, falling back to 1 default profile: "default"
+2025-03-26 15:20:20 - Tomcat initialized with port 8080 (http)
+2025-03-26 15:20:20 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-26 15:20:20 - Starting service [Tomcat]
+2025-03-26 15:20:20 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-26 15:20:20 - Initializing Spring embedded WebApplicationContext
+2025-03-26 15:20:20 - Root WebApplicationContext: initialization completed in 1294 ms
+2025-03-26 15:20:20 - HikariPool-1 - Starting...
+2025-03-26 15:20:21 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@668cc9a2
+2025-03-26 15:20:21 - HikariPool-1 - Start completed.
+2025-03-26 15:20:21 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-26 15:20:21 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-26 15:20:21 - Started AppStart in 2.749 seconds (process running for 3.257)
+2025-03-26 15:21:15 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-26 15:21:15 - Initializing Servlet 'dispatcherServlet'
+2025-03-26 15:21:15 - Completed initialization in 3 ms
+2025-03-26 15:21:52 -  log info 
+2025-03-26 15:21:52 -  log info 
+2025-03-26 15:22:28 -  log info 
+2025-03-26 15:22:28 -  log info 
+2025-03-26 15:25:57 -  log info 
+2025-03-26 15:25:57 -  log info 
+2025-03-26 15:26:05 -  log info 
+2025-03-26 15:26:05 -  log info 
+2025-03-26 15:26:07 -  log info 
+2025-03-26 15:26:07 -  log info 
+2025-03-26 15:26:09 -  log info 
+2025-03-26 15:26:09 -  log info 
+2025-03-26 15:26:36 -  log info 
+2025-03-26 15:26:36 -  log info 
+2025-03-26 15:26:42 -  log info 
+2025-03-26 15:26:42 -  log info 
+2025-03-26 15:26:55 -  log info 
+2025-03-26 15:26:55 -  log info 
+2025-03-26 15:28:02 -  log info 
+2025-03-26 15:28:02 -  log info 
+2025-03-26 15:28:14 -  log info 
+2025-03-26 15:28:14 -  log info 
+2025-03-26 15:30:39 -  log info 
+2025-03-26 15:30:39 -  log info 
+2025-03-26 15:30:55 -  log info 
+2025-03-26 15:30:55 -  log info 
+2025-03-26 15:32:28 -  log info 
+2025-03-26 15:32:28 -  log info 
+2025-03-26 15:39:36 -  log info 
+2025-03-26 15:39:36 -  log info 
+2025-03-26 15:40:28 -  log info 
+2025-03-26 15:40:28 -  log info 
+2025-03-26 15:40:39 -  log info 
+2025-03-26 15:40:39 -  log info 
+2025-03-26 15:42:24 -  log info 
+2025-03-26 15:42:24 -  log info 
+2025-03-26 15:43:00 -  log info 
+2025-03-26 15:43:00 -  log info 
+2025-03-26 15:43:57 -  log info 
+2025-03-26 15:43:57 -  log info 
+2025-03-26 15:44:59 -  log info 
+2025-03-26 15:44:59 -  log info 
+2025-03-26 15:46:15 -  log info 
+2025-03-26 15:46:15 -  log info 
+2025-03-26 15:46:30 -  log info 
+2025-03-26 15:46:30 -  log info 
+2025-03-26 15:48:40 - Starting AppStart using Java 17.0.12 with PID 41212 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-26 15:48:40 - No active profile set, falling back to 1 default profile: "default"
+2025-03-26 15:48:41 - Tomcat initialized with port 8080 (http)
+2025-03-26 15:48:41 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-26 15:48:41 - Starting service [Tomcat]
+2025-03-26 15:48:41 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-26 15:48:41 - Initializing Spring embedded WebApplicationContext
+2025-03-26 15:48:41 - Root WebApplicationContext: initialization completed in 1293 ms
+2025-03-26 15:48:41 - HikariPool-1 - Starting...
+2025-03-26 15:48:41 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@57e5396b
+2025-03-26 15:48:41 - HikariPool-1 - Start completed.
+2025-03-26 15:48:42 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-26 15:48:42 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-26 15:48:42 - Started AppStart in 2.761 seconds (process running for 3.311)
+2025-03-26 15:49:06 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-26 15:49:06 - Initializing Servlet 'dispatcherServlet'
+2025-03-26 15:49:06 - Completed initialization in 1 ms
+2025-03-26 15:52:05 -  log info 
+2025-03-26 15:52:05 -  log info 
+2025-03-26 15:54:02 - Starting AppStart using Java 17.0.12 with PID 45200 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-26 15:54:02 - No active profile set, falling back to 1 default profile: "default"
+2025-03-26 15:54:03 - Tomcat initialized with port 8080 (http)
+2025-03-26 15:54:03 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-26 15:54:03 - Starting service [Tomcat]
+2025-03-26 15:54:03 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-26 15:54:03 - Initializing Spring embedded WebApplicationContext
+2025-03-26 15:54:03 - Root WebApplicationContext: initialization completed in 1265 ms
+2025-03-26 15:54:03 - HikariPool-1 - Starting...
+2025-03-26 15:54:04 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@38fb50f8
+2025-03-26 15:54:04 - HikariPool-1 - Start completed.
+2025-03-26 15:54:04 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-26 15:54:04 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-26 15:54:04 - Started AppStart in 2.756 seconds (process running for 3.26)
+2025-03-26 15:54:26 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-26 15:54:26 - Initializing Servlet 'dispatcherServlet'
+2025-03-26 15:54:26 - Completed initialization in 0 ms
+2025-03-26 15:54:31 -  log info 
+2025-03-26 15:54:31 -  log info 
+2025-03-26 15:55:54 -  log info 
+2025-03-26 15:55:54 -  log info 
+2025-03-26 16:04:12 -  log info 
+2025-03-26 16:04:12 -  log info 
+2025-03-26 16:04:43 -  log info 
+2025-03-26 16:04:43 -  log info 
+2025-03-26 16:05:19 -  log info 
+2025-03-26 16:05:19 -  log info 
+2025-03-26 16:06:06 -  log info 
+2025-03-26 16:06:06 -  log info 
+2025-03-26 16:06:21 -  log info 
+2025-03-26 16:06:21 -  log info 
+2025-03-26 16:06:40 -  log info 
+2025-03-26 16:06:40 -  log info 
+2025-03-26 16:07:12 -  log info 
+2025-03-26 16:07:12 -  log info 
+2025-03-26 16:07:33 -  log info 
+2025-03-26 16:07:33 -  log info 
+2025-03-26 16:08:04 -  log info 
+2025-03-26 16:08:04 -  log info 
+2025-03-26 16:08:12 -  log info 
+2025-03-26 16:08:12 -  log info 
+2025-03-26 16:10:04 -  log info 
+2025-03-26 16:10:04 -  log info 
+2025-03-26 16:11:18 -  log info 
+2025-03-26 16:11:18 -  log info 
+2025-03-26 16:11:49 -  log info 
+2025-03-26 16:11:49 -  log info 
+2025-03-26 16:12:03 -  log info 
+2025-03-26 16:12:03 -  log info 
+2025-03-26 16:12:34 -  log info 
+2025-03-26 16:12:34 -  log info 
+2025-03-26 16:12:47 -  log info 
+2025-03-26 16:12:47 -  log info 
+2025-03-26 16:13:11 -  log info 
+2025-03-26 16:13:11 -  log info 
+2025-03-26 16:13:35 -  log info 
+2025-03-26 16:13:35 -  log info 
+2025-03-26 16:13:44 -  log info 
+2025-03-26 16:13:44 -  log info 
+2025-03-26 16:14:51 -  log info 
+2025-03-26 16:14:52 -  log info 
+2025-03-26 16:20:02 -  log info 
+2025-03-26 16:20:02 -  log info 
+2025-03-26 16:28:32 -  log info 
+2025-03-26 16:28:32 -  log info 
+2025-03-26 16:28:48 -  log info 
+2025-03-26 16:28:48 -  log info 
+2025-03-26 16:29:31 -  log info 
+2025-03-26 16:29:31 -  log info 
+2025-03-26 16:29:40 -  log info 
+2025-03-26 16:29:40 -  log info 
+2025-03-26 16:30:04 -  log info 
+2025-03-26 16:30:04 -  log info 
+2025-03-26 16:31:03 -  log info 
+2025-03-26 16:31:03 -  log info 
+2025-03-26 16:31:22 -  log info 
+2025-03-26 16:31:22 -  log info 
+2025-03-26 16:43:16 -  log info 
+2025-03-26 16:43:16 -  log info 
+2025-03-26 16:43:38 -  log info 
+2025-03-26 16:43:38 -  log info 
+2025-03-26 16:44:14 -  log info 
+2025-03-26 16:44:14 -  log info 
+2025-03-26 16:44:28 -  log info 
+2025-03-26 16:44:28 -  log info 
+2025-03-26 16:44:40 -  log info 
+2025-03-26 16:44:40 -  log info 
+2025-03-26 16:45:05 -  log info 
+2025-03-26 16:45:05 -  log info 
+2025-03-26 16:45:15 -  log info 
+2025-03-26 16:45:15 -  log info 
+2025-03-26 16:46:12 -  log info 
+2025-03-26 16:46:12 -  log info 
+2025-03-26 16:51:26 -  log info 
+2025-03-26 16:51:26 -  log info 
+2025-03-26 16:51:46 -  log info 
+2025-03-26 16:51:46 -  log info 
+2025-03-26 16:51:55 -  log info 
+2025-03-26 16:51:55 -  log info 
+2025-03-26 16:58:03 -  log info 
+2025-03-26 16:58:03 -  log info 
+2025-03-26 16:58:23 -  log info 
+2025-03-26 16:58:23 -  log info 
+2025-03-26 16:59:31 -  log info 
+2025-03-26 16:59:31 -  log info 
+2025-03-26 17:01:14 -  log info 
+2025-03-26 17:01:14 -  log info 
+2025-03-26 17:01:35 -  log info 
+2025-03-26 17:01:36 -  log info 
+2025-03-26 17:02:12 -  log info 
+2025-03-26 17:02:12 -  log info 
+2025-03-26 17:02:29 -  log info 
+2025-03-26 17:02:29 -  log info 
+2025-03-26 17:07:05 -  log info 
+2025-03-26 17:07:05 -  log info 
+2025-03-26 17:07:28 -  log info 
+2025-03-26 17:07:28 -  log info 
+2025-03-26 17:07:32 -  log info 
+2025-03-26 17:07:32 -  log info 
+2025-03-26 17:07:52 -  log info 
+2025-03-26 17:07:52 -  log info 
+2025-03-26 17:08:11 -  log info 
+2025-03-26 17:08:11 -  log info 
+2025-03-26 17:08:27 -  log info 
+2025-03-26 17:08:27 -  log info 
+2025-03-26 17:17:00 -  log info 
+2025-03-26 17:17:00 -  log info 
+2025-03-26 17:17:13 -  log info 
+2025-03-26 17:17:13 -  log info 
+2025-03-26 17:17:40 -  log info 
+2025-03-26 17:17:40 -  log info 
+2025-03-26 17:17:53 -  log info 
+2025-03-26 17:17:53 -  log info 
+2025-03-26 17:18:16 -  log info 
+2025-03-26 17:18:16 -  log info 
+2025-03-26 17:18:32 -  log info 
+2025-03-26 17:18:32 -  log info 
+2025-03-26 17:19:52 -  log info 
+2025-03-26 17:19:52 -  log info 
+2025-03-26 17:20:03 -  log info 
+2025-03-26 17:20:03 -  log info 
+2025-03-26 17:24:15 -  log info 
+2025-03-26 17:24:15 -  log info 
+2025-03-26 17:24:25 -  log info 
+2025-03-26 17:24:25 -  log info 
+2025-03-26 17:24:50 -  log info 
+2025-03-26 17:24:50 -  log info 
+2025-03-26 17:25:03 -  log info 
+2025-03-26 17:25:03 -  log info 
+2025-03-26 17:25:07 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=zzzzzzzzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-26 17:25:52 -  log info 
+2025-03-26 17:25:52 -  log info 
+2025-03-26 17:25:52 -  log info 
+2025-03-26 17:25:52 -  log info 
+2025-03-26 17:25:53 -  log info 
+2025-03-26 17:25:53 -  log info 
+2025-03-26 17:25:54 -  log info 
+2025-03-26 17:25:54 -  log info 
+2025-03-26 17:26:04 -  log info 
+2025-03-26 17:26:04 -  log info 
+2025-03-26 17:26:09 -  log info 
+2025-03-26 17:26:09 -  log info 
+2025-03-26 17:26:42 -  log info 
+2025-03-26 17:26:42 -  log info 
+2025-03-26 17:27:07 -  log info 
+2025-03-26 17:27:07 -  log info 
+2025-03-26 17:27:30 -  log info 
+2025-03-26 17:27:30 -  log info 
+2025-03-26 17:27:52 -  log info 
+2025-03-26 17:27:52 -  log info 
+2025-03-26 17:27:55 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=gggggggggggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-26 17:27:58 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=zzzzzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-26 17:28:00 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=ggggggggggggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-26 17:28:03 - 일반메세지 : ChattingDto(mstype=0, rno=16, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=zzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-26 17:28:07 - 일반메세지 : ChattingDto(mstype=0, rno=19, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=ggggggggggg, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
+2025-03-26 17:29:05 - 일반메세지 : ChattingDto(mstype=0, rno=19, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=zzzzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null)
