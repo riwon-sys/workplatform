@@ -100,7 +100,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
   const loginInfo = useSelector((state) => state.user.userInfo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar(); // ✅ 토스트 함수 사용
+  const { enqueueSnackbar } = useSnackbar(); // 토스트 함수 사용
 
   useEffect(() => {
     const storedUser = localStorage.getItem("username");
@@ -118,7 +118,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
     setOpen((prevOpen) => !prevOpen);
   };
 
-  // ✅ 로그아웃 함수: 토스트 포함
+  // 로그아웃 함수: 토스트 포함
   const onLogout = async () => {
     if( !confirm('로그아웃 하시겠습니까?') ){ return; }
     try {
@@ -249,10 +249,10 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
                         />
                       <div
                         style={{
-                          fontSize: '18px',
-                          fontWeight: 'bold',
+                          fontSize: '16px',
+                          fontWeight: '500',
                           color: 'gray',
-                          margin: '3px 5px 0px 10px'
+                          margin: '0px 25px 0px 10px'
                         }}
                       >
                         { loginInfo.mname } 님 ({ loginInfo.mrank })

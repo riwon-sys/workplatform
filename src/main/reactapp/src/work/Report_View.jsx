@@ -3,15 +3,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 /* react pdf */
-// import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
-// import { Page, Text, View, Document, StyleSheet } from "@react-pdf/renderer";
-// import ReactPDF from '@react-pdf/renderer';
-// import html2pdf from 'html2pdf.js';
-// import { useReactToPrint } from 'react-to-print';
-// import html2canvas from "html2canvas";
 import domtoimage from "dom-to-image";
 import { jsPDF } from "jspdf";
-
 
 /* mui import */
 import { styled } from '@mui/material/styles';
@@ -26,6 +19,7 @@ import { CssVarsProvider } from '@mui/joy/styles';
 /* jsx import */
 import Report_List from './component/report/Report_List';
 import Report_Form from './component/report/Report_Form';
+import LoadingIconButton from './component/report/LoadingIconButton';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -254,9 +248,7 @@ export default function Report_View() {
             {rpno && Number(rpno) > 0 ? (
               <>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Button variant="contained" color="info" sx={{ mb: 3, ml: 3 }} onClick={ convertToPdf } >
-                    PDF 저장 3
-                  </Button>
+                  <LoadingIconButton sx={{ mb: 3, ml: 3}} convertToPdf={ convertToPdf } />
                 </div>
                 <Report_Form
                   id='pdf-download'
@@ -269,10 +261,10 @@ export default function Report_View() {
                 />
     
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={() => onUpdate()}>
+                  <Button variant="contained" color="info" sx={{ my: 3, ml: 2 }} onClick={() => onUpdate()}>
                     수정
                   </Button>
-                  <Button variant="contained" color="info" sx={{ mt: 3, ml: 3 }} onClick={() => onDelete()}>
+                  <Button variant="contained" color="info" sx={{ my: 3, ml: 2 }} onClick={() => onDelete()}>
                     삭제
                   </Button>
                 </div>

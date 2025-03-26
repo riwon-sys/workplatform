@@ -15,7 +15,6 @@ const Item = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(1),
   textAlign: 'center',
   height: '100%',
- 
 }));
 
 export default function () {
@@ -41,17 +40,17 @@ export default function () {
 
   
   return (<>
-            <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
-            <Item
-              sx={{
-                overflow: 'scroll',
-                overflowX: 'hidden',
-                minWidth: '700px',
-                maxWidth: '1000px',
-                width: '100%',
-                padding: '50px 70px'
-              }}
-            >
+    <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
+      <Item
+        sx={{
+          overflow: 'scroll',
+          overflowX: 'hidden',
+          minWidth: '700px',
+          maxWidth: '1000px',
+          width: '100%',
+          padding: '50px 70px'
+        }}
+      >
           <CssVarsProvider>
           <Table>
               <thead>

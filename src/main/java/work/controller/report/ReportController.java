@@ -2,6 +2,7 @@ package work.controller.report;
 
 import com.github.pagehelper.PageInfo;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import work.model.dto.member.MemberDto;
@@ -90,11 +91,21 @@ public class ReportController {
         return reportService.delete(rpno);
     } // f end
 
-    // 6. 보고서 번호
+    // 6. 등록된 보고서 번호
     @GetMapping("/lastrpno")
-    public int lastRpno(){
+    public Integer lastRpno(HttpServletRequest req){
         System.out.println("ReportController.findAll");
-        return reportService.lastRpno();
+
+        // loginMno 가져오기
+        if( MemberUtils.getLoginInfo(req) == null  ){
+            System.out.println("로그인 정보가 없음");
+            return null;
+        } // if end
+
+        MemberDto memberDto = MemberUtils.getLoginInfo(req);
+        int loginMno = memberDto.getMno();
+
+        return reportService.lastRpno( loginMno );
     } // f end
 
 }

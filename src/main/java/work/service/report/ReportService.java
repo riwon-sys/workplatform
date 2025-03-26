@@ -68,9 +68,9 @@ public class ReportService {
     } // f end
 
     // 6. 마지막 보고서 번호 조회
-    public int lastRpno(){
+    public int lastRpno( int loginMno ){
         System.out.println("ReportController.findAll");
-        return reportMapper.lastRpno();
+        return reportMapper.lastRpno( loginMno );
     } // f end
 
 }
