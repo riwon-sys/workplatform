@@ -12,12 +12,14 @@ import java.util.List;
 
 @Mapper
 public interface CommentMapper {
+
     //[0] pid에 해당하는 전체 댓글 조회
     @Select("select * from comment where pid =#{pid};")
     public List<CommentDto>CommentFindAll(int pid);
+
     //[1]댓글등록
-    @Insert("insert into comment( pid,content,mno)"+
-    "values(#{pid},#{content},#{mno})")
+    @Insert("insert into comment( cid,content,mno,pid)"+
+    "values(#{cid},#{content},#{mno},#{pid})")
     public boolean CommentCreate(CommentDto commentDto);
 
     //[2]댓글 수정

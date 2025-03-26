@@ -21,7 +21,7 @@ public interface RoomMapper {
     boolean participantWrite(int mno, int rno);
 
     // [2] 회원별 채팅방 전체 조회
-    @Select("select p.* , m.mname , r.* from paritcipant p join member m on p.mno = m.mno join room r on p.rno = r.rno where p.mno = #{loginMno} and r.rstate= true")
+    @Select("select p.* , m.mname , r.* from paritcipant p join member m on p.mno = m.mno join room r on p.rno = r.rno where p.mno = #{loginMno} and r.rstate= true ORDER BY r.rno ASC")
     List<RoomDto> find(int loginMno);
 
     // [3] 채팅방 메세지 상세 조회

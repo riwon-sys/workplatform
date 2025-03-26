@@ -36,6 +36,8 @@ import { useEffect, useState } from "react";
 
 import ReportSocket from "./ReportSocket.jsx";
 import BoardWrite from "./BoardWrite.jsx";
+import Member_Mypage from "./member/Member_Mypage.jsx";
+import BoardUpdate from "./BoardUpdate.jsx";
 
 export default function App(props) {
     const loginInfo = useSelector( (state) => state.user.userInfo ); // 🔸 로그인 정보 가져오기
@@ -73,7 +75,7 @@ export default function App(props) {
         apno: '' 
       });
       // 다음결재자를 받아올 state 변수
-      const [nextApMno , setNextApMno] = useState(null)
+      const [nextApMno , setNextApMno] = useState([])
       // 결재 상태를 받아올 state 변수
       const [nextApState, setNextApState] = useState(false)
 
@@ -119,9 +121,11 @@ export default function App(props) {
                                 <Route path="/board" element={<Board />} />
                                 <Route path="/board/detail" element={<BoardDetail />} />
                                 <Route path="/board/write" element={<BoardWrite />} />
+                                <Route path="/board/update" element={<BoardUpdate />} />
                                 <Route path="/report/list" element={<Report_List />} />
                                 <Route path="/report/Form" element={<Report_Form />} />
                                 <Route path="/report/update/:rpno" element={<Report_Update />} />
+                                <Route path="/member/mypage" element={<Member_Mypage/>} /> {/* 마이페이지 롸우터 경로를 등록 | rw 25-03-26 생성 */}
                                 <Route path="/member/post" element={<Member_Post />} />
                                 <Route path="/member/login" element={<Member_Login />} />
                             </Routes>
