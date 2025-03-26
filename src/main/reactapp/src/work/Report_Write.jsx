@@ -51,10 +51,10 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
   const [ mrank, setMrank ] = useState('');
   const [ lastRpno, setLastRpno ] = useState(''); 
   const [ approval, setApproval ] = useState([
-    { rank: "대리", mno: null, apstate: false },
-    { rank: "과장", mno: null, apstate: false },
-    { rank: "차장", mno: null, apstate: false },
-    { rank: "부장", mno: null, apstate: false }
+    { rank: "대리", mno: null, rpno: lastRpno, apstate: false },
+    { rank: "과장", mno: null, rpno: lastRpno, apstate: false },
+    { rank: "차장", mno: null, rpno: lastRpno, apstate: false },
+    { rank: "부장", mno: null, rpno: lastRpno, apstate: false }
   ]);
   const [ members, setMembers ] = useState([]);
   const [ reports, setReports ] = useState( [] );
@@ -96,24 +96,20 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
       const response = await axios.post('http://localhost:8080/api/report', formData, { withCredentials: true });
   
       if ( response.data ) {
-        const ApprovalRpnoResponse = await axios.get('http://localhost:8080/api/report/lastrpno');
+        const ApprovalRpnoResponse = await axios.get('http://localhost:8080/api/report/lastrpno', { withCredentials: true });
         const ApprovalRpno = ApprovalRpnoResponse.data;
   
         setLastRpno( ApprovalRpno ); // 상태 업데이트
-        console.log( ApprovalRpno );
   
-        setApproval((prevApproval) =>
-          prevApproval.map((item) => ({ ...item, rpno: ApprovalRpno }))
-        );
-  
-        console.log('Updated approval:', approval);
-        onApprovalPost();
+        onApprovalPost( ApprovalRpno );
       } else { alert('등록 실패'); }
     } catch (e) { console.log(e); alert('등록 실패'); }
   };
 
-  const onApprovalPost = async ( props ) => {
+  const onApprovalPost = async ( ApprovalRpno ) => {
     try{
+      const sendApproval = approval.map((item) => ({ ...item, rpno: ApprovalRpno }))
+
       // signData는 Base64로 인코딩된 서명 이미지 데이터
       const signData = signCanvas.current.toDataURL();
 
@@ -137,7 +133,7 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
       // FormData 객체 생성
       const signFormData = new FormData();
       signFormData.append( 'uploadFile', file );
-      signFormData.append( 'jsonaplist', JSON.stringify(approval) );
+      signFormData.append( 'jsonaplist', JSON.stringify(sendApproval) );
     
       const response = await axios.post( 'http://localhost:8080/api/approval', signFormData , { withCredentials : true } );
       if( response.data ){
@@ -145,7 +141,6 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
         navigate('/report/view');
         setFormData( { rpname: '일일 업무 보고서', rpam: '', rppm: '', rpamnote: '', rppmnote: '',
           rpunprocessed: '', rpsignificant: '', rpexpected: '' } );
-
 
         // props 로 보고서 소켓으로 전달할 state 변수
         setReportState(true);

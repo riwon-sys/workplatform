@@ -45,6 +45,7 @@ public class ApprovalController {
             List<ApprovalDto> aplist = objectMapper.readValue(jsonaplist, new TypeReference<List<ApprovalDto>>() {});
             approvalDto.setAplist( aplist );
         }catch ( Exception e ){ System.out.println( e ); }
+        System.out.println( approvalDto );
 
         return approvalService.write(approvalDto, loginMno);
     } // f end
