@@ -46,7 +46,7 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
     mname: '',
     mrank: '',
     mdepartment: '',
-    apno: '' 
+    apno: ''
   });
   const [ reports, setReports ] = useState( [] );
   const [ page, setPage ] = useState(1); // 현재 페이지
@@ -68,14 +68,14 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
   // 보고서 상세 조회 함수
   useEffect(() => { 
     if ( rpno ) { onFindByRpno(); } 
-  }, [ rpno,nextApState ]);
+  }, [ rpno, nextApState ]);
 
   const onFindByRpno = async ( props ) => {
     if( !rpno ){ return; }
     try{
       const response = await axios.get( `http://localhost:8080/api/report/view?rpno=${rpno}` );
       setFormData( response.data );
-      setNextAp(response.data) // 소켓으로 보낼 보고서 정보
+      setNextAp( response.data ) // 소켓으로 보낼 보고서 정보
     }catch( e ){ console.log( e ); }
   } // f end
 
@@ -139,7 +139,6 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
   } // f end
 
   
-
   // mui 페이지네이션 페이지 번호 가져오기
   const handlePageChange = ( value ) => {
     setPage( value );
@@ -202,7 +201,7 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
                 setPage={ setPage }
                 setTotalPages={ setTotalPages }
                 selectValue={ selectValue }
-                nextApState={nextApState}
+                nextApState={ nextApState }
               />
             </CssVarsProvider>
     
@@ -250,7 +249,11 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
                 />
     
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <PostModal signCanvas={ signCanvas } btnName={ "결재" } onApproval={ onApproval } />
+                  {
+                    selectValue == 1 ? null
+                    :
+                    <PostModal signCanvas={ signCanvas } btnName={ "결재" } onApproval={ onApproval } />
+                  }
                 </div>
               </>
             ) : null}

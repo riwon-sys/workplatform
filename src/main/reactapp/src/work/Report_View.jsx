@@ -51,6 +51,7 @@ export default function Report_View() {
   const [ page, setPage ] = useState(1); // 현재 페이지
   const [ totalPages, setTotalPages ] = useState(1); // 전체 페이지 수
   const [ approval, setApproval ] = useState( [] );
+  const [ refresh, setRefresh ] = useState( false );
   const navigate = useNavigate();
   
   const formDataChange = (e) => {
@@ -58,8 +59,10 @@ export default function Report_View() {
   } // f end
 
   // 보고서 상세 조회 함수
-  useEffect(() => { 
-    if ( rpno ) { onFindByRpno(); } 
+  useEffect(() => {
+    if ( rpno ) {
+      onFindByRpno();
+    }
   }, [ rpno ]);
 
   const onFindByRpno = async ( props ) => {
@@ -79,8 +82,8 @@ export default function Report_View() {
     try{
       const response = await axios.put( `http://localhost:8080/api/report/delete?rpno=${rpno}` )
       if( response.data ){
-        alert('보고서 삭제가 완료되었습니다.')
-        navigate( 0 ); // 0 : 페이지 새로고침
+        alert('보고서 삭제가 완료되었습니다.');
+        setRefresh( true );
         navigate( '/report/view' );
       }else{ alert('보고서 삭제 실패'); }
     }catch( e ){ console.log( e ); }
@@ -210,6 +213,8 @@ export default function Report_View() {
                 setReports={ setReports }
                 setPage={ setPage }
                 setTotalPages={ setTotalPages }
+                refresh={ refresh }
+                setRefresh={ setRefresh }
               />
             </CssVarsProvider>
     
@@ -248,14 +253,14 @@ export default function Report_View() {
             {rpno && Number(rpno) > 0 ? (
               <>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <LoadingIconButton sx={{ mb: 3, ml: 3}} convertToPdf={ convertToPdf } />
+                  <LoadingIconButton convertToPdf={ convertToPdf } />
                 </div>
                 <Report_Form
                   id='pdf-download'
                   formData={ formData }
                   formDataChange={ formDataChange }
                   isReadOnly={ true }
-                  isUpdate={ false }
+                  isUpdate={ true }
                   rpno={ rpno }
                   approval={ approval }
                 />

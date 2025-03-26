@@ -161,7 +161,7 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
     };
     fetchMembers();
   }, [mrank]);
-
+console.log( approval)
   // select 선택시 데이터 변경
   const handleApprovalChange = (rank) => async (e) => {
     const selectedMno = e.target?.value; // 안전한 접근
@@ -174,6 +174,7 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
   // 기존 approval 배열에서 동일한 rank 항목만 업데이트 (중복 추가 방지)
     setApproval((prevApproval) =>
     prevApproval.map((item) =>
+      formData.mrank === item.rank ? { ...item, mno: loginInfo.mno } :
       item.rank === rank ? { ...item, mno: selectedMno } : item
       )
     );
@@ -228,7 +229,12 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
         />
 
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <PostModal onPost={ onPost } signCanvas={ signCanvas } btnName={ "작성" } />
+          <PostModal 
+            onPost={ onPost } 
+            signCanvas={ signCanvas }
+            approval={ approval } 
+            formData={ formData }
+            btnName={ "작성" } />
         </div>
       </Item>
     </Box>

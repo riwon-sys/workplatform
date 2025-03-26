@@ -47,7 +47,8 @@ public interface ApprovalMapper {
                     WHERE("apstate = #{apstate}");
                 }
                 WHERE("apdate is not null");
-                ORDER_BY("rp.rpno DESC");
+                WHERE( "rpstate = true" );
+                ORDER_BY("rpdate DESC, rp.rpno DESC");
             }}.toString();
         } // f end
     }

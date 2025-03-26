@@ -5,19 +5,24 @@ import axios from 'axios';
 /* mui import */
 import Table from '@mui/joy/Table';
 
-export default function Report_List( { rpno, reports, page, setReports, setPage, setTotalPages } ) {
+export default function Report_List( 
+  { rpno, reports, page, setReports, setPage, setTotalPages, refresh, setRefresh } ) {
   
   if( rpno == null ){ rpno = '' };
 
-  useEffect( () => { onFindByMno( page ); }, [ page ] );
+  useEffect( () => { onFindByMno( page ); }, [ page, refresh ] );
 
   const onFindByMno = async ( page ) => {
     try{
       const response = await axios.get( `http://localhost:8080/api/report?page=${page}&pageSize=10`, { withCredentials : true } )
-      setReports( response.data.list );
+      if( response.data.list != null ){ setReports( response.data.list ); }
+      else{ setReports( [] ); }
       setPage( response.data.pageNum );
       setTotalPages( response.data.pages );
     }catch( e ){ console.log(e); }
+    finally {
+      setRefresh(false); // 데이터 갱신 후 refresh 상태 초기화
+    }
   } // f end
 
   const navigate = useNavigate();
@@ -31,7 +36,7 @@ export default function Report_List( { rpno, reports, page, setReports, setPage,
         sx={{ 
           '& th' : { textAlign: 'center', backgroundColor: '#e5edf7' }, 
           '& td' : { height: '60px' }
-        }} 
+        }}
       >
         <thead>
           <tr>

@@ -73,7 +73,8 @@ export default function Member_Login() {
                     mprofile: response2.data.mprofile,
                     mphone: response2.data.mphone,
                     mtype: response2.data.mtype,
-                    memail: response2.data.memail
+                    memail: response2.data.memail,
+                    department: response2.data.department // 부서 추가 - 희만
                 };
 
                 dispatch(login(safeUserInfo)); // ✅ 안전하게 리덕스에 저장
