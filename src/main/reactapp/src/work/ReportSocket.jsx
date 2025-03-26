@@ -42,10 +42,10 @@ export default function ReportSocket(
     console.log(nextApState)
 
     const nextMno = nextApMno
-        .filter((item,index , array) => item.apstate === false && item.mno != loginInfo.mno)
+        .filter((item, index, array) => item.apstate === false && item.mno != loginInfo.mno)
         .shift()
-        
-        console.log(nextMno)
+
+    console.log(nextMno)
     if (nextMno) {
         console.log(nextMno.mno);  // 정상 출력
     } else {
@@ -66,11 +66,11 @@ export default function ReportSocket(
 
     const handleClose = () => {
         setState({ ...state, open: false }); // Snackbar를 닫음
-        if(receivedData.rpno == null){
-        navigate('/report/approval');
-        }else{
+        if (receivedData.rpno == null) {
+            navigate('/report/approval');
+        } else {
             navigate(`/report/approval/${receivedData.rpno}`);
-            
+
         }
     };
 
@@ -181,7 +181,7 @@ export default function ReportSocket(
                     mrank: nextAp.mrank,
                     mdepartment: nextAp.mdepartment,
                     apno: nextAp.apno,
-                    rpno : nextAp.rpno,
+                    rpno: nextAp.rpno,
                     nextMno: nextMno.mno
                 }
                 console.log(obj)
@@ -190,7 +190,7 @@ export default function ReportSocket(
                 console.log('서버에서 보낸 데이터 : ', data);
                 console.log("서버소켓으로 보내기 성공~~~~~")
                 setNextApState(false)
-                
+
             } else {
                 console.log('소켓이 아직 연결되지 않았습니다.');
             }
@@ -228,73 +228,73 @@ export default function ReportSocket(
 
     console.log(nextMno)
     if (receivedData && receivedData.nextMno) {
-    console.log(receivedData.nextMno)
-}console.log("*********서버가 보냄",receivedData)
+        console.log(receivedData.nextMno)
+    } console.log("*********서버가 보냄", receivedData)
     return (
         <>
-          {/* 첫 번째 Box: mnoList에서 조건에 맞는 항목 렌더링 */}
-          <Box sx={{ width: 800, backgroundColor: 'red' }}>
-            {receivedData && Array.isArray(receivedData.mnoList) && receivedData.mnoList.map((mno, index) => {
-              if (receivedData.apmno === loginInfo.mno) {
-                return (
-                  <Snackbar
-                    key={mno}
-                    anchorOrigin={{ vertical, horizontal }}
-                    open={open}
-                    onClose={handleClose}
-                    message={
-                      <>
-                        <p>
-                        결재요청
-                        <Button onClick={handleClose}>결재하기</Button>
-                        </p>
-                        <hr />
-                        <br />
-                        <p>{receivedData.mname} : {receivedData.rpname}</p>
-                      </>
+            {/* 첫 번째 Box: mnoList에서 조건에 맞는 항목 렌더링 */}
+            <Box sx={{ width: 800, backgroundColor: 'red' }}>
+                {receivedData && Array.isArray(receivedData.mnoList) && receivedData.mnoList.map((mno, index) => {
+                    if (receivedData.apmno === loginInfo.mno) {
+                        return (
+                            <Snackbar
+                                key={mno}
+                                anchorOrigin={{ vertical, horizontal }}
+                                open={open}
+                                onClose={handleClose}
+                                message={
+                                    <>
+                                        <p>
+                                            결재요청
+                                            <Button onClick={handleClose}>결재하기</Button>
+                                        </p>
+                                        <hr />
+                                        <br />
+                                        <p>{receivedData.mname} : {receivedData.rpname}</p>
+                                    </>
+                                }
+                                ContentProps={{
+                                    sx: {
+                                        backgroundColor: 'white',
+                                        color: 'black',
+                                    },
+                                }}
+                            />
+                        );
                     }
-                    ContentProps={{
-                      sx: {
-                        backgroundColor: 'white',
-                        color: 'black',
-                      },
-                    }}
-                  />
-                );
-              }
-              return null; // 조건에 맞지 않으면 아무것도 렌더링하지 않음
-            })}
-          </Box>
-      
-          {/* 두 번째 Box: nextMno와 loginInfo.mno 비교 */}
-          <Box sx={{ width: 800, backgroundColor: 'red' }}>
-            {receivedData && receivedData.nextMno === loginInfo.mno && (
-              <Snackbar
-                key={receivedData.nextMno}
-                anchorOrigin={{ vertical, horizontal }}
-                open={open}
-                onClose={handleClose}
-                message={
-                    <>
-                    <p>
-                    결재요청
-                    <Button onClick={handleClose}>결재하기</Button>
-                    </p>
-                    <hr />
-                    <br />
-                    <p>{receivedData.mname} : {receivedData.rpname}</p>
-                  </>
-                }
-                ContentProps={{
-                  sx: {
-                    backgroundColor: 'white',
-                    color: 'black',
-                  },
-                }}
-              />
-            )}
-          </Box>
+                    return null; // 조건에 맞지 않으면 아무것도 렌더링하지 않음
+                })}
+            </Box>
+
+            {/* 두 번째 Box: nextMno와 loginInfo.mno 비교 */}
+            <Box sx={{ width: 800, backgroundColor: 'red' }}>
+                {receivedData && receivedData.nextMno === loginInfo.mno && (
+                    <Snackbar
+                        key={receivedData.nextMno}
+                        anchorOrigin={{ vertical, horizontal }}
+                        open={open}
+                        onClose={handleClose}
+                        message={
+                            <>
+                                <p>
+                                    결재요청
+                                    <Button onClick={handleClose}>결재하기</Button>
+                                </p>
+                                <hr />
+                                <br />
+                                <p>{receivedData.mname} : {receivedData.rpname}</p>
+                            </>
+                        }
+                        ContentProps={{
+                            sx: {
+                                backgroundColor: 'white',
+                                color: 'black',
+                            },
+                        }}
+                    />
+                )}
+            </Box>
         </>
-      );
-      
+    );
+
 }

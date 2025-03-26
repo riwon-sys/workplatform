@@ -26,13 +26,13 @@ public interface RoomMapper {
 
     // [3] 채팅방 메세지 상세 조회
     @Select("""
-            ( select ms.msno, ms.msg ,ms.msdate as msdate,p.pdate,r.rno, r.rname, r.rtype,  m.mname, null fno,null fname, null flocation, null fdate               
+            ( select ms.msno, ms.msg ,ms.msdate as msdate,p.pdate,r.rno, r.rname, r.rtype,  m.mname, m.mprofile, null fno,null fname, null flocation, null fdate               
                 from message ms join paritcipant p on ms.pno = p.pno join room r on p.rno = r.rno join member m on p.mno = m.mno
                 where r.rno = #{rno} )
             
             union all
             
-            (select f.fno AS msno, null as content, f.fdate as msdate, p.pdate, r.rno, r.rname, r.rtype, m.mname , f.fno, f.fname, f.flocation, f.fdate                   
+            (select f.fno AS msno, null as content, f.fdate as msdate, p.pdate, r.rno, r.rname, r.rtype, m.mname ,m.mprofile, f.fno, f.fname, f.flocation, f.fdate                   
                 from fileshare f join paritcipant p on f.pno = p.pno join room r on p.rno = r.rno join member m on p.mno = m.mno
                 where r.rno = #{rno} )
             order by msdate ASC
