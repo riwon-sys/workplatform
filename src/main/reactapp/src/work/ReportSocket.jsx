@@ -38,7 +38,8 @@ export default function ReportSocket(
 
     // 다음결재자
     console.log(nextAp)
-    console.log()
+      console.log(nextApMno)
+      console.log(nextApState) //
 
     const navigate = useNavigate();
     const [state, setState] = React.useState({

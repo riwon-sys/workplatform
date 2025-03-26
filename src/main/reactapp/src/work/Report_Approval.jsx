@@ -79,12 +79,13 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
     }catch( e ){ console.log( e ); }
   } // f end
 
-   // 소켓으로 보낼 reportState가 변경될 때마다 실행되는 useEffect
-   useEffect(() => {
-    if (nextApState) {
-      console.log('nextApState 값이 변경되어 true로 설정되었습니다.');
-    }
-  }, [nextApState]);  // reportState가 변경될 때마다 실행
+     // 소켓으로 보낼 nextApState가 변경될 때마다 실행되는 useEffect
+     useEffect(() => {
+      if (nextApState) {
+        console.log('nextApState 값이 변경되어 true로 설정되었습니다.');
+        
+      }
+    }, [nextApState]);  
 
   // 보고서 결재
   const onApproval = async ( props ) => {
@@ -127,13 +128,17 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
       const response = await axios.put( `http://localhost:8080/api/approval`, signFormData, { withCredentials : true } )
       if( response ){
         alert('보고서 결재를 완료하였습니다.');
-        navigate( 0 );
+        // navigate( 0 );
         
+        // 소켓으로 보낼 상태 변수
         setNextApState(true)
+        console.log(nextApState)
       }else{ alert('보고서 결제 실패') }
     }catch( e ){ console.log( e ); alert('보고서 결제 실패'); }
 
   } // f end
+
+  
 
   // mui 페이지네이션 페이지 번호 가져오기
   const handlePageChange = ( value ) => {
