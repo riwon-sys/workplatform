@@ -23,6 +23,8 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import { useSelector } from 'react-redux';
 import log from "../../work/member/reduxs/logSlice"
 
+import LogoutIcon from '@mui/icons-material/Logout';
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
@@ -184,6 +186,7 @@ export default function ChatTeset() {
       formData.append("rno", selectedRoomId);
       formData.append("mstype", 1); // 파일 메시지 타입
       formData.append("mno", loginInfo.mno);
+      formData.append("mprofile", loginInfo.mprofile)
 
       console.log(formData);
 
@@ -850,17 +853,18 @@ export default function ChatTeset() {
                     type="button"
                     onClick={() => deleteRoom(selectedRoomId)}
                     component="label"
-                    variant="contained"
+                    variant="contained" color='info'
 
-                    sx={{ width: "15%", marginLeft: "-10%", marginRight: "10%", backgroundColor: "#ff7a7a" }}
+                    sx={{ width: "7%", marginLeft: "-10%", marginRight: "10%"}}
                   >
-                    나가기
+                    
+                    <LogoutIcon />
                   </Button>
                 </div>
                 <hr />
 
                 <div id="space" ref={mySpaceRef} style={{ overflow: "scroll", overflowX: 'hidden', height: '2000%' }}>
-                  <div>
+                  <div style={{backgroundColor : "#f2f4f8"}}>
                     {/* 메시지 영역 */}
                     {messages.map((msg, index) => (
                       <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
@@ -873,7 +877,7 @@ export default function ChatTeset() {
 
                         {/* 기존 메시지 출력 */}
                         {msg.msg ? (
-                          <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
+                          <Card sx={{ minWidth: 100 }}  style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
                             <CardContent>
                               <Typography variant="body2" >
                                 <div style={{ display: "flex" }}>
@@ -890,8 +894,12 @@ export default function ChatTeset() {
                                   />
                                   <h3 style={{ color: "black" , marginTop : "3%"}}>
                                     {msg.mname}</h3>
+                                    
                                   <br />
+
+                                  
                                 </div>
+                                
                                 <p style={{marginTop : "7%", marginLeft : "1%"}}>{msg.msg}
                                 </p>
                               </Typography>
