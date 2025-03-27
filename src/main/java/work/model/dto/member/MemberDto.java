@@ -26,4 +26,9 @@ public class MemberDto {
 
     // 기존 비밀번호 확인용 | rw 25-03-26 생성
     private String moldPwd;
+
+    // 부서별 합계
+    private int partnum;
+    private int count;
+
 }

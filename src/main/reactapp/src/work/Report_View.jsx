@@ -16,6 +16,7 @@ import { CssVarsProvider } from '@mui/joy/styles';
 import Report_List from './component/report/Report_List';
 import Report_Form from './component/report/Report_Form';
 import LoadingIconButton from './component/report/LoadingIconButton';
+import PDF_Viewer from './component/report/PDF_Viewer';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -194,6 +195,14 @@ export default function Report_View() {
               <>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
                   <LoadingIconButton />
+                  <CssVarsProvider>
+                    <PDF_Viewer 
+                      formData={ formData }
+                      formDataChange={ formDataChange }
+                      rpno={ rpno }
+                      approval={ approval }
+                    />
+                  </CssVarsProvider>
                 </div>
                 <Report_Form
                   id='pdf-download'
