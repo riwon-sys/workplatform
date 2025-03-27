@@ -17,6 +17,7 @@ import Report_Form from './component/report/Report_Form';
 import SelectSmall from './component/report/SeleclSmall';
 import PostModal from './component/report/PostModal';
 import LoadingIconButton from './component/report/LoadingIconButton';
+import { useSelector } from 'react-redux';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -29,6 +30,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Report_Approval({ setNextApMno, setNextAp, setNextApState, nextApState }) {
+  const loginInfo = useSelector((state) => state.user.userInfo);
 
   // Signature Canvas 참조
   const signCanvas = useRef( null );
@@ -44,7 +46,7 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
     rpsignificant: '', 
     rpexpected: '',
     mname: '',
-    mrank: '',
+    mrank: loginInfo.mrank,
     mdepartment: '',
     apno: ''
   });
@@ -256,7 +258,13 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
                   {
                     selectValue == 1 ? null
                     :
-                    <PostModal signCanvas={ signCanvas } btnName={ "결재" } onApproval={ onApproval } />
+                    <PostModal 
+                      signCanvas={ signCanvas } 
+                      btnName={ "결재" } 
+                      approval={ approval }
+                      onApproval={ onApproval } 
+                      formData={ formData }
+                    />
                   }
                 </div>
               </>

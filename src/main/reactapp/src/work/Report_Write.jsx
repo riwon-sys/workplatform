@@ -26,7 +26,6 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
   , setLastRpno , lastRpno
 }){
   const loginInfo = useSelector((state) => state.user.userInfo);
-  console.log( loginInfo )
 
   // Signature Canvas 참조
   const signCanvas = useRef(null);
