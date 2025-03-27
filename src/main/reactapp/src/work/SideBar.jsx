@@ -38,6 +38,7 @@ import { useSnackbar } from 'notistack'; // 토스트 메시지
 
 import Socket from "./socket.jsx";
 import ReportSocket from './ReportSocket.jsx';
+import CheckSession from './member/reduxs/CheckSession.jsx';
 
 
 const drawerWidth = 240;
@@ -101,6 +102,9 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar(); // 토스트 함수 사용
+
+  // 세션 확인
+  if ( loginInfo ) { CheckSession(); }// 로그인한 경우에만 세션 체크 실행
 
   useEffect(() => {
     const storedUser = localStorage.getItem("username");

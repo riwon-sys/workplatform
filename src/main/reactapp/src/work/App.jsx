@@ -33,7 +33,7 @@ import './App.css';
 import Report_Update from "./Report_Update.jsx";
 import { useEffect, useState } from "react";
 
-
+/* jsx import */
 import ReportSocket from "./ReportSocket.jsx";
 import BoardWrite from "./BoardWrite.jsx";
 import Member_Mypage from "./member/Member_Mypage.jsx";

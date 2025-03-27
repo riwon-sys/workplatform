@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import work.model.dto.member.MemberDto;
 import work.model.dto.member.MemberUtils;
@@ -116,6 +118,20 @@ public class MemberController {
         System.out.println("memberDto = " + memberDto);
         return memberService.updateMember(memberDto);
     }
+
+    // [6] 세션( 로그인 상태 ) 확인
+    @GetMapping("/checksession")
+    public ResponseEntity<?> checkSession( HttpServletRequest req ){
+        HttpSession session = req.getSession();
+        Object user = session.getAttribute("memberDto");
+
+        if( user == null ){
+            // 세션 없음 전송
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        } // if end
+
+        return ResponseEntity.ok(user); // 세션 존재
+    } // f end
 
 
 }
