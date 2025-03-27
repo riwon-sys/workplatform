@@ -13,7 +13,7 @@ export default function Socket({isReportPosted}) {
 
     // 리덕스
       const loginInfo = useSelector((state) => state.user.userInfo);
-      console.log("로그인된 정보 : ", loginInfo)
+      // console.log("로그인된 정보 : ", loginInfo)
     
     const [roomInfo, setRoomInfo] = useState(null);
     const [state, setState] = React.useState({

@@ -14,7 +14,7 @@ export default function ReportSocket(
     console.log(mnos)
     console.log(data)
     const loginInfo = useSelector((state) => state.user.userInfo);
-    console.log("로그인된 정보 : ", loginInfo);
+    // console.log("로그인된 정보 : ", loginInfo);
     console.log(reportState);
     const [reportSocket, setReportSocket] = useState(null); // 소켓 상태 관리
     const [receivedData, setReceivedData] = useState(null); // 수신된 데이터 상태 관리
@@ -25,6 +25,7 @@ export default function ReportSocket(
     console.log(mnoList)
     // 보고서 소켓 연결
 
+    
     // 결재 전 가장 낮은 직급의 mno 찾기
     const lowestIndexItem = mnos
         .filter((item, index, array) => item.apstate === false && item.mno != null && item.mno !== loginInfo.mno)  // apstate가 false이고 mno가 loginInfo.mno와 다른 항목만 필터링
@@ -38,20 +39,25 @@ export default function ReportSocket(
 
 
     // 다음결재자
-    console.log(nextAp)
-    console.log(nextApMno)
-    console.log(nextApState)
+    // console.log(nextAp)
+    // console.log(nextApMno)
+    // console.log(nextApState)
+    let nextMno = "";
+    // nextApMno가 배열이거나 유효한 값인지 확인
+if (Array.isArray(nextApMno)) {
+    nextMno = nextApMno
+        .filter((item) => item.apstate === false && item.mno != null && item.mno !== loginInfo.mno)
+        .shift();
 
-    const nextMno = nextApMno
-        .filter((item, index, array) => item.apstate === false && item.mno != null && item.mno != loginInfo.mno)
-        .shift()
-
-    console.log(nextMno)
+    console.log(nextMno);
     if (nextMno) {
         console.log(nextMno.mno);  // 정상 출력
     } else {
         console.log('No item found with apstate === false and mno !== loginInfo.mno');
     }
+} else {
+    console.log('nextApMno is not an array or is null/undefined');
+}
 
 
 
@@ -129,13 +135,13 @@ export default function ReportSocket(
 
     }, []); // 의존성 배열에 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행됨
 
-    // reportState가 true일 때 소켓으로 데이터 전송
     useEffect(() => {
-        if (reportState && reportSocket && loginInfo && loginInfo.mno) {///////
+        // lowestIndexItem이 존재하고, reportState, reportSocket, loginInfo, loginInfo.mno가 모두 정의되어 있을 때만 실행
+        if (lowestIndexItem && reportState && reportSocket && loginInfo && loginInfo.mno) {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket.readyState === WebSocket.OPEN) {
-                console.log(lowestIndexItem.mno);  // 정상 출력
-                console.log(data)
+                // console.log(lowestIndexItem.mno);  // 정상 출력
+                // console.log(data)
                 const obj = {
                     mdepartment: data.mdepartment,
                     mname: data.mname,
@@ -149,60 +155,65 @@ export default function ReportSocket(
                     rpsignificant: data.rpsignificant,
                     rpunprocessed: data.rpunprocessed,
                     mnoList: mnoList,
-                    apmno: lowestIndexItem.mno,
-                    lastRpno : lastRpno
-                }
-                console.log(obj)
+                    apmno: lowestIndexItem.mno,  // lowestIndexItem.mno에 안전하게 접근
+                    lastRpno: lastRpno
+                };
+                console.log(obj);
                 const sendData = JSON.stringify(obj);
                 reportSocket.send(sendData);
                 console.log('서버에서 보낸 데이터 : ', data);
-                console.log("서버소켓으로 보내기 성공~~~~~")
-                setReportState(false)
+                console.log("서버소켓으로 보내기 성공~~~~~");
+                setReportState(false);
             } else {
                 console.log('소켓이 아직 연결되지 않았습니다.');
             }
+        } else {
+            console.log('lowestIndexItem이 정의되지 않았거나 필요한 값들이 누락되었습니다.');
         }
-    }, [reportState]);
-
+    }, [reportState, lowestIndexItem, reportSocket, loginInfo, data, mnoList, lastRpno]);
+    
 
     console.log("결재상태 : ", nextApState)
-
-    // nextApState가 true일 때 소켓으로 데이터 전송
     useEffect(() => {
-        if (nextMno && nextMno.mno && nextApState && reportSocket && loginInfo && loginInfo.mno) {
-            // 소켓이 연결되었을 때만 메시지를 전송
-            if (reportSocket.readyState === WebSocket.OPEN) {
-                console.log(nextMno.mno);  // 정상 출력
-                console.log(nextAp)
-                const obj = {
-                    rpname: nextAp.rpname,
-                    rpam: nextAp.rpam,
-                    rppm: nextAp.rppm,
-                    rpamnote: nextAp.rpamnote,
-                    rppmnote: nextAp.rppmnote,
-                    rpunprocessed: nextAp.rpunprocessed,
-                    rpsignificant: nextAp.rpsignificant,
-                    rpexpected: nextAp.rpexpected,
-                    mname: nextAp.mname,
-                    mrank: nextAp.mrank,
-                    mdepartment: nextAp.mdepartment,
-                    apno: nextAp.apno,
-                    rpno: nextAp.rpno,
-                    nextMno: nextMno.mno
+        if (reportState && reportSocket && loginInfo && loginInfo.mno) {
+            // lowestIndexItem이 정의되어 있고, mno 속성이 있는지 확인
+            if (lowestIndexItem && lowestIndexItem.mno) {
+                if (reportSocket.readyState === WebSocket.OPEN) {
+                    console.log(lowestIndexItem.mno);  // 정상 출력
+                    console.log(data);
+    
+                    const obj = {
+                        mdepartment: data.mdepartment,
+                        mname: data.mname,
+                        mrank: data.mrank,
+                        rpam: data.rpam,
+                        rpamnote: data.rpamnote,
+                        rpexpected: data.rpexpected,
+                        rpname: data.rpname,
+                        rppm: data.rppm,
+                        rppmnote: data.rppmnote,
+                        rpsignificant: data.rpsignificant,
+                        rpunprocessed: data.rpunprocessed,
+                        mnoList: mnoList,
+                        apmno: lowestIndexItem.mno,  // 정상적으로 접근
+                        lastRpno: lastRpno
+                    };
+    
+                    console.log(obj);
+                    const sendData = JSON.stringify(obj);
+                    reportSocket.send(sendData);
+                    console.log('서버에서 보낸 데이터 : ', data);
+                    console.log("서버소켓으로 보내기 성공~~~~~");
+                    setReportState(false);
+                } else {
+                    console.log('소켓이 아직 연결되지 않았습니다.');
                 }
-                console.log(obj)
-                const sendData = JSON.stringify(obj);
-                reportSocket.send(sendData);
-                console.log('서버에서 보낸 데이터 : ', data);
-                console.log("서버소켓으로 보내기 성공~~~~~")
-                setNextApState(false)
-
             } else {
-                console.log('소켓이 아직 연결되지 않았습니다.');
+                console.log('lowestIndexItem 또는 lowestIndexItem.mno가 정의되지 않았습니다.');
             }
         }
-    }, [nextApState]);
-
+    }, [reportState, lowestIndexItem, reportSocket, loginInfo, data, mnoList, lastRpno]);
+    
     // receivedData가 변경될 때마다 실행되는 useEffect
     useEffect(() => {
         if (receivedData) {
@@ -234,7 +245,7 @@ export default function ReportSocket(
 
     }, [receivedData]);
 
-    console.log(nextMno)
+    // console.log(nextMno)
     if (receivedData && receivedData.nextMno) {
         console.log(receivedData.nextMno)
     } console.log("*********서버가 보냄", receivedData)
