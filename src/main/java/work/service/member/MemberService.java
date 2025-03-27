@@ -108,25 +108,42 @@ public class MemberService {
         System.out.println("MemberService.updateMember");
 
         // 1. 현재 비밀번호 조회
-        String currentEncryptedPwd = memberMapper.getCurrentPassword(memberDto.getMno());
+        // String currentEncryptedPwd = memberMapper.getCurrentPassword(memberDto.getMno());
 
         // 2. 기존 비밀번호 비교
-        if (!BCrypt.checkpw(memberDto.getMoldPwd(), currentEncryptedPwd)) {
-            throw new RuntimeException("기존 비밀번호가 일치하지 않습니다.");
-        }
+        // if (!BCrypt.checkpw(memberDto.getMoldPwd(), currentEncryptedPwd)) {
+        //     throw new RuntimeException("기존 비밀번호가 일치하지 않습니다.");
+        // }
 
         // 3. 새 비밀번호 암호화
         String newEncryptedPwd = BCrypt.hashpw(memberDto.getMpwd(), BCrypt.gensalt());
         memberDto.setMpwd(newEncryptedPwd);
 
         // 4. moldPwd도 암호화 상태로 저장
-        String encryptedOldPwd = BCrypt.hashpw(memberDto.getMoldPwd(), BCrypt.gensalt());
-        memberDto.setMoldPwd(encryptedOldPwd);
+        // String encryptedOldPwd = BCrypt.hashpw(memberDto.getMoldPwd(), BCrypt.gensalt());
+        // memberDto.setMoldPwd(encryptedOldPwd);
 
         // 5. 연락처 중복 검사
         int count = memberMapper.checkPhoneDuplicate(memberDto.getMphone(), memberDto.getMno());
         if (count > 0) {
             throw new RuntimeException("이미 사용 중인 전화번호입니다.");
+        }
+
+        // 6. 만약에 mtype 0 1 2 가 아니면 예외발생 | rw 25-03-27 생성
+
+        if( memberDto.getMtype()  == 3 ){
+            throw new RuntimeException("해당 상태는 수정할 수 없는 기능입니다.");
+        }
+
+        // 7. 첨부파일로 받은 새로운 사진을 업로드 후 그 업로드된 사진명으로 수정 | rw 25-03-27 생성
+        // (1) 첨부파일 존재 여부
+        if(memberDto.getUploadFile()==null){
+        } // 업로드가 X
+        else{ // 업로드 O
+            // (2) 파일 서비스 내에 업로드 함수를 이용하여 첨부파일 업로드하고 파일명 받기.
+            String filename = fileService.fileUpload(memberDto.getUploadFile());
+            // (3) 업로드된 파일명을 dto 저장
+            memberDto.setMprofile(filename);
         }
 
         // 6. 최종 수정 실행

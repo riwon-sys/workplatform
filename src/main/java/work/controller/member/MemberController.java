@@ -115,7 +115,8 @@ public class MemberController {
 
     // [5] 사원 수정  // http://localhost:8080/workplatform/update | rw 25-03-26 생성
     @PutMapping("/update")
-    public boolean updateMember(@RequestBody MemberDto memberDto) {
+    // public boolean updateMember(@RequestBody MemberDto memberDto) 첨부파일관련 | rw 25-03-26 소멸
+    public boolean updateMember( MemberDto memberDto){
         System.out.println("MemberController.updateMember");
         System.out.println("memberDto = " + memberDto);
         return memberService.updateMember(memberDto);
