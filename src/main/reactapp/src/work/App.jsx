@@ -33,7 +33,7 @@ import './App.css';
 import Report_Update from "./Report_Update.jsx";
 import { useEffect, useState } from "react";
 
-
+/* jsx import */
 import ReportSocket from "./ReportSocket.jsx";
 import BoardWrite from "./BoardWrite.jsx";
 import Member_Mypage from "./member/Member_Mypage.jsx";
@@ -106,7 +106,9 @@ export default function App(props) {
                                 nextApState={nextApState}
                                 nextAp={nextAp}
                                 nextApMno={nextApMno}
-                                setLastRpno={setLastRpno} lastRpno={lastRpno} />
+                                setLastRpno={setLastRpno} 
+                                lastRpno={lastRpno} 
+                            />
                             <Routes>
                                 <Route path="/" element={<ChatTeset />} />
                                 <Route path="/chatting" element={<ChatTeset />} />
@@ -119,10 +121,11 @@ export default function App(props) {
                                 <Route path="/report/view/:rpno" element={<Report_View />} />
                                 <Route path="/report/approval" element={<Report_Approval />} />
                                 <Route path="/report/approval/:rpno" element={<Report_Approval 
-                                setNextApMno={setNextApMno} 
-                                setNextAp={setNextAp} 
-                                setNextApState={setNextApState} 
-                                nextApState={nextApState} />} />
+                                    setNextApMno={setNextApMno} 
+                                    setNextAp={setNextAp} 
+                                    setNextApState={setNextApState} 
+                                    nextApState={nextApState} 
+                                />} />
                                 <Route path="/board" element={<Board />} />
                                 <Route path="/board/detail" element={<BoardDetail />} />
                                 <Route path="/board/write" element={<BoardWrite />} />

@@ -1,4 +1,6 @@
-import * as React from 'react';
+import { useEffect } from 'react';
+
+/* mui import */
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -6,12 +8,20 @@ import Select from '@mui/material/Select';
 
 export default function BasicSelect( { rank, handleChange, members, value } ) {
 
+  // useEffect(() => {
+  //   if ((value === null || value === undefined || value === "") && members.length > 0) {
+  //     console.log("handleChange 호출:", members[0]?.mno);
+  //     handleChange({ target: { value: members[0]?.mno } });
+  //   }
+  // }, [value, members, handleChange]);
+
   return (
     <FormControl sx={{ minWidth: 95, maxWidth: 95 }} size="small" >
       <InputLabel id="demo-select-small-label" sx={{ mt: -1, pl: 2 }} > { rank } </InputLabel>
       <Select
         labelId={ `rank-select-${rank}` }
         id={ `rank-select-${rank}` }
+        // value={ value ?? members[0]?.mno ?? "" }
         value={ value }
         onChange={ handleChange }
         variant="filled" // filled 사용하여 아래쪽 줄 제거
