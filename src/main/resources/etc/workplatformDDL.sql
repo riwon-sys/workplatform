@@ -497,3 +497,5 @@ INNER JOIN report rp ON ap.rpno = rp.rpno
 WHERE m.mno = 100007 and
 apstate = true and apdate is not null
 ORDER BY rp.rpno DESC;
+
+SELECT DISTINCT rpno FROM approval WHERE apstate = false

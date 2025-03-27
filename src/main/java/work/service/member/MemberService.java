@@ -3,9 +3,11 @@ package work.service.member;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import work.model.dto.member.MemberDto;
@@ -14,6 +16,7 @@ import work.model.mapper.member.MemberMapper;
 import work.service.message.FileService;
 
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -130,7 +133,33 @@ public class MemberService {
         return memberMapper.updateMember(memberDto);
     }
 
+    // [6] 부서별 조회
+    // 매월 1일 자정에 실행
+    @Scheduled( cron = "0 0 0 1 */1 *" )
+    @Transactional( rollbackFor = Exception.class )
+    public List<MemberDto> memberByPart() {
+        System.out.println("MemberService.memberByPart");
+        List<MemberDto> partList = memberMapper.memberByPart();
+        for( MemberDto memberDto : partList ){
+            int partNum = memberDto.getPartnum();
+            String part = MemberUtils.getDepartmentFromMno( partNum * 100000 );
+            memberDto.setDepartment( part );
+        } // for end
 
+        System.out.println(partList.toString());
+        return partList;
+    } // f end
 
+    // [7] 직급별 조회
+    // 매월 1일 자정에 실행
+    @Scheduled( cron = "0 0 0 1 */1 *" )
+    @Transactional( rollbackFor = Exception.class )
+    public List<MemberDto> memberByRank() {
+        System.out.println("MemberService.memberByRank");
+        List<MemberDto> divList = memberMapper.memberByPart();
+
+        System.out.println(divList);
+        return divList;
+    } // f end
 
 }

@@ -57,4 +57,12 @@ public interface ApprovalMapper {
     @Update( "UPDATE approval SET apstate = #{apstate}, apdate = #{apdate}, apsignature = #{apsignature} WHERE apno = #{apno}" )
     public boolean onApproval( ApprovalDto approvalDto );
 
+    // 5. 한주동안 결재받지 않은 보고서 rpno 가져오기
+    @Select( "SELECT DISTINCT rpno FROM approval WHERE apstate = false" )
+    public List<Integer> getNotApproveRpno();
+
+    // 6. 한주동안 결재받지 못한 보고서 삭제
+    @Delete( "DELETE FROM approval WHERE rpno = #{rpno}" )
+    public boolean delete_Approval( int rpno );
+
 }
