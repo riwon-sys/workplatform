@@ -65,17 +65,11 @@ public interface MemberMapper {
         UPDATE member 
         SET 
           mpwd = #{mpwd}, 
-          moldPwd = #{moldPwd},
+          
           mphone = #{mphone}, 
-          mtype = CASE 
-                     WHEN #{mtype} IN (0, 1, 2) THEN #{mtype} 
-                     ELSE 3 
-                  END,
-          mprofile = #{mprofile},
-          memail = CASE 
-                     WHEN #{mtype} = 3 THEN CONCAT('retired_', #{mno}, '@company.com') 
-                     ELSE memail 
-                  END
+          mtype =  #{mtype},
+        mprofile = #{mprofile}
+          
         WHERE mno = #{mno}
     """)
     public boolean updateMember(MemberDto memberDto);
