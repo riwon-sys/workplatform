@@ -26,7 +26,6 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
   , setLastRpno , lastRpno
 }){
   const loginInfo = useSelector((state) => state.user.userInfo);
-  console.log( loginInfo )
 
   // Signature Canvas 참조
   const signCanvas = useRef(null);
@@ -102,7 +101,8 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
         const ApprovalRpno = ApprovalRpnoResponse.data;
   
         setLastRpno( ApprovalRpno ); // 상태 업데이트
-  
+  console.log(lastRpno)
+
         onApprovalPost( ApprovalRpno );
       } else { alert('등록 실패'); }
     } catch (e) { console.log(e); alert('등록 실패'); }
@@ -162,6 +162,8 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
     fetchMembers();
   }, [mrank]);
 console.log( approval)
+
+
   // select 선택시 데이터 변경
   const handleApprovalChange = (rank) => async (e) => {
     const selectedMno = e.target?.value; // 안전한 접근
@@ -178,8 +180,13 @@ console.log( approval)
       item.rank === rank ? { ...item, mno: selectedMno } : item
       )
     );
-    setMnos(approval);
+    console.log(approval);
+    //setMnos(approval);
   };
+
+  useEffect(() => {
+    setMnos(approval);
+  },[approval])
 
   // 모든 직급의 멤버를 한 번에 로드
   useEffect(() => {

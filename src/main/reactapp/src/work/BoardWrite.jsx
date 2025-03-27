@@ -73,14 +73,14 @@ export default function BoardWrite(){
    };
 
    //취소버튼 클릭 처리
-   const onCancel = ()=>{
+  const onCancel = ()=>{
     navigate('/board');
-}
+  }
     
 
     return (
         <>
-                  <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
+          <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
             <Item
               sx={{
                 overflow: 'scroll',

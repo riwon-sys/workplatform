@@ -90,7 +90,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function SideBar({ reportState, setReportState, mnos, setMnos, data
-  , setNextApMno, nextApMno, setNextAp, nextAp, setNextApState, nextApState, setLastRpno, lastRpno }) {
+  , setNextApMno, nextApMno, setNextAp, nextAp, setNextApState, nextApState, setLastRpno, lastRpno, setData }) {
 
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('xl'));
@@ -104,7 +104,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
   const { enqueueSnackbar } = useSnackbar(); // 토스트 함수 사용
 
   // 세션 확인
-  if ( loginInfo ) { CheckSession(); }// 로그인한 경우에만 세션 체크 실행
+  if ( loginInfo ) { CheckSession(); } // 로그인한 경우에만 세션 체크 실행
 
   useEffect(() => {
     const storedUser = localStorage.getItem("username");
@@ -161,18 +161,18 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
 
   // checkSession();
 
-  /* Axios 인터셉터 설정 */
-  axios.interceptors.response.use(
-    ( response ) => response,
-    ( error ) => {
-      if (error.response?.status === 401) {
-        dispatch(logout()); // 세션 만료 시 로그아웃
-        enqueueSnackbar("로그아웃 되었습니다. 로그인 후 다시 시도해주세요.", { variant: "info" });
-        navigate('/');
-      }
-      return Promise.reject(error);
-    }
-  );
+  // /* Axios 인터셉터 설정 */
+  // axios.interceptors.response.use(
+  //   ( response ) => response,
+  //   ( error ) => {
+  //     if (error.response?.status === 401) {
+  //       dispatch(logout()); // 세션 만료 시 로그아웃
+  //       enqueueSnackbar("로그아웃 되었습니다. 로그인 후 다시 시도해주세요.", { variant: "info" });
+  //       navigate('/');
+  //     }
+  //     return Promise.reject(error);
+  //   }
+  // );
 
   /* 상단 사이드메뉴 */
   const mainMenuItems = [
@@ -279,6 +279,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
           nextAp={nextAp}
           nextApMno={nextApMno}
           setLastRpno={setLastRpno} lastRpno={lastRpno}
+          setData={setData}
         />
 
         {/* 로그인 영역 */}

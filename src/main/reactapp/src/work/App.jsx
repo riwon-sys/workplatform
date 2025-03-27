@@ -72,7 +72,8 @@ export default function App(props) {
         mname: '',
         mrank: '',
         mdepartment: '',
-        apno: '' 
+        apno: '' ,
+        rpno : ''
       });
       // 다음결재자를 받아올 state 변수
       const [nextApMno , setNextApMno] = useState([])
@@ -82,8 +83,12 @@ export default function App(props) {
       console.log(nextAp)
       console.log(nextApMno)
       console.log(nextApState)
+      
 
+      console.log(mnos)
       const [ lastRpno, setLastRpno ] = useState(''); 
+      
+      console.log(lastRpno)
       return (
 
         <ThemeProvider theme={theme}>
@@ -108,6 +113,7 @@ export default function App(props) {
                                 nextApMno={nextApMno}
                                 setLastRpno={setLastRpno} 
                                 lastRpno={lastRpno} 
+                                setData={setData}
                             />
                             <Routes>
                                 <Route path="/" element={<ChatTeset />} />
