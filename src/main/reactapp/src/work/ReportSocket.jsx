@@ -27,7 +27,7 @@ export default function ReportSocket(
 
     // 결재 전 가장 낮은 직급의 mno 찾기
     const lowestIndexItem = mnos
-        .filter((item, index, array) => item.apstate === false && item.mno !== loginInfo.mno)  // apstate가 false이고 mno가 loginInfo.mno와 다른 항목만 필터링
+        .filter((item, index, array) => item.apstate === false && item.mno != null && item.mno !== loginInfo.mno)  // apstate가 false이고 mno가 loginInfo.mno와 다른 항목만 필터링
         .shift();  // 배열에서 첫 번째 아이템
 
     if (lowestIndexItem) {
@@ -43,7 +43,7 @@ export default function ReportSocket(
     console.log(nextApState)
 
     const nextMno = nextApMno
-        .filter((item, index, array) => item.apstate === false && item.mno != loginInfo.mno)
+        .filter((item, index, array) => item.apstate === false && item.mno != null && item.mno != loginInfo.mno)
         .shift()
 
     console.log(nextMno)
@@ -94,6 +94,8 @@ export default function ReportSocket(
         }
 
         socket.onmessage = (event) => {
+            setNextApMno(null)
+            // setMnos(null) // props 에 추가한뒤 주석 풀기
             console.log('메시지 수신: ', event.data);
             setReceivedData(JSON.parse(event.data));
 
@@ -129,7 +131,7 @@ export default function ReportSocket(
 
     // reportState가 true일 때 소켓으로 데이터 전송
     useEffect(() => {
-        if (reportState && reportSocket && loginInfo && loginInfo.mno) {
+        if (reportState && reportSocket && loginInfo && loginInfo.mno) {///////
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket.readyState === WebSocket.OPEN) {
                 console.log(lowestIndexItem.mno);  // 정상 출력
@@ -213,6 +215,8 @@ export default function ReportSocket(
             setState(prevState => ({
                 ...prevState,
                 open: true // 새로운 로그 메시지가 오면 Snackbar 열기
+
+                
             }));
         }
 

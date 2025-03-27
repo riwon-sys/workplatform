@@ -26,7 +26,7 @@ public class RoomService {
     // insert 시 데이터 일관성 유지를 위해 트랜젝션 처리
     // RuntimeException , Error 외에도 에외 발생 시 롤백
 
-    @Transactional(rollbackFor = {DataAccessException.class, RuntimeException.class, Exception.class})
+    @Transactional(rollbackFor = Exception.class)
     public boolean write(RoomDto roomDto, int loginMno) {
         try {
             // 채팅방 타입 지정
@@ -48,12 +48,8 @@ public class RoomService {
                 roomMapper.participantWrite(mno, rno);
             }
 
-        } catch (DataAccessException e) {
-            // SQLException을 RuntimeException으로 감싸서 던짐
-            throw new RuntimeException("SQLException 발생", e);
         } catch (Exception e) {
-            // 기타 예외 처리
-            throw new RuntimeException("기타 예외 발생", e);
+            System.out.println(e);
         }
 
         return true;
