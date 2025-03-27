@@ -25,6 +25,7 @@ export default function ReportSocket(
     console.log(mnoList)
     // 보고서 소켓 연결
 
+    
     // 결재 전 가장 낮은 직급의 mno 찾기
     const lowestIndexItem = mnos
         .filter((item, index, array) => item.apstate === false && item.mno != null && item.mno !== loginInfo.mno)  // apstate가 false이고 mno가 loginInfo.mno와 다른 항목만 필터링

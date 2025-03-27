@@ -883,7 +883,7 @@ export default function ChatTeset() {
                   <div style={{ backgroundColor: "#f2f4f8" }}>
                     {/* 메시지 영역 */}
                     {messages.map((msg, index) => (
-                      <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
+                      <div key={index} style={{ display: 'flex', marginTop: '15px', marginLeft : "5%" }}>
                         {/* 입장 메시지 처리 */}
                         {msg.mNameList && msg.mNameList.length > 0 && msg.mNameList.map((name, idx) => (
                           <div key={idx} style={{ marginTop: "3%", marginBottom: "3%" }}>
