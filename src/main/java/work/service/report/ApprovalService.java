@@ -64,6 +64,7 @@ public class ApprovalService {
                 }
 
                 // DB 저장 (결과 확인)
+                System.out.println( approvalDto.getRpno());
                 boolean result = approvalMapper.write( approvalListDto );
                 if ( !result ) {
                     throw new RuntimeException( "DB 저장 실패: 결재자 ID = " + approvalListDto.getMno() );

@@ -25,9 +25,49 @@ const style = {
   p: 4,
 };
 
-export default function PostModal( { signCanvas, onPost, onApproval, btnName } ) {
+export default function PostModal( { signCanvas, onPost, approval, onApproval, formData, btnName } ) {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
+  // const handleOpen = () => setOpen(true);
+  // const handleClose = () => setOpen(false);
+
+  // 직급 순위 매핑
+  const rankOrder = {
+    대리: 1,
+    과장: 2,
+    차장: 3,
+    부장: 4,
+  };
+
+  // 유효성검사 : 모달 열기 전에 승인자 선택 여부 확인
+  const handleOpen = () => {
+    // 현재 로그인한 사용자의 직급 순위 가져오기
+    const userRankOrder = rankOrder[ formData.mrank ] || 0; 
+
+    // 로그인한 사용자의 직급보다 높은 직급만 검사
+    const unselectedRanks = approval
+      .filter( ( item ) => !item.mno && rankOrder[ item.rank ] > userRankOrder )
+      .map( ( item ) => item.rank );
+
+    if ( unselectedRanks.length > 0 ) {
+      alert(`결재자가 선택되지 않았습니다: ${ unselectedRanks.join(", ") }`);
+      return; // 모달 열지 않음
+    }
+
+    // 유효성검사 : 오전 업무 보고 작성 여부
+    if( formData.rpam == '' ){ 
+      alert('오전 업무 보고 내용을 작성해주세요.');
+      return; 
+    }
+
+    // 유효성검사 : 오후 업무 보고 작성 여부
+    if( formData.rppm == '' ){ 
+      alert('오후 업무 보고 내용을 작성해주세요.');
+      return; 
+    }
+
+    setOpen(true);
+  };
+
   const handleClose = () => setOpen(false);
 
   // 서명 전체 지우기
@@ -91,7 +131,7 @@ export default function PostModal( { signCanvas, onPost, onApproval, btnName } )
                     등록
                   </Button> :
                   <Button variant="contained" color="info" sx={{ mt: 2 }} onClick={ onApproval } >
-                    승인
+                    결재
                   </Button>
               }
               <Button variant="contained" color="info" sx={{ mt: 2, ml: 3 }} onClick={ onClear } >

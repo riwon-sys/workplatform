@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function ReportSocket(
     { reportState, mnos, data, setReportState,
-        setNextApMno, setNextAp, setNextApState, nextApState, nextApMno, nextAp }) {
+        setNextApMno, setNextAp, setNextApState, nextApState, nextApMno, nextAp, setLastRpno, lastRpno }) {
 
     console.log(mnos)
     console.log(data)
@@ -21,12 +21,13 @@ export default function ReportSocket(
     const [checkMnos, setCheckMnos] = useState([])
     const mnoList = mnos.filter(item => item.mno !== null).map(item => item.mno);
 
+    console.log(lastRpno)
     console.log(mnoList)
     // 보고서 소켓 연결
 
     // 결재 전 가장 낮은 직급의 mno 찾기
     const lowestIndexItem = mnos
-        .filter((item, index, array) => item.apstate === false && item.mno !== loginInfo.mno)  // apstate가 false이고 mno가 loginInfo.mno와 다른 항목만 필터링
+        .filter((item, index, array) => item.apstate === false && item.mno != null && item.mno !== loginInfo.mno)  // apstate가 false이고 mno가 loginInfo.mno와 다른 항목만 필터링
         .shift();  // 배열에서 첫 번째 아이템
 
     if (lowestIndexItem) {
@@ -42,10 +43,10 @@ export default function ReportSocket(
     console.log(nextApState)
 
     const nextMno = nextApMno
-        .filter((item,index , array) => item.apstate === false && item.mno != loginInfo.mno)
+        .filter((item, index, array) => item.apstate === false && item.mno != null && item.mno != loginInfo.mno)
         .shift()
-        
-        console.log(nextMno)
+
+    console.log(nextMno)
     if (nextMno) {
         console.log(nextMno.mno);  // 정상 출력
     } else {
@@ -66,11 +67,13 @@ export default function ReportSocket(
 
     const handleClose = () => {
         setState({ ...state, open: false }); // Snackbar를 닫음
-        if(receivedData.rpno == null){
-        navigate('/report/approval');
-        }else{
+        if (receivedData.lastRpno > 0 && receivedData.rpno == 0) {
+            console.log(receivedData.lastRpno)
+            navigate(`/report/approval/${receivedData.lastRpno}`);
+        } else if(receivedData.rpno > 0 && receivedData.lastRpno == 0){
+            console.log(receivedData.rpno)
             navigate(`/report/approval/${receivedData.rpno}`);
-            
+
         }
     };
 
@@ -91,6 +94,8 @@ export default function ReportSocket(
         }
 
         socket.onmessage = (event) => {
+            setNextApMno(null)
+            // setMnos(null) // props 에 추가한뒤 주석 풀기
             console.log('메시지 수신: ', event.data);
             setReceivedData(JSON.parse(event.data));
 
@@ -126,7 +131,7 @@ export default function ReportSocket(
 
     // reportState가 true일 때 소켓으로 데이터 전송
     useEffect(() => {
-        if (reportState && reportSocket && loginInfo && loginInfo.mno) {
+        if (reportState && reportSocket && loginInfo && loginInfo.mno) {///////
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket.readyState === WebSocket.OPEN) {
                 console.log(lowestIndexItem.mno);  // 정상 출력
@@ -144,7 +149,8 @@ export default function ReportSocket(
                     rpsignificant: data.rpsignificant,
                     rpunprocessed: data.rpunprocessed,
                     mnoList: mnoList,
-                    apmno: lowestIndexItem.mno
+                    apmno: lowestIndexItem.mno,
+                    lastRpno : lastRpno
                 }
                 console.log(obj)
                 const sendData = JSON.stringify(obj);
@@ -181,7 +187,7 @@ export default function ReportSocket(
                     mrank: nextAp.mrank,
                     mdepartment: nextAp.mdepartment,
                     apno: nextAp.apno,
-                    rpno : nextAp.rpno,
+                    rpno: nextAp.rpno,
                     nextMno: nextMno.mno
                 }
                 console.log(obj)
@@ -190,7 +196,7 @@ export default function ReportSocket(
                 console.log('서버에서 보낸 데이터 : ', data);
                 console.log("서버소켓으로 보내기 성공~~~~~")
                 setNextApState(false)
-                
+
             } else {
                 console.log('소켓이 아직 연결되지 않았습니다.');
             }
@@ -209,6 +215,8 @@ export default function ReportSocket(
             setState(prevState => ({
                 ...prevState,
                 open: true // 새로운 로그 메시지가 오면 Snackbar 열기
+
+                
             }));
         }
 
@@ -228,73 +236,73 @@ export default function ReportSocket(
 
     console.log(nextMno)
     if (receivedData && receivedData.nextMno) {
-    console.log(receivedData.nextMno)
-}console.log("*********서버가 보냄",receivedData)
+        console.log(receivedData.nextMno)
+    } console.log("*********서버가 보냄", receivedData)
     return (
         <>
-          {/* 첫 번째 Box: mnoList에서 조건에 맞는 항목 렌더링 */}
-          <Box sx={{ width: 800, backgroundColor: 'red' }}>
-            {receivedData && Array.isArray(receivedData.mnoList) && receivedData.mnoList.map((mno, index) => {
-              if (receivedData.apmno === loginInfo.mno) {
-                return (
-                  <Snackbar
-                    key={mno}
-                    anchorOrigin={{ vertical, horizontal }}
-                    open={open}
-                    onClose={handleClose}
-                    message={
-                      <>
-                        <p>
-                        결재요청
-                        <Button onClick={handleClose}>결재하기</Button>
-                        </p>
-                        <hr />
-                        <br />
-                        <p>{receivedData.mname} : {receivedData.rpname}</p>
-                      </>
+            {/* 첫 번째 Box: mnoList에서 조건에 맞는 항목 렌더링 */}
+            <Box sx={{ width: 800, backgroundColor: 'red' }}>
+                {receivedData && Array.isArray(receivedData.mnoList) && receivedData.mnoList.map((mno, index) => {
+                    if (receivedData.apmno === loginInfo.mno) {
+                        return (
+                            <Snackbar
+                                key={mno}
+                                anchorOrigin={{ vertical, horizontal }}
+                                open={open}
+                                onClose={handleClose}
+                                message={
+                                    <>
+                                        <p>
+                                            결재요청
+                                            <Button onClick={handleClose}>결재하기</Button>
+                                        </p>
+                                        <hr />
+                                        <br />
+                                        <p>{receivedData.mname} : {receivedData.rpname}</p>
+                                    </>
+                                }
+                                ContentProps={{
+                                    sx: {
+                                        backgroundColor: 'white',
+                                        color: 'black',
+                                    },
+                                }}
+                            />
+                        );
                     }
-                    ContentProps={{
-                      sx: {
-                        backgroundColor: 'white',
-                        color: 'black',
-                      },
-                    }}
-                  />
-                );
-              }
-              return null; // 조건에 맞지 않으면 아무것도 렌더링하지 않음
-            })}
-          </Box>
-      
-          {/* 두 번째 Box: nextMno와 loginInfo.mno 비교 */}
-          <Box sx={{ width: 800, backgroundColor: 'red' }}>
-            {receivedData && receivedData.nextMno === loginInfo.mno && (
-              <Snackbar
-                key={receivedData.nextMno}
-                anchorOrigin={{ vertical, horizontal }}
-                open={open}
-                onClose={handleClose}
-                message={
-                    <>
-                    <p>
-                    결재요청
-                    <Button onClick={handleClose}>결재하기</Button>
-                    </p>
-                    <hr />
-                    <br />
-                    <p>{receivedData.mname} : {receivedData.rpname}</p>
-                  </>
-                }
-                ContentProps={{
-                  sx: {
-                    backgroundColor: 'white',
-                    color: 'black',
-                  },
-                }}
-              />
-            )}
-          </Box>
+                    return null; // 조건에 맞지 않으면 아무것도 렌더링하지 않음
+                })}
+            </Box>
+
+            {/* 두 번째 Box: nextMno와 loginInfo.mno 비교 */}
+            <Box sx={{ width: 800, backgroundColor: 'red' }}>
+                {receivedData && receivedData.nextMno === loginInfo.mno && (
+                    <Snackbar
+                        key={receivedData.nextMno}
+                        anchorOrigin={{ vertical, horizontal }}
+                        open={open}
+                        onClose={handleClose}
+                        message={
+                            <>
+                                <p>
+                                    결재요청
+                                    <Button onClick={handleClose}>결재하기</Button>
+                                </p>
+                                <hr />
+                                <br />
+                                <p>{receivedData.mname} : {receivedData.rpname}</p>
+                            </>
+                        }
+                        ContentProps={{
+                            sx: {
+                                backgroundColor: 'white',
+                                color: 'black',
+                            },
+                        }}
+                    />
+                )}
+            </Box>
         </>
-      );
-      
+    );
+
 }

@@ -23,6 +23,8 @@ import StarBorder from '@mui/icons-material/StarBorder';
 import { useSelector } from 'react-redux';
 import log from "../../work/member/reduxs/logSlice"
 
+import LogoutIcon from '@mui/icons-material/Logout';
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
@@ -50,6 +52,19 @@ export default function ChatTeset() {
   const [addMembers, setAddMembers] = useState({ mnoList: [], rno: "" }) // 채팅방에 추가할 회원번호 목록과 방번호
   const [mNameList, setMnameList] = useState([]) // 채팅방에 추가된 회원의 이름 목록
 
+  // 현재 PC의 시간 가져오기
+const now = new Date();
+
+// 원하는 형식으로 현재 시간 포맷팅 (예: yyyy-MM-dd HH:mm:ss)
+const nowTime = now.getFullYear() + '-' +
+                      (now.getMonth() + 1).toString().padStart(2, '0') + '-' +
+                      now.getDate().toString().padStart(2, '0') + ' ' +
+                      now.getHours().toString().padStart(2, '0') + ':' +
+                      now.getMinutes().toString().padStart(2, '0') + ':' +
+                      now.getSeconds().toString().padStart(2, '0');
+
+// 출력된 시간
+console.log(nowTime);
 
 
   // [1-1] 브라우저 입장 시 접속되는 연결되는 소켓
@@ -164,7 +179,9 @@ export default function ChatTeset() {
           mname: chattingDto.mname,
           mno: loginInfo.mno,
           fname: chattingDto.fname, // 파일 이름
-          flocation: chattingDto.flocation // 파일 경로
+          flocation: chattingDto.flocation, // 파일 경로
+          mprofile: loginInfo.mprofile,
+          showdate : nowTime
         };
 
         clientSocket.send(JSON.stringify(messageData)); // 소켓으로 메시지 전송
@@ -183,6 +200,8 @@ export default function ChatTeset() {
       formData.append("rno", selectedRoomId);
       formData.append("mstype", 1); // 파일 메시지 타입
       formData.append("mno", loginInfo.mno);
+      formData.append("mprofile", loginInfo.mprofile)
+      formData.append("showdate", nowTime)
 
       console.log(formData);
 
@@ -201,7 +220,7 @@ export default function ChatTeset() {
         const { flocation, fname } = response.data;
 
         console.log(fname)
-        console.log(response.data)
+        console.log(response.data) //////////////
         // 파일 정보를 messages에 바로 추가
         const newMessage = {
           rno: selectedRoomId,
@@ -211,6 +230,8 @@ export default function ChatTeset() {
           mno: loginInfo.mno,
           flocation: response.data, // 서버로부터 받은 파일 경로
           fname, // 서버로부터 받은 파일명
+          mprofile: loginInfo.mprofile, ////////////////////////
+          showdate : nowTime
         };
         console.log(newMessage)
 
@@ -437,6 +458,8 @@ export default function ChatTeset() {
           mstype: 0, // 일반 메세지 타입 서버로 전송
           mname: loginInfo.mname, // 나중에 세션에 저장된 로그인된 회원으로 변경
           mno: loginInfo.mno, // 나중에 세션에 저장된 로그인된 회원으로 변경
+          mprofile: loginInfo.mprofile,
+          showdate : nowTime
         };
 
         console.log(messageData)
@@ -765,27 +788,29 @@ export default function ChatTeset() {
       <Grid container spacing={0} sx={{ height: '100%' }}>
         <Grid size={2.8} sx={{ height: '100%' }}>
           <Item >
-            
-              <div style={{display : "flex", justifyContent : "center", alignItems : "center",
-                marginBottom: "3%", height: "4.3%", marginLeft : "-12%"}}>
-                <Typography variant="body2" color="textSecondary" 
-                sx={{ display: 'inline-block', mr: 1 , marginLeft : "0%"}} >
-                  {/*                                 {loginInfo.mprofile} {loginInfo.mname}{loginInfo.mrank}{loginInfo.mno} 오늘도 화이팅! */}
-                  <img
-                    src={
-                      'http://localhost:8080/file/' +
-                      (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)
-                    }
-                    style={{
-                      width: '40px',
-                      borderRadius: '40px',
-                    }}
-                  />
-                </Typography>
-                <span style={{marginLeft : "5%"}}><b> {loginInfo.mname} 님 </b> ({loginInfo.mrank})
-                </span>
-              </div>
-            
+
+            <div style={{
+              display: "flex", justifyContent: "center", alignItems: "center",
+              marginBottom: "3%", height: "4.3%", marginLeft: "-12%"
+            }}>
+              <Typography variant="body2" color="textSecondary"
+                sx={{ display: 'inline-block', mr: 1, marginLeft: "0%" }} >
+                {/*                                 {loginInfo.mprofile} {loginInfo.mname}{loginInfo.mrank}{loginInfo.mno} 오늘도 화이팅! */}
+                <img
+                  src={
+                    'http://localhost:8080/file/' +
+                    (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)
+                  }
+                  style={{
+                    width: '40px',
+                    borderRadius: '40px',
+                  }}
+                />
+              </Typography>
+              <span style={{ marginLeft: "5%" }}><b> {loginInfo.mname} 님 </b> ({loginInfo.mrank})
+              </span>
+            </div>
+
             <hr></hr>
 
             <div style={{ margin: " 0 auto", overflow: "scroll", overflowX: 'hidden', height: '94.8%' }}>
@@ -796,9 +821,7 @@ export default function ChatTeset() {
                     <div>
                       <ListItem style={{ width: "100%" }}>
                         <ListItemAvatar>
-                          <Avatar>
-                            <ImageIcon />
-                          </Avatar>
+                          <Avatar alt={room.rname} src={room.avatarUrl || '/static/images/avatar/1.jpg'} />
                         </ListItemAvatar>
                         <ListItemText
                           key={index} onClick={() => handleRoomSelect(room.rno)}
@@ -847,61 +870,83 @@ export default function ChatTeset() {
                     type="button"
                     onClick={() => deleteRoom(selectedRoomId)}
                     component="label"
-                    variant="contained"
+                    variant="contained" color='info'
 
-                    sx={{ width: "15%", marginLeft: "-10%", marginRight: "10%", backgroundColor: "#ff7a7a" }}
+                    sx={{ width: "7%", marginLeft: "-10%", marginRight: "10%" }}
                   >
-                    나가기
+
+                    <LogoutIcon />
                   </Button>
                 </div>
                 <hr />
-
-                <div id="space" ref={mySpaceRef} style={{ overflow: "scroll", overflowX: 'hidden', height: '2000%' }}>
-                  <div>
+                <div id="space" ref={mySpaceRef} style={{  backgroundColor: "#f2f4f8",overflow: "scroll", overflowX: 'hidden', height: '2000%' }}>
+                  <div style={{ backgroundColor: "#f2f4f8" }}>
                     {/* 메시지 영역 */}
                     {messages.map((msg, index) => (
                       <div key={index} style={{ display: 'flex', marginTop: '15px' }}>
                         {/* 입장 메시지 처리 */}
-                        {msg.mNameList && msg.mNameList.length > 0 && msg.mNameList.map((name, index) => (
-                          <div key={index}>
+                        {msg.mNameList && msg.mNameList.length > 0 && msg.mNameList.map((name, idx) => (
+                          <div key={idx} style={{marginTop : "3%", marginBottom : "3%"}}>
                             {name} 님 입장
                           </div>
                         ))}
 
-                        {/* 기존 메시지 출력 */}
-                        {msg.msg ? (
-                          <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
-                            <CardContent>
-                              <Typography variant="body2">
-                                <h3 style={{ color: "black" }}>{msg.msno}{msg.mname}</h3>
-                                <br />
-                                {msg.msg}
-                              </Typography>
-                            </CardContent>
-                            <CardActions>
-                              <Button size="small">채팅 삭제</Button>
-                            </CardActions>
-                          </Card>
-                        ) : (
-                          <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '300px', textAlign: "start" }}>
-                            <CardContent>
-                              <Typography variant="body2">
-                                <h3 style={{ color: "black" }}>{msg.mname}</h3>
-                                <br />
-                                {msg.flocation}
-                              </Typography>
-                            </CardContent>
-                            <CardActions>
-                              <Button size="small">채팅 삭제</Button>
-                              <Button
-                                href={`http://localhost:8080/api/msg/file/download?file=${encodeURIComponent(msg.flocation)}`}
-                                download={msg.fname}
-                              >
-                                다운로드
-                              </Button>
-                            </CardActions>
-                          </Card>
-                        )}
+                        <div>
+                          <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+                            <img
+                              src={
+                                'http://localhost:8080/file/' +
+                                (msg.mprofile === 'default.jpg' ? 'default.jpg' : msg.mprofile)
+                              }
+                              style={{
+                                width: '40px',
+                                borderRadius: '40px',
+                                marginRight: "3%",
+                                marginLeft : "5%"
+
+                              }}
+                            />
+                            <h3 style={{ color: "black", marginTop: "3%", marginBottom : "2%" }}>
+                              {msg.mname}
+                            </h3>
+                          </div>
+
+                          {/* 기존 메시지 출력 */}
+                          {msg.msg ? (
+                            <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start" , marginBottom : "5%"}}>
+                              <CardContent>
+                                <Typography variant="body2">
+                                  <p style={{ marginTop: "3%",marginBottom : "3%", marginLeft: "1%" }}>{msg.msg}</p>
+                                </Typography>
+                              </CardContent>
+                              <CardActions>
+                                <Button size="small" style={{ marginLeft: "1.5%" }}>{msg.msdate}</Button>
+                              </CardActions>
+                            </Card>
+                          ) : (
+                            <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
+                              <CardContent>
+                                <Typography variant="body2">
+                                  <p style={{ marginTop: "3%",marginBottom : "3%", marginLeft: "1%" }}>
+                                    {msg.flocation}
+                                  </p>
+                                </Typography>
+                              </CardContent>
+                              <CardActions>
+
+                              <Button size="small" style={{ marginLeft: "1.5%" }}>{msg.msdate}</Button>
+                              
+                                <Button
+                                style={{marginBottom : "1.2%"}}
+                                  href={`http://localhost:8080/api/msg/file/download?file=${encodeURIComponent(msg.flocation)}`}
+                                  download={msg.fname}
+                                >
+                                  다운로드
+                                </Button>
+                              </CardActions>
+                            </Card>
+                          )}
+                        </div>
                       </div>
                     ))}
 
@@ -914,9 +959,8 @@ export default function ChatTeset() {
                       ))
                     )}
                   </div>
-
-
                 </div>
+
                 <div style={{ marginBottom: "7%" }}>
 
                   {/* 메시지 입력칸과  등록 버튼 */}
@@ -989,7 +1033,7 @@ export default function ChatTeset() {
               height: "4%"
             }}>
 
-              <h2 style={{ fontSize: "180%" }}>목록</h2>
+              <h2 style={{ fontSize: "180%" }}>조직도</h2>
               {selectedRoomId && (
                 <>
                   {/* 기존 채팅방에 회원추가 */}
@@ -1012,7 +1056,7 @@ export default function ChatTeset() {
             </div>
             <hr></hr>
 
-            <div style={{ overflow: "scroll", overflowX: 'hidden', height: '800px', height: '94.8%' }}>
+            <div style={{ overflow: "scroll", overflowX: 'hidden', height: '800px', height: '94.8%'}}>
 
 
               <List
@@ -1030,7 +1074,7 @@ export default function ChatTeset() {
                     {/* 부서명 드롭다운 버튼 */}
                     <ListItemButton onClick={() => handleClick(department)}>
                       <ListItemIcon>
-                        <InboxIcon />
+                        
                       </ListItemIcon>
                       <ListItemText primary={department} /> {/* 부서명 */}
                       {open[department] ? <ExpandLess /> : <ExpandMore />} {/* 드롭다운 화살표 */}
@@ -1041,12 +1085,22 @@ export default function ChatTeset() {
 
                         {!selectedRoomId && groupedMembers[department].map((m) => (
                           <ListItemButton sx={{ pl: 4 }} key={m.mno}>
-                            <ListItemAvatar>
-                              <Avatar alt={m.mname} src={m.avatarUrl || '/static/images/avatar/1.jpg'} />
-                            </ListItemAvatar>
+
+                            <img
+                              src={
+                                'http://localhost:8080/file/' +
+                                (m.mprofile === 'default.jpg' ? 'default.jpg' : m.mprofile)
+                              }
+                              style={{
+                                width: '40px',
+                                borderRadius: '40px',
+                                marginRight: "7%",
+                                marginBottom: "1%"
+                              }}
+                            />
                             <ListItemText
-                              primary={`${m.mname} (${m.mno})`} // 회원명과 사원번호
-                              secondary={m.mrank} // 직급
+                              primary={`${m.mname} | ${m.mrank} `} // 회원명과 사원번호
+                              secondary={`(${m.mno})`} // 직급
                             />
                             <ListItemIcon>
 
@@ -1067,13 +1121,23 @@ export default function ChatTeset() {
                         ))}
                         {selectedRoomId && groupedMembers[department].map((m) => (
                           <ListItemButton sx={{ pl: 4 }} key={m.mno}>
-                            <ListItemAvatar>
-                              <Avatar alt={m.mname} src={m.avatarUrl || '/static/images/avatar/1.jpg'} />
-                            </ListItemAvatar>
-                            <ListItemText
-                              primary={`${m.mname} (${m.mno})`} // 회원명과 사원번호
-                              secondary={m.mrank} // 직급
+                            <img
+                              src={
+                                'http://localhost:8080/file/' +
+                                (m.mprofile === 'default.jpg' ? 'default.jpg' : m.mprofile)
+                              }
+                              style={{
+                                width: '40px',
+                                borderRadius: '40px',
+                                marginRight: "7%",
+                                marginBottom: "1%"
+                              }}
                             />
+                            <ListItemText
+                              primary={`${m.mname} | ${m.mrank} `} // 회원명과 사원번호
+                              secondary={`(${m.mno})`} // 직급
+                            />
+
                             <ListItemIcon>
                               {/* 참여 회원에 해당하는 mno가 있을 경우 checked로, 없으면 mnoList에 있는지 확인 */}
                               <input type='checkbox'

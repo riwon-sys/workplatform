@@ -12,7 +12,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
-import { Button, Typography, useMediaQuery } from '@mui/material';
+import { Button, Tooltip, Typography, useMediaQuery } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 
 /* mui icon */
@@ -34,10 +34,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from './member/reduxs/userSlice';
 
 /* toast | rw 25-03-25 */
-import { useSnackbar } from 'notistack'; // ✅ 토스트 메시지
+import { useSnackbar } from 'notistack'; // 토스트 메시지
 
 import Socket from "./socket.jsx";
 import ReportSocket from './ReportSocket.jsx';
+import CheckSession from './member/reduxs/CheckSession.jsx';
 
 
 const drawerWidth = 240;
@@ -89,7 +90,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function SideBar({ reportState, setReportState, mnos, setMnos, data
-  , setNextApMno, nextApMno, setNextAp, nextAp, setNextApState, nextApState }) {
+  , setNextApMno, nextApMno, setNextAp, nextAp, setNextApState, nextApState, setLastRpno, lastRpno }) {
 
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('xl'));
@@ -101,6 +102,9 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar(); // 토스트 함수 사용
+
+  // 세션 확인
+  if ( loginInfo ) { CheckSession(); }// 로그인한 경우에만 세션 체크 실행
 
   useEffect(() => {
     const storedUser = localStorage.getItem("username");
@@ -119,8 +123,9 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
   };
 
   // 로그아웃 함수: 토스트 포함
-  const onLogout = async () => {
-    if( !confirm('로그아웃 하시겠습니까?') ){ return; }
+  const onLogout = async ( sessionOut ) => {
+    if( sessionOut ){  }
+    else if( !confirm('로그아웃 하시겠습니까?') ){ return; }
     try {
       await axios.get('http://localhost:8080/workplatform/logout', { withCredentials: true });
       dispatch(logout());
@@ -132,6 +137,44 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
     }
   };
 
+  // /* 로그인 세션 확인 */
+  // const checkSession = () => {
+  //   useEffect(() => {
+  //     const interval = setInterval(async () => {
+  //       try {
+  //         const response = await axios.get( "http://localhost:8080/workplatform/myinfo", { withCredentials: true } );
+  //         if( response == null ){ 
+  //           dispatch( logout() ); 
+  //           enqueueSnackbar("로그아웃 되었습니다. 로그인 후 사용가능합니다.", { variant: "info" });
+  //           navigate('/');
+  //         }
+  //       } catch (error) {
+  //         dispatch( logout() ); // 세션 만료 시 로그아웃 처리
+  //         console.error("로그아웃 오류:", e);
+  //         enqueueSnackbar("로그아웃 중 오류가 발생했습니다.", { variant: "error" });
+  //       }
+  //     }, 2 * 60 * 1000 ); // 5분마다 체크
+
+  //     return () => clearInterval(interval);
+  //   }, [dispatch]);
+  // } // f end
+
+  // checkSession();
+
+  /* Axios 인터셉터 설정 */
+  axios.interceptors.response.use(
+    ( response ) => response,
+    ( error ) => {
+      if (error.response?.status === 401) {
+        dispatch(logout()); // 세션 만료 시 로그아웃
+        enqueueSnackbar("로그아웃 되었습니다. 로그인 후 다시 시도해주세요.", { variant: "info" });
+        navigate('/');
+      }
+      return Promise.reject(error);
+    }
+  );
+
+  /* 상단 사이드메뉴 */
   const mainMenuItems = [
     { name: "메신저", path: "/chatting", icon: <QuestionAnswerIcon /> },
     { name: "보고서 작성", path: "/report/write", icon: <NoteAddIcon /> },
@@ -139,6 +182,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
     { name: "결재 목록", path: "/report/approval", icon: <ApprovalIcon /> },
   ];
 
+  /* 하단 사이드 메뉴 */
   const menuItems = [
     { name: "게시판", path: "/board", icon: <DvrTwoToneIcon /> },
     { name: "내 정보", path: "/member/mypage", icon: <PersonIcon /> }, // 정의한 롸우터 경로를 입력 | rw 25-03-26 생성
@@ -156,7 +200,13 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
               />
             </Box>
             <IconButton onClick={toggleDrawer}>
-              {open ? <ChevronLeftIcon /> : <img src='/logoimg/logo_blue_icon.png' style={{ width: '40px', marginRight: -5 }} />}
+              {
+                open ? <ChevronLeftIcon /> 
+                : 
+                <Tooltip title="Open" placement="top" >
+                  <img src='/logoimg/logo_blue_icon.png' style={{ width: '40px', marginRight: -5 }} />
+                </Tooltip>  
+              }
             </IconButton>
           </DrawerHeader>
           <Divider />
@@ -228,6 +278,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
           nextApState={nextApState}
           nextAp={nextAp}
           nextApMno={nextApMno}
+          setLastRpno={setLastRpno} lastRpno={lastRpno}
         />
 
         {/* 로그인 영역 */}
@@ -258,14 +309,17 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
                         { loginInfo.mname } 님 ({ loginInfo.mrank })
                       </div>
                     </Box>
-                    <IconButton onClick={onLogout} sx={{ marginRight: "-7px" }} >
+                    <IconButton onClick={ () => { onLogout( false ) } } sx={{ marginRight: "-7px" }} >
                       { open ?
-                        <LogoutIcon color='primary' /> :
-                        <img
-                          src={'http://localhost:8080/file/' + (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)}
-                          alt="profile"
-                          style={{ width: '40px', borderRadius: '40px' }}
-                        />
+                        <LogoutIcon color='primary' /> 
+                        :
+                        <Tooltip title="Log-Out" placement="top" >
+                          <img
+                            src={'http://localhost:8080/file/' + (loginInfo.mprofile === 'default.jpg' ? 'default.jpg' : loginInfo.mprofile)}
+                            alt="profile"
+                            style={{ width: '40px', borderRadius: '40px' }}
+                          />
+                        </Tooltip>
                       }
                     </IconButton>
                   </DrawerHeader>

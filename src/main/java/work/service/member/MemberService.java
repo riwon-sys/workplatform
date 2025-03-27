@@ -1,9 +1,12 @@
 package work.service.member;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import work.model.dto.member.MemberDto;
 import work.model.dto.member.MemberUtils;
@@ -97,6 +100,36 @@ public class MemberService {
 
         return result;
     }
+    // [5] 사원 수정 | rw 25-03-26 생성
+    public boolean updateMember(MemberDto memberDto) {
+        System.out.println("MemberService.updateMember");
+
+        // 1. 현재 비밀번호 조회
+        String currentEncryptedPwd = memberMapper.getCurrentPassword(memberDto.getMno());
+
+        // 2. 기존 비밀번호 비교
+        if (!BCrypt.checkpw(memberDto.getMoldPwd(), currentEncryptedPwd)) {
+            throw new RuntimeException("기존 비밀번호가 일치하지 않습니다.");
+        }
+
+        // 3. 새 비밀번호 암호화
+        String newEncryptedPwd = BCrypt.hashpw(memberDto.getMpwd(), BCrypt.gensalt());
+        memberDto.setMpwd(newEncryptedPwd);
+
+        // 4. moldPwd도 암호화 상태로 저장
+        String encryptedOldPwd = BCrypt.hashpw(memberDto.getMoldPwd(), BCrypt.gensalt());
+        memberDto.setMoldPwd(encryptedOldPwd);
+
+        // 5. 연락처 중복 검사
+        int count = memberMapper.checkPhoneDuplicate(memberDto.getMphone(), memberDto.getMno());
+        if (count > 0) {
+            throw new RuntimeException("이미 사용 중인 전화번호입니다.");
+        }
+
+        // 6. 최종 수정 실행
+        return memberMapper.updateMember(memberDto);
+    }
+
 
 
 

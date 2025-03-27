@@ -24,5 +24,6 @@ public class MessageDto {
     private  String flocation;
     private   String fdate;
     private MessageDto type;
+    private  String mprofile;
 
 }

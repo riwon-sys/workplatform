@@ -14,6 +14,15 @@ export default function Report_Form(
   let week = WEEKDAY[today.getDay()];
   let day = year+''+month+''+date;
 
+
+  let rankList = ["대리", "과장", "차장", "부장"];
+
+  const currentIndex = rankList.indexOf(formData.mrank); // 현재 직급의 인덱스 찾기
+  if (currentIndex !== -1) {
+    rankList = rankList.slice(currentIndex + 1); // 현재 직급 이후의 배열만 남기기
+  }
+  console.log( rankList.length )
+
   return(<>
     <div id={ id } >
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }} >
@@ -28,7 +37,14 @@ export default function Report_Form(
             <tr>
               {
                 !isReadOnly && !isUpdate ?
-                ["대리", "과장", "차장", "부장"].map((rank) => {
+                <th width="100px" height="30px" >
+                  { formData.mname }( { formData.mrank } )
+                </th>
+                : null
+              }
+              { 
+                !isReadOnly && !isUpdate ?
+                rankList.map((rank) => {
                   const selectedMno = approval.find((item) => item.rank === rank)?.mno || "";
                   return (
                     <td key={ rank } width="100px" >
@@ -52,7 +68,12 @@ export default function Report_Form(
             </tr>
             <tr style={{ height: '80px' }}>
               {
-                !isReadOnly || !isUpdate ?
+                !isReadOnly && !isUpdate ?
+                (
+                  [...Array(rankList.length + 1)].map((_, index) => (
+                    <td key={index}></td> // 빈 td 생성 (기본 4개)
+                  ))
+                ) :
                 approval.map((rank, index) => (
                   <td key={ `${rank.mno || 'empty'}-${index}` } >
                     {
@@ -69,8 +90,7 @@ export default function Report_Form(
                       /> : null
                     }
                   </td>
-                )) :
-                Array(4).fill(null).map((_, index) => <td key={index}></td>) // 4개의 빈 <td> 자동 생성
+                ))
               }
             </tr>
           </tbody>

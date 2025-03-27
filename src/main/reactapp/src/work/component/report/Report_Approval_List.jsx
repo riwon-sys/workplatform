@@ -5,8 +5,18 @@ import axios from 'axios';
 /* mui import */
 import Table from '@mui/joy/Table';
 
-export default function Report_Approval_List( { rpno, reports, page, setReports, setPage, setTotalPages, selectValue, nextApState } ) {
+/* redux  | rw 25-03-21 */
+import { useDispatch } from 'react-redux';
+import { logout } from '../../member/reduxs/userSlice';
+
+/* toast | rw 25-03-25 */
+import { useSnackbar } from 'notistack'; // 토스트 메시지
+
+export default function Report_Approval_List( 
+  { rpno, reports, page, setReports, setPage, setTotalPages, selectValue, nextApState } ) {
   if( rpno == null ){ rpno = '' };
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar(); // 토스트 함수 사용
 
   useEffect( () => { onFindByMno( page, selectValue ); }, [ page, selectValue, nextApState ] );
 
@@ -18,7 +28,13 @@ export default function Report_Approval_List( { rpno, reports, page, setReports,
       let apstateSQL = '';
       if( selectValue != 2 ){ apstateSQL = `apstate=${selectValue}&`; }  
       const response = await axios.get( `http://localhost:8080/api/approval/list?${apstateSQL}page=${page}&pageSize=10`, { withCredentials : true } )
-      setReports( response.data.list );
+      if( response.data.list != null ){ setReports( response.data.list ); }
+      else{ 
+        // null 반환시 세션값 없음
+        dispatch(logout());
+        enqueueSnackbar("로그아웃 되었습니다. 로그인 후 다시 시도해주세요.", { variant: "info" });
+        navigate('/');
+      }
       setPage( response.data.pageNum );
       setTotalPages( response.data.pages );
     }catch( e ){ console.log(e); }

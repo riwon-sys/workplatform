@@ -22,7 +22,9 @@ const Item = styled(Paper)(({ theme }) => ({
   height: '100%',
 }));
 
-export default function Report_Write({setReportState, setMnos, setData, reportState}){
+export default function Report_Write({setReportState, setMnos, setData, reportState
+  , setLastRpno , lastRpno
+}){
   const loginInfo = useSelector((state) => state.user.userInfo);
   console.log( loginInfo )
 
@@ -49,12 +51,12 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
     mrank: loginInfo.mrank
   });
   const [ mrank, setMrank ] = useState('');
-  const [ lastRpno, setLastRpno ] = useState(''); 
+  // const [ lastRpno, setLastRpno ] = useState(''); 
   const [ approval, setApproval ] = useState([
-    { rank: "대리", mno: null, apstate: false },
-    { rank: "과장", mno: null, apstate: false },
-    { rank: "차장", mno: null, apstate: false },
-    { rank: "부장", mno: null, apstate: false }
+    { rank: "대리", mno: null, rpno: lastRpno, apstate: false },
+    { rank: "과장", mno: null, rpno: lastRpno, apstate: false },
+    { rank: "차장", mno: null, rpno: lastRpno, apstate: false },
+    { rank: "부장", mno: null, rpno: lastRpno, apstate: false }
   ]);
   const [ members, setMembers ] = useState([]);
   const [ reports, setReports ] = useState( [] );
@@ -96,24 +98,20 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
       const response = await axios.post('http://localhost:8080/api/report', formData, { withCredentials: true });
   
       if ( response.data ) {
-        const ApprovalRpnoResponse = await axios.get('http://localhost:8080/api/report/lastrpno');
+        const ApprovalRpnoResponse = await axios.get('http://localhost:8080/api/report/lastrpno', { withCredentials: true });
         const ApprovalRpno = ApprovalRpnoResponse.data;
   
         setLastRpno( ApprovalRpno ); // 상태 업데이트
-        console.log( ApprovalRpno );
   
-        setApproval((prevApproval) =>
-          prevApproval.map((item) => ({ ...item, rpno: ApprovalRpno }))
-        );
-  
-        console.log('Updated approval:', approval);
-        onApprovalPost();
+        onApprovalPost( ApprovalRpno );
       } else { alert('등록 실패'); }
     } catch (e) { console.log(e); alert('등록 실패'); }
   };
 
-  const onApprovalPost = async ( props ) => {
+  const onApprovalPost = async ( ApprovalRpno ) => {
     try{
+      const sendApproval = approval.map((item) => ({ ...item, rpno: ApprovalRpno }))
+
       // signData는 Base64로 인코딩된 서명 이미지 데이터
       const signData = signCanvas.current.toDataURL();
 
@@ -137,7 +135,7 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
       // FormData 객체 생성
       const signFormData = new FormData();
       signFormData.append( 'uploadFile', file );
-      signFormData.append( 'jsonaplist', JSON.stringify(approval) );
+      signFormData.append( 'jsonaplist', JSON.stringify(sendApproval) );
     
       const response = await axios.post( 'http://localhost:8080/api/approval', signFormData , { withCredentials : true } );
       if( response.data ){
@@ -145,7 +143,6 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
         navigate('/report/view');
         setFormData( { rpname: '일일 업무 보고서', rpam: '', rppm: '', rpamnote: '', rppmnote: '',
           rpunprocessed: '', rpsignificant: '', rpexpected: '' } );
-
 
         // props 로 보고서 소켓으로 전달할 state 변수
         setReportState(true);
@@ -164,7 +161,7 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
     };
     fetchMembers();
   }, [mrank]);
-
+console.log( approval)
   // select 선택시 데이터 변경
   const handleApprovalChange = (rank) => async (e) => {
     const selectedMno = e.target?.value; // 안전한 접근
@@ -177,6 +174,7 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
   // 기존 approval 배열에서 동일한 rank 항목만 업데이트 (중복 추가 방지)
     setApproval((prevApproval) =>
     prevApproval.map((item) =>
+      formData.mrank === item.rank ? { ...item, mno: loginInfo.mno } :
       item.rank === rank ? { ...item, mno: selectedMno } : item
       )
     );
@@ -231,7 +229,12 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
         />
 
         <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <PostModal onPost={ onPost } signCanvas={ signCanvas } btnName={ "작성" } />
+          <PostModal 
+            onPost={ onPost } 
+            signCanvas={ signCanvas }
+            approval={ approval } 
+            formData={ formData }
+            btnName={ "작성" } />
         </div>
       </Item>
     </Box>
