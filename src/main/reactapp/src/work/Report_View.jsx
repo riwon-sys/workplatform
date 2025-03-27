@@ -2,10 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-/* react pdf */
-import domtoimage from "dom-to-image";
-import { jsPDF } from "jspdf";
-
 /* mui import */
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -119,62 +115,6 @@ export default function Report_View() {
   //   html2pdf().from(element).set(options).save();
   // };
 
-  const convertToPdf = async () => {
-    const element = document.getElementById("pdf-download");
-    if ( !element ) {
-      console.error("PDF 변환할 요소를 찾을 수 없습니다.");
-      return;
-    }
-  
-    // 기존 스타일 저장
-    const originalStyle = {
-      width: element.style.width,
-      height: element.style.height,
-      maxWidth: element.style.maxWidth,
-      visibility: element.style.visibility,
-    };
-  
-    // 스타일 변경 (PDF 생성용)
-    element.style.width = "800px"; 
-    element.style.height = "auto"; 
-    element.style.maxWidth = "none"; 
-    element.style.background = "white";  
-    // element.style.visibility = "hidden"; // 깜빡임 방지
-  
-    try {
-      const dataUrl = await domtoimage.toPng(element, {
-        bgcolor: 'white',
-        scale: 2
-      });
-  
-      const doc = new jsPDF("p", "mm", "a4");
-  
-      const img = new Image();
-      img.src = dataUrl;
-      img.onload = () => {
-        const pageWidth = doc.internal.pageSize.getWidth();
-        const pageHeight = doc.internal.pageSize.getHeight();
-        const padding = 15;
-        const imgWidth = pageWidth * 0.85;
-        // const imgHeight = (img.height * imgWidth) / img.width;
-        const imgHeight = pageHeight * 0.85;
-
-  
-        doc.addImage(img, "PNG", padding, padding, imgWidth, imgHeight, '', 'FAST');
-        doc.save("screenshot.pdf");
-  
-        // 원래 스타일 복원
-        Object.assign(element.style, originalStyle);
-      };
-    } catch (error) {
-      console.error("PDF 변환 오류:", error);
-      // 오류 발생 시에도 원래 스타일 복원
-      Object.assign(element.style, originalStyle);
-    }
-  };
-  
-  
-
   return (
     <Box 
       sx={{ 
@@ -253,7 +193,7 @@ export default function Report_View() {
             {rpno && Number(rpno) > 0 ? (
               <>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <LoadingIconButton convertToPdf={ convertToPdf } />
+                  <LoadingIconButton />
                 </div>
                 <Report_Form
                   id='pdf-download'

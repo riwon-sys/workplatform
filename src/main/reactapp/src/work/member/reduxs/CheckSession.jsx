@@ -43,7 +43,7 @@ const CheckSession = () => {
     setTimeout(checkSession, 10000);
 
     // 이후 5분마다 체크
-    const interval = setInterval(checkSession, 5 * 60 * 1000);
+    const interval = setInterval(checkSession, 1 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, [dispatch, navigate]);

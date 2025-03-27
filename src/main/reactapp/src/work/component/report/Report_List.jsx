@@ -21,7 +21,7 @@ export default function Report_List(
       setTotalPages( response.data.pages );
     }catch( e ){ console.log(e); }
     finally {
-      setRefresh(false); // 데이터 갱신 후 refresh 상태 초기화
+      setRefresh( false ); // 데이터 갱신 후 refresh 상태 초기화
     }
   } // f end
 

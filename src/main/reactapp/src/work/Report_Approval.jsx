@@ -7,7 +7,6 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid2';
-import Button from '@mui/material/Button';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import { CssVarsProvider } from '@mui/joy/styles';
@@ -17,6 +16,7 @@ import Report_Approval_List from './component/report/Report_Approval_List';
 import Report_Form from './component/report/Report_Form';
 import SelectSmall from './component/report/SeleclSmall';
 import PostModal from './component/report/PostModal';
+import LoadingIconButton from './component/report/LoadingIconButton';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -239,7 +239,11 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
           >
             {rpno && Number(rpno) > 0 ? (
               <>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <LoadingIconButton />
+                </div>
                 <Report_Form
+                  id='pdf-download'
                   formData={ formData }
                   formDataChange={ formDataChange }
                   isReadOnly={ true }
