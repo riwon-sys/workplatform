@@ -109,7 +109,7 @@ export default function ReportSocket(
         if (next != null && loginInfo && loginInfo.mno && data.mname !== '') {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket && reportSocket.readyState === WebSocket.OPEN) {
-
+console.log(next)
                 const obj = {
                     mdepartment: data.mdepartment,
                     mname: data.mname,
@@ -124,7 +124,8 @@ export default function ReportSocket(
                     rpunprocessed: data.rpunprocessed,
                     mnoList: nextApMno,  // mnoList는 nextApMno를 사용
                     apmno: next,  // lowestIndexItem.mno에 안전하게 접근
-                    lastRpno: lastRpno
+                    lastRpno: lastRpno,
+                    nextMno : next
                 };
 
                 const sendData = JSON.stringify(obj);
@@ -190,6 +191,8 @@ export default function ReportSocket(
 
     // 보고서 결재 시 다음 결재자 찾고 서버소켓으로 보내기
     console.log("결재상태 : ", nextApState)
+    console.log(nextAp)
+    console.log(nextNext)
     useEffect(() => {
         if (nextNext != null && loginInfo && loginInfo.mno && nextAp.mname != '') {
             // 소켓이 연결되었을 때만 메시지를 전송
