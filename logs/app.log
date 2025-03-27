@@ -565,3 +565,81 @@ Error starting ApplicationContext. To display the condition evaluation report re
 2025-03-27 16:53:57 - Completed initialization in 2 ms
 2025-03-27 16:53:57 -  log info 
 2025-03-27 16:53:57 -  log info 
+2025-03-27 16:55:33 - Starting AppStart using Java 17.0.12 with PID 15412 (C:\Users\tj-bu-702-11\IdeaProjects\workplatform\build\classes\java\main started by tj-bu-702-11 in C:\Users\tj-bu-702-11\IdeaProjects\workplatform)
+2025-03-27 16:55:33 - No active profile set, falling back to 1 default profile: "default"
+2025-03-27 16:55:35 - Tomcat initialized with port 8080 (http)
+2025-03-27 16:55:35 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-27 16:55:35 - Starting service [Tomcat]
+2025-03-27 16:55:35 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-27 16:55:35 - Initializing Spring embedded WebApplicationContext
+2025-03-27 16:55:35 - Root WebApplicationContext: initialization completed in 1615 ms
+2025-03-27 16:55:35 - HikariPool-1 - Starting...
+2025-03-27 16:55:35 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@78d23d6a
+2025-03-27 16:55:35 - HikariPool-1 - Start completed.
+2025-03-27 16:55:36 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-27 16:55:36 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-27 16:55:36 - Started AppStart in 3.267 seconds (process running for 3.804)
+2025-03-27 16:57:45 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-27 16:57:45 - Initializing Servlet 'dispatcherServlet'
+2025-03-27 16:57:45 - Completed initialization in 0 ms
+2025-03-27 16:57:46 -  log info 
+2025-03-27 16:57:46 -  log info 
+2025-03-27 16:58:21 -  log info 
+2025-03-27 16:58:21 -  log info 
+2025-03-27 16:59:09 - Starting AppStart using Java 17.0.12 with PID 3744 (C:\Users\tj-bu-702-11\IdeaProjects\workplatform\build\classes\java\main started by tj-bu-702-11 in C:\Users\tj-bu-702-11\IdeaProjects\workplatform)
+2025-03-27 16:59:09 - No active profile set, falling back to 1 default profile: "default"
+2025-03-27 16:59:10 - Tomcat initialized with port 8080 (http)
+2025-03-27 16:59:10 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-27 16:59:10 - Starting service [Tomcat]
+2025-03-27 16:59:10 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-27 16:59:10 - Initializing Spring embedded WebApplicationContext
+2025-03-27 16:59:10 - Root WebApplicationContext: initialization completed in 1229 ms
+2025-03-27 16:59:10 - HikariPool-1 - Starting...
+2025-03-27 16:59:11 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@78d23d6a
+2025-03-27 16:59:11 - HikariPool-1 - Start completed.
+2025-03-27 16:59:11 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-27 16:59:11 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-27 16:59:11 - Started AppStart in 2.729 seconds (process running for 3.265)
+2025-03-27 16:59:15 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-27 16:59:15 - Initializing Servlet 'dispatcherServlet'
+2025-03-27 16:59:15 - Completed initialization in 2 ms
+2025-03-27 16:59:32 -  log info 
+2025-03-27 16:59:32 -  log info 
+2025-03-27 16:59:40 -  log info 
+2025-03-27 16:59:40 -  log info 
+2025-03-27 17:02:23 -  log info 
+2025-03-27 17:02:23 -  log info 
+2025-03-27 17:19:59 -  log info 
+2025-03-27 17:19:59 -  log info 
+2025-03-27 17:23:20 -  log info 
+2025-03-27 17:23:20 -  log info 
+2025-03-27 17:27:31 -  log info 
+2025-03-27 17:27:31 -  log info 
+2025-03-27 17:29:52 -  log info 
+2025-03-27 17:29:52 -  log info 
+2025-03-27 17:30:02 -  log info 
+2025-03-27 17:30:02 -  log info 
+2025-03-27 17:32:25 -  log info 
+2025-03-27 17:32:25 -  log info 
+2025-03-27 17:35:20 -  log info 
+2025-03-27 17:35:20 -  log info 
+2025-03-27 17:40:07 -  log info 
+2025-03-27 17:40:07 -  log info 
+2025-03-27 17:42:37 -  log info 
+2025-03-27 17:42:37 -  log info 
+2025-03-27 17:46:09 -  log info 
+2025-03-27 17:46:09 -  log info 
+2025-03-27 17:47:11 -  log info 
+2025-03-27 17:47:11 -  log info 
+2025-03-27 17:47:33 -  log info 
+2025-03-27 17:47:33 -  log info 
+2025-03-27 17:48:04 -  log info 
+2025-03-27 17:48:04 -  log info 
+2025-03-27 17:51:03 -  log info 
+2025-03-27 17:51:03 -  log info 
+2025-03-27 17:53:35 -  log info 
+2025-03-27 17:53:35 -  log info 
+2025-03-27 17:58:32 -  log info 
+2025-03-27 17:58:32 -  log info 
+2025-03-27 18:03:34 -  log info 
+2025-03-27 18:03:34 -  log info 

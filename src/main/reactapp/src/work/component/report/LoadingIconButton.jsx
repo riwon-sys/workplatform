@@ -1,12 +1,20 @@
 import * as React from 'react';
+
+/* mui import */
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { Button, Tooltip, CircularProgress } from "@mui/material";
+import { useTheme } from '@emotion/react';
 
 /* react pdf */
 import domtoimage from "dom-to-image";
 import { jsPDF } from "jspdf";
 
 export default function LoadingIconButton( ) {
+  const theme = useTheme();
+
+  console.log("theme:", theme);  // 디버깅용
+  const backgroundColor = theme?.palette?.neutral?.[300] || "#f0f0f0";
+
   const [ loading, setLoading ] = React.useState(false);
   React.useEffect(() => {
     const timeout = setTimeout(() => {
@@ -86,7 +94,8 @@ export default function LoadingIconButton( ) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          mb: 2
+          mb: 2,
+          backgroundColor: theme?.palette?.primary?.[300] || "#1976d2",
         }}
         disabled={loading} // 로딩 중이면 버튼 비활성화
       >

@@ -164,7 +164,7 @@ public class ApprovalService {
 
     // 7. 한주동안 결재받지 못한 보고서 삭제
     // 매주 월요일 자정에 삭제
-    @Scheduled( cron = "0 0 0 * * 4")
+    @Scheduled( cron = "0 0 0 * * 1")
     @Transactional( rollbackFor = Exception.class )
     public void deleteUnapprove() throws Exception {
         System.out.println("MemberService.deleteUnapprove");
