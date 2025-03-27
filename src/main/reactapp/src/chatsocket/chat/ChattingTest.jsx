@@ -39,7 +39,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function ChatTeset() {
   // 리덕스
   const loginInfo = useSelector((state) => state.user.userInfo);
-  console.log("로그인된 정보 : ", loginInfo)
+ //  console.log("로그인된 정보 : ", loginInfo)
 
   const [rooms, setRooms] = useState([{ rno: "", rname: "", mnoList: [] }]); // 채팅방 목록
   const [members, setMembers] = useState([]); // 전체 회원 목록
@@ -934,9 +934,11 @@ console.log(nowTime);
                               </CardContent>
                               <CardActions>
 
-                              <Button size="small" style={{ marginLeft: "1.5%" }}>{msg.msdate}</Button>
-                              
-                                <Button
+                              <Button size="small" style={{ marginLeft: "1.5%" }}>
+  {msg.showdate ? msg.showdate : msg.msdate}
+</Button>
+
+                              <Button
                                 style={{marginBottom : "1.2%"}}
                                   href={`http://localhost:8080/api/msg/file/download?file=${encodeURIComponent(msg.flocation)}`}
                                   download={msg.fname}

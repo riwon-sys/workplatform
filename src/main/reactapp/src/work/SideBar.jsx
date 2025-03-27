@@ -161,18 +161,18 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
 
   // checkSession();
 
-  /* Axios 인터셉터 설정 */
-  axios.interceptors.response.use(
-    ( response ) => response,
-    ( error ) => {
-      if (error.response?.status === 401) {
-        dispatch(logout()); // 세션 만료 시 로그아웃
-        enqueueSnackbar("로그아웃 되었습니다. 로그인 후 다시 시도해주세요.", { variant: "info" });
-        navigate('/');
-      }
-      return Promise.reject(error);
-    }
-  );
+  // /* Axios 인터셉터 설정 */
+  // axios.interceptors.response.use(
+  //   ( response ) => response,
+  //   ( error ) => {
+  //     if (error.response?.status === 401) {
+  //       dispatch(logout()); // 세션 만료 시 로그아웃
+  //       enqueueSnackbar("로그아웃 되었습니다. 로그인 후 다시 시도해주세요.", { variant: "info" });
+  //       navigate('/');
+  //     }
+  //     return Promise.reject(error);
+  //   }
+  // );
 
   /* 상단 사이드메뉴 */
   const mainMenuItems = [
