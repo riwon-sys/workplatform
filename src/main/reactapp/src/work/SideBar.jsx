@@ -90,7 +90,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function SideBar({ reportState, setReportState, mnos, setMnos, data
-  , setNextApMno, nextApMno, setNextAp, nextAp, setNextApState, nextApState, setLastRpno, lastRpno }) {
+  , setNextApMno, nextApMno, setNextAp, nextAp, setNextApState, nextApState, setLastRpno, lastRpno, setData }) {
 
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('xl'));
@@ -279,6 +279,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
           nextAp={nextAp}
           nextApMno={nextApMno}
           setLastRpno={setLastRpno} lastRpno={lastRpno}
+          setData={setData}
         />
 
         {/* 로그인 영역 */}

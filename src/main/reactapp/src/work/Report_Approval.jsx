@@ -135,6 +135,7 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
         // 소켓으로 보낼 상태 변수
         setNextApState(true)
         console.log(nextApState)
+        console.log(nextApState)
       }else{ alert('보고서 결제 실패') }
     }catch( e ){ console.log( e ); alert('보고서 결제 실패'); }
 
