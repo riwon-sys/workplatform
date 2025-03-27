@@ -13,6 +13,7 @@ export default function ReportSocket(
 
     console.log(mnos)
     console.log(data)
+    console.log(nextAp)
     const loginInfo = useSelector((state) => state.user.userInfo);
     // console.log("로그인된 정보 : ", loginInfo);
     console.log(reportState);
@@ -35,7 +36,7 @@ export default function ReportSocket(
         const socket = new WebSocket("ws://localhost:8080/reportConnect");
 
         socket.onopen = () => {
-            // console.log('보고서 소켓 연결 성공');
+            console.log('보고서 소켓 연결 성공');
             // // 연결 성공 후 reportState와 loginInfo가 있을 때 데이터 전송
             // if (data != null) {
             //     const sendData = JSON.stringify(data);
