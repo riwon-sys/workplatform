@@ -38,6 +38,8 @@ export default function () {
     setboards(response.data)
   }
 
+ 
+
   
   return (<>
     <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
@@ -58,18 +60,32 @@ export default function () {
               <tbody>
                 {
                   boards.map( ( board , index )=> {
-                    const commentCount = board.commentList ? board.commentList.length : 0;
+                    const commentCount = board.ccount
+
                     return(<>
                       <tr>
                         <td> <span>{board.category_name || '카테고리 없음'}</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
-                        <td> <span>👍0</span> <span> 💬{commentCount} </span></td>
+                        <td style={{ textAlign: 'right' }}>
+        <span style={{ marginRight: '12px' }}>👍 {board.lcount || 0}</span>
+        <span style={{ color: commentCount > 0 ? '#0068c3' : '#666' }}>
+          💬 {commentCount}
+        </span>
+      </td>
                       </tr>
                     </>)
                   } )
                 }
               </tbody>
             </Table>
-            <button onClick={()=>{navigate("/board/write")}}>글쓰기</button>
+                {/* 블라인드 스타일 버튼 컨테이너 */}
+                <div className="button-container">
+              <button 
+                className="blind-button" 
+                onClick={() => {navigate("/board/write")}}
+              >
+                글쓰기
+              </button>
+            </div>
           
           </CssVarsProvider>
       </Item>

@@ -1,5 +1,7 @@
 package work.controller.board;
 
+import com.github.pagehelper.PageInfo;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import work.model.dto.board.BoardDto;
+import work.model.dto.member.MemberDto;
+import work.model.dto.member.MemberUtils;
+import work.model.dto.report.ReportDto;
 import work.service.board.BoardService;
 
 import java.util.List;
@@ -69,5 +74,4 @@ public class BoardController {
 
 
 
-
-}// c end
+}//c end

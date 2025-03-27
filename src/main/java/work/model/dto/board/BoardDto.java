@@ -23,6 +23,8 @@ public class BoardDto {
     private int views;
     private int category_id;   //카테고리 번호
     private String category_name; // 카테고리 이름
+    private int ccount;  //댓글 개수
+    private int lcount; //좋아요 개수
 
 //    @Builder.Default
     private int mno;

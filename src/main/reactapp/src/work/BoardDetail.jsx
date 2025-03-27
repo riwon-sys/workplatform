@@ -74,7 +74,35 @@ export default function BoardDetail() {
     if(response.data == true){alert('댓글이 등록 되었습니다.');setComment('');getview();}
     else{alert('댓글 작성을 실패했습니다.');}
   }
-   
+  const [showAnimation, setShowAnimation] = useState(false);
+
+ // 좋아요 애니메이션 효과
+ useEffect(() => {
+  if (showAnimation) {
+    // 1.5초 후에 애니메이션 사라지게 하기
+    const timer = setTimeout(() => {
+      setShowAnimation(false);
+    }, 1500);
+    
+    return () => clearTimeout(timer);
+  }
+}, [showAnimation]);
+
+
+  //좋아요 
+  const likeview = async() =>{
+    //작성자 샘플 : 리덕스에서 가져올 예정
+    const mno = loginInfo.mno;
+    const response = await axios.get(`http://localhost:8080/work/board/like?pid=${pid}&mno=${mno}`);
+    console.log( response.data );
+    if( response.data == true ){
+        // 애니메이션 표시
+        setShowAnimation(true);
+    }
+    getview();
+
+  }
+
   // 게시물 삭제 함수
   const deleteBoard = async() => {
     const mno = loginInfo.mno
@@ -224,9 +252,9 @@ export default function BoardDetail() {
 
                 {/* 좋아요 버튼 및 공유 버튼 */}
                 <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
-                  <Button variant="text" sx={{ color: '#666', fontSize: '14px', mr: 1 }}>
+                  <Button variant="text" sx={{ color: '#666', fontSize: '14px', mr: 1 }} onClick={likeview}    >
                     <ThumbUpOutlinedIcon sx={{ fontSize: '18px', mr: 0.5 }} /> 
-                    1
+                    {board.lcount}
                   </Button>
                   <Button variant="text" sx={{ color: '#666', fontSize: '14px', mr: 1 }}>
                     <ChatBubbleOutlineOutlinedIcon sx={{ fontSize: '18px', mr: 0.5 }} /> 
@@ -372,6 +400,36 @@ export default function BoardDetail() {
          </Button>
        </DialogActions>
      </Dialog>
+
+     {showAnimation && (
+        <div 
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            pointerEvents: 'none',
+            zIndex: 9999
+          }}
+        >
+          <div 
+            className="like-animation" 
+            style={{
+              fontSize: '150px',
+              opacity: 1,
+              animation: 'thumbsUpAnimation 1.5s ease-out forwards'
+            }}
+          >
+            <img src="/좋아요.png" />
+          </div>
+        </div>
+      )}
+
+
    </>
  );
 }
