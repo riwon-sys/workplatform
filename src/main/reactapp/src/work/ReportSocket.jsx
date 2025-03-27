@@ -212,7 +212,7 @@ console.log(next)
                     mname: nextAp.mname,
                     mrank: nextAp.mrank,
                     mdepartment: nextAp.mdepartment,
-                    apno: "",
+                    apno: nextNext,
                     nextMno: nextNext
                 };
 
