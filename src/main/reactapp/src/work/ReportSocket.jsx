@@ -68,17 +68,17 @@ export default function ReportSocket(
         setReportSocket(socket);
 
         // 브라우저를 닫을 때 소켓 종료
-        const handleBeforeUnload = () => {
-            socket.close(); // 소켓 종료
-        };
+        // const handleBeforeUnload = () => {
+        //     socket.close(); // 소켓 종료
+        // };
 
         // `beforeunload` 이벤트 리스너 등록
-        window.addEventListener('beforeunload', handleBeforeUnload);
+        //window.addEventListener('beforeunload', handleBeforeUnload);
 
         // 컴포넌트 언마운트 시 이벤트 리스너 제거
         return () => {
             socket.close(); // 소켓 종료
-            window.removeEventListener('beforeunload', handleBeforeUnload); // 이벤트 리스너 제거
+       //     window.removeEventListener('beforeunload', handleBeforeUnload); // 이벤트 리스너 제거
         };
 
     }, []); // 의존성 배열에 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행됨
@@ -124,7 +124,7 @@ console.log(next)
                     rppmnote: apData.rppmnote,
                     rpsignificant: apData.rpsignificant,
                     rpunprocessed: apData.rpunprocessed,
-                    mnoList: nextApMno,  // mnoList는 nextApMno를 사용
+                    //mnoList: nextApMno,  // mnoList는 nextApMno를 사용
                     apmno: next,  // lowestIndexItem.mno에 안전하게 접근
                     lastRpno: lastRpno,
                     nextMno : next
