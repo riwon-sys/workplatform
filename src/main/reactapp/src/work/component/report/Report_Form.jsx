@@ -14,7 +14,6 @@ export default function Report_Form(
   let week = WEEKDAY[today.getDay()];
   let day = year+''+month+''+date;
 
-
   let rankList = ["대리", "과장", "차장", "부장"];
 
   const currentIndex = rankList.indexOf(formData.mrank); // 현재 직급의 인덱스 찾기
