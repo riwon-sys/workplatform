@@ -26,6 +26,7 @@ import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
 
 import LogoutIcon from '@mui/icons-material/Logout';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
+import Textarea from '@mui/joy/Textarea';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -972,6 +973,7 @@ export default function ChatTeset() {
 
                   {/* 메시지 입력칸과  등록 버튼 */}
                   <div style={{ display: 'flex', marginLeft: "3%" }}>
+                  <Textarea name="Soft" placeholder="Type in here…" variant="soft" />
                     <Input
                       type="text"
                       placeholder="메시지를 입력하세요."
@@ -982,7 +984,7 @@ export default function ChatTeset() {
                     />
                     <Button onClick={sendMessage} variant="contained" color='info'
                       style={{ width: "10%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}>
-                      등록
+                      전송
                     </Button>
 
                     {/* 파일 첨부 버튼 */}
