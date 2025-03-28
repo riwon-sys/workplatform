@@ -25,7 +25,7 @@ INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd ) VALUES
 (100003, '박예진', '010-3456-7890', 'insateam_team@example.com', 0, '과장' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 (100004, '이민호', '010-4567-8901', 'insateam_dari@example.com', 0, '대리' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 (100006, '이시훈', '010-6789-0123', 'insateam_sawon@example.com', 0, '대리' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
-(100007, '김은서', '010-7890-1234', 'insateam_sawon@example.com', 0, '사원' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
+(100007, '김은서', '010-7890-1234', 'insateam_sawon@example.com', 0, '대리' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 (100008, '최진우', '010-8901-2345', 'insateam_sawon@example.com', 0, '사원' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
 -- 마케팅팀
 (200009, '윤지호', '010-1122-3344', 'marketingteam@example.com', 0, '부장' ,'$2a$10$rqTp0i3K2XkFCHyB0aZc6uk1vVvYmNd3uaEwTZHTCAJWg8wf0NveG'),
@@ -265,7 +265,31 @@ insert into comment(cid,content,reg_date,pid,mno)values
 (3, '오늘은 야근각이네요ㅠㅠ', '2025-03-16 14:15:33', 3, 100003),
 (4, '저도 집에 가고 싶어요... 퇴근시간 언제 오나요', '2025-03-17 16:45:12', 4, 100004);
 
+-- 좋아요 테이블 삭제(board_like 테이블은 board를 참조하므로 , board_like 테이블을 먼저 삭제)
+drop table if exists board_like;
 
+
+-- 좋아요 테이블 추가 됨
+CREATE TABLE Board_Like (
+    like_id INT UNSIGNED AUTO_INCREMENT,
+    pid INT UNSIGNED NOT NULL,      -- 게시물 번호 (외래키)
+    mno INT UNSIGNED NOT NULL,      -- 회원 번호 (외래키)
+    PRIMARY KEY (like_id),
+    UNIQUE KEY unique_like (pid, mno),  -- 한 사용자가 한 게시물에 좋아요는 한 번만 가능
+    FOREIGN KEY (pid) REFERENCES board(pid)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES Member(mno)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+-- 좋아요 샘플 데이터 추가
+insert into board_like (pid,mno)values
+(1, 100001),  -- 회원 100001이 게시물 1에 좋아요
+(2, 100001),  -- 회원 100001이 게시물 2에 좋아요
+(1, 100002),  -- 회원 100002가 게시물 1에 좋아요
+(3, 100003);  -- 회원 100003이 게시물 3에 좋아요
 
 # 보고서 테이블
 create table report(

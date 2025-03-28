@@ -194,17 +194,23 @@ export default function BoardDetail() {
       
   return (
     <>
-      <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
-        <Grid container spacing={0} sx={{ height: '100%' }}>
-          {/* xs: 너비 조정 */}
-          <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>  {/* size → xs 변경 */}
-            <Item sx={{overflow:'scroll',overflowX:'hidden'}}>
+      <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
+        <Item
+          sx={{
+            overflow: 'scroll',
+            overflowX: 'hidden',
+            minWidth: '700px',
+            maxWidth: '1000px',
+            width: '100%',
+            padding: '50px 70px'
+          }}
+        >
 
               {/* 헤더 부분 */}
               <Box sx={{ display: 'flex', alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid #eee' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', fontSize: '14px' }}>
                   <span style={{ color: '#0068c3' }}>{"[게시판]" + board.category_name}</span>
-                 
+
                 </Box>
               </Box>
 
@@ -280,91 +286,89 @@ export default function BoardDetail() {
                   댓글 {board.commentList && board.commentList.length}
                 </Typography>
 
-                {/* 댓글 작성 폼 */}
-                <Box sx={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
-                  <TextField
-                    fullWidth
-                    multiline
-                    rows={4}
-                    placeholder="댓글을 남겨주세요."
-                    variant="outlined"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        borderRadius: '4px',
-                        fontSize: '14px'
-                      }
-                    }}
-                  />
-                  <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
-                    <Button
-                      onClick={createComment}
-                      variant="contained"
-                      sx={{ 
-                        backgroundColor: '#0068c3', 
-                        color: 'white',
-                        fontSize: '14px',
-                        padding: '6px 16px',
-                        '&:hover': {
-                          backgroundColor: '#0056a3'
-                        }
-                      }}
-                    >
-                      등록
-                    </Button>
-                  </Box>
-                </Box>
+            {/* 댓글 작성 폼 */}
+            <Box sx={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                placeholder="댓글을 남겨주세요."
+                variant="outlined"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    borderRadius: '4px',
+                    fontSize: '14px'
+                  }
+                }}
+              />
+              <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: '8px' }}>
+                <Button
+                  onClick={createComment}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: '#0068c3',
+                    color: 'white',
+                    fontSize: '14px',
+                    padding: '6px 16px',
+                    '&:hover': {
+                      backgroundColor: '#0056a3'
+                    }
+                  }}
+                >
+                  등록
+                </Button>
               </Box>
-              
-              {/*현재 게시물 해당하는 댓글조회 , 리스트명.map((반복변수,인덱스)),조건&&참 */}
-              {board.commentList && board.commentList.map((comment,index)=>{
-                return (
-                  <Box 
-                    key={index}
-                    sx={{ 
-                      padding: '12px 16px', 
-                      borderBottom: '1px solid #eee',
-                      textAlign: 'left'
-                    }}
+            </Box>
+          </Box>
+
+          {/*현재 게시물 해당하는 댓글조회 , 리스트명.map((반복변수,인덱스)),조건&&참 */}
+          {board.commentList && board.commentList.map((comment,index)=>{
+            return (
+              <Box
+                key={index}
+                sx={{
+                  padding: '12px 16px',
+                  borderBottom: '1px solid #eee',
+                  textAlign: 'left'
+                }}
+              >
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#333' }}>
+                    {comment.mno}
+                  </Typography>
+                  <Typography sx={{ fontSize: '12px', color: '#999' }}>
+                    {comment.reg_date}
+                  </Typography>
+                </Box>
+                <Typography sx={{ fontSize: '14px', marginBottom: '12px', color: '#333' }}>
+                  {comment.content}
+                </Typography>
+                <Box sx={{ display: 'flex', gap: '8px' }}>
+                  {comment.mno === loginInfo.mno && (
+                <>
+                  <Button
+                    size="small"
+                    sx={{ fontSize: '12px', color: '#666', minWidth: 'auto', padding: '2px 8px' }}
+                    onClick={() => openEditModal(comment)}
                   >
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                      <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#333' }}>
-                        {comment.mno}
-                      </Typography>
-                      <Typography sx={{ fontSize: '12px', color: '#999' }}>
-                        {comment.reg_date}
-                      </Typography>
-                    </Box>
-                    <Typography sx={{ fontSize: '14px', marginBottom: '12px', color: '#333' }}>
-                      {comment.content}
-                    </Typography>
-                    <Box sx={{ display: 'flex', gap: '8px' }}>
-                     {comment.mno === loginInfo.mno && (
- <>
-   <Button 
-     size="small" 
-     sx={{ fontSize: '12px', color: '#666', minWidth: 'auto', padding: '2px 8px' }}
-     onClick={() => openEditModal(comment)}
-   >
-     수정
-   </Button>
-   <Button 
-     size="small" 
-     sx={{ fontSize: '12px', color: '#666', minWidth: 'auto', padding: '2px 8px' }}
-     onClick={() => deleteComment(comment.cid)}
-   >
-     삭제
-   </Button>
- </>
-)}
-                   </Box>
-                 </Box>
-               );
-             })}
-           </Item>
-         </Grid>
-       </Grid>
+                    수정
+                  </Button>
+                  <Button
+                    size="small"
+                    sx={{ fontSize: '12px', color: '#666', minWidth: 'auto', padding: '2px 8px' }}
+                    onClick={() => deleteComment(comment.cid)}
+                  >
+                    삭제
+                  </Button>
+                </>
+                )}
+              </Box>
+            </Box>
+          );
+        })}
+      </Item>
      </Box>
 
      {/* 댓글 수정 모달 */}

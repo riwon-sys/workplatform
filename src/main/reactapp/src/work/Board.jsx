@@ -60,7 +60,8 @@ export default function () {
         }}
       >
           <CssVarsProvider>
-          <Table>
+          <h1> 사내 게시판 </h1>
+          <Table sx={{ mt: 3 }} >
               <thead>
               </thead>
               <tbody>
@@ -70,22 +71,21 @@ export default function () {
 
                     return(<>
                       <tr>
-                        <td> <span style={{textAlign :'left',display:'inline-block',marginRight:'8px'}}>{board.category_name || '카테고리 없음'}</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
+                        <td> <span>{board.category_name || '카테고리 없음'}</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
                         <td style={{ textAlign: 'right' }}>
-        <span style={{ marginRight: '12px' }}>👍 {board.lcount || 0}</span>
-        <span style={{ color: commentCount > 0 ? '#0068c3' : '#666' }}>
-          💬 {commentCount}
-        </span>
-      </td>
+                        <span style={{ marginRight: '12px' }}>👍 {board.lcount || 0}</span>
+                        <span style={{ color: commentCount > 0 ? '#0068c3' : '#666' }}>
+                          💬 {commentCount}
+                        </span>
+                        </td>
                       </tr>
                     </>)
                   } )
                 }
               </tbody>
             </Table>
-            
                 {/* 블라인드 스타일 버튼 컨테이너 */}
-                <div className="button-container">
+            <div className="button-container" style={{ justifyContent: 'flex-end' }} >
               <button 
                 className="blind-button" 
                 onClick={() => {navigate("/board/write")}}
@@ -95,7 +95,7 @@ export default function () {
             </div>
           
           </CssVarsProvider>
-          
+
           <Stack spacing={2} mt={1}>
                           <Pagination
                             color="primary"
