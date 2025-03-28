@@ -8,11 +8,11 @@ import { Button, Link } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export default function ReportSocket(
-    { reportState, mnos, setData, data, setReportState,
+    { reportState, mnos, setApData, apData, setReportState,
         setNextApMno, setNextAp, setNextApState, nextApState, nextApMno, nextAp, setLastRpno, lastRpno }) {
 
     console.log(mnos)
-    console.log(data)
+    console.log(apData)
     console.log(nextAp)
     const loginInfo = useSelector((state) => state.user.userInfo);
     console.log("로그인된 정보 : ", loginInfo);
@@ -68,17 +68,17 @@ export default function ReportSocket(
         setReportSocket(socket);
 
         // 브라우저를 닫을 때 소켓 종료
-        const handleBeforeUnload = () => {
-            socket.close(); // 소켓 종료
-        };
+        // const handleBeforeUnload = () => {
+        //     socket.close(); // 소켓 종료
+        // };
 
         // `beforeunload` 이벤트 리스너 등록
-        window.addEventListener('beforeunload', handleBeforeUnload);
+        //window.addEventListener('beforeunload', handleBeforeUnload);
 
         // 컴포넌트 언마운트 시 이벤트 리스너 제거
         return () => {
             socket.close(); // 소켓 종료
-            window.removeEventListener('beforeunload', handleBeforeUnload); // 이벤트 리스너 제거
+       //     window.removeEventListener('beforeunload', handleBeforeUnload); // 이벤트 리스너 제거
         };
 
     }, []); // 의존성 배열에 빈 배열을 넣어 컴포넌트 마운트 시 한 번만 실행됨
@@ -106,25 +106,25 @@ export default function ReportSocket(
     console.log("최초결재상태", reportState)
     // 보고서 등록 시 다음 결재자를 찾고 서버 소켓으로 전달
     useEffect(() => {
-        if(data&&data.mname != null){
+        if(reportState == true&&apData.mname != null ){
    
-        if (next != null && loginInfo && loginInfo.mno && data.mname !== '') {
+        if (next != null && loginInfo && loginInfo.mno && apData.mname !== '') {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket && reportSocket.readyState === WebSocket.OPEN) {
 console.log(next)
                 const obj = {
-                    mdepartment: data.mdepartment,
-                    mname: data.mname,
-                    mrank: data.mrank,
-                    rpam: data.rpam,
-                    rpamnote: data.rpamnote,
-                    rpexpected: data.rpexpected,
-                    rpname: data.rpname,
-                    rppm: data.rppm,
-                    rppmnote: data.rppmnote,
-                    rpsignificant: data.rpsignificant,
-                    rpunprocessed: data.rpunprocessed,
-                    mnoList: nextApMno,  // mnoList는 nextApMno를 사용
+                    mdepartment: apData.mdepartment,
+                    mname: apData.mname,
+                    mrank: apData.mrank,
+                    rpam: apData.rpam,
+                    rpamnote: apData.rpamnote,
+                    rpexpected: apData.rpexpected,
+                    rpname: apData.rpname,
+                    rppm: apData.rppm,
+                    rppmnote: apData.rppmnote,
+                    rpsignificant: apData.rpsignificant,
+                    rpunprocessed: apData.rpunprocessed,
+                    //mnoList: nextApMno,  // mnoList는 nextApMno를 사용
                     apmno: next,  // lowestIndexItem.mno에 안전하게 접근
                     lastRpno: lastRpno,
                     nextMno : next
@@ -132,14 +132,14 @@ console.log(next)
 
                 const sendData = JSON.stringify(obj);
                 reportSocket.send(sendData);
-                console.log('서버에서 보낸 데이터 : ', data);
+                console.log('서버에게 보낸 데이터 : ',apData);
                 console.log("서버소켓으로 보내기 성공~~~~~");
 
                 setReportState(false);
                 // setNext(null)
                 // setS(false)
                 // 데이터를 초기화
-            setData({
+            setApData({
                 rpname: '',
                 rpam: '',
                 rppm: '',
@@ -165,7 +165,7 @@ setLastRpno(null)
 
     }
 
-    }, [next, data]); //s
+    }, [next, apData]); //s
     // [2] 등록된 보고서 결재 시 다음 결재자 찾기
     const [nextNext, setNextNext] = useState(null);
 
@@ -200,7 +200,7 @@ setLastRpno(null)
     useEffect(() => {
 
         if(nextAp.rpno > 0){
-        if (nextNext != null && loginInfo && loginInfo.mno && nextAp.mname != '') {
+        if (nextNext != null && loginInfo && loginInfo.mno && nextAp.mname != '' && nextApState == true) {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket && reportSocket.readyState === WebSocket.OPEN) {
                 console.log(nextNext)
@@ -225,7 +225,7 @@ setLastRpno(null)
                 console.log(obj);
                 const sendData = JSON.stringify(obj);
                 reportSocket.send(sendData);
-                console.log('서버에서 보낸 데이터 : ', data);
+                console.log('서버에게 보낸 데이터 : ', nextAp);
                 console.log("서버소켓으로 보내기 성공~~~~~");
                 setNextApState(false)
                 // setNextNext(null)

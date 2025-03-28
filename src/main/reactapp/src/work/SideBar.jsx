@@ -90,8 +90,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   })
 );
 
-export default function SideBar({ reportState, setReportState, mnos, setMnos, data
-  , setNextApMno, nextApMno, setNextAp, nextAp, setNextApState, nextApState, setLastRpno, lastRpno, setData }) {
+export default function SideBar({ reportState, setReportState, mnos, setMnos, apData
+  , setNextApMno, nextApMno, setNextAp, nextAp, setNextApState, nextApState, setLastRpno, lastRpno, setApData }) {
 
   const theme = useTheme();
   const isMdUp = useMediaQuery(theme.breakpoints.up('xl'));
@@ -287,7 +287,7 @@ const isLoggingOut = useRef(false);
         <ReportSocket
           reportState={reportState}
           mnos={mnos}
-          data={data}
+          apData={apData}
           setReportState={setReportState}
 
           setNextApMno={setNextApMno}
@@ -297,7 +297,7 @@ const isLoggingOut = useRef(false);
           nextAp={nextAp}
           nextApMno={nextApMno}
           setLastRpno={setLastRpno} lastRpno={lastRpno}
-          setData={setData}
+          setApData={setApData}
         />
 
         {/* 로그인 영역 */}

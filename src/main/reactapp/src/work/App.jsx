@@ -43,7 +43,7 @@ export default function App(props) {
     const loginInfo = useSelector( (state) => state.user.userInfo ); // 🔸 로그인 정보 가져오기
     const [reportState, setReportState] = useState(false);
     const [mnos, setMnos] = useState([])
-    const [ data, setData ] = useState({
+    const [ apData, setApData ] = useState({
         rpname: '',
         rpam: '',
         rppm: '',
@@ -103,7 +103,7 @@ export default function App(props) {
                                 setReportState={setReportState}
                                 mnos={mnos}
                                 setMnos={setMnos}
-                                data={data}
+                                apData={apData}
                                 
                                 setNextApMno={setNextApMno} 
                                 setNextAp={setNextAp} 
@@ -113,14 +113,15 @@ export default function App(props) {
                                 nextApMno={nextApMno}
                                 setLastRpno={setLastRpno} 
                                 lastRpno={lastRpno} 
-                                setData={setData}
+                                setApData={setApData}
                             />
                             <Routes>
                                 <Route path="/" element={<ChatTeset />} />
                                 <Route path="/chatting" element={<ChatTeset />} />
                                 <Route path="/report/write" element={<Report_Write setReportState={setReportState} setMnos={setMnos} 
-                                                                                    setData={setData} reportState={reportState}
+                                                                                    setApData={setApData} reportState={reportState}
                                                                                     setLastRpno={setLastRpno} lastRpno={lastRpno}
+                                                                                    apData={apData}
                                                                                     />} />
 
                                 <Route path="/report/view" element={<Report_View />} />
