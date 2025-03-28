@@ -127,7 +127,7 @@ create table comment(
                             on delete cascade
 );
 
-
+---좋아요 테이블 추가 됨
 CREATE TABLE Board_Like (
     like_id INT UNSIGNED AUTO_INCREMENT,
     pid INT UNSIGNED NOT NULL,      -- 게시물 번호 (외래키)
