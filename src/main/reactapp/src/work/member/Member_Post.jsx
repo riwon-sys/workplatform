@@ -18,16 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Report_Post(){
 
   return(<>
-      <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#eeeeee' }}>
-        <Grid container spacing={0} sx={{ height: '100%' }}>
-          <Grid size={7} sx={{ height: '100%', margin: '0 auto' }}>
-            <Item sx={{ overflow: 'scroll', overflowX: 'hidden', minWidth: '700px' }} >
-              <Member_Input />
-            </Item>
-          </Grid>
-        </Grid>
-      </Box>
-
+        <Member_Input />
   </>)
 }
 

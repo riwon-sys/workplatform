@@ -1,19 +1,12 @@
-/*  Member_Mypage.jsx 고정 박스형 마이페이지 | rw 25-03-27 생성 */
 import React, { useState } from 'react';
 import {
-    Box,
-    Typography,
-    TextField,
-    Button,
-    Avatar,
-    Paper
+    Box, Typography, TextField, Button, Avatar, Paper
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-// ✅ 고정된 마이페이지 카드 박스 스타일 정의
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
     ...theme.typography.body2,
@@ -22,27 +15,23 @@ const Item = styled(Paper)(({ theme }) => ({
     height: '100%',
 }));
 
-const Member_Mypage = () => {
+const Member_Myinfo = () => {
     const navigate = useNavigate();
     const loginInfo = useSelector((state) => state.user.userInfo);
 
-    // ✅ 보안 확인 관련 상태
     const [inputPwd, setInputPwd] = useState('');
     const [isVerified, setIsVerified] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
-    // ✅ 프로필 사진 관련 (미리보기는 추후 확장용)
-    const [preview, setPreview] = useState(null);
-    const [profile, setProfile] = useState(null);
-
-    // ✅ 연락처 유효성 및 중복 확인
     const [mphone, setMphone] = useState(loginInfo.mphone);
-    const [phoneCheck, setPhoneCheck] = useState(false);
+    const [mtype, setMtype] = useState(loginInfo.mtype);
+    const [mpwd, setMpwd] = useState('');
 
-    // ✅ 전화번호 정규식 검사
+    const [profile, setProfile] = useState(null);
+    const [preview, setPreview] = useState(null);
+
     const isValidPhone = (phone) => /^010-\d{4}-\d{4}$/.test(phone);
 
-    // ✅ 비밀번호 보안 재확인
     const handlePasswordCheck = () => {
         if (inputPwd === '1234') {
             setIsVerified(true);
@@ -52,51 +41,43 @@ const Member_Mypage = () => {
         }
     };
 
-    // ✅ 전화번호 중복 확인
-    const checkPhoneDuplicate = async () => {
-        if (!isValidPhone(mphone)) {
-            alert("전화번호 형식이 올바르지 않습니다. (010-0000-0000)");
-            return;
-        }
-
-        try {
-            const res = await axios.get(`http://localhost:8080/workplatform/check-phone?mphone=${mphone}`);
-            if (res.data.duplicate === true) {
-                alert("이미 사용 중인 연락처입니다.");
-                setPhoneCheck(false);
-            } else {
-                alert("사용 가능한 번호입니다.");
-                setPhoneCheck(true);
-            }
-        } catch (err) {
-            console.error(err);
-            alert("중복 확인 중 오류가 발생했습니다.");
-            setPhoneCheck(false);
-        }
+    const onFileChange = (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+        setProfile(file);
+        const reader = new FileReader();
+        reader.onloadend = () => setPreview(reader.result);
+        reader.readAsDataURL(file);
     };
 
-    // ✅ 등록 버튼 클릭 → 정보 업데이트 요청
     const onUpdate = async () => {
-        if (!phoneCheck) {
-            alert("전화번호 중복 확인을 해주세요.");
+        if (!isValidPhone(mphone)) {
+            alert("전화번호 형식이 올바르지 않습니다. (예: 010-1234-5678)");
             return;
         }
 
-        try {
-            const res = await axios.put("http://localhost:8080/workplatform/update", {
-                mno: loginInfo.mno,
-                mphone: mphone
-            });
+        const formData = new FormData();
+        formData.append("mno", loginInfo.mno);
+        formData.append("mname", loginInfo.mname);
+        formData.append("mrank", loginInfo.mrank);
+        formData.append("memail", loginInfo.memail);
+        formData.append("mpwd", mpwd);
+        formData.append("mphone", mphone);
+        formData.append("mtype", mtype);
+        if (profile) formData.append("uploadFile", profile);
 
+        try {
+            const res = await axios.put("http://localhost:8080/workplatform/update", formData, {
+                headers: { "Content-Type": "multipart/form-data" }
+            });
             if (res.data === true) {
-                alert("회원정보가 성공적으로 업데이트되었습니다.");
+                alert("정보가 성공적으로 수정되었습니다.");
                 navigate('/');
             } else {
-                alert("업데이트에 실패했습니다.");
+                alert("수정 실패: 관리자에게 문의하세요.");
             }
         } catch (err) {
-            console.error(err);
-            alert("서버 오류가 발생했습니다.");
+            alert("서버 오류: " + err.message);
         }
     };
 
@@ -130,44 +111,56 @@ const Member_Mypage = () => {
                         <TextField label="사번" value={loginInfo.mno} fullWidth margin="normal" InputProps={{ readOnly: true }} />
                         <TextField label="이름" value={loginInfo.mname} fullWidth margin="normal" InputProps={{ readOnly: true }} />
                         <TextField label="이메일" value={loginInfo.memail} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+                        <TextField label="직급" value={loginInfo.mrank} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+
+                        <TextField
+                            label="비밀번호 변경"
+                            value={mpwd}
+                            onChange={(e) => setMpwd(e.target.value)}
+                            fullWidth
+                            margin="normal"
+                            type="password"
+                        />
+
                         <TextField
                             label="연락처"
                             value={mphone}
-                            onChange={(e) => {
-                                setMphone(e.target.value);
-                                setPhoneCheck(false);
-                            }}
+                            onChange={(e) => setMphone(e.target.value)}
                             fullWidth
                             margin="normal"
                             placeholder="010-0000-0000"
-                            helperText={phoneCheck ? "✔ 중복 확인 완료" : "전화번호는 010-0000-0000 형식입니다."}
+                            helperText="전화번호는 010-0000-0000 형식입니다."
                         />
-                        <Button
-                            variant="outlined"
-                            onClick={checkPhoneDuplicate}
-                            sx={{ mt: 1, mb: 2 }}
-                        >
-                            중복 확인
-                        </Button>
-                        <TextField label="직급" value={loginInfo.mrank} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+
                         <TextField
+                            select
                             label="상태"
-                            value={
-                                loginInfo.mtype === 0 ? '활동' :
-                                    loginInfo.mtype === 1 ? '부재' :
-                                        loginInfo.mtype === 2 ? '외부업무' : '퇴사'
-                            }
-                            fullWidth margin="normal" InputProps={{ readOnly: true }}
-                        />
+                            value={mtype}
+                            onChange={(e) => setMtype(e.target.value)}
+                            fullWidth
+                            margin="normal"
+                            SelectProps={{ native: true }}
+                        >
+                            <option value={0}>활동</option>
+                            <option value={1}>부재</option>
+                            <option value={2}>외부업무</option>
+                            <option value={3} disabled>퇴사</option>
+                        </TextField>
+
                         <Box sx={{ mt: 3 }}>
                             <Typography variant="body1" gutterBottom>프로필 사진</Typography>
-                            <Avatar src={`http://localhost:8080/file/${loginInfo.mprofile}`} sx={{ width: 100, height: 100, mx: 'auto' }} />
+                            <Avatar
+                                src={preview || `http://localhost:8080/file/${loginInfo.mprofile}`}
+                                sx={{ width: 100, height: 100, mx: 'auto' }}
+                            />
+                            <input type="file" accept="image/*" onChange={onFileChange} style={{ marginTop: '1rem' }} />
                         </Box>
+
                         <Button variant="contained" fullWidth sx={{ mt: 3 }} onClick={onUpdate}>
-                            등록
+                            정보 수정
                         </Button>
                         <Typography variant="body2" align="center" sx={{ mt: 4, color: 'gray' }}>
-                            문의: insateam_jang@example.com DDDD
+                            문의: insateam_jang@example.com
                         </Typography>
                     </Box>
                 )}
@@ -176,4 +169,4 @@ const Member_Mypage = () => {
     );
 };
 
-export default Member_Mypage;
+export default Member_Myinfo;

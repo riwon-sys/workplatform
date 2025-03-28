@@ -76,22 +76,26 @@ public interface MemberMapper {
     """)
     public boolean updateMember(MemberDto memberDto);
 
-    // [2] 기존 암호화 비밀번호 조회
+    // [5]-(2) 기존 암호화 비밀번호 조회
     @Select("SELECT mpwd FROM member WHERE mno = #{mno}")
     public String getCurrentPassword(@Param("mno") int mno);
 
-    // [3] 연락처 중복 검사
+    // [5]-(3) 연락처 중복 검사
     @Select("SELECT COUNT(*) FROM member WHERE mphone = #{mphone} AND mno != #{mno}")
     public int checkPhoneDuplicate(@Param("mphone") String mphone, @Param("mno") int mno);
 
-    // [4] 부서별 조회(shceduled)
+    // [5]-(4) 부서별 조회(shceduled)
     @Select("SELECT LEFT(mno, 1) partnum, count(*) count " +
             "FROM member GROUP BY partnum ORDER BY partnum ASC")
     public List<MemberDto> memberByPart();
 
-    // [5] 직급별 조회(shceduled)
+    // [5]-(5) 직급별 조회(shceduled)
     @Select("SELECT mrank value, count(*) count FROM member GROUP BY mrank")
     public List<MemberDto> memberByRank();
+
+    // [8] 사원 전체 조회 http://localhost:8080/workplatform/infoall | rw 25-03-28 생성
+    @Select("select * from member")
+    public List<MemberDto>infoAll();
 
 }
 
