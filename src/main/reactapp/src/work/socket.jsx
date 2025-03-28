@@ -144,7 +144,7 @@ export default function Socket({isReportPosted}) {
                                 onClose={handleClose}
                                 message={
                                     <>
-                                        {roomInfo.rname} 번 채팅방
+                                        {roomInfo.rname}                              
                                         <hr />
                                         <br />
                                         {findLog.mname} :{' '}
