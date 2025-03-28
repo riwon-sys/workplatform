@@ -1,27 +1,15 @@
-/*  Member_Mypage.jsx 마이페이지 UI 및 MUI 기능 + 보안/제한적 수정 기능 반영 | rw 25-03-26 수정 */
-import React, { useEffect, useState } from 'react';
+/*  Member_Mypage.jsx 고정 박스형 마이페이지 | rw 25-03-27 생성 */
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
-    Container,
-    Typography,
     Box,
+    Typography,
     TextField,
     Button,
     Avatar,
-    IconButton,
-    Card,
-    MenuItem,
+    Paper
 } from '@mui/material';
-import {
-    Brightness4 as Brightness4Icon,
-    Brightness7 as Brightness7Icon,
-    Settings as SettingsIcon,
-    Minimize as MinimizeIcon,
-    Fullscreen as MaximizeIcon,
-    Close as CloseIcon,
-} from '@mui/icons-material';
-import { styled, ThemeProvider, createTheme } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -32,92 +20,56 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Member_Mypage = () => {
-    const loginUser = useSelector((state) => state.user.userInfo);
-    const [verified, setVerified] = useState(false);
+    const loginInfo = useSelector((state) => state.user.userInfo);
+
     const [inputPwd, setInputPwd] = useState('');
-    const [memberData, setMemberData] = useState(null);
-    const [editMode, setEditMode] = useState(false);
-    const [formData, setFormData] = useState({});
-    const [darkMode, setDarkMode] = useState(false);
-    const [newPwd, setNewPwd] = useState('');
-    const [profileFile, setProfileFile] = useState(null);
-
-    const toggleColorMode = () => setDarkMode(!darkMode);
-
-    const theme = createTheme({
-        palette: {
-            primary: { main: '#1976d2' },
-            secondary: { main: '#dc004e' },
-            mode: darkMode ? 'dark' : 'light',
-        },
-    });
+    const [isVerified, setIsVerified] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
 
     const handlePasswordCheck = () => {
         if (inputPwd === '1234') {
-            const data = {
-                mno: loginUser.mno,
-                mname: loginUser.mname,
-                mphone: loginUser.mphone,
-                memail: loginUser.memail,
-                mtype: loginUser.mtype,
-                mrank: loginUser.mrank,
-                mprofile: loginUser.mprofile,
-                mpwd: loginUser.mpwd,
-            };
-            setMemberData(data);
-            setFormData(data);
-            setVerified(true);
+            setIsVerified(true);
+            setErrorMsg('');
         } else {
-            alert('비밀번호가 올바르지 않습니다.');
+            setErrorMsg('비밀번호가 일치하지 않습니다.');
         }
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({ ...prev, [name]: value }));
-    };
+    const [mphone, setMphone] = useState(loginInfo.mphone);
+    const [phoneCheck, setPhoneCheck] = useState(false);
 
-    const handleProfileUpload = (e) => {
-        const file = e.target.files[0];
-        setProfileFile(file);
-    };
+    const isValidPhone = (phone) => /^010-\d{4}-\d{4}$/.test(phone);
 
-    const handleSave = () => {
-        if (!/^010\d{8}$/.test(formData.mphone)) {
-            alert('전화번호 형식이 올바르지 않습니다. 예: 01012345678');
+    const checkPhoneDuplicate = async () => {
+        if (!isValidPhone(mphone)) {
+            alert("전화번호 형식이 올바르지 않습니다. (010-0000-0000)");
             return;
         }
-        if (formData.mtype === '3') {
-            alert('퇴사 상태(3)로는 변경할 수 없습니다.');
-            return;
+
+        try {
+            const res = await axios.get(`http://localhost:8080/workplatform/check-phone?mphone=${mphone}`);
+            if (res.data.duplicate === true) {
+                alert("이미 사용 중인 연락처입니다.");
+                setPhoneCheck(false);
+            } else {
+                alert("사용 가능한 번호입니다.");
+                setPhoneCheck(true);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("중복 확인 중 오류가 발생했습니다.");
+            setPhoneCheck(false);
         }
-        if (newPwd.trim() !== '') {
-            formData.mpwd = newPwd;
-        }
-        if (profileFile) {
-            formData.mprofile = profileFile.name;
-        }
-        alert('수정이 완료되었습니다. (실제 서버 연동 필요)');
-        setMemberData(formData);
-        setEditMode(false);
     };
 
     return (
         <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
-            <Item
-                sx={{
-                    minWidth: '800px',
-                    maxWidth: '1000px',
-                    width: '100%',
-                }}
-            >
-                <Typography variant="h4" sx={{ mb: 3, textAlign: 'center', fontWeight: "bold" }}
-                    paddingTop={ !verified ? '300px' : '100px' }
-                >
+            <Item sx={{ minWidth: '800px', maxWidth: '1000px', width: '100%' }}>
+                <Typography variant="h4" sx={{ mb: 3, textAlign: 'center', fontWeight: "bold" }} paddingTop={!isVerified ? '300px' : '100px'}>
                     내 정보
                 </Typography>
 
-                {!verified ? (
+                {!isVerified ? (
                     <>
                         <Typography variant="body1" gutterBottom>
                             보안을 위해 비밀번호를 다시 입력해주세요.
@@ -133,46 +85,53 @@ const Member_Mypage = () => {
                         <Button variant="contained" onClick={handlePasswordCheck} fullWidth>
                             확인
                         </Button>
+                        {errorMsg && <Typography color="error" sx={{ mt: 2 }}>{errorMsg}</Typography>}
                     </>
                 ) : (
-                    memberData && (
+                    <Box sx={{ mt: 3 }}>
+                        <TextField label="사번" value={loginInfo.mno} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+                        <TextField label="이름" value={loginInfo.mname} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+                        <TextField label="이메일" value={loginInfo.memail} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+                        <TextField
+                            label="연락처"
+                            value={mphone}
+                            onChange={(e) => {
+                                setMphone(e.target.value);
+                                setPhoneCheck(false); // 번호 변경 시 중복 확인 다시 필요
+                            }}
+                            fullWidth
+                            margin="normal"
+                            placeholder="010-0000-0000"
+                            helperText={phoneCheck ? "✔ 중복 확인 완료" : "전화번호는 010-0000-0000 형식입니다."}
+                        />
+                        <Button
+                            variant="outlined"
+                            onClick={checkPhoneDuplicate}
+                            sx={{ mt: 1, mb: 2 }}
+                        >
+                            중복 확인
+                        </Button>
+                        <TextField label="직급" value={loginInfo.mrank} fullWidth margin="normal" InputProps={{ readOnly: true }} />
+                        <TextField
+                            label="상태"
+                            value={
+                                loginInfo.mtype === 0 ? '활동' :
+                                    loginInfo.mtype === 1 ? '부재' :
+                                        loginInfo.mtype === 2 ? '외부업무' : '퇴사'
+                            }
+                            fullWidth margin="normal" InputProps={{ readOnly: true }}
+                        />
                         <Box sx={{ mt: 3 }}>
-                            <TextField label="사번" value={formData.mno} fullWidth margin="normal" InputProps={{ readOnly: true }} />
-                            <TextField label="이름" value={formData.mname} fullWidth margin="normal" InputProps={{ readOnly: true }} />
-                            <TextField label="이메일" value={formData.memail} fullWidth margin="normal" InputProps={{ readOnly: true }} />
-                            <TextField label="연락처" value={formData.mphone} name="mphone" onChange={handleChange} fullWidth margin="normal" InputProps={{ readOnly: !editMode }} />
-                            <TextField label="직급" value={formData.mrank} fullWidth margin="normal" InputProps={{ readOnly: true }} />
-                            <TextField select label="상태" name="mtype" value={formData.mtype} onChange={handleChange} fullWidth margin="normal" disabled={!editMode}>
-                                <MenuItem value="0">활동</MenuItem>
-                                <MenuItem value="1">부재</MenuItem>
-                                <MenuItem value="2">외부업무</MenuItem>
-                            </TextField>
-                            {editMode && (
-                                <>
-                                    <TextField label="기존 비밀번호" type="password" value="********" fullWidth margin="normal" disabled />
-                                    <TextField label="새 비밀번호" type="password" value={newPwd} onChange={(e) => setNewPwd(e.target.value)} fullWidth margin="normal" />
-                                    <Button variant="outlined" component="label" fullWidth sx={{ mt: 1 }}>
-                                        프로필 사진 업로드
-                                        <input type="file" accept="image/*" hidden onChange={handleProfileUpload} />
-                                    </Button>
-                                </>
-                            )}
-                            <Box sx={{ mt: 3, textAlign: 'center' }}>
-                                <Avatar src={`http://localhost:8080/file/${formData.mprofile}`} sx={{ width: 100, height: 100, mx: 'auto' }} />
-                            </Box>
-                            <Box sx={{ display: 'flex', gap: 2, mt: 3 }}>
-                                {!editMode ? (
-                                    <Button variant="outlined" fullWidth onClick={() => setEditMode(true)}>수정하기</Button>
-                                ) : (
-                                    <Button variant="contained" color="primary" fullWidth onClick={handleSave}>저장</Button>
-                                )}
-                            </Box>
+                            <Typography variant="body1" gutterBottom>프로필 사진</Typography>
+                            <Avatar src={`http://localhost:8080/file/${loginInfo.mprofile}`} sx={{ width: 100, height: 100, mx: 'auto' }} />
                         </Box>
-                    )
+                        <Typography variant="body2" align="center" sx={{ mt: 4, color: 'gray' }}>
+                            문의: insateam_jang@example.com
+                        </Typography>
+                    </Box>
                 )}
             </Item>
         </Box>
-
     );
 };
 

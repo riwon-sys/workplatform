@@ -143,6 +143,22 @@ INSERT INTO fileshare (fname, flocation, pno) VALUES
                                                   ('회의 일지.txt', '/uploads/회의_일지.txt', 14), -- 박시연 (마케팅팀 대리 회의)
                                                   ('분석 자료.xlsx', '/uploads/분석_자료.xlsx', 15); -- 윤지호 (마케팅팀 전체)
 
+
+--좋아요 샘플 데이터 추가
+insert into board_like (pid,mno)values
+(1, 100001),  -- 회원 100001이 게시물 1에 좋아요
+(2, 100001),  -- 회원 100001이 게시물 2에 좋아요
+(1, 100002),  -- 회원 100002가 게시물 1에 좋아요
+(3, 100003);  -- 회원 100003이 게시물 3에 좋아요
+
+-- 좋아요 수 업데이트 (옵션)
+UPDATE board SET like_count = 2 WHERE pid = 1;  -- 게시물 1은 좋아요 2개
+UPDATE board SET like_count = 1 WHERE pid = 2;  -- 게시물 2는 좋아요 1개
+UPDATE board SET like_count = 1 WHERE pid = 3;  -- 게시물 3은 좋아요 1개
+UPDATE board SET like_count = 1 WHERE pid = 4;  -- 게시물 4은 좋아요 1개
+
+
+
 -- 카테고리 데이터 추가
 insert into category(category_name, category_desc) values
                                                        ('자유게시판', '자유롭게 글을 작성할 수 있는 게시판'),

@@ -7,6 +7,7 @@ import work.model.dto.board.BoardDto;
 import work.model.dto.board.CommentDto;
 import work.model.mapper.board.BoardMapper;
 import work.model.mapper.board.CommentMapper;
+import work.model.mapper.board.LikeMapper;
 
 import java.util.List;
 
@@ -16,11 +17,26 @@ public class BoardService {
     // 서비스와 매퍼 연결
     private final BoardMapper boardMapper;
     private final CommentMapper commentMapper;
+    private final LikeMapper likeMapper;
 
     //[1]전체조회
     public List<BoardDto>allView(){
         System.out.println("BoardService.allView");
-        return boardMapper.allView();
+         List<BoardDto> list =boardMapper.allView();
+         list.forEach(b->{
+             //게시물 하나씩 댓글 수 구하기
+             int reuslt =commentMapper.ccount(b.getPid());
+             b.setCcount(reuslt);
+
+             //게시물 하나씩 좋아요 수 구하기
+             int likeCount = likeMapper.lcount(b.getPid());
+             b.setLcount(likeCount);
+         });
+         return list;
+
+
+
+
     }
 
 
@@ -40,6 +56,10 @@ public class BoardService {
         List<CommentDto> commentDto = commentMapper.CommentFindAll(pid);
         //3.조회된 댓글 리스트를 게시물 dto에 담기
         boardDto.setCommentList(commentDto);
+
+        int likeCount = likeMapper.lcount(boardDto.getPid());
+        boardDto.setLcount(likeCount);
+
         return boardDto;
     }
 

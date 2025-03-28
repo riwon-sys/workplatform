@@ -3,12 +3,14 @@ package work.service.report;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import work.model.dto.member.MemberUtils;
 import work.model.dto.report.ApprovalDto;
 import work.model.dto.report.ReportDto;
 import work.model.mapper.report.ApprovalMapper;
+import work.model.mapper.report.ReportMapper;
 import work.service.message.FileService;
 
 import java.sql.Timestamp;
@@ -19,6 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ApprovalService {
 
+    private final ReportMapper reportMapper;
     private final ApprovalMapper approvalMapper;
     private final FileService fileService;
 
@@ -157,6 +160,36 @@ public class ApprovalService {
 
         return true;
 
+    } // f end
+
+    // 7. 한주동안 결재받지 못한 보고서 삭제
+    // 매주 월요일 자정에 삭제
+    @Scheduled( cron = "0 0 0 * * 1")
+    @Transactional( rollbackFor = Exception.class )
+    public void deleteUnapprove() throws Exception {
+        System.out.println("MemberService.deleteUnapprove");
+
+        // 삭제할 보고서 번호 리스트 가져오기
+        List<Integer> deleteList = approvalMapper.getNotApproveRpno();
+        System.out.println("deleteList = " + deleteList);
+
+        System.out.println(">> 보고서 삭제");
+        deleteList.stream()
+                .forEach( (rpno) -> {
+                    delete_report(rpno);
+                    delete_Approval(rpno);
+                } );
+
+    } // f end
+
+    // 보고서 삭제
+    private void delete_report( int rpno ){
+        reportMapper.delete_Report( rpno );
+    } // f end
+
+    // 결재목록 삭제
+    private void delete_Approval( int rpno ){
+        approvalMapper.delete_Approval( rpno );
     } // f end
 
 }

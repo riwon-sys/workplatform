@@ -37,4 +37,7 @@ public interface CommentMapper {
 
 
     /// { "cid": 3, "content": "수정된, 댓글 내용입니다.", "mno": 100001 }
+    //댓글 수 구하기
+    @Select("select count(*) from comment where pid = #{pid}")
+    public int ccount(@Param("pid")int pid);
 }

@@ -3,8 +3,11 @@ package work.service.report;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import work.model.dto.member.MemberUtils;
+import work.model.dto.report.ApprovalDto;
 import work.model.dto.report.ReportDto;
 import work.model.mapper.report.ReportMapper;
 

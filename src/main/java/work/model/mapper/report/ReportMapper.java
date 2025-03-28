@@ -31,14 +31,19 @@ public interface ReportMapper {
             "rpexpected = #{rpexpected}, rpdate = now() WHERE rpno = #{rpno} ")
     boolean update(ReportDto reportDto);
 
-    // 5. 보고서 삭제
+    // 5. 보고서 삭제( 상태변경만 )
     @Delete( "UPDATE report SET rpstate = false WHERE rpno = #{rpno}" )
     boolean delete(int rpno);
 
     // 6. 보고서 번호
-    // 한번 insert 되기 전까지 실행안됨
+    // 한번 insert 되기 전까지 조회안됨
     // @Select( "SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'workplatform' AND TABLE_NAME = 'report'" )
     @Select( "SELECT rpno FROM report WHERE mno = #{loginMno} ORDER BY rpdate DESC LIMIT 1" )
     Integer lastRpno( int loginMno );
+
+    // 7. 한주동안 결재받지 못한 보고서 삭제
+    @Delete("DELETE FROM report WHERE rpno = #{rpno}")
+    public boolean delete_Report( int rpno );
+
 
 }

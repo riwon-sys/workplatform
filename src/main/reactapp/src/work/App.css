@@ -32,3 +32,57 @@ body{ min-height: 100%;}
     }
 }
 
+/* App.css 또는 별도의 CSS 파일에 추가 */
+@keyframes thumbsUpAnimation {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1);
+    }
+  }
+  
+  .like-animation {
+    animation: thumbsUpAnimation 1.5s ease-out forwards;
+  }
+
+
+  .blind-button {
+    background-color: #2C7FFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    min-width: 80px;
+    transition: background-color 0.2s;
+  }
+  
+  .blind-button:hover {
+    background-color: #1A70F5;
+  }
+  
+  .blind-button:active {
+    background-color: #155ED6;
+  }
+  
+  /* 버튼 기능이 필요한 레이아웃 부분 */
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    padding: 0 8px;
+  }
+  

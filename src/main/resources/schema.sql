@@ -16,7 +16,8 @@ DROP TABLE IF EXISTS report;
 
 -- 채팅방 테이블 삭제 (room 테이블은 member를 참조하므로, room 테이블을 마지막에 삭제)
 DROP TABLE IF EXISTS room;
-
+-- 좋아요 테이블 삭제(board_like 테이블은 board를 참조하므로 , board_like 테이블을 먼저 삭제)
+drop table if exists board_like;
 -- 댓글 테이블 삭제 (comment 테이블은 board를 참조하므로, comment 테이블을 먼저 삭제)
 drop table if exists comment;
 -- 카테고리 테이블 삭제  ( 카테고리 테이블은 board 를 참조하므로 , 카테고리 테이블 먼저 삭제)
@@ -125,6 +126,22 @@ create table comment(
                             on update cascade
                             on delete cascade
 );
+
+---좋아요 테이블 추가 됨
+CREATE TABLE Board_Like (
+    like_id INT UNSIGNED AUTO_INCREMENT,
+    pid INT UNSIGNED NOT NULL,      -- 게시물 번호 (외래키)
+    mno INT UNSIGNED NOT NULL,      -- 회원 번호 (외래키)
+    PRIMARY KEY (like_id),
+    UNIQUE KEY unique_like (pid, mno),  -- 한 사용자가 한 게시물에 좋아요는 한 번만 가능
+    FOREIGN KEY (pid) REFERENCES board(pid)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (mno) REFERENCES Member(mno)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
 
 -- 보고서 테이블
 create table report(

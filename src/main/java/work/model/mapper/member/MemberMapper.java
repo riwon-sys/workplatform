@@ -4,9 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.jdbc.SQL;
+import org.springframework.scheduling.annotation.Scheduled;
 import work.model.dto.member.MemberDto;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface MemberMapper {
@@ -65,17 +67,11 @@ public interface MemberMapper {
         UPDATE member 
         SET 
           mpwd = #{mpwd}, 
-          moldPwd = #{moldPwd},
+          
           mphone = #{mphone}, 
-          mtype = CASE 
-                     WHEN #{mtype} IN (0, 1, 2) THEN #{mtype} 
-                     ELSE 3 
-                  END,
-          mprofile = #{mprofile},
-          memail = CASE 
-                     WHEN #{mtype} = 3 THEN CONCAT('retired_', #{mno}, '@company.com') 
-                     ELSE memail 
-                  END
+          mtype =  #{mtype},
+        mprofile = #{mprofile}
+          
         WHERE mno = #{mno}
     """)
     public boolean updateMember(MemberDto memberDto);
@@ -87,6 +83,16 @@ public interface MemberMapper {
     // [3] 연락처 중복 검사
     @Select("SELECT COUNT(*) FROM member WHERE mphone = #{mphone} AND mno != #{mno}")
     public int checkPhoneDuplicate(@Param("mphone") String mphone, @Param("mno") int mno);
+
+    // [4] 부서별 조회(shceduled)
+    @Select("SELECT LEFT(mno, 1) partnum, count(*) count " +
+            "FROM member GROUP BY partnum ORDER BY partnum ASC")
+    public List<MemberDto> memberByPart();
+
+    // [5] 직급별 조회(shceduled)
+    @Select("SELECT mrank value, count(*) count FROM member GROUP BY mrank")
+    public List<MemberDto> memberByRank();
+
 }
 
 

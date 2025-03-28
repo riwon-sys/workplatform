@@ -1,57 +1,71 @@
+import * as React from 'react';
+
 /* mui import */
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import Button from '@mui/material/Button';
+import Button from '@mui/joy/Button';
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import Modal from '@mui/joy/Modal';
+import ModalDialog from '@mui/joy/ModalDialog';
+import ModalClose from '@mui/joy/ModalClose';
+import DialogTitle from '@mui/joy/DialogTitle';
+import Stack from '@mui/joy/Stack';
 
 /* jsx import */
 import Report_Form from './Report_Form';
-import { StyleSheet } from '@react-pdf/renderer';
+import LoadingIconButton from './LoadingIconButton';
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(0),
-  paddingTop: '30px',
-  textAlign: 'center',
-  color: theme.palette.text.primary,
-  height: '100%', // 높이 설정 추가
-}));
+export default function PDF_Viewer( { formData, formDataChange, rpno, approval } ) {
+  const [layout, setLayout] = React.useState(undefined);
+  const [scroll, setScroll] = React.useState(true);
 
-const styles = StyleSheet.create({
-  page: { padding: 20 },
-  section: { marginBottom: 10 },
-  title: { fontSize: 20, fontWeight: "bold", marginBottom: 10 },
-  text: { fontSize: 14 },
-});
+  return (
+    <React.Fragment>
+      <Stack direction="row" spacing={1}>
+        <Button
+          variant="outlined"
+          color="neutral"
+          onClick={() => {
+            setLayout('fullscreen');
+          }}
+        >
+          모달
+        </Button>
+      </Stack>
+      <Modal
+        open={!!layout}
+        onClose={() => {
+          setLayout(undefined);
+        }}
+      >
+        <ModalDialog layout={layout}>
+          <ModalClose />
+          
 
-export default function PDF_Viewer( { formData, rpno, approval } ){
-  return(<>
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-    <Item
-      sx={{
-        overflow: 'scroll',
-        overflowX: 'hidden',
-        padding: 10,
-        width: '100%', // 기본적으로 100% 차지
-        minHeight: { sm: '1350px', lg: '100%' }
-      }}
-    >
-      {rpno && Number(rpno) > 0 ? (
-        <>
-          <Report_Form
-            formData={ formData }
-            isReadOnly={ true }
-            isUpdate={ false }
-            rpno={ rpno }
-            approval={ approval }
-          />
-        </>
-      ) : null}
-    </Item>
-      </View>
-    </Page>
-  </Document>
-  </>);
+          <div style={{ width: "800px", margin: "0 auto", overflow: "scroll", overflowX: "hidden"  }} >
+            <FormControl
+              orientation="horizontal"
+              sx={{ bgcolor: '', p: 1, borderRadius: 'sm' }}
+            >
+              <DialogTitle> PDF 미리보기 </DialogTitle>
+              <FormLabel> PDF View </FormLabel>
+              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <LoadingIconButton />
+              </div>
+            </FormControl>
+            
+            <Report_Form
+              id='pdf-download'
+              formData={ formData }
+              formDataChange={ formDataChange }
+              isReadOnly={ true }
+              isUpdate={ true }
+              rpno={ rpno }
+              approval={ approval }
+            />
+          </div>
+          
+        </ModalDialog>
+      </Modal>
+    </React.Fragment>
+  );
 }
