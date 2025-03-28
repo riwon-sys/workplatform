@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react';  // useState 추가
 import axios from 'axios';
 import Table from '@mui/joy/Table';
 import {  CssVarsProvider } from '@mui/joy/styles';
-
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -32,12 +33,18 @@ export default function () {
 
     //const respons  = await axios.메소드명( "자바주소" )
    const response =await axios.get("http://localhost:8080/work/board")
-    console.log(response.data)
+    console.log(response.data.list)
     // 응답받은 게시물목록을 state 변수에 저장한다. -> state가 변경되면 컴포넌트 재렌더링 된다.
-    setboards(response.data)
+    setboards(response.data.list)
   }
 
- 
+  const [ page, setPage ] = useState(1); // 현재 페이지
+  const [ totalPages, setTotalPages ] = useState(1); // 전체 페이지 수
+
+  // mui 페이지네이션 페이지 번호 가져오기
+  const handlePageChange = ( e, value ) => {
+    setPage( value );
+  }
 
   
   return (<>
@@ -63,7 +70,7 @@ export default function () {
 
                     return(<>
                       <tr>
-                        <td> <span>{board.category_name || '카테고리 없음'}</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
+                        <td> <span style={{textAlign :'left',display:'inline-block',marginRight:'8px'}}>{board.category_name || '카테고리 없음'}</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
                         <td style={{ textAlign: 'right' }}>
         <span style={{ marginRight: '12px' }}>👍 {board.lcount || 0}</span>
         <span style={{ color: commentCount > 0 ? '#0068c3' : '#666' }}>
@@ -76,6 +83,7 @@ export default function () {
                 }
               </tbody>
             </Table>
+            
                 {/* 블라인드 스타일 버튼 컨테이너 */}
                 <div className="button-container">
               <button 
@@ -87,6 +95,17 @@ export default function () {
             </div>
           
           </CssVarsProvider>
+          
+          <Stack spacing={2} mt={1}>
+                          <Pagination
+                            color="primary"
+                            page={ page }
+                            count={ totalPages }
+                            defaultPage={ 1 }
+                            onChange={ handlePageChange }
+                            sx={{ display: 'flex', justifyContent: 'center' }}
+                          />
+                        </Stack>
       </Item>
     </Box>
   </>);

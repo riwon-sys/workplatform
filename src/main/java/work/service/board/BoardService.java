@@ -1,5 +1,7 @@
 package work.service.board;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,9 +22,13 @@ public class BoardService {
     private final LikeMapper likeMapper;
 
     //[1]전체조회
-    public List<BoardDto>allView(){
-        System.out.println("BoardService.allView");
-         List<BoardDto> list =boardMapper.allView();
+    public PageInfo<BoardDto> allView(int page,int pageSize){
+        System.out.println("BoardService.allView with paging");
+
+        //페이지헬퍼로 페이징 처리 적용
+        PageHelper.startPage(page,pageSize);
+        //페이징이 적용된 게시물 목록 조회
+        List<BoardDto> list =boardMapper.allView();
          list.forEach(b->{
              //게시물 하나씩 댓글 수 구하기
              int reuslt =commentMapper.ccount(b.getPid());
@@ -32,12 +38,38 @@ public class BoardService {
              int likeCount = likeMapper.lcount(b.getPid());
              b.setLcount(likeCount);
          });
-         return list;
+
+         //pageInfo 객체 생성
+        PageInfo<BoardDto>pageInfo = new PageInfo<>(list);
+        System.out.println("page = " + page + ", pageSize = " + pageSize);
+        System.out.println("BoardService.allView");
+        return pageInfo;
+
+
 
 
 
 
     }
+//    // 2. 회원별 보고서 조회( 페이징 적용 )
+//    public PageInfo<ReportDto> findByMno(int page, int pageSize){
+//        System.out.println("ReportService.findByMno with paging");
+//
+//
+//        // PageHelper로 페이징 처리 적용
+//        PageHelper.startPage( page, pageSize );
+//        List<ReportDto> pagingResult = reportMapper.findByMno( );
+//
+//
+//        // PageInfo의 pageSize가 정상적인지 확인
+//        PageInfo<ReportDto> pageInfo = new PageInfo<>(pagingResult);
+//        System.out.println("pageInfo = " + pageInfo);
+//        System.out.println("PageHelper 적용 후 pageSize: " + pageInfo.getPageSize());
+//
+//        return pageInfo;
+//    } // f end
+
+
 
 
     //[2]게시물 등록

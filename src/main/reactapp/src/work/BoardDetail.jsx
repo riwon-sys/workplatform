@@ -203,11 +203,8 @@ export default function BoardDetail() {
               {/* 헤더 부분 */}
               <Box sx={{ display: 'flex', alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid #eee' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center', fontSize: '14px' }}>
-                  <span style={{ color: '#555' }}>토픽</span>
-                  <span style={{ margin: '0 4px' }}>&gt;</span>
-                  <span style={{ color: '#4d90fe' }}>OTT위플레이</span>
-                  <span style={{ margin: '0 4px' }}>&gt;</span>
-                  <span style={{ color: '#4d90fe' }}>팔로우</span>
+                  <span style={{ color: '#0068c3' }}>{"[게시판]" + board.category_name}</span>
+                 
                 </Box>
               </Box>
 
