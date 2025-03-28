@@ -12,8 +12,6 @@ import Paper from '@mui/material/Paper';
 import Report_Form from './component/report/Report_Form';
 import PostModal from './component/report/PostModal';
 
-import Socket from './socket.jsx'
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
   ...theme.typography.body2,
@@ -57,9 +55,9 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
     { rank: "차장", mno: null, rpno: lastRpno, apstate: false },
     { rank: "부장", mno: null, rpno: lastRpno, apstate: false }
   ]);
-  const [ members, setMembers ] = useState([]);
+  const [ members, setMembers ] = useState( [] );
   const [ reports, setReports ] = useState( [] );
-  const [ membersByRank, setMembersByRank ] = useState({}); // 직급별 멤버 상태
+  const [ membersByRank, setMembersByRank ] = useState( {} ); // 직급별 멤버 상태
   // 보고서 소켓으로 전달할 state 변수
  
   const navigate = useNavigate();
