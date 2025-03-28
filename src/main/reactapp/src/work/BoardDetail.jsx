@@ -63,6 +63,7 @@ export default function BoardDetail() {
   const [editComment, setEditComment] = useState({ cid: null, content: '' });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
+
   //댓글 등록함수
   const createComment = async() => {
     //작성자 샘플 : 리덕스에서 가져올 예정
@@ -325,6 +326,8 @@ export default function BoardDetail() {
 
           {/*현재 게시물 해당하는 댓글조회 , 리스트명.map((반복변수,인덱스)),조건&&참 */}
           {board.commentList && board.commentList.map((comment,index)=>{
+
+              const anonymousName = `익명${index + 1}`; //익명변환
             return (
               <Box
                 key={index}
@@ -336,7 +339,7 @@ export default function BoardDetail() {
               >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                   <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#333' }}>
-                    {comment.mno}
+                  {anonymousName}
                   </Typography>
                   <Typography sx={{ fontSize: '12px', color: '#999' }}>
                     {comment.reg_date}
@@ -425,7 +428,7 @@ export default function BoardDetail() {
               animation: 'thumbsUpAnimation 1.5s ease-out forwards'
             }}
           >
-            <img src="/좋아요.png" />
+            <img src="/좋아요.png" style={{width:100}} />
           </div>
         </div>
       )}
