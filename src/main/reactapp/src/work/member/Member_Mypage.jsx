@@ -167,7 +167,7 @@ const Member_Mypage = () => {
                             등록
                         </Button>
                         <Typography variant="body2" align="center" sx={{ mt: 4, color: 'gray' }}>
-                            문의: insateam_jang@example.com
+                            문의: insateam_jang@example.com DDDD
                         </Typography>
                     </Box>
                 )}
