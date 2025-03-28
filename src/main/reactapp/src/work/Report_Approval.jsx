@@ -148,7 +148,11 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
   }
 
   // rpno 바뀔때마다 결재자 찾기
-  useEffect( () => { onApprovalByRpno( rpno ); }, [ rpno ] );
+  useEffect( () => { 
+    if(rpno > 0){
+    onApprovalByRpno( rpno );
+
+  }}, [ rpno ] );
 
   // 보고서 결재자 찾기
   const onApprovalByRpno = async ( rpno ) => {

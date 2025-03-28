@@ -973,7 +973,7 @@ export default function ChatTeset() {
 
                   {/* 메시지 입력칸과  등록 버튼 */}
                   <div style={{ display: 'flex', marginLeft: "3%" }}>
-                  <Textarea name="Soft" placeholder="Type in here…" variant="soft" />
+                 
                     <Input
                       type="text"
                       placeholder="메시지를 입력하세요."

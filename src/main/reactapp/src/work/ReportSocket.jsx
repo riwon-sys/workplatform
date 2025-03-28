@@ -152,7 +152,7 @@ console.log(next)
                 mrank: ''
             });
 
-
+setLastRpno(null)
 
             } else {
                 console.log('소켓이 아직 연결되지 않았습니다.');
