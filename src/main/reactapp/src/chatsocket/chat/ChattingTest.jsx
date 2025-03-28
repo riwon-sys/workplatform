@@ -338,17 +338,35 @@ export default function ChatTeset() {
       console.log("mnolist 있음")
       rname = prompt("채팅방 이름");
 
-      if (rname === "") {
+      if (rname === null) {
+        alert("채팅방 등록을 취소했습니다.");
+        return;
+      }
+    
+      if (rname.trim === "") {
         alert("채팅방 이름을 입력하세요.")
         return;
       }
+
 
       const obj = {
         rname: rname,
         mnoList: mnoList,
       };
 
+      let state = false
       console.log("채팅방에 참여할 mno: ", mnoList);
+      for(let i = 0; i < mnoList.length; i++){
+        if(mnoList[i] == loginInfo.mno){
+          console.log(mnoList[i])
+          state = true
+        }
+      }
+
+      if(state == false){
+        alert("등록할 채팅방에 참여하세요.")
+        return;
+      }
 
       try {
         // 새로운 채팅방 생성 요청
@@ -365,6 +383,8 @@ export default function ChatTeset() {
 
           // 채팅방 생성 메시지를 소켓으로 전송
           totalSocket.send(JSON.stringify(mappingobj)); // JSON으로 파싱 후 서버로 전송
+        }else{
+          alert("채팅방 등록 취소")
         }
       } catch (e) {
         console.log("채팅방 생성 오류: ", e);
