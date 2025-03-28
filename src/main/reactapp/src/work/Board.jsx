@@ -37,9 +37,6 @@ export default function () {
     setboards(response.data)
   }
 
- 
-
-  
   return (<>
     <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
       <Item
@@ -53,7 +50,8 @@ export default function () {
         }}
       >
           <CssVarsProvider>
-          <Table>
+          <h1> 사내 게시판 </h1>
+          <Table sx={{ mt: 3 }} >
               <thead>
               </thead>
               <tbody>
@@ -65,19 +63,19 @@ export default function () {
                       <tr>
                         <td> <span>{board.category_name || '카테고리 없음'}</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
                         <td style={{ textAlign: 'right' }}>
-        <span style={{ marginRight: '12px' }}>👍 {board.lcount || 0}</span>
-        <span style={{ color: commentCount > 0 ? '#0068c3' : '#666' }}>
-          💬 {commentCount}
-        </span>
-      </td>
+                        <span style={{ marginRight: '12px' }}>👍 {board.lcount || 0}</span>
+                        <span style={{ color: commentCount > 0 ? '#0068c3' : '#666' }}>
+                          💬 {commentCount}
+                        </span>
+                        </td>
                       </tr>
                     </>)
                   } )
                 }
               </tbody>
-            </Table>
+            </Table >
                 {/* 블라인드 스타일 버튼 컨테이너 */}
-                <div className="button-container">
+            <div className="button-container" style={{ justifyContent: 'flex-end' }} >
               <button 
                 className="blind-button" 
                 onClick={() => {navigate("/board/write")}}
