@@ -22,8 +22,11 @@ import StarBorder from '@mui/icons-material/StarBorder';
 
 import { useSelector } from 'react-redux';
 import log from "../../work/member/reduxs/logSlice"
+import AddHomeOutlinedIcon from '@mui/icons-material/AddHomeOutlined';
 
 import LogoutIcon from '@mui/icons-material/Logout';
+import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
+import Textarea from '@mui/joy/Textarea';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: '#fff',
@@ -807,7 +810,9 @@ export default function ChatTeset() {
                   }}
                 />
               </Typography>
-              <span style={{ marginLeft: "5%" }}><b> {loginInfo.mname} 님 </b> ({loginInfo.mrank})
+              <span style={{ marginLeft: "3%" }}><b> {loginInfo.mname} 님 </b> | {loginInfo.department}팀 ({loginInfo.mrank})
+              
+              <br/>  {loginInfo.memail}
               </span>
             </div>
 
@@ -825,7 +830,7 @@ export default function ChatTeset() {
                         </ListItemAvatar>
                         <ListItemText
                           key={index} onClick={() => handleRoomSelect(room.rno)}
-                          primary={`${room.rname} | ${room.rno} 방`} secondary={`${room.rdate}`} />
+                          primary={`${room.rno} . ${room.rname} `} secondary={`${room.rdate}`} />
                       </ListItem>
 
                       <hr style={{ border: "1px solid #bdbdbd", width: "100%" }} />
@@ -968,6 +973,7 @@ export default function ChatTeset() {
 
                   {/* 메시지 입력칸과  등록 버튼 */}
                   <div style={{ display: 'flex', marginLeft: "3%" }}>
+                  <Textarea name="Soft" placeholder="Type in here…" variant="soft" />
                     <Input
                       type="text"
                       placeholder="메시지를 입력하세요."
@@ -978,7 +984,7 @@ export default function ChatTeset() {
                     />
                     <Button onClick={sendMessage} variant="contained" color='info'
                       style={{ width: "10%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}>
-                      등록
+                      전송
                     </Button>
 
                     {/* 파일 첨부 버튼 */}
@@ -1048,13 +1054,14 @@ export default function ChatTeset() {
                     color='info'
                     sx={{ marginLeft: "10%" }}
                   >
-                    회원추가
+                    <GroupAddOutlinedIcon/> {/* 회원추가 아이콘 */}
+                  
                   </Button></>
               )}
 
               <Button type='button' onClick={creatR} variant="contained"
                 style={{ marginLeft: "10%" }}>
-                채팅방 생성
+               <AddHomeOutlinedIcon/>  {/* 채팅방 추가 아이콘 */}
               </Button>
             </div>
             <hr></hr>

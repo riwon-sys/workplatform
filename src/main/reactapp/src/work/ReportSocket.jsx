@@ -15,7 +15,7 @@ export default function ReportSocket(
     console.log(data)
     console.log(nextAp)
     const loginInfo = useSelector((state) => state.user.userInfo);
-    // console.log("로그인된 정보 : ", loginInfo);
+    console.log("로그인된 정보 : ", loginInfo);
     console.log(reportState);
     const [reportSocket, setReportSocket] = useState(null); // 소켓 상태 관리
     const [receivedData, setReceivedData] = useState(null); // 수신된 데이터 상태 관리
@@ -105,6 +105,7 @@ export default function ReportSocket(
 
     console.log("최초결재상태", reportState)
     // 보고서 등록 시 다음 결재자를 찾고 서버 소켓으로 전달
+    if(data.mname != null){
     useEffect(() => {
         if (next != null && loginInfo && loginInfo.mno && data.mname !== '') {
             // 소켓이 연결되었을 때만 메시지를 전송
@@ -163,7 +164,7 @@ console.log(next)
 
     }, [next, data]); //s
 
-
+}
     // [2] 등록된 보고서 결재 시 다음 결재자 찾기
     const [nextNext, setNextNext] = useState(null);
 
@@ -193,6 +194,8 @@ console.log(next)
     console.log("결재상태 : ", nextApState)
     console.log(nextAp)
     console.log(nextNext)
+
+    if(nextAp.mname != null){
     useEffect(() => {
         if (nextNext != null && loginInfo && loginInfo.mno && nextAp.mname != '') {
             // 소켓이 연결되었을 때만 메시지를 전송
@@ -245,7 +248,7 @@ console.log(next)
         }
 
     }, [nextApState, nextNext, data]);
-
+}
 
 
 
