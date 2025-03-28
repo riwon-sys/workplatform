@@ -105,8 +105,9 @@ export default function ReportSocket(
 
     console.log("최초결재상태", reportState)
     // 보고서 등록 시 다음 결재자를 찾고 서버 소켓으로 전달
-    if(data.mname != null){
     useEffect(() => {
+        if(data&&data.mname != null){
+   
         if (next != null && loginInfo && loginInfo.mno && data.mname !== '') {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket && reportSocket.readyState === WebSocket.OPEN) {
@@ -152,7 +153,7 @@ console.log(next)
                 mrank: ''
             });
 
-
+setLastRpno(null)
 
             } else {
                 console.log('소켓이 아직 연결되지 않았습니다.');
@@ -162,9 +163,9 @@ console.log(next)
         }
 
 
-    }, [next, data]); //s
+    }
 
-}
+    }, [next, data]); //s
     // [2] 등록된 보고서 결재 시 다음 결재자 찾기
     const [nextNext, setNextNext] = useState(null);
 
@@ -181,6 +182,7 @@ console.log(next)
                 const nextItem = filteredItems[loginInfoIndex + 1];
                 setNextNext(nextItem.mno);  // 그 다음 항목의 mno를 nn에 담음
                 console.log(nextNext)
+                
             } else {
                 // 만약 그런 항목이 없으면 0을 담음
                 setNextNext(0);
@@ -195,8 +197,9 @@ console.log(next)
     console.log(nextAp)
     console.log(nextNext)
 
-    if(nextAp.mname != null){
     useEffect(() => {
+
+        if(nextAp.rpno > 0){
         if (nextNext != null && loginInfo && loginInfo.mno && nextAp.mname != '') {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket && reportSocket.readyState === WebSocket.OPEN) {
@@ -246,9 +249,9 @@ console.log(next)
         } else {
             console.log('정의되지 않음');
         }
+    }
+    }, [nextApState, nextNext, nextAp]);
 
-    }, [nextApState, nextNext, data]);
-}
 
 
 

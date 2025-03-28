@@ -58,7 +58,7 @@ export default function Member_Login() {
                 { withCredentials: true }
             );
             const result = response.data;
-
+            console.log("로그인됨***********")
             if (result === true) {
                 const response2 = await axios.get(
                     "http://localhost:8080/workplatform/myinfo",

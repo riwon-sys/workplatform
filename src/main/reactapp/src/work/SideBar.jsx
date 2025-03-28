@@ -131,6 +131,7 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
       dispatch(logout());
       enqueueSnackbar("로그아웃 되었습니다. 다음에 또 만나요! 👋", { variant: "info" });
       navigate('/');
+      console.log("*************로그아웃됨")
     } catch (e) {
       console.error("로그아웃 오류:", e);
       enqueueSnackbar("로그아웃 중 오류가 발생했습니다.", { variant: "error" });
