@@ -154,6 +154,13 @@ public class MemberController {
         return result;
     } // f end
 
+    // [8] 사원 전체 조회 http://localhost:8080/workplatform/infoall | rw 25-03-28 생성
+    @GetMapping("/infoall")
+    public List<MemberDto> infoAll(){
+        System.out.println("MemberController.infoAll");
+        return memberService.infoAll();
+    } // f e
+
 }
 
 
