@@ -279,6 +279,24 @@ const isLoggingOut = useRef(false);
                 </ListItemButton>
               </ListItem>
             )}
+
+          {/* SideBar.jsx 인사팀이면 사원 전체 조회 메뉴 보여주기 | rw 25-03-28 생성 */}
+          {String(loginInfo?.mno).startsWith("1") &&
+              (loginInfo?.mrank === "차장" || loginInfo?.mrank === "부장") && (
+                  <ListItem key="사원 전체 조회" disablePadding sx={{ display: 'block' }}>
+                    <ListItemButton
+                        component={Link}
+                        to="/member/infoall"
+                        sx={{ justifyContent: open ? 'initial' : 'center', px: 2.5 }}
+                    >
+                      <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
+                        <PersonIcon />
+                      </ListItemIcon>
+                      <ListItemText primary="사원 전체 조회" sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+                  </ListItem>
+              )}
+
           </List>
 
         <Divider />
