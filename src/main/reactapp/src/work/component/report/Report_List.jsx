@@ -16,7 +16,10 @@ export default function Report_List(
     try{
       const response = await axios.get( `http://localhost:8080/api/report?page=${page}&pageSize=10`, { withCredentials : true } )
       if( response.data.list != null ){ setReports( response.data.list ); }
-      else{ setReports( [] ); }
+      else{ 
+        setReports( [] ); 
+        navigate('/');
+      }
       setPage( response.data.pageNum );
       setTotalPages( response.data.pages );
     }catch( e ){ console.log(e); }

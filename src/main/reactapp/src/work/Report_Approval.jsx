@@ -18,6 +18,7 @@ import SelectSmall from './component/report/SeleclSmall';
 import PostModal from './component/report/PostModal';
 import LoadingIconButton from './component/report/LoadingIconButton';
 import { useSelector } from 'react-redux';
+import PDF_Viewer from './component/report/PDF_Viewer';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
@@ -243,7 +244,14 @@ export default function Report_Approval({ setNextApMno, setNextAp, setNextApStat
             {rpno && Number(rpno) > 0 ? (
               <>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  <LoadingIconButton />
+                  <CssVarsProvider>
+                    <PDF_Viewer 
+                      formData={ formData }
+                      formDataChange={ formDataChange }
+                      rpno={ rpno }
+                      approval={ approval }
+                    />
+                  </CssVarsProvider>
                 </div>
                 <Report_Form
                   id='pdf-download'

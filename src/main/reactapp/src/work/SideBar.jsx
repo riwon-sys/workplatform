@@ -39,6 +39,7 @@ import { useSnackbar } from 'notistack'; // 토스트 메시지
 import Socket from "./socket.jsx";
 import ReportSocket from './ReportSocket.jsx';
 import CheckSession from './member/reduxs/CheckSession.jsx';
+import { useRef } from 'react';
 
 
 const drawerWidth = 240;
@@ -98,6 +99,9 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(isMdUp);
 
+  /* 로그아웃 상태를 추적하는 변수 추가 */
+const isLoggingOut = useRef(false);
+
   const loginInfo = useSelector((state) => state.user.userInfo);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -137,42 +141,22 @@ export default function SideBar({ reportState, setReportState, mnos, setMnos, da
     }
   };
 
-  // /* 로그인 세션 확인 */
-  // const checkSession = () => {
-  //   useEffect(() => {
-  //     const interval = setInterval(async () => {
-  //       try {
-  //         const response = await axios.get( "http://localhost:8080/workplatform/myinfo", { withCredentials: true } );
-  //         if( response == null ){ 
-  //           dispatch( logout() ); 
-  //           enqueueSnackbar("로그아웃 되었습니다. 로그인 후 사용가능합니다.", { variant: "info" });
-  //           navigate('/');
-  //         }
-  //       } catch (error) {
-  //         dispatch( logout() ); // 세션 만료 시 로그아웃 처리
-  //         console.error("로그아웃 오류:", e);
-  //         enqueueSnackbar("로그아웃 중 오류가 발생했습니다.", { variant: "error" });
-  //       }
-  //     }, 2 * 60 * 1000 ); // 5분마다 체크
-
-  //     return () => clearInterval(interval);
-  //   }, [dispatch]);
-  // } // f end
-
-  // checkSession();
-
-  // /* Axios 인터셉터 설정 */
-  // axios.interceptors.response.use(
-  //   ( response ) => response,
-  //   ( error ) => {
-  //     if (error.response?.status === 401) {
-  //       dispatch(logout()); // 세션 만료 시 로그아웃
-  //       enqueueSnackbar("로그아웃 되었습니다. 로그인 후 다시 시도해주세요.", { variant: "info" });
-  //       navigate('/');
-  //     }
-  //     return Promise.reject(error);
-  //   }
-  // );
+ /* Axios 인터셉터 설정 */
+  axios.interceptors.response.use(
+    ( response ) => response,
+    ( error ) => {
+      if ( error.response?.status === 401 ) {
+        if ( !isLoggingOut.current ) {  // 로그아웃 중이 아닐 때만 실행
+          isLoggingOut.current = true;
+          dispatch( logout() ); // 세션 만료 시 로그아웃
+          enqueueSnackbar("로그아웃 되었습니다. 로그인 후 다시 시도해주세요.", { variant: "info" });
+          navigate('/');
+          setTimeout( () => ( isLoggingOut.current = false ), 5000 ); // 일정 시간 후 리셋
+        }
+      }
+      return Promise.reject(error);
+    }
+  );
 
   /* 상단 사이드메뉴 */
   const mainMenuItems = [
