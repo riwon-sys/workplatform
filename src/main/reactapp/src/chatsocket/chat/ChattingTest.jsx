@@ -679,6 +679,8 @@ export default function ChatTeset() {
         console.log(socketObj)
         clientSocket.send(JSON.stringify(socketObj)) // 채팅방 소켓으로 보내기
         participant() // 이미 추가된 회원 체크박스 업데이트
+        const re = {mstype : 5}
+        totalSocket.send(JSON.stringify(re))
       }
     } catch (e) {
       console.log("회원 추가 오류 : ", e);

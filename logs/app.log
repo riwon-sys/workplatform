@@ -523,3 +523,85 @@
 2025-03-28 16:52:12 -  log info 
 2025-03-28 16:52:12 -  log info 
 2025-03-28 16:52:46 -  log info 
+2025-03-28 16:55:11 - Starting AppStart using Java 17.0.12 with PID 49128 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-28 16:55:11 - No active profile set, falling back to 1 default profile: "default"
+2025-03-28 16:55:12 - Tomcat initialized with port 8080 (http)
+2025-03-28 16:55:12 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-28 16:55:12 - Starting service [Tomcat]
+2025-03-28 16:55:12 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-28 16:55:12 - Initializing Spring embedded WebApplicationContext
+2025-03-28 16:55:12 - Root WebApplicationContext: initialization completed in 1236 ms
+2025-03-28 16:55:12 - HikariPool-1 - Starting...
+2025-03-28 16:55:13 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6b8d54da
+2025-03-28 16:55:13 - HikariPool-1 - Start completed.
+2025-03-28 16:55:13 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-28 16:55:13 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-28 16:55:13 - Started AppStart in 2.719 seconds (process running for 3.215)
+2025-03-28 16:55:20 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-28 16:55:20 - Initializing Servlet 'dispatcherServlet'
+2025-03-28 16:55:20 - Completed initialization in 1 ms
+2025-03-28 16:55:21 -  log info 
+2025-03-28 16:55:21 -  log info 
+2025-03-28 16:56:02 -  log info 
+2025-03-28 16:56:02 -  log info 
+2025-03-28 16:56:06 -  log info 
+2025-03-28 16:56:06 -  log info 
+2025-03-28 16:57:48 -  log info 
+2025-03-28 16:57:48 -  log info 
+2025-03-28 16:58:09 -  log info 
+2025-03-28 16:58:09 -  log info 
+2025-03-28 16:58:15 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=484854, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 16:58:14)
+2025-03-28 17:52:47 - Starting AppStart using Java 17.0.12 with PID 55560 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-28 17:52:47 - No active profile set, falling back to 1 default profile: "default"
+2025-03-28 17:52:48 - Tomcat initialized with port 8080 (http)
+2025-03-28 17:52:48 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-28 17:52:48 - Starting service [Tomcat]
+2025-03-28 17:52:48 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-28 17:52:49 - Initializing Spring embedded WebApplicationContext
+2025-03-28 17:52:49 - Root WebApplicationContext: initialization completed in 1320 ms
+2025-03-28 17:52:49 - HikariPool-1 - Starting...
+2025-03-28 17:52:49 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@18d47df0
+2025-03-28 17:52:49 - HikariPool-1 - Start completed.
+2025-03-28 17:52:50 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-28 17:52:50 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-28 17:52:50 - Started AppStart in 2.825 seconds (process running for 3.33)
+2025-03-28 17:52:56 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-28 17:52:56 - Initializing Servlet 'dispatcherServlet'
+2025-03-28 17:52:56 - Completed initialization in 10 ms
+2025-03-28 17:52:57 -  log info 
+2025-03-28 17:52:57 -  log info 
+2025-03-28 17:53:06 -  log info 
+2025-03-28 17:53:06 -  log info 
+2025-03-28 17:53:12 -  log info 
+2025-03-28 17:53:12 -  log info 
+2025-03-28 17:53:55 - 일반메세지 : ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=zzzzzzzzzzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 17:53:55)
+2025-03-28 17:54:01 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=zzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 17:54:01)
+2025-03-28 17:54:07 - 일반메세지 : ChattingDto(mstype=0, rno=18, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=zzzzzzzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 17:54:07)
+2025-03-28 17:54:12 - 파일메세지 : ChattingDto(mstype=1, rno=18, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=7d5eb5f7-9968-48da-a996-579b999d02cf_11.gif, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 17:54:10)
+2025-03-28 17:54:50 -  log info 
+2025-03-28 17:54:50 -  log info 
+2025-03-28 17:55:05 -  log info 
+2025-03-28 17:55:25 -  log info 
+2025-03-28 17:55:51 -  log info 
+2025-03-28 17:55:51 -  log info 
+2025-03-28 17:57:16 -  log info 
+2025-03-28 17:57:16 -  log info 
+2025-03-28 17:57:22 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=zzzzzzzzzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 17:57:22)
+2025-03-28 17:57:27 - 일반메세지 : ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=zzzzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 17:57:27)
+2025-03-28 17:57:37 - 일반메세지 : ChattingDto(mstype=0, rno=2, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=zzzzzzzzzzzzzz, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 17:57:36)
+2025-03-28 17:58:03 -  log info 
+2025-03-28 17:58:03 -  log info 
+2025-03-28 17:59:03 -  log info 
+2025-03-28 17:59:03 -  log info 
+2025-03-28 17:59:24 - 일반메세지 : ChattingDto(mstype=0, rno=20, msDate=null, loginMno=0, mname=이시훈, mscontent=null, mno=100006, msg=fxgfxgff, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 17:59:22)
+2025-03-28 18:03:05 -  log info 
+2025-03-28 18:03:05 -  log info 
+2025-03-28 18:03:10 -  log info 
+2025-03-28 18:03:10 -  log info 
+2025-03-28 18:03:19 -  log info 
+2025-03-28 18:03:19 -  log info 
+2025-03-28 18:03:30 -  log info 
+2025-03-28 18:03:30 -  log info 
+2025-03-28 18:03:40 -  log info 
+2025-03-28 18:04:11 -  log info 
+2025-03-28 18:04:21 -  log info 
