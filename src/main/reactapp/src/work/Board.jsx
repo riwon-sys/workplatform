@@ -49,42 +49,42 @@ export default function () {
           padding: '50px 70px'
         }}
       >
-          <CssVarsProvider>
-          <h1> 사내 게시판 </h1>
-          <Table sx={{ mt: 3 }} >
-              <thead>
-              </thead>
-              <tbody>
-                {
-                  boards.map( ( board , index )=> {
-                    const commentCount = board.ccount
+        <CssVarsProvider>
+        <h1> 사내 게시판 </h1>
+        <Table sx={{ mt: 3 }} >
+            <thead>
+            </thead>
+            <tbody>
+              {
+                boards.map( ( board , index )=> {
+                  const commentCount = board.ccount
 
-                    return(<>
-                      <tr>
-                        <td> <span>{board.category_name || '카테고리 없음'}</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
-                        <td style={{ textAlign: 'right' }}>
-                        <span style={{ marginRight: '12px' }}>👍 {board.lcount || 0}</span>
-                        <span style={{ color: commentCount > 0 ? '#0068c3' : '#666' }}>
-                          💬 {commentCount}
-                        </span>
-                        </td>
-                      </tr>
-                    </>)
-                  } )
-                }
-              </tbody>
-            </Table >
-                {/* 블라인드 스타일 버튼 컨테이너 */}
-            <div className="button-container" style={{ justifyContent: 'flex-end' }} >
-              <button 
-                className="blind-button" 
-                onClick={() => {navigate("/board/write")}}
-              >
-                글쓰기
-              </button>
-            </div>
-          
-          </CssVarsProvider>
+                  return(<>
+                    <tr>
+                      <td> <span>{board.category_name || '카테고리 없음'}</span> <span>  <Link to={ '/board/detail?pid='+board.pid } >{ board.title }</Link> </span></td>
+                      <td style={{ textAlign: 'right' }}>
+                      <span style={{ marginRight: '12px' }}>👍 {board.lcount || 0}</span>
+                      <span style={{ color: commentCount > 0 ? '#0068c3' : '#666' }}>
+                        💬 {commentCount}
+                      </span>
+                      </td>
+                    </tr>
+                  </>)
+                } )
+              }
+            </tbody>
+          </Table >
+              {/* 블라인드 스타일 버튼 컨테이너 */}
+          <div className="button-container" style={{ justifyContent: 'flex-end' }} >
+            <button 
+              className="blind-button" 
+              onClick={() => {navigate("/board/write")}}
+            >
+              글쓰기
+            </button>
+          </div>
+        
+        </CssVarsProvider>
       </Item>
     </Box>
   </>);

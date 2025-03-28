@@ -42,8 +42,8 @@ const CheckSession = () => {
     // 첫 체크는 10초 후에 실행 (로그인 직후 세션 반영 시간 확보)
     setTimeout(checkSession, 10000);
 
-    // 이후 5분마다 체크
-    const interval = setInterval(checkSession, 1 * 60 * 1000);
+    // 이후 10분마다 체크
+    const interval = setInterval(checkSession, 10 * 60 * 1000);
 
     return () => clearInterval(interval);
   }, [dispatch, navigate]);

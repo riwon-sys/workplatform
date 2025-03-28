@@ -23,7 +23,7 @@ export default function Report_Form(
   console.log( rankList.length )
 
   return(<>
-    <div id={ id } >
+    <div id={ id } style={{ backgroundColor: "white" }} >
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px' }} >
       <div style={{ margin: '0 auto', display: 'flex', justifyContent: 'center', flexWrap: 'wrap' }} >
         <h1 style={{ marginRight: 10 }} > 일일 업무 </h1>
@@ -109,14 +109,14 @@ export default function Report_Form(
               </div>
             </td>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 작성자 </th>
-            <td style={{ width: '30%' }} > { formData.mname } </td>
+            <td style={{ width: '30%', textAlign: 'center' }} > { formData.mname } </td>
           </tr>
 
           <tr>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 소속 </th>
-            <td style={{ width: '30%' }} > { formData.mdepartment } </td>
+            <td style={{ width: '30%', textAlign: 'center' }} > { formData.mdepartment } </td>
             <th style={{ width: '20%', backgroundColor: '#eeeeee' }} > 직위 </th>
-            <td style={{ width: '30%' }} > { formData.mrank } </td>
+            <td style={{ width: '30%', textAlign: 'center' }} > { formData.mrank } </td>
           </tr>
         </tbody>
       </table>

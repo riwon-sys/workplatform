@@ -31,8 +31,6 @@ export default function Report_Approval_List(
       if( response.data.list != null ){ setReports( response.data.list ); }
       else{ 
         // null 반환시 세션값 없음
-        dispatch(logout());
-        enqueueSnackbar("로그아웃 되었습니다. 로그인 후 다시 시도해주세요.", { variant: "info" });
         navigate('/');
       }
       setPage( response.data.pageNum );
