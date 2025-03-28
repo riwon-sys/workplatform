@@ -1,6 +1,5 @@
 /*  Member_Mypage.jsx 고정 박스형 마이페이지 | rw 25-03-27 생성 */
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import {
     Box,
     Typography,
@@ -10,7 +9,11 @@ import {
     Paper
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
+// ✅ 고정된 마이페이지 카드 박스 스타일 정의
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: '#fff',
     ...theme.typography.body2,
@@ -20,12 +23,26 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Member_Mypage = () => {
+    const navigate = useNavigate();
     const loginInfo = useSelector((state) => state.user.userInfo);
 
+    // ✅ 보안 확인 관련 상태
     const [inputPwd, setInputPwd] = useState('');
     const [isVerified, setIsVerified] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
+    // ✅ 프로필 사진 관련 (미리보기는 추후 확장용)
+    const [preview, setPreview] = useState(null);
+    const [profile, setProfile] = useState(null);
+
+    // ✅ 연락처 유효성 및 중복 확인
+    const [mphone, setMphone] = useState(loginInfo.mphone);
+    const [phoneCheck, setPhoneCheck] = useState(false);
+
+    // ✅ 전화번호 정규식 검사
+    const isValidPhone = (phone) => /^010-\d{4}-\d{4}$/.test(phone);
+
+    // ✅ 비밀번호 보안 재확인
     const handlePasswordCheck = () => {
         if (inputPwd === '1234') {
             setIsVerified(true);
@@ -35,11 +52,7 @@ const Member_Mypage = () => {
         }
     };
 
-    const [mphone, setMphone] = useState(loginInfo.mphone);
-    const [phoneCheck, setPhoneCheck] = useState(false);
-
-    const isValidPhone = (phone) => /^010-\d{4}-\d{4}$/.test(phone);
-
+    // ✅ 전화번호 중복 확인
     const checkPhoneDuplicate = async () => {
         if (!isValidPhone(mphone)) {
             alert("전화번호 형식이 올바르지 않습니다. (010-0000-0000)");
@@ -59,6 +72,31 @@ const Member_Mypage = () => {
             console.error(err);
             alert("중복 확인 중 오류가 발생했습니다.");
             setPhoneCheck(false);
+        }
+    };
+
+    // ✅ 등록 버튼 클릭 → 정보 업데이트 요청
+    const onUpdate = async () => {
+        if (!phoneCheck) {
+            alert("전화번호 중복 확인을 해주세요.");
+            return;
+        }
+
+        try {
+            const res = await axios.put("http://localhost:8080/workplatform/update", {
+                mno: loginInfo.mno,
+                mphone: mphone
+            });
+
+            if (res.data === true) {
+                alert("회원정보가 성공적으로 업데이트되었습니다.");
+                navigate('/');
+            } else {
+                alert("업데이트에 실패했습니다.");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("서버 오류가 발생했습니다.");
         }
     };
 
@@ -97,7 +135,7 @@ const Member_Mypage = () => {
                             value={mphone}
                             onChange={(e) => {
                                 setMphone(e.target.value);
-                                setPhoneCheck(false); // 번호 변경 시 중복 확인 다시 필요
+                                setPhoneCheck(false);
                             }}
                             fullWidth
                             margin="normal"
@@ -125,8 +163,11 @@ const Member_Mypage = () => {
                             <Typography variant="body1" gutterBottom>프로필 사진</Typography>
                             <Avatar src={`http://localhost:8080/file/${loginInfo.mprofile}`} sx={{ width: 100, height: 100, mx: 'auto' }} />
                         </Box>
+                        <Button variant="contained" fullWidth sx={{ mt: 3 }} onClick={onUpdate}>
+                            등록
+                        </Button>
                         <Typography variant="body2" align="center" sx={{ mt: 4, color: 'gray' }}>
-                            문의: insateam_jang@example.com
+                            문의: insateam_jang@example.com DDDD
                         </Typography>
                     </Box>
                 )}
