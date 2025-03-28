@@ -50,7 +50,7 @@ public class MemberController {
         else{ // 서비스 결과가 null 이 아니면 로그인 성공 => 세션에 로그인 성공한 결과를 MemberDto 를 저장
             HttpSession session = req.getSession(); // 세션을 호출
             session.setAttribute("memberDto" , result); // 세션 객체 내 새로운 속성 추가 로그인 성공한 결과를 meberDto 라는 이름으로 저장
-            session.setMaxInactiveInterval(60*1); // 세션 유지 시간(초) 60x10 은 10분
+            session.setMaxInactiveInterval(60*10); // 세션 유지 시간(초) 60x10 은 10분
             return true; // 로그인 성공
         } // e e
     } // f e
@@ -153,6 +153,13 @@ public class MemberController {
         List<MemberDto> result = memberService.memberByRank();
         return result;
     } // f end
+
+    // [8] 사원 전체 조회 http://localhost:8080/workplatform/infoall | rw 25-03-28 생성
+    @GetMapping("/infoall")
+    public List<MemberDto> infoAll(){
+        System.out.println("MemberController.infoAll");
+        return memberService.infoAll();
+    } // f e
 
 }
 

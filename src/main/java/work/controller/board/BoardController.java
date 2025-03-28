@@ -1,5 +1,6 @@
 package work.controller.board;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import work.model.dto.board.BoardDto;
 import work.model.dto.member.MemberDto;
 import work.model.dto.member.MemberUtils;
 import work.model.dto.report.ReportDto;
+import work.model.mapper.board.BoardMapper;
 import work.service.board.BoardService;
 
 import java.util.List;
@@ -31,10 +33,13 @@ public class BoardController {
 
     //[1]게시물 전체 조회
     @GetMapping("")
-    public List<BoardDto>allView(){
-        System.out.println("BoardController.boardView");
-        return boardService.allView();
+    public PageInfo<BoardDto>allView(@RequestParam(defaultValue = "1")int page,@RequestParam(defaultValue ="10")int pageSize){
+        System.out.println("BoardController.allView");
+        System.out.println("page = " + page + ", pageSize = " + pageSize);
+        return boardService.allView(page,pageSize);
+
     }
+
 
 
     //[2]게시물 등록

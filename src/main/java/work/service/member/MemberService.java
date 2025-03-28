@@ -116,8 +116,12 @@ public class MemberService {
         // }
 
         // 3. 새 비밀번호 암호화
-        String newEncryptedPwd = BCrypt.hashpw(memberDto.getMpwd(), BCrypt.gensalt());
-        memberDto.setMpwd(newEncryptedPwd);
+        // (4) 비크립트 라이브러리 사용 | rw 25-03-21
+        // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        // (4-(2)) 비밀번호 암호화 ( 자료에 encode )
+        String hashedPassword = passwordEncoder.encode( memberDto.getMpwd() );
+        memberDto.setMpwd(hashedPassword);
 
         // 4. moldPwd도 암호화 상태로 저장
         // String encryptedOldPwd = BCrypt.hashpw(memberDto.getMoldPwd(), BCrypt.gensalt());
@@ -178,5 +182,11 @@ public class MemberService {
         System.out.println(divList);
         return divList;
     } // f end
+
+    // [8] 사원 전체 조회 http://localhost:8080/workplatform/infoall | rw 25-03-28 생성
+    public List<MemberDto>infoAll(){
+        System.out.println("MemberService.infoAll");
+        return memberMapper.infoAll();
+    }
 
 }

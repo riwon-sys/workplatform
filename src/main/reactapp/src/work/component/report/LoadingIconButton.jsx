@@ -1,9 +1,11 @@
 import * as React from 'react';
 
 /* mui import */
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import { Button, Tooltip, CircularProgress } from "@mui/material";
 import { useTheme } from '@emotion/react';
+
+/* mui icon */
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 /* react pdf */
 import domtoimage from "dom-to-image";
@@ -88,7 +90,7 @@ export default function LoadingIconButton( ) {
         variant="contained"
         color="info"
         sx={{
-          width: "70px", // 가로 너비 설정
+          width: "60px", // 가로 너비 설정
           minWidth: "unset", // 기본 min-width 제거
           padding: "8px", // 패딩 적용
           display: "flex",

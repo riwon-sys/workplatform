@@ -144,7 +144,7 @@ INSERT INTO fileshare (fname, flocation, pno) VALUES
                                                   ('분석 자료.xlsx', '/uploads/분석_자료.xlsx', 15); -- 윤지호 (마케팅팀 전체)
 
 
---좋아요 샘플 데이터 추가
+-- 좋아요 샘플 데이터 추가
 insert into board_like (pid,mno)values
 (1, 100001),  -- 회원 100001이 게시물 1에 좋아요
 (2, 100001),  -- 회원 100001이 게시물 2에 좋아요
@@ -176,7 +176,7 @@ insert into board (pid,title,content,views,mno) values
 
 
 
---- 댓글 샘플데이터 삽입
+-- 댓글 샘플데이터 삽입
 insert into comment (cid, content, reg_date, pid, mno) VALUES
                                                            (1, '저는 한식당 추천합니다! 2번 출구 나가셔서 왼쪽에 있는 고깃집이 진짜 맛있어요.', '2025-03-15 10:23:45', 1, 100001),
                                                            (2, '매콤한거 좋아하시면 3번 출구 옆 중국집 마라탕이 좋을 것 같아요!', '2025-03-15 11:30:22', 2, 100002),

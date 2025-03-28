@@ -63,6 +63,7 @@ export default function BoardDetail() {
   const [editComment, setEditComment] = useState({ cid: null, content: '' });
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
+
   //댓글 등록함수
   const createComment = async() => {
     //작성자 샘플 : 리덕스에서 가져올 예정
@@ -206,88 +207,85 @@ export default function BoardDetail() {
           }}
         >
 
-          {/* 헤더 부분 */}
-          <Box sx={{ display: 'flex', alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid #eee' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', fontSize: '14px' }}>
-              <span style={{ color: '#555' }}>토픽</span>
-              <span style={{ margin: '0 4px' }}>&gt;</span>
-              <span style={{ color: '#4d90fe' }}>OTT위플레이</span>
-              <span style={{ margin: '0 4px' }}>&gt;</span>
-              <span style={{ color: '#4d90fe' }}>팔로우</span>
-            </Box>
-          </Box>
+              {/* 헤더 부분 */}
+              <Box sx={{ display: 'flex', alignItems: 'center', padding: '8px 16px', borderBottom: '1px solid #eee' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', fontSize: '14px' }}>
+                  <span style={{ color: '#0068c3' }}>{"[게시판]" + board.category_name}</span>
 
-          {/* 게시물 제목 */}
-          <Box sx={{ padding: '20px 16px 10px' }}>
-            <Typography variant="h6" sx={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '12px' }}>
-              {board.title}
-            </Typography>
-
-            {/* 작성자 정보 */}
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ color: '#0068c3', fontSize: '14px', fontWeight: 'medium' }}>
-                  회사원
-                </Box>
-                <Box sx={{ color: '#999', fontSize: '14px', marginLeft: '4px' }}>
-                  ********
                 </Box>
               </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', color: '#999', fontSize: '13px', marginRight: '8px' }}>
-                  <span></span>
+
+              {/* 게시물 제목 */}
+              <Box sx={{ padding: '20px 16px 10px' }}>
+                <Typography variant="h6" sx={{ fontSize: '18px', fontWeight: 'bold', marginBottom: '12px' }}>
+                  {board.title}
+                </Typography>
+
+                {/* 작성자 정보 */}
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box sx={{ color: '#0068c3', fontSize: '14px', fontWeight: 'medium' }}>
+                      회사원
+                    </Box>
+                    <Box sx={{ color: '#999', fontSize: '14px', marginLeft: '4px' }}>
+                      ********
+                    </Box>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', color: '#999', fontSize: '13px', marginRight: '8px' }}>
+                      <span></span>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', color: '#999', fontSize: '13px', marginRight: '8px' }}>
+                      <span>👁️ {board.view}</span>
+                    </Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', color: '#999', fontSize: '13px' }}>
+                      <span></span>
+                    </Box>
+                    <IconButton size="small">
+                      <MoreHorizIcon sx={{ fontSize: '18px' }} />
+                    </IconButton>
+                  </Box>
                 </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', color: '#999', fontSize: '13px', marginRight: '8px' }}>
-                  <span>👁️ {board.view}</span>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', color: '#999', fontSize: '13px' }}>
-                  <span></span>
-                </Box>
-                <IconButton size="small">
-                  <MoreHorizIcon sx={{ fontSize: '18px' }} />
-                </IconButton>
               </Box>
-            </Box>
-          </Box>
 
-          {/* 게시물 내용 */}
-          <Box sx={{ padding: '0 16px 20px', borderBottom: '1px solid #eee' }}>
-            <Typography sx={{ fontSize: '15px', lineHeight: 1.6, marginBottom: '16px' }}>
-              {board.content}
-            </Typography>
+              {/* 게시물 내용 */}
+              <Box sx={{ padding: '0 16px 20px', borderBottom: '1px solid #eee' }}>
+                <Typography sx={{ fontSize: '15px', lineHeight: 1.6, marginBottom: '16px' }}>
+                  {board.content}
+                </Typography>
 
-            {/* 좋아요 버튼 및 공유 버튼 */}
-            <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
-              <Button variant="text" sx={{ color: '#666', fontSize: '14px', mr: 1 }} onClick={likeview}    >
-                <ThumbUpOutlinedIcon sx={{ fontSize: '18px', mr: 0.5 }} /> 
-                {board.lcount}
-              </Button>
-              <Button variant="text" sx={{ color: '#666', fontSize: '14px', mr: 1 }}>
-                <ChatBubbleOutlineOutlinedIcon sx={{ fontSize: '18px', mr: 0.5 }} /> 
-                
-              </Button>
-              {/* 삭제 버튼 추가 */}
-              <Button variant="text" sx={{ color: '#d32f2f', fontSize: '14px', mr: 1 }} onClick={deleteBoard}>
-                삭제
-              </Button>
-              <Button variant="text" sx={{ color: '#d32f2f', fontSize: '14px', mr: 1 }} onClick={updateBoard}>
-                수정
-              </Button>
+                {/* 좋아요 버튼 및 공유 버튼 */}
+                <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '20px' }}>
+                  <Button variant="text" sx={{ color: '#666', fontSize: '14px', mr: 1 }} onClick={likeview}    >
+                    <ThumbUpOutlinedIcon sx={{ fontSize: '18px', mr: 0.5 }} /> 
+                    {board.lcount}
+                  </Button>
+                  <Button variant="text" sx={{ color: '#666', fontSize: '14px', mr: 1 }}>
+                    <ChatBubbleOutlineOutlinedIcon sx={{ fontSize: '18px', mr: 0.5 }} /> 
+                    
+                  </Button>
+                  {/* 삭제 버튼 추가 */}
+                  <Button variant="text" sx={{ color: '#d32f2f', fontSize: '14px', mr: 1 }} onClick={deleteBoard}>
+                    삭제
+                  </Button>
+                  <Button variant="text" sx={{ color: '#d32f2f', fontSize: '14px', mr: 1 }} onClick={updateBoard}>
+                    수정
+                  </Button>
 
-              <Box sx={{ marginLeft: 'auto', display: 'flex' }}>
-                <Avatar sx={{ bgcolor: '#FFD700', width: 24, height: 24, fontSize: '12px', mr: 1 }}>K</Avatar>
-                <Avatar sx={{ bgcolor: '#3b5998', width: 24, height: 24, fontSize: '12px', mr: 1 }}>f</Avatar>
-                <Avatar sx={{ bgcolor: '#1DA1F2', width: 24, height: 24, fontSize: '12px', mr: 1 }}>t</Avatar>
-                <Avatar sx={{ bgcolor: '#444', width: 24, height: 24, fontSize: '12px', mr: 1 }}>...</Avatar>
-              </Box>   
-            </Box>
-          </Box> 
+                  <Box sx={{ marginLeft: 'auto', display: 'flex' }}>
+                    <Avatar sx={{ bgcolor: '#FFD700', width: 24, height: 24, fontSize: '12px', mr: 1 }}>K</Avatar>
+                    <Avatar sx={{ bgcolor: '#3b5998', width: 24, height: 24, fontSize: '12px', mr: 1 }}>f</Avatar>
+                    <Avatar sx={{ bgcolor: '#1DA1F2', width: 24, height: 24, fontSize: '12px', mr: 1 }}>t</Avatar>
+                    <Avatar sx={{ bgcolor: '#444', width: 24, height: 24, fontSize: '12px', mr: 1 }}>...</Avatar>
+                  </Box>   
+                </Box>
+              </Box> 
 
-          {/* 댓글 섹션 */}
-          <Box sx={{ padding: '16px', borderBottom: '1px solid #eee' }}>
-            <Typography sx={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px' }}>
-              댓글 {board.commentList && board.commentList.length}
-            </Typography>
+              {/* 댓글 섹션 */}
+              <Box sx={{ padding: '16px', borderBottom: '1px solid #eee' }}>
+                <Typography sx={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '12px' }}>
+                  댓글 {board.commentList && board.commentList.length}
+                </Typography>
 
             {/* 댓글 작성 폼 */}
             <Box sx={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
@@ -310,8 +308,8 @@ export default function BoardDetail() {
                 <Button
                   onClick={createComment}
                   variant="contained"
-                  sx={{ 
-                    backgroundColor: '#0068c3', 
+                  sx={{
+                    backgroundColor: '#0068c3',
                     color: 'white',
                     fontSize: '14px',
                     padding: '6px 16px',
@@ -325,21 +323,23 @@ export default function BoardDetail() {
               </Box>
             </Box>
           </Box>
-          
+
           {/*현재 게시물 해당하는 댓글조회 , 리스트명.map((반복변수,인덱스)),조건&&참 */}
           {board.commentList && board.commentList.map((comment,index)=>{
+
+              const anonymousName = `익명${index + 1}`; //익명변환
             return (
-              <Box 
+              <Box
                 key={index}
-                sx={{ 
-                  padding: '12px 16px', 
+                sx={{
+                  padding: '12px 16px',
                   borderBottom: '1px solid #eee',
                   textAlign: 'left'
                 }}
               >
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                   <Typography sx={{ fontSize: '14px', fontWeight: 'bold', color: '#333' }}>
-                    {comment.mno}
+                  {anonymousName}
                   </Typography>
                   <Typography sx={{ fontSize: '12px', color: '#999' }}>
                     {comment.reg_date}
@@ -351,15 +351,15 @@ export default function BoardDetail() {
                 <Box sx={{ display: 'flex', gap: '8px' }}>
                   {comment.mno === loginInfo.mno && (
                 <>
-                  <Button 
-                    size="small" 
+                  <Button
+                    size="small"
                     sx={{ fontSize: '12px', color: '#666', minWidth: 'auto', padding: '2px 8px' }}
                     onClick={() => openEditModal(comment)}
                   >
                     수정
                   </Button>
-                  <Button 
-                    size="small" 
+                  <Button
+                    size="small"
                     sx={{ fontSize: '12px', color: '#666', minWidth: 'auto', padding: '2px 8px' }}
                     onClick={() => deleteComment(comment.cid)}
                   >
@@ -428,7 +428,7 @@ export default function BoardDetail() {
               animation: 'thumbsUpAnimation 1.5s ease-out forwards'
             }}
           >
-            <img src="/좋아요.png" />
+            <img src="/좋아요.png" style={{width:100}} />
           </div>
         </div>
       )}
