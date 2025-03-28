@@ -108,7 +108,7 @@ export default function ReportSocket(
     useEffect(() => {
         if(data&&data.mname != null){
    
-        if (next != null && loginInfo && loginInfo.mno && data.mname !== '') {
+        if (next != null && loginInfo && loginInfo.mno && data.mname !== ''&&nextApState == false) {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket && reportSocket.readyState === WebSocket.OPEN) {
 console.log(next)
@@ -200,7 +200,7 @@ setLastRpno(null)
     useEffect(() => {
 
         if(nextAp.rpno > 0){
-        if (nextNext != null && loginInfo && loginInfo.mno && nextAp.mname != '') {
+        if (nextNext != null && loginInfo && loginInfo.mno && nextAp.mname != '' && nextApState == true) {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket && reportSocket.readyState === WebSocket.OPEN) {
                 console.log(nextNext)
