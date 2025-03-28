@@ -106,9 +106,9 @@ export default function ReportSocket(
     console.log("최초결재상태", reportState)
     // 보고서 등록 시 다음 결재자를 찾고 서버 소켓으로 전달
     useEffect(() => {
-        if(apData&&apData.mname != null){
+        if(reportState == true&&apData.mname != null ){
    
-        if (next != null && loginInfo && loginInfo.mno && apData.mname !== ''&&nextApState == false) {
+        if (next != null && loginInfo && loginInfo.mno && apData.mname !== '') {
             // 소켓이 연결되었을 때만 메시지를 전송
             if (reportSocket && reportSocket.readyState === WebSocket.OPEN) {
 console.log(next)
