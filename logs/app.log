@@ -378,3 +378,87 @@
 2025-03-28 13:02:45 -  log info 
 2025-03-28 13:07:05 -  log info 
 2025-03-28 13:07:05 -  log info 
+2025-03-28 13:30:21 -  log info 
+2025-03-28 13:30:21 -  log info 
+2025-03-28 13:39:20 -  log info 
+2025-03-28 13:39:20 -  log info 
+2025-03-28 13:39:30 -  log info 
+2025-03-28 13:39:30 -  log info 
+2025-03-28 13:39:52 -  log info 
+2025-03-28 13:39:52 -  log info 
+2025-03-28 13:39:55 -  log info 
+2025-03-28 13:39:55 -  log info 
+2025-03-28 13:40:16 -  log info 
+2025-03-28 13:40:16 -  log info 
+2025-03-28 13:45:12 -  log info 
+2025-03-28 13:45:12 -  log info 
+2025-03-28 13:45:17 -  log info 
+2025-03-28 13:45:17 -  log info 
+2025-03-28 13:45:27 -  log info 
+2025-03-28 13:45:27 -  log info 
+2025-03-28 13:47:13 - Starting AppStart using Java 17.0.12 with PID 34712 (C:\Users\tj-bu-702-18\IdeaProjects\workplatform2\build\classes\java\main started by tj-bu-702-18 in C:\Users\tj-bu-702-18\IdeaProjects\workplatform2)
+2025-03-28 13:47:13 - No active profile set, falling back to 1 default profile: "default"
+2025-03-28 13:47:14 - Tomcat initialized with port 8080 (http)
+2025-03-28 13:47:14 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-03-28 13:47:14 - Starting service [Tomcat]
+2025-03-28 13:47:14 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-03-28 13:47:14 - Initializing Spring embedded WebApplicationContext
+2025-03-28 13:47:14 - Root WebApplicationContext: initialization completed in 1463 ms
+2025-03-28 13:47:14 - HikariPool-1 - Starting...
+2025-03-28 13:47:15 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@18d47df0
+2025-03-28 13:47:15 - HikariPool-1 - Start completed.
+2025-03-28 13:47:15 - Starting ProtocolHandler ["http-nio-8080"]
+2025-03-28 13:47:15 - Tomcat started on port 8080 (http) with context path '/'
+2025-03-28 13:47:15 - Started AppStart in 3.124 seconds (process running for 3.667)
+2025-03-28 13:47:16 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-03-28 13:47:16 - Initializing Servlet 'dispatcherServlet'
+2025-03-28 13:47:16 - Completed initialization in 1 ms
+2025-03-28 13:47:22 -  log info 
+2025-03-28 13:47:22 -  log info 
+2025-03-28 13:47:38 -  log info 
+2025-03-28 13:47:38 -  log info 
+2025-03-28 13:47:57 -  log info 
+2025-03-28 13:47:57 -  log info 
+2025-03-28 13:48:53 -  log info 
+2025-03-28 13:48:53 -  log info 
+2025-03-28 14:03:20 -  log info 
+2025-03-28 14:03:20 -  log info 
+2025-03-28 14:03:32 -  log info 
+2025-03-28 14:03:32 -  log info 
+2025-03-28 14:03:55 -  log info 
+2025-03-28 14:03:55 -  log info 
+2025-03-28 14:04:21 -  log info 
+2025-03-28 14:04:21 -  log info 
+2025-03-28 14:04:30 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=조윤서, mscontent=null, mno=100002, msg=안녕하세요., msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 14:04:28)
+2025-03-28 14:04:59 -  log info 
+2025-03-28 14:07:05 -  log info 
+2025-03-28 14:07:05 -  log info 
+2025-03-28 14:07:20 - 일반메세지 : ChattingDto(mstype=0, rno=1, msDate=null, loginMno=0, mname=최민경, mscontent=null, mno=100001, msg=결재 부탁드립니다., msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=default.jpg, showdate=2025-03-28 14:07:18)
+2025-03-28 14:08:26 -  log info 
+2025-03-28 14:08:26 -  log info 
+2025-03-28 14:34:30 -  log info 
+2025-03-28 14:34:30 -  log info 
+2025-03-28 14:34:54 -  log info 
+2025-03-28 14:34:54 -  log info 
+2025-03-28 14:35:33 -  log info 
+2025-03-28 14:35:33 -  log info 
+2025-03-28 14:35:54 -  log info 
+2025-03-28 14:35:54 -  log info 
+2025-03-28 14:36:56 -  log info 
+2025-03-28 14:36:56 -  log info 
+2025-03-28 14:37:23 -  log info 
+2025-03-28 14:37:23 -  log info 
+2025-03-28 14:38:11 -  log info 
+2025-03-28 14:38:11 -  log info 
+2025-03-28 14:49:48 -  log info 
+2025-03-28 14:49:48 -  log info 
+2025-03-28 14:49:54 -  log info 
+2025-03-28 14:49:54 -  log info 
+2025-03-28 14:52:05 -  log info 
+2025-03-28 14:52:05 -  log info 
+2025-03-28 14:57:17 -  log info 
+2025-03-28 14:57:17 -  log info 
+2025-03-28 14:57:18 -  log info 
+2025-03-28 14:57:18 -  log info 
+2025-03-28 14:57:50 -  log info 
+2025-03-28 14:57:50 -  log info 

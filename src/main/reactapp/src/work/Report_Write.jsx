@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { data, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 /* mui import */
@@ -20,7 +20,7 @@ const Item = styled(Paper)(({ theme }) => ({
   height: '100%',
 }));
 
-export default function Report_Write({setReportState, setMnos, setData, reportState
+export default function Report_Write({setReportState,apData, setMnos, setApData, reportState
   , setLastRpno , lastRpno
 }){
   const loginInfo = useSelector((state) => state.user.userInfo);
@@ -145,8 +145,9 @@ export default function Report_Write({setReportState, setMnos, setData, reportSt
         // props 로 보고서 소켓으로 전달할 state 변수
         setReportState(true);
         console.log(reportState) // 소켓으로 전달할 상태 확인
-        setData(formData)
+        setApData(formData)
         console.log(formData)
+        console.log("************",apData)
       }else{ alert('등록 실패'); }
     }catch( e ){ console.log( e ); alert('등록 실패'); }
   } // f end
