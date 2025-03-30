@@ -29,7 +29,6 @@ const CheckSession = () => {
         }
       } catch (error) {
         console.error("세션 확인 오류:", error);
-        handleLogout();
       }
     };
 
