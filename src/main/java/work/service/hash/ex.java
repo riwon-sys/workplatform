@@ -8,9 +8,9 @@ public class ex {
         String str1 = scan.next();
         String str2 = scan.next();
 
-        str1 = hash.hashStr(str1);
-
-        str2 = hash.hashStr(str2);
+//        str1 = hash.hashStr(str1);
+//
+//        str2 = hash.hashStr(str2);
 
         System.out.println(str1);
         System.out.println(str2);

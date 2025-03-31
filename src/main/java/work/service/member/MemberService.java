@@ -1,27 +1,31 @@
 package work.service.member;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import work.model.dto.member.MemberDto;
 import work.model.dto.member.MemberUtils;
 import work.model.mapper.member.MemberMapper;
+import work.service.hash.Hash;
 import work.service.message.FileService;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
+
 public class MemberService {
 
-    private final BCryptPasswordEncoder passwordEncoder;
     private final MemberMapper memberMapper;
-    private final FileService fileService; // 파일 서비스 (업로드,다운로드,파일삭제)
-
+    private final FileService fileService; // 파일 서비스 (업로드,다운로드,파일삭제) 기능 포함
     // [1] 사원 등록
     public boolean signUp( MemberDto memberDto ){
         System.out.println("MemberService.signUp");
@@ -36,13 +40,19 @@ public class MemberService {
                 // (3) 업로드된 파일명을 dto 저장
                 memberDto.setMprofile(filename);
             }
-            // (4) 비크립트 라이브러리 사용 | rw 25-03-21
-            // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            // (4-(2)) 비밀번호 암호화 ( 자료에 encode )
-            String hashedPassword = passwordEncoder.encode( "1234" );
-            System.out.println( "hashedPassword = " + hashedPassword );
-            // (4-(3)) dto 에 encode 된 비밀번호 저장
+//            // (4) 비크립트 라이브러리 사용 | rw 25-03-21
+//                // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
+//            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//                // (4-(2)) 비밀번호 암호화 ( 자료에 encode )
+//            String hashedPassword = passwordEncoder.encode( "1234" );
+//            System.out.println( "hashedPassword = " + hashedPassword );
+//                // (4-(3)) dto 에 encode 된 비밀번호 저장
+
+            // 개인 해시함수 적용
+            Hash hash = new Hash();
+            String salt = hash.createSalt(); // 랜덤 솔트 생성
+            String hashedValue = hash.customHash( "1234" , salt); // 입력된 비밀번호 + 솔트를 해싱
+            String hashedPassword = salt + hashedValue;
             memberDto.setMpwd( hashedPassword );
 
 
@@ -69,9 +79,11 @@ public class MemberService {
         String password = memberMapper.findPassword (memberDto.getMno() );
         if( password == null ) return null;
         // (3) 로그인에서 입력받은 비밀번호와 암호화된 비밀번호 검증하기
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // 1. 비크립트 객체 생성
-        boolean result = passwordEncoder.matches( memberDto.getMpwd(), password ); // 2. 로그인에 입력받은 자료와 db에 가져온 해시 값 검증
-        if( result == false ) return null;
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // 1. 비크립트 객체 생성
+//        boolean result = passwordEncoder.matches( memberDto.getMpwd(), password ); // 2. 로그인에 입력받은 자료와 db에 가져온 해시 값 검증
+        Hash hash = new Hash();
+        boolean result = hash.MatchPwd( memberDto.getMpwd(), password );
+        if( result == false ) { return null; }
 
         // (4) 로그인에서 입력한 아이디와 비밀번호가 모두 일치하면 회원정보 가져오기
 
@@ -113,12 +125,19 @@ public class MemberService {
         // }
 
         // 3. 새 비밀번호 암호화
-        // (4) 비크립트 라이브러리 사용 | rw 25-03-21
-        // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        // (4-(2)) 비밀번호 암호화 ( 자료에 encode )
-        String hashedPassword = passwordEncoder.encode( memberDto.getMpwd() );
-        memberDto.setMpwd(hashedPassword);
+//        // (4) 비크립트 라이브러리 사용 | rw 25-03-21
+//        // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        // (4-(2)) 비밀번호 암호화 ( 자료에 encode )
+//        String hashedPassword = passwordEncoder.encode( memberDto.getMpwd() );
+//        memberDto.setMpwd(hashedPassword);
+
+        // 개인 해시함수 적용
+        Hash hash = new Hash();
+        String salt = hash.createSalt(); // 랜덤 솔트 생성
+        String hashedValue = hash.customHash( "1234" , salt ); // 입력된 비밀번호 + 솔트를 해싱
+        String hashedPassword = salt + hashedValue;
+        memberDto.setMpwd( hashedPassword );
 
         // 4. moldPwd도 암호화 상태로 저장
         // String encryptedOldPwd = BCrypt.hashpw(memberDto.getMoldPwd(), BCrypt.gensalt());
