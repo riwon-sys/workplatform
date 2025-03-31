@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import work.model.dto.member.MemberDto;
 import work.model.dto.member.MemberUtils;
 import work.service.member.MemberService;
@@ -160,6 +161,19 @@ public class MemberController {
         System.out.println("MemberController.infoAll");
         return memberService.infoAll();
     } // f e
+
+    // http://localhost:8080/workplatform/member/updateInfo
+    @PostMapping("/member/updateInfo")
+    public int updateMemberInfo(
+            @RequestParam("mno") String mno,
+            @RequestParam("mname") String mname,
+            @RequestParam("mrank") String mrank,
+            @RequestParam("mphone") String mphone,
+            @RequestParam("mtype") int mtype,
+            @RequestParam(value = "mprofile", required = false) MultipartFile mprofile){
+        // 비밀번호 "1234" 암호화 & 이메일 null 처리 (mtype==3)
+        return memberService.updateMemberInfo(mno, mname, mrank, mphone, mtype, mprofile);
+    }
 
 }
 
