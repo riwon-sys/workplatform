@@ -92,195 +92,195 @@ INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd ) VALUES
 
 -- 채팅방 테이블
 CREATE TABLE room (
-                      rno INT UNSIGNED AUTO_INCREMENT,
-                      rname VARCHAR(50) NOT NULL,
-                      rtype VARCHAR(30) NOT NULL,
-                      rdate DATETIME DEFAULT NOW(),
-                      rlastdate DATETIME,
-                      rstate BOOLEAN DEFAULT TRUE,
-                      mno INT UNSIGNED,
-                      PRIMARY KEY (rno),
-                      FOREIGN KEY (mno) REFERENCES member (mno) ON UPDATE CASCADE ON DELETE CASCADE
+	  rno INT UNSIGNED AUTO_INCREMENT,
+	  rname VARCHAR(50) NOT NULL,
+	  rtype VARCHAR(30) NOT NULL,
+	  rdate DATETIME DEFAULT NOW(),
+	  rlastdate DATETIME,
+	  rstate BOOLEAN DEFAULT TRUE,
+	  mno INT UNSIGNED,
+	  PRIMARY KEY (rno),
+	  FOREIGN KEY (mno) REFERENCES member (mno) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- 채팅방 샘플 데이터 삽입
 INSERT INTO room (rname, rtype, mno, rlastdate) VALUES
-                                                    ('인사팀-윤서와 민경', '0', 100001, NOW()), -- 최민경과 윤서 (일대일)
-                                                    ('인사팀-민호와 예진', '0', 100004, NOW()), -- 박예진과 민호 (일대일)
-                                                    ('마케팅팀-지호와 도하', '0', 200009, NOW()), -- 윤지호와 도하 (일대일)
-                                                    ('마케팅팀-정환과 시연', '0', 200010, NOW()), -- 정지환과 시연 (일대일)
-                                                    ('기술팀-은서와 시훈', '0', 100006, NOW()), -- 은서와 시훈 (일대일)
-                                                    ('인사팀 전체', '1', 100001, NOW()), -- 인사팀 전체
-                                                    ('마케팅팀 전체', '1', 200009, NOW()), -- 마케팅팀 전체
-                                                    ('기술팀 전체', '1', 100006, NOW()), -- 기술팀 전체
-                                                    ('운영팀 전체', '1', 100004, NOW()), -- 운영팀 전체
-                                                    ('인사팀-사원 회의', '1', 100001, NOW()), -- 인사팀 사원 회의
-                                                    ('마케팅팀-대리 회의', '1', 200012, NOW()), -- 마케팅팀 대리 회의
-                                                    ('영업팀-팀장 회의', '1', 200010, NOW()), -- 영업팀 팀장 회의
-                                                    ('기술팀-개발자 회의', '1', 100007, NOW()), -- 기술팀 개발자 회의
-                                                    ('운영팀-운영 회의', '1', 100003, NOW()); -- 운영팀 운영 회의
+	('인사팀-윤서와 민경', '0', 100001, NOW()), -- 최민경과 윤서 (일대일)
+	('인사팀-민호와 예진', '0', 100004, NOW()), -- 박예진과 민호 (일대일)
+	('마케팅팀-지호와 도하', '0', 200009, NOW()), -- 윤지호와 도하 (일대일)
+	('마케팅팀-정환과 시연', '0', 200010, NOW()), -- 정지환과 시연 (일대일)
+	('기술팀-은서와 시훈', '0', 100006, NOW()), -- 은서와 시훈 (일대일)
+	('인사팀 전체', '1', 100001, NOW()), -- 인사팀 전체
+	('마케팅팀 전체', '1', 200009, NOW()), -- 마케팅팀 전체
+	('기술팀 전체', '1', 100006, NOW()), -- 기술팀 전체
+	('운영팀 전체', '1', 100004, NOW()), -- 운영팀 전체
+	('인사팀-사원 회의', '1', 100001, NOW()), -- 인사팀 사원 회의
+	('마케팅팀-대리 회의', '1', 200012, NOW()), -- 마케팅팀 대리 회의
+	('영업팀-팀장 회의', '1', 200010, NOW()), -- 영업팀 팀장 회의
+	('기술팀-개발자 회의', '1', 100007, NOW()), -- 기술팀 개발자 회의
+	('운영팀-운영 회의', '1', 100003, NOW()); -- 운영팀 운영 회의
 
 -- 참여자 테이블 (오타 수정)
 CREATE TABLE paritcipant (
-                             pno INT UNSIGNED AUTO_INCREMENT,
-                             pdate DATETIME DEFAULT NOW(),
-                             mno INT UNSIGNED,
-                             rno INT UNSIGNED,
-                             PRIMARY KEY (pno),
-                             FOREIGN KEY (mno) REFERENCES member (mno) ON UPDATE CASCADE ON DELETE CASCADE,
-                             FOREIGN KEY (rno) REFERENCES room (rno) ON UPDATE CASCADE ON DELETE CASCADE
+	 pno INT UNSIGNED AUTO_INCREMENT,
+	 pdate DATETIME DEFAULT NOW(),
+	 mno INT UNSIGNED,
+	 rno INT UNSIGNED,
+	 PRIMARY KEY (pno),
+	 FOREIGN KEY (mno) REFERENCES member (mno) ON UPDATE CASCADE ON DELETE CASCADE,
+	 FOREIGN KEY (rno) REFERENCES room (rno) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- 참여현황 샘플 데이터 삽입 (오타 수정)
 INSERT INTO paritcipant (mno, rno) VALUES
-                                       (100001, 1), -- 최민경, 인사팀-윤서와 민경 (일대일)
-                                       (100002, 1), -- 조윤서, 인사팀-윤서와 민경 (일대일)
-                                       (100001, 2), -- 박예진, 인사팀-민호와 예진 (일대일)
-                                       (100002, 2), -- 이민호, 인사팀-민호와 예진 (일대일)
-                                       (100003, 3), -- 윤지호, 마케팅팀-지호와 도하 (일대일)
-                                       (200010, 3), -- 정지환, 마케팅팀-정환과 시연 (일대일)
-                                       (200011, 4), -- 이진아, 마케팅팀-정환과 시연 (일대일)
-                                       (200012, 5), -- 박시연, 마케팅팀-대리 회의
-                                       (200013, 6), -- 김도현, 마케팅팀-대리 회의
-                                       (100001, 6), -- 최민경, 인사팀 전체
-                                       (100002, 6), -- 조윤서, 인사팀 전체
-                                       (200009, 7), -- 윤지호, 마케팅팀 전체
-                                       (100004, 8), -- 이민호, 운영팀 전체
-                                       (100005, 9), -- 김은서, 디자인팀 전체
-                                       (100006, 10), -- 이시훈, 기술팀 전체
-                                       (200012, 11); -- 박시연, 마케팅팀 대리 회의
+(100001, 1), -- 최민경, 인사팀-윤서와 민경 (일대일)
+(100002, 1), -- 조윤서, 인사팀-윤서와 민경 (일대일)
+(100001, 2), -- 박예진, 인사팀-민호와 예진 (일대일)
+(100002, 2), -- 이민호, 인사팀-민호와 예진 (일대일)
+(100003, 3), -- 윤지호, 마케팅팀-지호와 도하 (일대일)
+(200010, 3), -- 정지환, 마케팅팀-정환과 시연 (일대일)
+(200011, 4), -- 이진아, 마케팅팀-정환과 시연 (일대일)
+(200012, 5), -- 박시연, 마케팅팀-대리 회의
+(200013, 6), -- 김도현, 마케팅팀-대리 회의
+(100001, 6), -- 최민경, 인사팀 전체
+(100002, 6), -- 조윤서, 인사팀 전체
+(200009, 7), -- 윤지호, 마케팅팀 전체
+(100004, 8), -- 이민호, 운영팀 전체
+(100005, 9), -- 김은서, 디자인팀 전체
+(100006, 10), -- 이시훈, 기술팀 전체
+(200012, 11); -- 박시연, 마케팅팀 대리 회의
 
 -- 메시지 테이블
 CREATE TABLE message (
-                         msno INT UNSIGNED AUTO_INCREMENT,
-                         msg TEXT,
-                         msdate DATETIME DEFAULT NOW(),
-                         msstate INT DEFAULT 0,
-                         pno INT UNSIGNED,
-                         PRIMARY KEY (msno),
-                         FOREIGN KEY (pno) REFERENCES paritcipant (pno) ON UPDATE CASCADE ON DELETE CASCADE
+	 msno INT UNSIGNED AUTO_INCREMENT,
+	 msg TEXT,
+	 msdate DATETIME DEFAULT NOW(),
+	 msstate INT DEFAULT 0,
+	 pno INT UNSIGNED,
+	 PRIMARY KEY (msno),
+	 FOREIGN KEY (pno) REFERENCES paritcipant (pno) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- 메시지 샘플 데이터 삽입
 INSERT INTO message (msg, msdate, pno) VALUES
-                                           ('안녕하세요!', NOW(), 1), -- 최민경 (인사팀-윤서와 민경)
-                                           ('반갑습니다.', NOW(), 2), -- 윤서 (인사팀-윤서와 민경)
-                                           ('회의 시작합니다.', NOW(), 3), -- 박예진 (인사팀-민호와 예진)
-                                           ('네, 알겠습니다.', NOW(), 1), -- 이민호 (인사팀-민호와 예진)
-                                           ('도하님, 자료 준비 되셨나요?', NOW(), 5), -- 윤지호 (마케팅팀-지호와 도하)
-                                           ('네, 준비되었습니다.', NOW(), 6), -- 도하 (마케팅팀-지호와 도하)
-                                           ('팀원들, 오늘 회의에서 논의할 사항들 확인해주세요.', NOW(), 7), -- 정지환 (마케팅팀-정환과 시연)
-                                           ('확인했습니다.', NOW(), 8), -- 이진아 (마케팅팀-정환과 시연)
-                                           ('오늘 회의는 다들 잘 준비해 주세요.', NOW(), 9), -- 박시연 (마케팅팀-대리 회의)
-                                           ('알겠습니다.', NOW(), 10), -- 김도현 (마케팅팀-대리 회의)
-                                           ('디자인 회의 진행 예정입니다.', NOW(), 1), -- 김은서 (디자인팀 전체)
-                                           ('기술팀은 오늘 무엇을 다루나요?', NOW(), 1), -- 이시훈 (기술팀 전체)
-                                           ('운영 회의 일정 변경되었습니다.', NOW(), 1), -- 김도현 (운영팀 전체)
-                                           ('오늘 회의 준비 잘 하겠습니다.', NOW(), 14), -- 박시연 (마케팅팀 대리 회의)
-                                           ('모두 회의 참석 부탁드립니다.', NOW(), 15); -- 윤지호 (마케팅팀 전체)
+('안녕하세요!', NOW(), 1), -- 최민경 (인사팀-윤서와 민경)
+('반갑습니다.', NOW(), 2), -- 윤서 (인사팀-윤서와 민경)
+('회의 시작합니다.', NOW(), 3), -- 박예진 (인사팀-민호와 예진)
+('네, 알겠습니다.', NOW(), 1), -- 이민호 (인사팀-민호와 예진)
+('도하님, 자료 준비 되셨나요?', NOW(), 5), -- 윤지호 (마케팅팀-지호와 도하)
+('네, 준비되었습니다.', NOW(), 6), -- 도하 (마케팅팀-지호와 도하)
+('팀원들, 오늘 회의에서 논의할 사항들 확인해주세요.', NOW(), 7), -- 정지환 (마케팅팀-정환과 시연)
+('확인했습니다.', NOW(), 8), -- 이진아 (마케팅팀-정환과 시연)
+('오늘 회의는 다들 잘 준비해 주세요.', NOW(), 9), -- 박시연 (마케팅팀-대리 회의)
+('알겠습니다.', NOW(), 10), -- 김도현 (마케팅팀-대리 회의)
+('디자인 회의 진행 예정입니다.', NOW(), 1), -- 김은서 (디자인팀 전체)
+('기술팀은 오늘 무엇을 다루나요?', NOW(), 1), -- 이시훈 (기술팀 전체)
+('운영 회의 일정 변경되었습니다.', NOW(), 1), -- 김도현 (운영팀 전체)
+('오늘 회의 준비 잘 하겠습니다.', NOW(), 14), -- 박시연 (마케팅팀 대리 회의)
+('모두 회의 참석 부탁드립니다.', NOW(), 15); -- 윤지호 (마케팅팀 전체)
 
 -- 파일 공유 테이블
 CREATE TABLE fileshare (
-                           fno INT UNSIGNED AUTO_INCREMENT,
-                           fname VARCHAR(30),
-                           flocation VARCHAR(255),
-                           fdate DATETIME DEFAULT NOW(),
-                           pno INT UNSIGNED,
-                           PRIMARY KEY (fno),
-                           FOREIGN KEY (pno) REFERENCES paritcipant (pno) ON UPDATE CASCADE ON DELETE CASCADE
+   fno INT UNSIGNED AUTO_INCREMENT,
+   fname VARCHAR(30),
+   flocation VARCHAR(255),
+   fdate DATETIME DEFAULT NOW(),
+   pno INT UNSIGNED,
+   PRIMARY KEY (fno),
+   FOREIGN KEY (pno) REFERENCES paritcipant (pno) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- 파일 샘플 데이터 삽입
 INSERT INTO fileshare (fname, flocation, pno) VALUES
-                                                  ('회의자료1.pdf', '/uploads/회의자료1.pdf', 1), -- 최민경 (인사팀-윤서와 민경)
-                                                  ('보고서_주간.xlsx', '/uploads/보고서_주간.xlsx', 2), -- 윤서 (인사팀-윤서와 민경)
-                                                  ('프로젝트 계획서.docx', '/uploads/프로젝트_계획서.docx', 3), -- 박예진 (인사팀-민호와 예진)
-                                                  ('마케팅 전략.pptx', '/uploads/마케팅_전략.pptx', 4), -- 이민호 (인사팀-민호와 예진)
-                                                  ('디자인 시안.jpg', '/uploads/디자인_시안.jpg', 5), -- 윤지호 (마케팅팀-지호와 도하)
-                                                  ('브랜딩 자료.pdf', '/uploads/브랜딩_자료.pdf', 6), -- 도하 (마케팅팀-지호와 도하)
-                                                  ('팀 회의록.txt', '/uploads/팀_회의록.txt', 7), -- 정지환 (마케팅팀-정환과 시연)
-                                                  ('경영 보고서.xlsx', '/uploads/경영_보고서.xlsx', 8), -- 이진아 (마케팅팀-정환과 시연)
-                                                  ('프로젝트 피드백.docx', '/uploads/프로젝트_피드백.docx', 9), -- 박시연 (마케팅팀 대리 회의)
-                                                  ('디자인 파일.zip', '/uploads/디자인_파일.zip', 10), -- 김도현 (마케팅팀 대리 회의)
-                                                  ('기술 개발 문서.pdf', '/uploads/기술_개발_문서.pdf', 11), -- 김은서 (디자인팀 전체)
-                                                  ('운영 계획서.xlsx', '/uploads/운영_계획서.xlsx', 12), -- 이시훈 (기술팀 전체)
-                                                  ('팀 회의 스케줄.xlsx', '/uploads/팀_회의_스케줄.xlsx', 13), -- 김도현 (운영팀 전체)
-                                                  ('회의 일지.txt', '/uploads/회의_일지.txt', 14), -- 박시연 (마케팅팀 대리 회의)
-                                                  ('분석 자료.xlsx', '/uploads/분석_자료.xlsx', 15); -- 윤지호 (마케팅팀 전체)
+('회의자료1.pdf', '/uploads/회의자료1.pdf', 1), -- 최민경 (인사팀-윤서와 민경)
+('보고서_주간.xlsx', '/uploads/보고서_주간.xlsx', 2), -- 윤서 (인사팀-윤서와 민경)
+('프로젝트 계획서.docx', '/uploads/프로젝트_계획서.docx', 3), -- 박예진 (인사팀-민호와 예진)
+('마케팅 전략.pptx', '/uploads/마케팅_전략.pptx', 4), -- 이민호 (인사팀-민호와 예진)
+('디자인 시안.jpg', '/uploads/디자인_시안.jpg', 5), -- 윤지호 (마케팅팀-지호와 도하)
+('브랜딩 자료.pdf', '/uploads/브랜딩_자료.pdf', 6), -- 도하 (마케팅팀-지호와 도하)
+('팀 회의록.txt', '/uploads/팀_회의록.txt', 7), -- 정지환 (마케팅팀-정환과 시연)
+('경영 보고서.xlsx', '/uploads/경영_보고서.xlsx', 8), -- 이진아 (마케팅팀-정환과 시연)
+('프로젝트 피드백.docx', '/uploads/프로젝트_피드백.docx', 9), -- 박시연 (마케팅팀 대리 회의)
+('디자인 파일.zip', '/uploads/디자인_파일.zip', 10), -- 김도현 (마케팅팀 대리 회의)
+('기술 개발 문서.pdf', '/uploads/기술_개발_문서.pdf', 11), -- 김은서 (디자인팀 전체)
+('운영 계획서.xlsx', '/uploads/운영_계획서.xlsx', 12), -- 이시훈 (기술팀 전체)
+('팀 회의 스케줄.xlsx', '/uploads/팀_회의_스케줄.xlsx', 13), -- 김도현 (운영팀 전체)
+('회의 일지.txt', '/uploads/회의_일지.txt', 14), -- 박시연 (마케팅팀 대리 회의)
+('분석 자료.xlsx', '/uploads/분석_자료.xlsx', 15); -- 윤지호 (마케팅팀 전체)
 
 -- 카테고리 테이블
 CREATE TABLE category (
-                          category_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-                          category_name VARCHAR(20) NOT NULL,
-                          category_desc VARCHAR(100)
+	category_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	category_name VARCHAR(20) NOT NULL,
+	category_desc VARCHAR(100)
 );
 
 -- 카테고리 데이터 추가
 insert into category(category_name, category_desc) values
-                                                       ('자유게시판', '자유롭게 글을 작성할 수 있는 게시판'),
-                                                       ('스포츠', '스포츠 관련 토론 게시판'),
-                                                       ('마음의소리', '고민이나 상담을 나눌 수 있는 게시판'),
-                                                       ('중고거래', '물품 거래를 위한 게시판');
+('자유게시판', '자유롭게 글을 작성할 수 있는 게시판'),
+('스포츠', '스포츠 관련 토론 게시판'),
+('마음의소리', '고민이나 상담을 나눌 수 있는 게시판'),
+('중고거래', '물품 거래를 위한 게시판');
 
 
 
 -- 게시판 테이블
 CREATE TABLE board (
-                       pid INT UNSIGNED AUTO_INCREMENT,
-                       title VARCHAR(50) NOT NULL,
-                       category_id INT UNSIGNED,
-                       content VARCHAR(1000) NOT NULL,
-                       views INT UNSIGNED DEFAULT 0,
-                       mno INT UNSIGNED,
-                       PRIMARY KEY (pid),
-                       FOREIGN KEY (mno) REFERENCES member (mno) ON UPDATE CASCADE ON DELETE CASCADE,
-                       FOREIGN KEY (category_id) REFERENCES category (category_id)
+	pid INT UNSIGNED AUTO_INCREMENT,
+	title VARCHAR(50) NOT NULL,
+	category_id INT UNSIGNED,
+	content VARCHAR(1000) NOT NULL,
+	views INT UNSIGNED DEFAULT 0,
+	mno INT UNSIGNED,
+	PRIMARY KEY (pid),
+	FOREIGN KEY (mno) REFERENCES member (mno) ON UPDATE CASCADE ON DELETE CASCADE,
+	FOREIGN KEY (category_id) REFERENCES category (category_id)
 );
 
 # 게시판 샘플데이터 삽입
 insert into board (pid,title,content,views,mno,category_id) values
-                                                                (1, '주변에 맛집있나요?', '매콤한게땡김', 11, 100001,1),
-                                                                (2, '칼퇴해도됩니까?', '칼퇴각', 32, 100002,1),
-                                                                (3, '집에가고싶은데', '집가도됨?', 10, 100003,2),
-                                                                (4, '팀장님들 요즘 왜이럼?', '떡볶이 vs 곱창 추천좀', 30, 100004,3),
-                                                                (5, '식당 추천해주세요', '회사 근처에 점심 먹을 곳 추천 부탁드려요', 45, 100002, 1),
-                                                                (6, '퇴근 후 운동 같이하실 분?', '헬스장 다니시는 분 계신가요? 같이 운동해요', 28, 100003, 2),
-                                                                (7, '주말에 볼만한 영화 추천', '액션이나 스릴러 위주로 추천해주세요', 67, 100001, 3),
-                                                                (8, '개발자 커리어 고민', '경력 3년차인데 다음 단계는 어떻게 준비해야 할까요?', 120, 100004, 2),
-                                                                (9, '점심시간에 뭐 먹을까요?', '오늘 메뉴 고민이에요. 추천해주세요', 36, 100002, 1),
-                                                                (10, '회사 근처 카페 추천', '조용히 일할 수 있는 카페 있을까요?', 49, 100003, 1),
-                                                                (11, '재택근무 팁 공유', '효율적인 재택근무 방법 알려주세요', 88, 100001, 2),
-                                                                (12, '이직 준비 중입니다', '포트폴리오 준비 어떻게 하시나요?', 105, 100004, 2),
-                                                                (13, '연차 사용 팁', '연차 효율적으로 쓰는 방법 공유해요', 72, 100002, 3),
-                                                                (14, '회식 장소 추천', '20명 정도 단체 회식 가능한 곳 추천해주세요', 66, 100003, 1),
-                                                                (15, '자격증 취득 방법', 'SQL 자격증 취득하신 분 공부 방법 알려주세요', 94, 100001, 2),
-                                                                (16, '야근 수당 계산', '야근 수당 어떻게 계산되나요?', 112, 100004, 3),
-                                                                (17, '회사 인근 병원 추천', '점심시간에 갈 수 있는 병원 있을까요?', 51, 100002, 1),
-                                                                (18, '업무용 노트북 추천', '개발에 적합한 노트북 추천해주세요', 83, 100003, 2),
-                                                                (19, '팀 회의 진행 방법', '효율적인 회의 진행 방법 공유해요', 77, 100001, 3),
-                                                                (20, '자기계발 서적 추천', '업무 역량 강화를 위한 책 추천 부탁드려요', 98, 100004, 2),
-                                                                (21, '사내 동호회 정보', '현재 운영 중인 동호회 알려주세요', 63, 100002, 3),
-                                                                (22, '출퇴근 교통편 공유', '효율적인 출퇴근 방법 있을까요?', 79, 100003, 1),
-                                                                (23, '회사 근처 헬스장 추천', '저렴하고 괜찮은 헬스장 알려주세요', 55, 100001, 2),
-                                                                (24, '업무 스트레스 해소법', '여러분은 어떻게 스트레스 푸시나요?', 129, 100004, 3);
+(1, '주변에 맛집있나요?', '매콤한게땡김', 11, 100001,1),
+(2, '칼퇴해도됩니까?', '칼퇴각', 32, 100002,1),
+(3, '집에가고싶은데', '집가도됨?', 10, 100003,2),
+(4, '팀장님들 요즘 왜이럼?', '떡볶이 vs 곱창 추천좀', 30, 100004,3),
+(5, '식당 추천해주세요', '회사 근처에 점심 먹을 곳 추천 부탁드려요', 45, 100002, 1),
+(6, '퇴근 후 운동 같이하실 분?', '헬스장 다니시는 분 계신가요? 같이 운동해요', 28, 100003, 2),
+(7, '주말에 볼만한 영화 추천', '액션이나 스릴러 위주로 추천해주세요', 67, 100001, 3),
+(8, '개발자 커리어 고민', '경력 3년차인데 다음 단계는 어떻게 준비해야 할까요?', 120, 100004, 2),
+(9, '점심시간에 뭐 먹을까요?', '오늘 메뉴 고민이에요. 추천해주세요', 36, 100002, 1),
+(10, '회사 근처 카페 추천', '조용히 일할 수 있는 카페 있을까요?', 49, 100003, 1),
+(11, '재택근무 팁 공유', '효율적인 재택근무 방법 알려주세요', 88, 100001, 2),
+(12, '이직 준비 중입니다', '포트폴리오 준비 어떻게 하시나요?', 105, 100004, 2),
+(13, '연차 사용 팁', '연차 효율적으로 쓰는 방법 공유해요', 72, 100002, 3),
+(14, '회식 장소 추천', '20명 정도 단체 회식 가능한 곳 추천해주세요', 66, 100003, 1),
+(15, '자격증 취득 방법', 'SQL 자격증 취득하신 분 공부 방법 알려주세요', 94, 100001, 2),
+(16, '야근 수당 계산', '야근 수당 어떻게 계산되나요?', 112, 100004, 3),
+(17, '회사 인근 병원 추천', '점심시간에 갈 수 있는 병원 있을까요?', 51, 100002, 1),
+(18, '업무용 노트북 추천', '개발에 적합한 노트북 추천해주세요', 83, 100003, 2),
+(19, '팀 회의 진행 방법', '효율적인 회의 진행 방법 공유해요', 77, 100001, 3),
+(20, '자기계발 서적 추천', '업무 역량 강화를 위한 책 추천 부탁드려요', 98, 100004, 2),
+(21, '사내 동호회 정보', '현재 운영 중인 동호회 알려주세요', 63, 100002, 3),
+(22, '출퇴근 교통편 공유', '효율적인 출퇴근 방법 있을까요?', 79, 100003, 1),
+(23, '회사 근처 헬스장 추천', '저렴하고 괜찮은 헬스장 알려주세요', 55, 100001, 2),
+(24, '업무 스트레스 해소법', '여러분은 어떻게 스트레스 푸시나요?', 129, 100004, 3);
 
 -- 댓글 테이블
 CREATE TABLE comment (
-                         cid INT UNSIGNED AUTO_INCREMENT,
-                         content VARCHAR(500) NOT NULL,
-                         reg_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-                         pid INT UNSIGNED,
-                         mno INT UNSIGNED,
-                         PRIMARY KEY (cid),
-                         FOREIGN KEY (pid) REFERENCES board(pid) ON UPDATE CASCADE ON DELETE CASCADE,
-                         FOREIGN KEY (mno) REFERENCES member(mno) ON UPDATE CASCADE ON DELETE CASCADE
+cid INT UNSIGNED AUTO_INCREMENT,
+content VARCHAR(500) NOT NULL,
+reg_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+pid INT UNSIGNED,
+mno INT UNSIGNED,
+PRIMARY KEY (cid),
+FOREIGN KEY (pid) REFERENCES board(pid) ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (mno) REFERENCES member(mno) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 insert into comment(cid,content,reg_date,pid,mno)values
-                                                     (1, '저는 한식당 추천합니다! 2번 출구 나가셔서 왼쪽에 있는 고깃집이 진짜 맛있어요.', '2025-03-15 10:23:45', 1, 100001),
-                                                     (2, '매콤한거 좋아하시면 3번 출구 옆 중국집 마라탕이 좋을 것 같아요!', '2025-03-15 11:30:22', 2, 100002),
-                                                     (3, '오늘은 야근각이네요ㅠㅠ', '2025-03-16 14:15:33', 3, 100003),
-                                                     (4, '저도 집에 가고 싶어요... 퇴근시간 언제 오나요', '2025-03-17 16:45:12', 4, 100004);
+ (1, '저는 한식당 추천합니다! 2번 출구 나가셔서 왼쪽에 있는 고깃집이 진짜 맛있어요.', '2025-03-15 10:23:45', 1, 100001),
+ (2, '매콤한거 좋아하시면 3번 출구 옆 중국집 마라탕이 좋을 것 같아요!', '2025-03-15 11:30:22', 2, 100002),
+ (3, '오늘은 야근각이네요ㅠㅠ', '2025-03-16 14:15:33', 3, 100003),
+ (4, '저도 집에 가고 싶어요... 퇴근시간 언제 오나요', '2025-03-17 16:45:12', 4, 100004);
 
 -- 좋아요 테이블 삭제(board_like 테이블은 board를 참조하므로 , board_like 테이블을 먼저 삭제)
 drop table if exists board_like;
@@ -290,221 +290,225 @@ drop table if exists board_like;
 DROP TABLE IF EXISTS board_like;
 
 CREATE TABLE board_like (
-                            like_id INT UNSIGNED AUTO_INCREMENT,
-                            pid INT UNSIGNED NOT NULL,
-                            mno INT UNSIGNED NOT NULL,
-                            PRIMARY KEY (like_id),
-                            UNIQUE KEY unique_like (pid, mno),
-                            FOREIGN KEY (pid) REFERENCES board(pid) ON UPDATE CASCADE ON DELETE CASCADE,
-                            FOREIGN KEY (mno) REFERENCES member(mno) ON UPDATE CASCADE ON DELETE CASCADE
+like_id INT UNSIGNED AUTO_INCREMENT,
+pid INT UNSIGNED NOT NULL,
+mno INT UNSIGNED NOT NULL,
+PRIMARY KEY (like_id),
+UNIQUE KEY unique_like (pid, mno),
+FOREIGN KEY (pid) REFERENCES board(pid) ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (mno) REFERENCES member(mno) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- 좋아요 샘플 데이터 추가
 insert into board_like (pid,mno)values
-                                    (1, 100001),  -- 회원 100001이 게시물 1에 좋아요
-                                    (2, 100001),  -- 회원 100001이 게시물 2에 좋아요
-                                    (1, 100002),  -- 회원 100002가 게시물 1에 좋아요
-                                    (3, 100003);  -- 회원 100003이 게시물 3에 좋아요
+(1, 100001),  -- 회원 100001이 게시물 1에 좋아요
+(2, 100001),  -- 회원 100001이 게시물 2에 좋아요
+(1, 100002),  -- 회원 100002가 게시물 1에 좋아요
+(3, 100003);  -- 회원 100003이 게시물 3에 좋아요
 
 -- 보고서 테이블
 CREATE TABLE report (
-                        rpno INT UNSIGNED AUTO_INCREMENT,
-                        rpname VARCHAR(50) NOT NULL,
-                        rpam VARCHAR(300) NOT NULL,
-                        rppm VARCHAR(300) NOT NULL,
-                        rpamnote VARCHAR(300) NOT NULL,
-                        rppmnote VARCHAR(300) NOT NULL,
-                        rpunprocessed VARCHAR(300),
-                        rpsignificant VARCHAR(300),
-                        rpexpected VARCHAR(300),
-                        rpdate DATETIME DEFAULT NOW(),
-                        rpstate BOOL DEFAULT TRUE,
-                        mno INT UNSIGNED,
-                        PRIMARY KEY (rpno),
-                        FOREIGN KEY (mno) REFERENCES member (mno) ON UPDATE CASCADE ON DELETE CASCADE
+	rpno INT UNSIGNED AUTO_INCREMENT,
+	rpname VARCHAR(50) NOT NULL,
+	rpam VARCHAR(300) NOT NULL,
+	rppm VARCHAR(300) NOT NULL,
+	rpamnote VARCHAR(300) NOT NULL,
+	rppmnote VARCHAR(300) NOT NULL,
+	rpunprocessed VARCHAR(300),
+	rpsignificant VARCHAR(300),
+	rpexpected VARCHAR(300),
+	rpdate DATETIME DEFAULT NOW(),
+	rpstate BOOL DEFAULT TRUE,
+	mno INT UNSIGNED,
+	PRIMARY KEY (rpno),
+	FOREIGN KEY (mno) REFERENCES member (mno) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- 보고서 샘플 추가
 INSERT INTO report( rpname, rpam, rppm, rpamnote, rppmnote, rpunprocessed, rpsignificant, rpexpected, rpdate, mno ) VALUES
-                                                                                                                        ( '일일 업무 보고서', '오전 업무1', '오후 업무1', '오전 비고1', '오후 비고 1', '미처리 내역1', '특이사항1', '예정사항1', '2025-02-01 12:30:11', 100006 ),
-                                                                                                                        ( '일일 업무 보고서', '오전 업무2', '오후 업무2', '오전 비고2', '오후 비고 2', '미처리 내역2', '특이사항2', '예정사항2', '2025-02-02 12:30:11', 200015 ),
-                                                                                                                        ( '일일 업무 보고서', '오전 업무3', '오후 업무3', '오전 비고3', '오후 비고 3', '미처리 내역3', '특이사항3', '예정사항3', '2025-02-03 12:30:11', 300024 ),
-                                                                                                                        ( '일일 업무 보고서', '오전 업무4', '오후 업무4', '오전 비고4', '오후 비고 4', '미처리 내역4', '특이사항4', '예정사항4', '2025-02-04 12:30:11', 400030 ),
-                                                                                                                        ( '일일 업무 보고서', '오전 업무5', '오후 업무5', '오전 비고5', '오후 비고 5', '미처리 내역5', '특이사항5', '예정사항5', '2025-02-05 12:30:11', 500039 ),
-                                                                                                                        ('20250201 일일 업무 보고서',
-                                                                                                                         '클라이언트 미팅 진행 (A사 프로젝트)\n요구사항 분석 및 회의록 작성',
-                                                                                                                         '프로젝트 기획서 초안 작성\n팀 내 검토 회의 진행',
-                                                                                                                         '회의 내용 정리 및 공유 완료\n추가 요구사항 정리 필요',
-                                                                                                                         '초안 작성 중 피드백 반영 예정\n일부 데이터 분석 필요',
-                                                                                                                         '미팅 후 보완 요청된 자료 정리 중\n기한 내 제출 필요',
-                                                                                                                         'A사 추가 요청 사항 발생\n데이터 보완 필요',
-                                                                                                                         '클라이언트 피드백 반영 후 최종 기획서 작성\n내일 오전 검토 예정',
-                                                                                                                         '2025-02-01 12:30:11', 100007),
-                                                                                                                        ('20250202 일일 업무 보고서',
-                                                                                                                         '신규 서비스 기능 정의 및 문서화\nUI/UX 시안 작업 진행',
-                                                                                                                         '개발팀과 협업하여 기능 구현 가능성 검토\n비즈니스 요구사항 반영 확인',
-                                                                                                                         'UI 디자인 수정 요청 반영 중\n고객 피드백 반영 필요',
-                                                                                                                         '기능 구현을 위한 기술 검토 진행\n추가 API 연동 필요',
-                                                                                                                         '기술 검토 중 발견된 문제 해결 필요\n서버 부하 테스트 미진행',
-                                                                                                                         '일부 기능 기획 보완 필요\n경쟁사 분석 자료 추가 검토',
-                                                                                                                         '개발팀과 추가 미팅 예정\nUI 최종 확정 후 작업 진행',
-                                                                                                                         '2025-02-02 12:30:11', 100007),
-                                                                                                                        ('02050203 일일 업무 보고서',
-                                                                                                                         '마케팅 캠페인 성과 분석\n광고 지표 정리 및 보고서 작성',
-                                                                                                                         'SNS 채널별 성과 비교 분석\n추가 마케팅 전략 논의',
-                                                                                                                         '데이터 기반으로 개선 방향 논의\n효율 낮은 광고 소재 수정 필요',
-                                                                                                                         '성과 분석 지표 일부 누락됨\n추가 데이터 요청 중',
-                                                                                                                         '광고비 대비 효과 분석 필요\n리타겟팅 전략 수정 필요',
-                                                                                                                         '마케팅팀과 전략 미팅 예정\n새로운 광고 소재 제작 논의',
-                                                                                                                         '추가 광고 성과 분석 후 리타겟팅 진행 예정\n다음주 캠페인 최적화 논의',
-                                                                                                                         '2025-02-03 12:30:11', 100007),
-                                                                                                                        ('20250204 일일 업무 보고서',
-                                                                                                                         '고객 지원 시스템 업데이트\n신규 문의 대응 프로세스 개선',
-                                                                                                                         '고객 불만 분석 및 개선안 도출\nFAQ 콘텐츠 업데이트',
-                                                                                                                         '고객 피드백 반영 중\n추가 개선 요청 사항 수집',
-                                                                                                                         '일부 시스템 오류 발견됨\n기술팀과 협의 필요',
-                                                                                                                         '긴급 문의 대응 지연 이슈 발생\n대응 속도 개선 필요',
-                                                                                                                         '기술팀과 협업하여 시스템 오류 해결 예정\n고객 응대 프로세스 개선 진행',
-                                                                                                                         '추가 CS 교육 진행 후 대응 매뉴얼 개정 예정\n고객만족도 조사 시행',
-                                                                                                                         '2025-02-04 12:30:11', 100007),
-                                                                                                                        ('202050205 일일 업무 보고서',
-                                                                                                                         '사내 교육 프로그램 기획\n교육 자료 초안 작성',
-                                                                                                                         '사내 직원 대상 워크숍 진행\n설문 조사 및 피드백 수집',
-                                                                                                                         '교육 자료 내용 검토 중\n추가 자료 보완 필요',
-                                                                                                                         '참석자 피드백 정리 중\n일부 강의 내용 수정 예정',
-                                                                                                                         '참석률 저조 문제 발생\n홍보 방안 개선 필요',
-                                                                                                                         '워크숍 후속 강의 기획 예정\n추가 강사진 섭외 진행',
-                                                                                                                         '교육 효과 분석 후 정기 교육 프로그램 도입 검토',
-                                                                                                                         '2025-02-05 12:30:11', 100007),
-                                                                                                                        ('20250206 일일 업무 보고서',
-                                                                                                                         '클라이언트 미팅 진행 (A사 프로젝트)\n요구사항 분석 및 회의록 작성',
-                                                                                                                         '프로젝트 기획서 초안 작성\n팀 내 검토 회의 진행',
-                                                                                                                         '회의 내용 정리 및 공유 완료\n추가 요구사항 정리 필요',
-                                                                                                                         '초안 작성 중 피드백 반영 예정\n일부 데이터 분석 필요',
-                                                                                                                         '미팅 후 보완 요청된 자료 정리 중\n기한 내 제출 필요',
-                                                                                                                         'A사 추가 요청 사항 발생\n데이터 보완 필요',
-                                                                                                                         '클라이언트 피드백 반영 후 최종 기획서 작성\n내일 오전 검토 예정',
-                                                                                                                         '2025-02-06 12:30:11', 100007),
-                                                                                                                        ('20250207 일일 업무 보고서',
-                                                                                                                         '신규 서비스 기능 정의 및 문서화\nUI/UX 시안 작업 진행',
-                                                                                                                         '개발팀과 협업하여 기능 구현 가능성 검토\n비즈니스 요구사항 반영 확인',
-                                                                                                                         'UI 디자인 수정 요청 반영 중\n고객 피드백 반영 필요',
-                                                                                                                         '기능 구현을 위한 기술 검토 진행\n추가 API 연동 필요',
-                                                                                                                         '기술 검토 중 발견된 문제 해결 필요\n서버 부하 테스트 미진행',
-                                                                                                                         '일부 기능 기획 보완 필요\n경쟁사 분석 자료 추가 검토',
-                                                                                                                         '개발팀과 추가 미팅 예정\nUI 최종 확정 후 작업 진행',
-                                                                                                                         '2025-02-07 12:30:11', 100004),
-                                                                                                                        ('20250208 일일 업무 보고서',
-                                                                                                                         '마케팅 캠페인 성과 분석\n광고 지표 정리 및 보고서 작성',
-                                                                                                                         'SNS 채널별 성과 비교 분석\n추가 마케팅 전략 논의',
-                                                                                                                         '데이터 기반으로 개선 방향 논의\n효율 낮은 광고 소재 수정 필요',
-                                                                                                                         '',
-                                                                                                                         '성과 분석 지표 일부 누락됨\n추가 데이터 요청 중',
-                                                                                                                         '광고비 대비 효과 분석 필요\n리타겟팅 전략 수정 필요',
-                                                                                                                         '마케팅팀과 전략 미팅 예정\n새로운 광고 소재 제작 논의',
-                                                                                                                         '2025-02-08 16:24:11', 100004),
-                                                                                                                        ('20250209 일일 업무 보고서',
-                                                                                                                         '고객 지원 시스템 업데이트\n신규 문의 대응 프로세스 개선',
-                                                                                                                         '고객 불만 분석 및 개선안 도출\nFAQ 콘텐츠 업데이트',
-                                                                                                                         '고객 피드백 반영 중\n추가 개선 요청 사항 수집',
-                                                                                                                         '일부 시스템 오류 발견됨\n기술팀과 협의 필요',
-                                                                                                                         '',
-                                                                                                                         '긴급 문의 대응 지연 이슈 발생\n대응 속도 개선 필요',
-                                                                                                                         '기술팀과 협업하여 시스템 오류 해결 예정\n고객 응대 프로세스 개선 진행',
-                                                                                                                         '2025-02-09 16:48:15', 100004),
-                                                                                                                        ('20250210 일일 업무 보고서',
-                                                                                                                         '사내 교육 프로그램 기획\n교육 자료 초안 작성',
-                                                                                                                         '사내 직원 대상 워크숍 진행\n설문 조사 및 피드백 수집',
-                                                                                                                         '',
-                                                                                                                         '교육 자료 내용 검토 중\n추가 자료 보완 필요',
-                                                                                                                         '참석자 피드백 정리 중\n일부 강의 내용 수정 예정',
-                                                                                                                         '참석률 저조 문제 발생\n홍보 방안 개선 필요',
-                                                                                                                         '워크숍 후속 강의 기획 예정\n추가 강사진 섭외 진행',
-                                                                                                                         '2025-02-10 16:27:45', 100007),
-                                                                                                                        ('20250211 일일 업무 보고서',
-                                                                                                                         '고객사 월간 보고서 작성\n매출 및 트래픽 분석 진행',
-                                                                                                                         '경쟁사 동향 조사 및 비교 분석\n시장 변화 예측 데이터 정리',
-                                                                                                                         '일부 데이터 수집 지연\n추가 자료 요청 필요',
-                                                                                                                         '경쟁사 자료 업데이트 필요\n리포트 내 그래프 시각화 검토 중',
-                                                                                                                         '고객사 요청 자료 일부 누락\n정확한 데이터 확보 필요',
-                                                                                                                         '트래픽 분석 과정에서 오류 발생\n수정 후 재분석 예정',
-                                                                                                                         '최종 보고서 제출 일정 조정\n내일 오전 최종 검토 후 발송',
-                                                                                                                         '2025-02-11 14:12:43', 100007),
-                                                                                                                        ('20250212 일일 업무 보고서',
-                                                                                                                         '사내 프로젝트 일정 조정\n업무 우선순위 재조정',
-                                                                                                                         '부서 간 협업 회의 진행\n업무 진행 상황 공유 및 조율',
-                                                                                                                         '일정 조정 후 팀원들에게 공지 완료\n변경된 일정 반영 필요',
-                                                                                                                         '회의 중 추가 요청 사항 발생\n리소스 배분 검토 중',
-                                                                                                                         '일부 업무 일정 조정 실패\n리소스 부족 문제 해결 필요',
-                                                                                                                         '부서 간 조율 과정에서 의견 차이 발생\n추가 회의 필요',
-                                                                                                                         '내일 추가 논의 후 최종 일정 확정\n리소스 재분배 계획 수립',
-                                                                                                                         '2025-02-12 15:30:11', 100007),
-                                                                                                                        ('20250213 일일 업무 보고서',
-                                                                                                                         '신규 웹사이트 기능 테스트 진행\n버그 리포트 작성 및 공유',
-                                                                                                                         '프론트엔드 디자인 개선 요청 정리\nUI 테스트 진행',
-                                                                                                                         '테스트 중 발견된 주요 이슈 정리 완료\n개발팀 공유 필요',
-                                                                                                                         'UI 개선 사항 일부 반영 완료\n추가 수정 사항 검토 중',
-                                                                                                                         '일부 기능 동작 오류 발견\n긴급 수정 필요',
-                                                                                                                         '디자인 팀과 개발팀 간 조율 필요\n우선순위 설정 필요',
-                                                                                                                         '내일 오전 수정 버전 배포 예정\n최종 테스트 후 반영 결정',
-                                                                                                                         '2025-02-13 17:00:37', 100007),
-                                                                                                                        ('20250214 일일 업무 보고서',
-                                                                                                                         '신입사원 OJT 진행\n업무 프로세스 및 툴 교육',
-                                                                                                                         '팀 내 멘토링 프로그램 진행\n신입사원 피드백 수집',
-                                                                                                                         '교육 내용 일부 보완 필요\n추가 자료 준비 예정',
-                                                                                                                         '멘토링 중 신입사원 질문 수집\nQ&A 정리 후 공유',
-                                                                                                                         '일부 신입사원 적응 문제 발생\n추가 지원 필요',
-                                                                                                                         'OJT 효과 분석 후 피드백 반영 예정\n교육 자료 개선 필요',
-                                                                                                                         '내일 보충 교육 진행\n적응도 조사 후 추가 지원 계획',
-                                                                                                                         '2025-02-14 15:09:51', 100007),
-                                                                                                                        ('20250215 일일 업무 보고서',
-                                                                                                                         '사내 보안 점검 진행\n서버 및 네트워크 취약점 분석',
-                                                                                                                         '보안 취약점 패치 및 조치 사항 정리\n관리 시스템 업데이트',
-                                                                                                                         '일부 시스템 점검 지연\n긴급 보안 패치 필요',
-                                                                                                                         '취약점 분석 리포트 작성 중\n기술팀과 공유 예정',
-                                                                                                                         '백업 서버 상태 점검 미진행\n데이터 안정성 확인 필요',
-                                                                                                                         '내부 시스템 보안 강화 필요\n추가 점검 계획 수립 중',
-                                                                                                                         '내일 보안팀과 추가 미팅 진행\n서버 점검 최종 완료 예정',
-                                                                                                                         '2025-02-15 17:30:40', 100007),
-                                                                                                                        ('20250216 일일 업무 보고서',
-                                                                                                                         '이커머스 플랫폼 상품 페이지 개편\nSEO 최적화 작업 진행',
-                                                                                                                         '상품 리뷰 시스템 개선 기획\n개발팀과 구현 방안 논의',
-                                                                                                                         '페이지 개편 시안 확정\n디자인 팀 협업 진행 중',
-                                                                                                                         'SEO 분석 결과 반영 중\n키워드 전략 조정 필요',
-                                                                                                                         '리뷰 시스템 오류 발견\n사용자 피드백 반영 필요',
-                                                                                                                         '일부 페이지 UX 문제 확인\n디자인 수정 요청 필요',
-                                                                                                                         '내일 개발팀과 추가 논의 후 적용\nA/B 테스트 계획 수립',
-                                                                                                                         '2025-02-16 16:39:51', 100007);
+( '일일 업무 보고서', '오전 업무1', '오후 업무1', '오전 비고1', '오후 비고 1', '미처리 내역1', '특이사항1', '예정사항1', '2025-02-01 12:30:11', 100006 ),
+( '일일 업무 보고서', '오전 업무2', '오후 업무2', '오전 비고2', '오후 비고 2', '미처리 내역2', '특이사항2', '예정사항2', '2025-02-02 12:30:11', 200015 ),
+( '일일 업무 보고서', '오전 업무3', '오후 업무3', '오전 비고3', '오후 비고 3', '미처리 내역3', '특이사항3', '예정사항3', '2025-02-03 12:30:11', 300024 ),
+( '일일 업무 보고서', '오전 업무4', '오후 업무4', '오전 비고4', '오후 비고 4', '미처리 내역4', '특이사항4', '예정사항4', '2025-02-04 12:30:11', 400030 ),
+( '일일 업무 보고서', '오전 업무5', '오후 업무5', '오전 비고5', '오후 비고 5', '미처리 내역5', '특이사항5', '예정사항5', '2025-02-05 12:30:11', 500039 ),
+('20250201 일일 업무 보고서',
+ '클라이언트 미팅 진행 (A사 프로젝트)\n요구사항 분석 및 회의록 작성',
+ '프로젝트 기획서 초안 작성\n팀 내 검토 회의 진행',
+ '회의 내용 정리 및 공유 완료\n추가 요구사항 정리 필요',
+ '초안 작성 중 피드백 반영 예정\n일부 데이터 분석 필요',
+ '미팅 후 보완 요청된 자료 정리 중\n기한 내 제출 필요',
+ 'A사 추가 요청 사항 발생\n데이터 보완 필요',
+ '클라이언트 피드백 반영 후 최종 기획서 작성\n내일 오전 검토 예정',
+ '2025-02-01 12:30:11', 100006),
+('20250202 일일 업무 보고서',
+ '신규 서비스 기능 정의 및 문서화\nUI/UX 시안 작업 진행',
+ '개발팀과 협업하여 기능 구현 가능성 검토\n비즈니스 요구사항 반영 확인',
+ 'UI 디자인 수정 요청 반영 중\n고객 피드백 반영 필요',
+ '기능 구현을 위한 기술 검토 진행\n추가 API 연동 필요',
+ '기술 검토 중 발견된 문제 해결 필요\n서버 부하 테스트 미진행',
+ '일부 기능 기획 보완 필요\n경쟁사 분석 자료 추가 검토',
+ '개발팀과 추가 미팅 예정\nUI 최종 확정 후 작업 진행',
+ '2025-02-02 12:30:11', 100006),
+('02050203 일일 업무 보고서',
+ '마케팅 캠페인 성과 분석\n광고 지표 정리 및 보고서 작성',
+ 'SNS 채널별 성과 비교 분석\n추가 마케팅 전략 논의',
+ '데이터 기반으로 개선 방향 논의\n효율 낮은 광고 소재 수정 필요',
+ '성과 분석 지표 일부 누락됨\n추가 데이터 요청 중',
+ '광고비 대비 효과 분석 필요\n리타겟팅 전략 수정 필요',
+ '마케팅팀과 전략 미팅 예정\n새로운 광고 소재 제작 논의',
+ '추가 광고 성과 분석 후 리타겟팅 진행 예정\n다음주 캠페인 최적화 논의',
+ '2025-02-03 12:30:11', 100006),
+('20250204 일일 업무 보고서',
+ '고객 지원 시스템 업데이트\n신규 문의 대응 프로세스 개선',
+ '고객 불만 분석 및 개선안 도출\nFAQ 콘텐츠 업데이트',
+ '고객 피드백 반영 중\n추가 개선 요청 사항 수집',
+ '일부 시스템 오류 발견됨\n기술팀과 협의 필요',
+ '긴급 문의 대응 지연 이슈 발생\n대응 속도 개선 필요',
+ '기술팀과 협업하여 시스템 오류 해결 예정\n고객 응대 프로세스 개선 진행',
+ '추가 CS 교육 진행 후 대응 매뉴얼 개정 예정\n고객만족도 조사 시행',
+ '2025-02-04 12:30:11', 100006),
+('202050205 일일 업무 보고서',
+ '사내 교육 프로그램 기획\n교육 자료 초안 작성',
+ '사내 직원 대상 워크숍 진행\n설문 조사 및 피드백 수집',
+ '교육 자료 내용 검토 중\n추가 자료 보완 필요',
+ '참석자 피드백 정리 중\n일부 강의 내용 수정 예정',
+ '참석률 저조 문제 발생\n홍보 방안 개선 필요',
+ '워크숍 후속 강의 기획 예정\n추가 강사진 섭외 진행',
+ '교육 효과 분석 후 정기 교육 프로그램 도입 검토',
+ '2025-02-05 12:30:11', 100006),
+('20250206 일일 업무 보고서',
+ '클라이언트 미팅 진행 (A사 프로젝트)\n요구사항 분석 및 회의록 작성',
+ '프로젝트 기획서 초안 작성\n팀 내 검토 회의 진행',
+ '회의 내용 정리 및 공유 완료\n추가 요구사항 정리 필요',
+ '초안 작성 중 피드백 반영 예정\n일부 데이터 분석 필요',
+ '미팅 후 보완 요청된 자료 정리 중\n기한 내 제출 필요',
+ 'A사 추가 요청 사항 발생\n데이터 보완 필요',
+ '클라이언트 피드백 반영 후 최종 기획서 작성\n내일 오전 검토 예정',
+ '2025-02-06 12:30:11', 100006),
+('20250207 일일 업무 보고서',
+ '신규 서비스 기능 정의 및 문서화\nUI/UX 시안 작업 진행',
+ '개발팀과 협업하여 기능 구현 가능성 검토\n비즈니스 요구사항 반영 확인',
+ 'UI 디자인 수정 요청 반영 중\n고객 피드백 반영 필요',
+ '기능 구현을 위한 기술 검토 진행\n추가 API 연동 필요',
+ '기술 검토 중 발견된 문제 해결 필요\n서버 부하 테스트 미진행',
+ '일부 기능 기획 보완 필요\n경쟁사 분석 자료 추가 검토',
+ '개발팀과 추가 미팅 예정\nUI 최종 확정 후 작업 진행',
+ '2025-02-07 12:30:11', 100004),
+('20250208 일일 업무 보고서',
+ '마케팅 캠페인 성과 분석\n광고 지표 정리 및 보고서 작성',
+ 'SNS 채널별 성과 비교 분석\n추가 마케팅 전략 논의',
+ '데이터 기반으로 개선 방향 논의\n효율 낮은 광고 소재 수정 필요',
+ '',
+ '성과 분석 지표 일부 누락됨\n추가 데이터 요청 중',
+ '광고비 대비 효과 분석 필요\n리타겟팅 전략 수정 필요',
+ '마케팅팀과 전략 미팅 예정\n새로운 광고 소재 제작 논의',
+ '2025-02-08 16:24:11', 100004),
+('20250209 일일 업무 보고서',
+ '고객 지원 시스템 업데이트\n신규 문의 대응 프로세스 개선',
+ '고객 불만 분석 및 개선안 도출\nFAQ 콘텐츠 업데이트',
+ '고객 피드백 반영 중\n추가 개선 요청 사항 수집',
+ '일부 시스템 오류 발견됨\n기술팀과 협의 필요',
+ '',
+ '긴급 문의 대응 지연 이슈 발생\n대응 속도 개선 필요',
+ '기술팀과 협업하여 시스템 오류 해결 예정\n고객 응대 프로세스 개선 진행',
+ '2025-02-09 16:48:15', 100004),
+('20250210 일일 업무 보고서',
+ '사내 교육 프로그램 기획\n교육 자료 초안 작성',
+ '사내 직원 대상 워크숍 진행\n설문 조사 및 피드백 수집',
+ '',
+ '교육 자료 내용 검토 중\n추가 자료 보완 필요',
+ '참석자 피드백 정리 중\n일부 강의 내용 수정 예정',
+ '참석률 저조 문제 발생\n홍보 방안 개선 필요',
+ '워크숍 후속 강의 기획 예정\n추가 강사진 섭외 진행',
+ '2025-02-10 16:27:45', 100006),
+('20250211 일일 업무 보고서',
+ '고객사 월간 보고서 작성\n매출 및 트래픽 분석 진행',
+ '경쟁사 동향 조사 및 비교 분석\n시장 변화 예측 데이터 정리',
+ '일부 데이터 수집 지연\n추가 자료 요청 필요',
+ '경쟁사 자료 업데이트 필요\n리포트 내 그래프 시각화 검토 중',
+ '고객사 요청 자료 일부 누락\n정확한 데이터 확보 필요',
+ '트래픽 분석 과정에서 오류 발생\n수정 후 재분석 예정',
+ '최종 보고서 제출 일정 조정\n내일 오전 최종 검토 후 발송',
+ '2025-02-11 14:12:43', 100006),
+('20250212 일일 업무 보고서',
+ '사내 프로젝트 일정 조정\n업무 우선순위 재조정',
+ '부서 간 협업 회의 진행\n업무 진행 상황 공유 및 조율',
+ '일정 조정 후 팀원들에게 공지 완료\n변경된 일정 반영 필요',
+ '회의 중 추가 요청 사항 발생\n리소스 배분 검토 중',
+ '일부 업무 일정 조정 실패\n리소스 부족 문제 해결 필요',
+ '부서 간 조율 과정에서 의견 차이 발생\n추가 회의 필요',
+ '내일 추가 논의 후 최종 일정 확정\n리소스 재분배 계획 수립',
+ '2025-02-12 15:30:11', 100006),
+('20250213 일일 업무 보고서',
+ '신규 웹사이트 기능 테스트 진행\n버그 리포트 작성 및 공유',
+ '프론트엔드 디자인 개선 요청 정리\nUI 테스트 진행',
+ '테스트 중 발견된 주요 이슈 정리 완료\n개발팀 공유 필요',
+ 'UI 개선 사항 일부 반영 완료\n추가 수정 사항 검토 중',
+ '일부 기능 동작 오류 발견\n긴급 수정 필요',
+ '디자인 팀과 개발팀 간 조율 필요\n우선순위 설정 필요',
+ '내일 오전 수정 버전 배포 예정\n최종 테스트 후 반영 결정',
+ '2025-02-13 17:00:37', 100006),
+('20250214 일일 업무 보고서',
+ '신입사원 OJT 진행\n업무 프로세스 및 툴 교육',
+ '팀 내 멘토링 프로그램 진행\n신입사원 피드백 수집',
+ '교육 내용 일부 보완 필요\n추가 자료 준비 예정',
+ '멘토링 중 신입사원 질문 수집\nQ&A 정리 후 공유',
+ '일부 신입사원 적응 문제 발생\n추가 지원 필요',
+ 'OJT 효과 분석 후 피드백 반영 예정\n교육 자료 개선 필요',
+ '내일 보충 교육 진행\n적응도 조사 후 추가 지원 계획',
+ '2025-02-14 15:09:51', 100006),
+('20250215 일일 업무 보고서',
+ '사내 보안 점검 진행\n서버 및 네트워크 취약점 분석',
+ '보안 취약점 패치 및 조치 사항 정리\n관리 시스템 업데이트',
+ '일부 시스템 점검 지연\n긴급 보안 패치 필요',
+ '취약점 분석 리포트 작성 중\n기술팀과 공유 예정',
+ '백업 서버 상태 점검 미진행\n데이터 안정성 확인 필요',
+ '내부 시스템 보안 강화 필요\n추가 점검 계획 수립 중',
+ '내일 보안팀과 추가 미팅 진행\n서버 점검 최종 완료 예정',
+ '2025-02-15 17:30:40', 100006),
+('20250216 일일 업무 보고서',
+ '이커머스 플랫폼 상품 페이지 개편\nSEO 최적화 작업 진행',
+ '상품 리뷰 시스템 개선 기획\n개발팀과 구현 방안 논의',
+ '페이지 개편 시안 확정\n디자인 팀 협업 진행 중',
+ 'SEO 분석 결과 반영 중\n키워드 전략 조정 필요',
+ '리뷰 시스템 오류 발견\n사용자 피드백 반영 필요',
+ '일부 페이지 UX 문제 확인\n디자인 수정 요청 필요',
+ '내일 개발팀과 추가 논의 후 적용\nA/B 테스트 계획 수립',
+ '2025-02-16 16:39:51', 100006);
 
 -- 결재 테이블
 CREATE TABLE approval (
-                          apno INT UNSIGNED AUTO_INCREMENT,
-                          apdate DATETIME DEFAULT NULL,
-                          apstate BOOL DEFAULT FALSE,
-                          apsignature VARCHAR(255) DEFAULT NULL,
-                          mno INT UNSIGNED,                      # 승인 할 회원번호(mno)
-                          rpno INT UNSIGNED,
-                          PRIMARY KEY (apno),
-                          FOREIGN KEY (mno) REFERENCES member (mno) ON UPDATE CASCADE ON DELETE CASCADE,
-                          FOREIGN KEY (rpno) REFERENCES report (rpno) ON UPDATE CASCADE ON DELETE CASCADE
+	  apno INT UNSIGNED AUTO_INCREMENT,
+	  apdate DATETIME DEFAULT NULL,
+	  apstate BOOL DEFAULT FALSE,
+	  apsignature VARCHAR(255) DEFAULT NULL,
+	  mno INT UNSIGNED,                      # 승인 할 회원번호(mno)
+	  rpno INT UNSIGNED,
+	  PRIMARY KEY (apno),
+	  FOREIGN KEY (mno) REFERENCES member (mno) ON UPDATE CASCADE ON DELETE CASCADE,
+	  FOREIGN KEY (rpno) REFERENCES report (rpno) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- 결재 샘플 추가
 INSERT INTO approval( apdate, apstate, apsignature, mno, rpno ) VALUES
-                                                                    ( '2025-02-01 23:30:11', 1, '서명1.jpg', 100007, 6 ),
-                                                                    ( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 6 ),
-                                                                    ( '2025-02-02 11:15:11', 0, null, 100002, 6 ),
-                                                                    ( null, 0, null, 100001, 6 ),
-                                                                    ( '2025-02-05 23:30:11', 1, '서명5.jpg', 200012, 2 ),
-                                                                    ( null , 0, '서명6', 200010, 2 ),
-                                                                    ( '2025-02-01 23:30:11', 1, '서명1.jpg', 100007, 20 ),
-                                                                    ( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 20 ),
-                                                                    ( '2025-02-02 11:15:11', 0, null, 100002, 20 ),
-                                                                    ( null, 0, null, 100001, 20 ),
-                                                                    ( '2025-02-01 23:30:11', 1, '서명1.jpg', 100007, 21 ),
-                                                                    ( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 21 ),
-                                                                    ( '2025-02-02 11:15:11', 0, null, 100003, 21 ),
-                                                                    ( null, 0, null, 100001, 21 );
+( '2025-02-01 23:30:11', 1, '서명1.jpg', 100006, 6 ),
+( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 6 ),
+( '2025-02-02 11:15:11', 0, null, 100002, 6 ),
+( null, 0, null, 100001, 6 ),
+( '2025-02-01 23:30:11', 1, '서명1.jpg', 100006, 19 ),
+( '2025-02-02 11:15:11', 0, null, 100003, 19 ),
+( null, 0, null, 100002, 19 ),
+( null, 0, null, 100001, 19 ),
+( '2025-02-05 23:30:11', 1, '서명5.jpg', 200012, 2 ),
+( null , 0, '서명6', 200010, 2 ),
+( '2025-02-01 23:30:11', 1, '서명1.jpg', 100006, 20 ),
+( '2025-02-02 11:15:11', 1, '서명2.jpg', 100004, 20 ),
+( '2025-02-02 11:15:11', 0, null, 100002, 20 ),
+( null, 0, null, 100001, 20 ),
+( '2025-02-01 23:30:11', 1, '서명1.jpg', 100006, 21 ),
+( '2025-02-02 11:15:11', 1, '서명2.jpg', 100003, 21 ),
+( '2025-02-02 11:15:11', 0, null, 100002, 21 ),
+( null, 0, null, 100001, 21 );
 
 -- 그룹 채팅방 생성 (부서별)
 INSERT INTO room (rname, rtype, mno) VALUES
@@ -668,7 +672,7 @@ WHERE m.mno = 100007 and
     apstate = true and apdate is not null
 ORDER BY rp.rpno DESC;
 
-SELECT DISTINCT rpno FROM approval WHERE apstate = false
+SELECT DISTINCT rpno FROM approval WHERE apstate = false;
 
 -- 그룹 채팅방 생성 (부서별)
 INSERT INTO room (rname, rtype, mno) VALUES
