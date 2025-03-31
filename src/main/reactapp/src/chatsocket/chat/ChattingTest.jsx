@@ -363,10 +363,10 @@ export default function ChatTeset() {
         }
       }
 
-      if (state == false) {
-        alert("등록할 채팅방에 참여하세요.")
-        return;
-      }
+      // if (state == false) {
+      //   alert("등록할 채팅방에 참여하세요.")
+      //   return;
+      // }
 
       try {
         // 새로운 채팅방 생성 요청
@@ -1203,16 +1203,14 @@ export default function ChatTeset() {
                               secondary={`(${m.mno})`} // 직급
                             />
                             <ListItemIcon>
+  <input
+    type="checkbox"
+    value={m.mno}
+    checked={loginInfo.mno === m.mno || mnoList.includes(m.mno)}
+    onChange={() => handleCheckboxChange(m.mno)}
+  />
+</ListItemIcon>
 
-
-                              <input type='checkbox'
-                                value={m.mno}
-                                checked={mnoList.includes(m.mno)}
-                                onChange={() => handleCheckboxChange(m.mno)}
-                              />
-
-
-                            </ListItemIcon>
 
 
 
