@@ -21,6 +21,5 @@ public class ApprovalDto {
     private String jsonaplist;
     private List<ApprovalDto> aplist;
 
-
     private MultipartFile uploadFile;
 }
