@@ -10,12 +10,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.multipart.MultipartFile;
 import work.model.dto.member.MemberDto;
 import work.model.dto.member.MemberUtils;
 import work.model.mapper.member.MemberMapper;
 import work.service.hash.Hash;
 import work.service.message.FileService;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -207,11 +209,15 @@ public class MemberService {
     // [9] 사원 정보 수정 및 비밀번호 초기화
     public int updateMemberInfo(String mno, String mname, String mrank, String mphone, int mtype, MultipartFile mprofile) {
 
+        Hash hash = new Hash();
         String mpwd = null;
         String memail = null;
 
         if (mtype == 3) { // 퇴사 처리
-            mpwd = passwordEncoder.encode("1234"); // 비밀번호 암호화
+            String salt = hash.createSalt(); // 랜덤 솔트 생성
+            String hashedValue = hash.customHash( "1234" , salt); // 입력된 비밀번호 + 솔트를 해싱
+            String hashedPassword = salt + hashedValue;
+            mpwd = hashedPassword; // 비밀번호 암호화
             memail = null;                         // 이메일 null 처리
         }
 
