@@ -74,8 +74,8 @@ public class ChatSocket extends TextWebSocketHandler {
 
         System.out.println(rno + "채팅방에  클라이언트 추가");
 
-        // 기존 채팅 불러오기
-        List<MessageDto> msgList = roomMapper.findAll(rno); // 나중에 limit  지정하기
+
+        List<MessageDto> msgList = roomMapper.findAll(rno);
 
         // 중복된 msno를 제거하기 위해 Set을 사용하여 중복을 제거
         Set<Integer> seenMsno = new HashSet<>();
@@ -100,13 +100,13 @@ public class ChatSocket extends TextWebSocketHandler {
             ChattingDto chattingDto = mapper.readValue(message.getPayload(), ChattingDto.class);
 
             int rno = chattingDto.getRno(); // 메시지가 전송된 채팅방 번호
-        if(chattingDto.getMnameList() != null) {
-            if (chattingDto.getMnameList().size() > 0) {
-                for (int i = 0; i < chattingDto.getMnameList().size(); i++) {
+            if(chattingDto.getMnameList() != null) {
+                if (chattingDto.getMnameList().size() > 0) {
+                    for (int i = 0; i < chattingDto.getMnameList().size(); i++) {
                     System.out.println("새로 추가된 회원" + chattingDto.getMnameList().get(i));
+                    }
                 }
             }
-        }
             switch (chattingDto.getMstype()) {
                 case 3: // 기존 채팅 기록 요청
                     List<MessageDto> msgList = addClient(rno, session);
@@ -197,31 +197,22 @@ public class ChatSocket extends TextWebSocketHandler {
 
     // 특정 rno에 접속한 클라이언트들에게 메시지를 전송
    private void broadcastMessage(int rno, ChattingDto message) throws Exception {
-
-       // 채팅방에 연결된 클라이언트 세션들 가져오기
+        // 채팅방에 연결된 클라이언트 세션들 가져오기
        Set<WebSocketSession> sessions = chatRooms.get(rno);
-
        if (sessions != null && !sessions.isEmpty()) {
            String jsonMessage = mapper.writeValueAsString(message);
-
-           // 각 세션에 메시지 전송
+       // 각 세션에 메시지 전송
            for (WebSocketSession session : sessions) {
                if (session.isOpen()) {  // 세션이 열린 경우에만 메시지 전송
                    try {
                        session.sendMessage(new TextMessage(jsonMessage));
-                       System.out.println("메시지 전송 성공: " + session.getId());
                    } catch (IOException e) {
-                       System.err.println("메시지 전송 실패: " + session.getId());
                        e.printStackTrace();
                    }
                } else {
-                   // 세션이 닫혀있다면 해당 세션을 목록에서 제거
                    chatRooms.get(rno).remove(session);
-                   System.out.println("세션이 닫혔으므로 목록에서 제거됨: " + session.getId());
                }
            }
-
-           // mstype이 4인 경우, 새로 추가된 회원 정보를 모든 클라이언트에 전달
            if (message.getMstype() == 4) {
                String jsonMsg = mapper.writeValueAsString(message);
                for (WebSocketSession session : sessions) {
@@ -235,10 +226,8 @@ public class ChatSocket extends TextWebSocketHandler {
                    }
                }
            }
-
        } else {
            System.out.println("해당 채팅방에 세션이 없습니다. rno: " + rno); // 세션이 없을 경우
-
-
        }
-   }}
+   }
+}

@@ -94,11 +94,9 @@ public class RoomService {
     public List<String> addMember(RoomDto roomDto){
         boolean state = false;
         List<String> mnameList = new ArrayList<>();
-
         for(int mno : roomDto.getMnoList()){
             state = roomMapper.participantWrite(mno, roomDto.getRno());
         }
-
         if(state == true) {
             for (int mno : roomDto.getMnoList()) {
                   String mname = roomMapper.findMname(mno);
@@ -106,7 +104,6 @@ public class RoomService {
            }
         }
         return mnameList;
-
     }
 
     // [8] 채팅방 정보 조회

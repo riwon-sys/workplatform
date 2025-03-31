@@ -33,18 +33,13 @@ public class MessageController {
 
     // 파일을 저장할 폴더 경로 지정
     String baseDir = System.getProperty("user.dir");
-
     // 업로드할 경로 지정
     String uploadPath = baseDir + "build/resources/static/file/";
 
     // 파일 업로드
     @PostMapping("/file/upload")
     public String fileUpload(MultipartFile file) {
-        System.out.println("file = " + file);
-        System.out.println("MessageController.writeFile");
-
         String result =  fileService.fileUpload(file);
-        System.out.println("파일업로드 확인 : " + result);
 
         return result;
     }

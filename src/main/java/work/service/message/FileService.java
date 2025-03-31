@@ -31,22 +31,15 @@ public class FileService {
         File directory = new File(uploadPath);
 
         // 디렉토리가 없으면 생성
-        if (!directory.exists()) {
-            directory.mkdirs();  // 디렉토리 생성
-        }
-
+        if (!directory.exists()) { directory.mkdirs();}
         File directory2 = new File(filePath);
 
-        try {
-            multipartFile.transferTo(directory2);
-        } catch (IOException e) {
+        try {multipartFile.transferTo(directory2); }
+        catch (IOException e) {
             System.out.println(e);
-
             return null;
         }
-
-        return fileName;
-
+       return fileName;
     }
 
     // 업로드된 파일 다운로드
