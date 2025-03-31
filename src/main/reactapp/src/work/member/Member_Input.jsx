@@ -60,11 +60,11 @@ const Member_Input = () => {
 
     let email = '';
     switch (mrank) {
-      case '부장': email = `${team}team@example.com`; break;
-      case '차장': email = `${team}team_team@example.com`; break;
-      case '과장': email = `${team}team_jang@example.com`; break;
-      case '대리': email = `${team}team_dari@example.com`; break;
-      case '사원': email = `${team}team_sawon@example.com`; break;
+      case '부장': email = `${team}hr_chief.@workplatform.com`; break;
+      case '차장': email = `${team}hr_director.@workplatform.com`; break;
+      case '과장': email = `${team}hr_manager.@workplatform.com`; break;
+      case '대리': email = `${team}hr_stafff.@workplatform.com`; break;
+      case '사원': email = `${team}hr_associate.@workplatform.com`; break;
       default: email = '';
     }
     setMemberInfo((prev) => ({ ...prev, memail: email }));

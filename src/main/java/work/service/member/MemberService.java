@@ -1,30 +1,27 @@
 package work.service.member;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.web.multipart.MultipartFile;
 import work.model.dto.member.MemberDto;
 import work.model.dto.member.MemberUtils;
 import work.model.mapper.member.MemberMapper;
 import work.service.message.FileService;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
-
 public class MemberService {
 
+    private final BCryptPasswordEncoder passwordEncoder;
     private final MemberMapper memberMapper;
-    private final FileService fileService; // 파일 서비스 (업로드,다운로드,파일삭제) 기능 포함
+    private final FileService fileService; // 파일 서비스 (업로드,다운로드,파일삭제)
+
     // [1] 사원 등록
     public boolean signUp( MemberDto memberDto ){
         System.out.println("MemberService.signUp");
@@ -40,12 +37,12 @@ public class MemberService {
                 memberDto.setMprofile(filename);
             }
             // (4) 비크립트 라이브러리 사용 | rw 25-03-21
-                // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
+            // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-                // (4-(2)) 비밀번호 암호화 ( 자료에 encode )
+            // (4-(2)) 비밀번호 암호화 ( 자료에 encode )
             String hashedPassword = passwordEncoder.encode( "1234" );
             System.out.println( "hashedPassword = " + hashedPassword );
-                // (4-(3)) dto 에 encode 된 비밀번호 저장
+            // (4-(3)) dto 에 encode 된 비밀번호 저장
             memberDto.setMpwd( hashedPassword );
 
 
@@ -187,6 +184,32 @@ public class MemberService {
     public List<MemberDto>infoAll(){
         System.out.println("MemberService.infoAll");
         return memberMapper.infoAll();
+    }
+    // [9] 사원 정보 수정 및 비밀번호 초기화
+    public int updateMemberInfo(String mno, String mname, String mrank, String mphone, int mtype, MultipartFile mprofile) {
+
+        String mpwd = null;
+        String memail = null;
+
+        if (mtype == 3) { // 퇴사 처리
+            mpwd = passwordEncoder.encode("1234"); // 비밀번호 암호화
+            memail = null;                         // 이메일 null 처리
+        }
+
+        byte[] profileData = null;
+        String profileName = null;
+
+        if (mprofile != null && !mprofile.isEmpty()) {
+            try {
+                profileData = mprofile.getBytes();
+                profileName = mprofile.getOriginalFilename();
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("파일 처리 중 오류 발생");
+            }
+        }
+
+        return memberMapper.updateMemberInfo(mno, mname, mrank, mphone, mtype, mpwd, memail, profileName, profileData);
     }
 
 }
