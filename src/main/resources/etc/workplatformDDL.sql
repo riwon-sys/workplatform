@@ -24,7 +24,7 @@ INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd ) VALUES
 (100003, '박예진', '010-3456-7890', 'hr_manager100003@workplatform.com', 0, '과장', '7c97b0bdf41a9198748d11e6b0a208ce21a6c3ec6391ece2f051caca717e66e489'),
 (100004, '이민호', '010-4567-8901', 'hr_stafff.100004@workplatform.com', 0, '대리', '7c97b0bdf41a9198748d11e6b0a208ce21a6c3ec6391ece2f051caca717e66e489'),
 (100006, '이시훈', '010-6789-0123', 'hr_staff.100006@workplatform.com', 0, '대리', '7c97b0bdf41a9198748d11e6b0a208ce21a6c3ec6391ece2f051caca717e66e489'),
-(100007, '김은서', '010-7890-1234', 'hr_associate.100007@workplatform.com', 0, '사원', '7c97b0bdf41a9198748d11e6b0a208ce21a6c3ec6391ece2f051caca717e66e489'),
+(100007, '김은경', '010-7890-1234', 'hr_associate.100007@workplatform.com', 0, '사원', '7c97b0bdf41a9198748d11e6b0a208ce21a6c3ec6391ece2f051caca717e66e489'),
 (100008, '최진우', '010-8901-2345', 'hr_associate@workplatform.com', 0, '사원', '7c97b0bdf41a9198748d11e6b0a208ce21a6c3ec6391ece2f051caca717e66e489'),
 -- 마케팅팀 (이메일 규칙 수정: marketing_직급.사번@workplatform.com)
 (200009, '윤지호', '010-1122-3344', 'marketing_chief.200009@workplatform.com', 0, '부장', '7c97b0bdf41a9198748d11e6b0a208ce21a6c3ec6391ece2f051caca717e66e489'),
@@ -121,7 +121,7 @@ INSERT INTO room (rname, rtype, mno, rlastdate) VALUES
                                                     ('운영팀-운영 회의', '1', 100003, NOW()); -- 운영팀 운영 회의
 
 -- 참여자 테이블 (오타 수정)
-CREATE TABLE participant (
+CREATE TABLE paritcipant (
                              pno INT UNSIGNED AUTO_INCREMENT,
                              pdate DATETIME DEFAULT NOW(),
                              mno INT UNSIGNED,
@@ -132,7 +132,7 @@ CREATE TABLE participant (
 );
 
 -- 참여현황 샘플 데이터 삽입 (오타 수정)
-INSERT INTO participant (mno, rno) VALUES
+INSERT INTO paritcipant (mno, rno) VALUES
                                        (100001, 1), -- 최민경, 인사팀-윤서와 민경 (일대일)
                                        (100002, 1), -- 조윤서, 인사팀-윤서와 민경 (일대일)
                                        (100001, 2), -- 박예진, 인사팀-민호와 예진 (일대일)
@@ -158,7 +158,7 @@ CREATE TABLE message (
                          msstate INT DEFAULT 0,
                          pno INT UNSIGNED,
                          PRIMARY KEY (msno),
-                         FOREIGN KEY (pno) REFERENCES participant (pno) ON UPDATE CASCADE ON DELETE CASCADE
+                         FOREIGN KEY (pno) REFERENCES paritcipant (pno) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- 메시지 샘플 데이터 삽입
@@ -187,7 +187,7 @@ CREATE TABLE fileshare (
                            fdate DATETIME DEFAULT NOW(),
                            pno INT UNSIGNED,
                            PRIMARY KEY (fno),
-                           FOREIGN KEY (pno) REFERENCES participant (pno) ON UPDATE CASCADE ON DELETE CASCADE
+                           FOREIGN KEY (pno) REFERENCES paritcipant (pno) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 -- 파일 샘플 데이터 삽입
@@ -506,19 +506,150 @@ INSERT INTO approval( apdate, apstate, apsignature, mno, rpno ) VALUES
                                                                     ( '2025-02-02 11:15:11', 0, null, 100003, 21 ),
                                                                     ( null, 0, null, 100001, 21 );
 
+-- 그룹 채팅방 생성 (부서별)
+INSERT INTO room (rname, rtype, mno) VALUES
+('인사팀 채팅방', '1', 100001),  -- 부장
+('마케팅팀 채팅방', '1', 200009),
+('영업팀 채팅방', '1', 300017),
+('운영팀 채팅방', '1', 400025),
+('기술팀 채팅방', '1', 500033),
+('디자인팀 채팅방', '1', 600041),
+('재무팀 채팅방', '1', 700049);
+
+-- 1:1 채팅방 샘플
+INSERT INTO room (rname, rtype, mno) VALUES
+('최민경-조윤서', '0', 100001),  -- 인사팀 부장과 차장
+('윤지호-정지환', '0', 200009),  -- 마케팅팀 부장과 차장
+('김재영-이서진', '0', 300017),  -- 영업팀 부장과 차장
+('차현수-모현수', '0', 400025),  -- 운영팀 부장과 차장
+('박시원-이건우', '0', 500033),  -- 기술팀 부장과 차장
+('윤수한-최소연', '0', 600041),  -- 디자인팀 부장과 차장
+('김자현-김주영', '0', 700049);  -- 재무팀 부장과 차장
+-- 인사팀 직급별 채팅방
+INSERT INTO room (rname, rtype, mno) VALUES
+('인사팀 부장 채팅방', '1', 100001),
+('인사팀 차장 채팅방', '1', 100002),
+('인사팀 과장 채팅방', '1', 100004),
+('인사팀 대리 채팅방', '1', 100007);
+
+-- 마케팅팀 직급별 채팅방
+INSERT INTO room (rname, rtype, mno) VALUES
+('마케팅팀 부장 채팅방', '1', 200009),
+('마케팅팀 차장 채팅방', '1', 200010),
+('마케팅팀 과장 채팅방', '1', 200012),
+('마케팅팀 대리 채팅방', '1', 200014);
+
+-- 영업팀 직급별 채팅방
+INSERT INTO room (rname, rtype, mno) VALUES
+('영업팀 부장 채팅방', '1', 300017),
+('영업팀 차장 채팅방', '1', 300018),
+('영업팀 과장 채팅방', '1', 300021),
+('영업팀 대리 채팅방', '1', 300024);
+
+-- 운영팀 직급별 채팅방
+INSERT INTO room (rname, rtype, mno) VALUES
+('운영팀 부장 채팅방', '1', 400025),
+('운영팀 차장 채팅방', '1', 400026),
+('운영팀 과장 채팅방', '1', 400028),
+('운영팀 대리 채팅방', '1', 400030);
+
+-- 기술팀 직급별 채팅방
+INSERT INTO room (rname, rtype, mno) VALUES
+('기술팀 부장 채팅방', '1', 500033),
+('기술팀 차장 채팅방', '1', 500034),
+('기술팀 과장 채팅방', '1', 500036),
+('기술팀 대리 채팅방', '1', 500038);
+
+-- 디자인팀 직급별 채팅방
+INSERT INTO room (rname, rtype, mno) VALUES
+('디자인팀 부장 채팅방', '1', 600041),
+('디자인팀 차장 채팅방', '1', 600042),
+('디자인팀 과장 채팅방', '1', 600045),
+('디자인팀 대리 채팅방', '1', 600047);
+
+-- 재무팀 직급별 채팅방
+INSERT INTO room (rname, rtype, mno) VALUES
+('재무팀 부장 채팅방', '1', 700049),
+('재무팀 차장 채팅방', '1', 700050),
+('재무팀 과장 채팅방', '1', 700052),
+('재무팀 대리 채팅방', '1', 700054);
+
+
+
+INSERT INTO paritcipant (mno, rno) VALUES
+(100001, 1), (100002, 1),  -- 인사팀-윤서와 민경
+(100004, 2), (100003, 2),  -- 인사팀-민호와 예진
+(200009, 3), (200016, 3),  -- 마케팅팀-지호와 도하
+(200010, 4), (200012, 4),  -- 마케팅팀-정환과 시연
+(100006, 5), (100007, 5),  -- 기술팀-은서와 시훈
+(100001, 6), (100002, 6), (100003, 6), (100004, 6), (100006, 6), (100007, 6), (100008, 6),  -- 인사팀 전체
+(200009, 7), (200010, 7), (200011, 7), (200012, 7), (200013, 7), (200014, 7), (200015, 7), (200016, 7),  -- 마케팅팀 전체
+(500033, 8), (500034, 8), (500035, 8), (500036, 8), (500037, 8), (500038, 8), (500039, 8), (500040, 8),  -- 기술팀 전체
+(400025, 9), (400026, 9), (400027, 9), (400028, 9), (400029, 9), (400030, 9), (400031, 9), (400032, 9),  -- 운영팀 전체
+(100007, 10), (100008, 10),  -- 인사팀-사원 회의
+(200014, 11), (200015, 11), (200016, 11),  -- 마케팅팀-대리 회의
+(300017, 12), (300018, 12),  -- 영업팀-팀장 회의
+(500036, 13), (500037, 13), (500038, 13), (500039, 13), (500040, 13),  -- 기술팀-개발자 회의
+(400025, 14), (400026, 14), (400027, 14), (400028, 14), (400029, 14), (400030, 14), (400031, 14), (400032, 14),  -- 운영팀-운영 회의
+(100001, 15), (100002, 15), (100003, 15), (100004, 15), (100006, 15), (100007, 15), (100008, 15);  -- 인사팀 채팅방
+
+select * from paritcipant;
+
+INSERT INTO message (msg, pno) VALUES
+('안녕하세요!', 1),
+('회의는 언제 진행하나요?', 2),
+('자료 공유 부탁드립니다.', 3),
+('점심 식사 후 회의합시다.', 4),
+('네, 확인했습니다.', 5),
+('좋은 아이디어네요!', 6),
+('문서 업데이트했습니다.', 7),
+('다들 확인 부탁드립니다.', 8),
+('일정 조정이 필요합니다.', 9),
+('회의록 정리해서 공유할게요.', 10),
+('새로운 프로젝트 관련 논의가 필요합니다.', 11),
+('예산 관련해서 검토가 필요합니다.', 12),
+('다음 주 일정은 어떻게 되나요?', 13),
+('테스트 진행 상황 공유드립니다.', 14),
+('이번 주 목표는 무엇인가요?', 15),
+('메일 확인 부탁드립니다.', 16),
+('회의 시간 조율이 필요할 것 같아요.', 17),
+('업무 분담을 다시 조정해야 할까요?', 18),
+('문제 발생 시 빠르게 공유 부탁드립니다.', 19),
+('슬랙에서 추가 논의합시다.', 20),
+('새로운 기능 구현이 필요합니다.', 21),
+('기획안 검토 부탁드립니다.', 22),
+('UI 디자인 수정이 필요합니다.', 23),
+('기술적인 문제 해결이 필요합니다.', 24),
+('고객 요청 사항 정리 완료했습니다.', 25),
+('회의록 검토 후 피드백 주세요.', 26),
+('업무 진행 상황 공유 부탁드립니다.', 27),
+('다음 회의 안건 정리했습니다.', 28),
+('추가 자료 준비 중입니다.', 29),
+('출퇴근 시간 변경이 가능한가요?', 30),
+('이번 주 마감일을 확인해주세요.', 31),
+('긴급 이슈 발생했습니다.', 32),
+('테스트 결과 공유드립니다.', 33),
+('다음 단계 계획이 필요합니다.', 34),
+('배포 일정이 조정되었습니다.', 35),
+('이메일로 추가 자료 보내드렸습니다.', 36),
+('기술 스택 관련 논의가 필요합니다.', 37),
+('사용자 피드백 반영이 필요합니다.', 38),
+('고객 문의사항 정리해서 공유해주세요.', 39),
+('새로운 정책 관련 논의가 필요합니다.', 40);
+
+
 select * from report;
 select rp.*, m.mname, m.mrank from report rp inner join member m on rp.mno = m.mno where rp.mno = 100004 && rpstate = true;
 select * from approval;
 
 select * from member;
 select * from room ;
-select * from participant;
+select * from paritcipant;
 select * from message where pno = 1 ;
 select * from fileshare;
 select * from approval;
 select * from member;
 select * from room where rstate = true;
-select * from participant;
 select * from message ;
 select * from fileshare;
 select * from approval;
