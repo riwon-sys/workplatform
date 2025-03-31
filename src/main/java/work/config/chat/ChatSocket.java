@@ -100,10 +100,6 @@ public class ChatSocket extends TextWebSocketHandler {
             ChattingDto chattingDto = mapper.readValue(message.getPayload(), ChattingDto.class);
 
             int rno = chattingDto.getRno(); // 메시지가 전송된 채팅방 번호
-            System.out.println("방 번호 : " + rno);
-            System.out.println("메세지 : " + chattingDto.getMsg());
-            System.out.println("회원 : " + chattingDto.getMno());
-            System.out.println("메세지 타입 : " + chattingDto.getMstype());
         if(chattingDto.getMnameList() != null) {
             if (chattingDto.getMnameList().size() > 0) {
                 for (int i = 0; i < chattingDto.getMnameList().size(); i++) {
@@ -121,7 +117,6 @@ public class ChatSocket extends TextWebSocketHandler {
                     break;
 
                 case 2: // 채팅방 입장
-                    System.out.println(chattingDto.getMname() + "님 " + rno + "에 입장");
                     ChattingDto joinMessage = new ChattingDto();
                     joinMessage.setMstype(2);  // 입장 메시지 타입
                     joinMessage.setMscontent(chattingDto.getMname() + "님이 채팅방에 입장했습니다.");
@@ -132,43 +127,27 @@ public class ChatSocket extends TextWebSocketHandler {
 
                 case 0: // 일반 텍스트 메시지
                     broadcastMessage(rno, chattingDto);
-                    System.out.println(chattingDto.getMsg());
-                    System.out.println(chattingDto.getMsgList());
                     boolean result = messageMapper.writeMessage(chattingDto); // 컨트롤러로 연결해야됨
-                    System.out.println("메시지 저장 결과: " + result);
                     // 로그처리
                     logClass.logMsg(chattingDto);
                     // 브라우저 소켓에 로그 전송
                     browserSokcet.broadcastToBrowser();
-                    System.out.println("브라우저 소켓으로 로그 보냄");
 
                     break;
 
                 case 1: // 파일 메시지
                     broadcastMessage(rno, chattingDto);
-                    System.out.println(chattingDto.getFlocation());
-                    System.out.println(chattingDto.getFname());
-                    System.out.println(chattingDto.getRno());
-                    System.out.println(chattingDto.getMno());
                     boolean fileResult = messageMapper.writeFile(chattingDto);
-
                     // 로그처리
                     logClass.logMsg(chattingDto);
-
                     // 브라우저 소켓에 로그 전송
                     browserSokcet.broadcastToBrowser();
-                    System.out.println("브라우저 소켓으로 로그 보냄");
-                    System.out.println(fileResult);
                     break;
 
                 case 4: // 새로 참여한 사람 알림
-
                     String mname = roomMapper.findMname(chattingDto.getMno());
-                    // System.out.println("새로온 사람 : " + );
                     broadcastMessage(rno, chattingDto);
                     break;
-
-
                 default:
                     System.out.println("알 수 없는 메시지 타입: " + chattingDto.getMstype());
                     break;
@@ -218,16 +197,12 @@ public class ChatSocket extends TextWebSocketHandler {
 
     // 특정 rno에 접속한 클라이언트들에게 메시지를 전송
    private void broadcastMessage(int rno, ChattingDto message) throws Exception {
-       System.out.println("메시지를 보내는 채팅방 rno: " + rno);  // rno 출력
-       System.out.println("소켓으로 보낼 타입 " + message.getMstype());
-       System.out.println(message.getMnameList());
 
        // 채팅방에 연결된 클라이언트 세션들 가져오기
        Set<WebSocketSession> sessions = chatRooms.get(rno);
 
        if (sessions != null && !sessions.isEmpty()) {
            String jsonMessage = mapper.writeValueAsString(message);
-           System.out.println("서버로 보낼 메세지: " + jsonMessage);
 
            // 각 세션에 메시지 전송
            for (WebSocketSession session : sessions) {

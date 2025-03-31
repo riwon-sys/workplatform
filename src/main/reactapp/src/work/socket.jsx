@@ -29,7 +29,7 @@ export default function Socket({isReportPosted}) {
         setState({ ...state, open: false }); // Snackbar를 닫음
     };
 
-    const [findLog, setFindLog] = useState(null);
+    const [findLog, setFindLog] = useState({mname : "", msg : "", flocation : ""});
 
     useEffect(() => {
         // WebSocket 연결
@@ -47,8 +47,9 @@ export default function Socket({isReportPosted}) {
             try {
                 const json = JSON.parse(event.data);
                 setFindLog(json); // 상태 업데이트
-
+                console.log("json 파싱 ", json)
                 console.log(json.msg);
+
 
                 // findLog와 json.rno가 모두 존재할 때만 findRoomInfo 호출
                 if (json && json.rno) {
@@ -129,40 +130,72 @@ export default function Socket({isReportPosted}) {
     useEffect(() => { findAllRoom() }, [roomInfo])
     console.log(rooms)
 
-
+    const formatMessageWithLineBreaks = (message) => {
+      if (!message) return "";
+  
+      let lines = message.split("\n"); // 사용자가 입력한 줄 기준으로 분할
+      let formattedMessage = [];
+      let lineCounter = 0;
+  
+      for (let i = 0; i < lines.length; i++) {
+          let subLines = lines[i].match(/.{1,50}/g) || [""]; // 50자씩 분할
+  
+          subLines.forEach((subLine) => {
+              formattedMessage.push(subLine);
+              lineCounter++;
+  
+              if (lineCounter % 13 === 0) {
+                  formattedMessage.push("<br/>"); // 13줄마다 자동 줄바꿈
+              }
+          });
+  
+          formattedMessage.push("<br/>"); // 사용자가 입력한 줄바꿈 유지
+          lineCounter = 0; // 사용자가 엔터 친 위치 기준으로 리셋
+      }
+  
+      return formattedMessage.join(""); // HTML 문자열 반환
+  };
+  
+  
     return (
         <>
-            <Box sx={{ width: 800, backgroundColor: 'red' }}>
-                {rooms && rooms.map((room) => {
-                    // roomInfo가 null인 경우와 rno가 없는 경우를 체크
-                    if (roomInfo && roomInfo.rno && room.rno === roomInfo.rno && showMessage && findLog && roomInfo) {
-                        return (
-                            <Snackbar
-                                key={room.rno}
-                                anchorOrigin={{ vertical, horizontal }}
-                                open={open}
-                                onClose={handleClose}
-                                message={
-                                    <>
-                                        {roomInfo.rname}                              
-                                        <hr />
-                                        <br />
-                                        {findLog.mname} :{' '}
-                                        {findLog.msg ? findLog.msg : findLog.flocation || ''}
-                                    </>
-                                }
-                                ContentProps={{
-                                    sx: {
-                                        backgroundColor: 'white',
-                                        color: 'black',
-                                    },
-                                }}
-                            />
-                        );
-                    }
-                    return null; // 조건이 맞지 않으면 렌더링 X
-                })}
-            </Box>
+<Box sx={{ width: 800, backgroundColor: 'red' }}>
+  {rooms && rooms.map((room) => {
+    if (roomInfo && roomInfo.rno && room.rno === roomInfo.rno && showMessage && findLog && roomInfo) {
+      console.log("findLog.msg:", findLog.msg); // ✅ 콘솔에서 메시지 확인
+
+      return (
+        <Snackbar
+          key={room.rno}
+          anchorOrigin={{ vertical, horizontal }}
+          open={open}
+          onClose={handleClose}
+          message={
+            <div>
+              {roomInfo.rname}                              
+              <hr />
+              <br />
+              {findLog.mname} : 
+              <span dangerouslySetInnerHTML={{ 
+                __html: findLog.msg 
+                  ? formatMessageWithLineBreaks(findLog.msg)  // ✅ 13줄마다 줄바꿈 & 엔터 유지 적용
+                  : findLog.flocation || ''  // ✅ msg가 없으면 flocation 출력
+              }} />
+            </div>
+          }
+          ContentProps={{
+            sx: {
+              backgroundColor: 'white',
+              color: 'black',
+            },
+          }}
+        />
+      );
+    }
+    return null; // 조건이 맞지 않으면 렌더링 X
+  })}
+</Box>
+
 
         </>
     );

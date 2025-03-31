@@ -43,6 +43,11 @@ public class RoomService {
             // rno 저장 후 참여자 테이블 insert
             int rno = roomDto.getRno();
 
+            // 만약 로그인된 회원이 참여자에 없다면 추가
+            if (!roomDto.getMnoList().contains(loginMno)) {
+                roomDto.getMnoList().add(loginMno);
+            }
+
             // 참여자 리스트에 등록
             for (int mno : roomDto.getMnoList()) {
                 roomMapper.participantWrite(mno, rno);

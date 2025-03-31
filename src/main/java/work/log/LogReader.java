@@ -87,7 +87,7 @@ public class LogReader {
                         chattingDto.setMno(Integer.parseInt(value));
                         break;
                     case "msg":
-                        chattingDto.setMsg(value);
+                        chattingDto.setMsg(value.replace("\\n", "\n"));
                         break;
 //                    case "msno":
 //                        chattingDto.setMsno(Integer.parseInt(value));
