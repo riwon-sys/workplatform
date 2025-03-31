@@ -20,7 +20,7 @@ public class LogClass {
             switch (chattingDto.getMstype()) {
                 case 0:
                     System.out.println(chattingDto);
-                    log.info("일반메세지 : " + chattingDto);
+                    log.info("일반메세지 : " + chattingDto.toString().replace("\n", "\\n"));
                     System.out.println("메세지 로그 처리됨");
                     break;
                 case 1:

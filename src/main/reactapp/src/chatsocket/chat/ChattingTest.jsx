@@ -48,7 +48,7 @@ export default function ChatTeset() {
   const [members, setMembers] = useState([]); // 전체 회원 목록
   const [mnoList, setMnoList] = useState([]); // 선택된 회원 번호 목록
   const [selectedRoomId, setSelectedRoomId] = useState(null); // 클라이언트가 선택한 방번호
-  const [message, setMessage] = useState(''); // 클라이언트가 입력한 메세지
+  const [message, setMessage] = useState(""); // 클라이언트가 입력한 메세지
   const [messages, setMessages] = useState([]); // 클라이언트가 선택한 채팅방의 기존 메세지 목록
   const [clientSocket, setClientSocket] = useState(null); // WebSocket 연결
   const [isSocketOpen, setIsSocketOpen] = useState(false); // WebSocket 연결 상태 확인
@@ -342,7 +342,7 @@ export default function ChatTeset() {
         alert("채팅방 등록을 취소했습니다.");
         return;
       }
-    
+
       if (rname.trim === "") {
         alert("채팅방 이름을 입력하세요.")
         return;
@@ -356,14 +356,14 @@ export default function ChatTeset() {
 
       let state = false
       console.log("채팅방에 참여할 mno: ", mnoList);
-      for(let i = 0; i < mnoList.length; i++){
-        if(mnoList[i] == loginInfo.mno){
+      for (let i = 0; i < mnoList.length; i++) {
+        if (mnoList[i] == loginInfo.mno) {
           console.log(mnoList[i])
           state = true
         }
       }
 
-      if(state == false){
+      if (state == false) {
         alert("등록할 채팅방에 참여하세요.")
         return;
       }
@@ -383,7 +383,7 @@ export default function ChatTeset() {
 
           // 채팅방 생성 메시지를 소켓으로 전송
           totalSocket.send(JSON.stringify(mappingobj)); // JSON으로 파싱 후 서버로 전송
-        }else{
+        } else {
           alert("채팅방 등록 취소")
         }
       } catch (e) {
@@ -472,7 +472,7 @@ export default function ChatTeset() {
 
     // 만약 소켓이 연결된 상태이고 방번호가 존재한다면
     if (clientSocket && isSocketOpen && selectedRoomId) {
-
+      console.log("보낸ㄹ 메세지", message)
       if (clientSocket.readyState == WebSocket.OPEN) {
         // 서버로 보낼 메세지 객체
         const messageData = {
@@ -679,7 +679,7 @@ export default function ChatTeset() {
         console.log(socketObj)
         clientSocket.send(JSON.stringify(socketObj)) // 채팅방 소켓으로 보내기
         participant() // 이미 추가된 회원 체크박스 업데이트
-        const re = {mstype : 5}
+        const re = { mstype: 5 }
         totalSocket.send(JSON.stringify(re))
       }
     } catch (e) {
@@ -718,6 +718,10 @@ export default function ChatTeset() {
       if (response.data == true) {
         alert("나가기 성공")
         findAllRoom()
+        setSelectedRoomId(null);
+        setRoomInfo(null);
+        setMessages([]); // 기존 채팅 메시지도 초기화
+  
       }
     } catch (e) {
 
@@ -807,6 +811,56 @@ export default function ChatTeset() {
 
   console.log(participationMember)
 
+  // const formatMessage = (message) => {
+  //   if (!message) return ""; // 메시지가 없을 경우 빈 문자열 반환
+
+  //   // 20줄마다 줄 바꿈을 추가하기 위해 줄 단위로 분할
+  //   const lines = message.split("\n"); // \n을 기준으로 줄 분할
+
+  //   // 결과를 저장할 배열
+  //   let formattedMessage = [];
+
+  //   // 20줄마다 <br/>을 추가하면서 메시지를 다시 합침
+  //   for (let i = 0; i < lines.length; i++) {
+  //     formattedMessage.push(lines[i]); // 현재 줄 추가
+  //     if ((i + 1) % 13 === 0) {
+  //       formattedMessage.push("<br/>"); // 20줄마다 줄 바꿈 추가
+  //     }
+  //   }
+
+  //   return formattedMessage.join("\n");
+  // };
+
+  // 엔터 인식 및 줄바꿈처리
+  const formatMessage = (message) => {
+    if (!message) return "";
+
+    // 사용자가 입력한 엔터("\n")를 유지하면서 줄 분할
+    let lines = message.split("\n");
+
+    // 결과를 저장할 배열
+    let formattedMessage = [];
+    let lineCount = 0; // 총 줄 수를 추적
+
+    for (let i = 0; i < lines.length; i++) {
+      let subLines = lines[i].match(/.{1,50}/g) || [""]; // 긴 문자열을 50글자씩 분할
+      subLines.forEach(subLine => {
+        formattedMessage.push(subLine);
+        lineCount++;
+
+        // 13줄마다 자동 줄바꿈 추가 (사용자가 엔터한 줄 포함)
+        if (lineCount % 13 === 0) {
+          formattedMessage.push("<br/>");
+        }
+      });
+
+      // 사용자가 엔터한 곳에서 줄바꿈 유지
+      formattedMessage.push("<br/>");
+      lineCount = 0; // 엔터 기준으로 줄 수 초기화
+    }
+
+    return formattedMessage.join(""); // `<br/>` 포함한 HTML 반환
+  };
 
   return (
     <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -833,8 +887,8 @@ export default function ChatTeset() {
                 />
               </Typography>
               <span style={{ marginLeft: "3%" }}><b> {loginInfo.mname} 님 </b> | {loginInfo.department}팀 ({loginInfo.mrank})
-              
-              <br/>  {loginInfo.memail}
+
+                <br />  {loginInfo.memail}
               </span>
             </div>
 
@@ -910,7 +964,7 @@ export default function ChatTeset() {
                   <div style={{ backgroundColor: "#f2f4f8" }}>
                     {/* 메시지 영역 */}
                     {messages.map((msg, index) => (
-                      <div key={index} style={{ display: 'flex', marginTop: '15px', marginLeft : "5%" }}>
+                      <div key={index} style={{ display: 'flex', marginTop: '15px', marginLeft: "5%" }}>
                         {/* 입장 메시지 처리 */}
                         {msg.mNameList && msg.mNameList.length > 0 && msg.mNameList.map((name, idx) => (
                           <div key={idx} style={{ marginTop: "3%", marginBottom: "3%" }}>
@@ -943,13 +997,16 @@ export default function ChatTeset() {
                             <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start", marginBottom: "5%" }}>
                               <CardContent>
                                 <Typography variant="body2">
-                                  <p style={{ marginTop: "3%", marginBottom: "3%", marginLeft: "1%" }}>{msg.msg}</p>
-                                </Typography>
+                                  <p
+                                    style={{ marginTop: "3%", marginBottom: "3%", marginLeft: "1%" }}
+                                    dangerouslySetInnerHTML={{ __html: formatMessage(msg.msg) }}
+                                  ></p></Typography>
                               </CardContent>
                               <CardActions>
                                 <Button size="small" style={{ marginLeft: "1.5%" }}>
                                   {msg.showdate ? msg.showdate : msg.msdate}
-                                </Button>    </CardActions>
+                                </Button>
+                              </CardActions>
                             </Card>
                           ) : (
                             <Card sx={{ minWidth: 100 }} style={{ marginLeft: "5%", width: '450px', textAlign: "start" }}>
@@ -995,15 +1052,18 @@ export default function ChatTeset() {
 
                   {/* 메시지 입력칸과  등록 버튼 */}
                   <div style={{ display: 'flex', marginLeft: "3%" }}>
-                 
-                    <Input
-                      type="text"
+
+                    <textarea type="text"
                       placeholder="메시지를 입력하세요."
                       value={message}
                       variant="outlined"
                       onChange={(e) => setMessage(e.target.value)}
-                      style={{ width: "60%", marginRight: "10px" }}
-                    />
+                      style={{
+                        width: "60%", marginRight: "10px", height: "13%", marginTop: "5.5%",
+                        border: "none"
+                      }}></textarea>
+
+
                     <Button onClick={sendMessage} variant="contained" color='info'
                       style={{ width: "10%", height: "5%", marginTop: "5%", marginLeft: "2.5%" }}>
                       전송
@@ -1076,14 +1136,14 @@ export default function ChatTeset() {
                     color='info'
                     sx={{ marginLeft: "10%" }}
                   >
-                    <GroupAddOutlinedIcon/> {/* 회원추가 아이콘 */}
-                  
+                    <GroupAddOutlinedIcon /> {/* 회원추가 아이콘 */}
+
                   </Button></>
               )}
 
               <Button type='button' onClick={creatR} variant="contained"
                 style={{ marginLeft: "10%" }}>
-               <AddHomeOutlinedIcon/>  {/* 채팅방 추가 아이콘 */}
+                <AddHomeOutlinedIcon />  {/* 채팅방 추가 아이콘 */}
               </Button>
             </div>
             <hr></hr>

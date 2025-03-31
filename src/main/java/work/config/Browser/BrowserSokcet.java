@@ -61,12 +61,13 @@ public class BrowserSokcet extends TextWebSocketHandler {
                 if (client.isOpen()) {
                     // 마지막 로그 한 줄을 ChattingDto로 가져옴
                     ChattingDto log = logReader.readLastLog();
+                    System.out.println("log 출력"+ log);
 
                     if (log != null) {
                         // ObjectMapper를 사용하여 ChattingDto 객체를 JSON 문자열로 변환
                         ObjectMapper mapper = new ObjectMapper();
                         String jsonLog = mapper.writeValueAsString(log);
-
+                    System.out.println("변환된 JSON: " + jsonLog);
                         // 변환된 JSON 문자열을 클라이언트에 전송
                         client.sendMessage(new TextMessage(jsonLog));
                         System.out.println("로그보내기 성공********");
