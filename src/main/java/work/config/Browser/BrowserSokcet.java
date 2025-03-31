@@ -39,17 +39,6 @@ public class BrowserSokcet extends TextWebSocketHandler {
         System.out.println("브라우저 소켓 연결 종료");
     }
 
-//    // 로그를 클라이언트에게 전송하는 메소드
-//    private void sendLogsToClient(WebSocketSession session) throws IOException {
-//        try {
-//            List<ChattingDto> logList = logReader.readLastLog(); // 마지막 로그 읽기
-//            for (String log : logList) {
-//                session.sendMessage(new TextMessage(log));  // 로그 메시지 보내기
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     ObjectMapper mapper = new ObjectMapper();
     // 클라이언트 소켓으로 로그를 보내는 메소드
@@ -61,16 +50,13 @@ public class BrowserSokcet extends TextWebSocketHandler {
                 if (client.isOpen()) {
                     // 마지막 로그 한 줄을 ChattingDto로 가져옴
                     ChattingDto log = logReader.readLastLog();
-                    System.out.println("log 출력"+ log);
 
                     if (log != null) {
                         // ObjectMapper를 사용하여 ChattingDto 객체를 JSON 문자열로 변환
                         ObjectMapper mapper = new ObjectMapper();
                         String jsonLog = mapper.writeValueAsString(log);
-                    System.out.println("변환된 JSON: " + jsonLog);
                         // 변환된 JSON 문자열을 클라이언트에 전송
                         client.sendMessage(new TextMessage(jsonLog));
-                        System.out.println("로그보내기 성공********");
                     } else {
                         System.out.println("마지막 로그가 없습니다.");
                     }

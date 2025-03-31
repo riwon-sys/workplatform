@@ -41,7 +41,6 @@ public class ReportSocket extends TextWebSocketHandler {
 
         try{
             ReportDto reportDto = mapper.readValue(message.getPayload(), ReportDto.class);
-            System.out.println("44*************보낼거야" + reportDto);
 
             if(reportDto != null){
                 broadcastToClients(reportDto);
@@ -65,11 +64,6 @@ public class ReportSocket extends TextWebSocketHandler {
     // 소켓에 메시지 보내기
     private void broadcastToClients(ReportDto reportDto) {
 
-        System.out.println("*****************보낼 메시지: " + reportDto);
-        System.out.println("메시지를 보낼 소켓: " + reportClients.toString());
-        System.out.println("결재자 : " + reportDto.getApmno());
-
-        System.out.println(reportDto.getMnoList());
         if (reportClients != null && !reportClients.isEmpty()) {
             try {
                 // List<ReportDto>를 하나의 JSON 배열로 변환
