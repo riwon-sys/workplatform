@@ -21,7 +21,7 @@ public class Hash {
 
         StringBuilder st = new StringBuilder(); // 문자열을 조합하기 위한 StringBuilder 객체 생성
         for (byte b : saltBytes) { // 배열의 각 바이트를 16진수 문자열로 변환
-            st.append(String.format("%02x", b)); // 각 바이트를 2자리 16진수로 변환하여 추가
+            st.append( String.format( "%02x", b ) ); // 각 바이트를 2자리 16진수로 변환하여 추가
         }
         return st.toString(); // 생성된 솔트를 문자열로 반환
     }
@@ -35,13 +35,13 @@ public class Hash {
     public static String customHash(String input, String salt) {
         byte[] bytes = (input + salt).getBytes(StandardCharsets.UTF_8); // 입력값과 솔트를 합쳐 바이트 배열로 변환
         int hashVal = 7919; // 초기값 (낮은 소수)
-        int prime = 257; // 해싱에 사용할 작은 소수
+        int decimal = 257; // 해싱에 사용할 작은 소수
 
         StringBuilder st = new StringBuilder(); // 해시 값을 저장할 StringBuilder 객체 생성
         for (byte b : bytes) { // 입력값의 각 바이트를 반복하여 해싱
             int intVal = b & 0xFF; // 바이트 값을 정수로 변환
             hashVal ^= intVal; // XOR 연산 수행
-            hashVal *= prime; // 소수 곱셈 연산 적용
+            hashVal *= decimal; // 소수 곱셈 연산 적용
             hashVal = ( hashVal << 5 ) + intVal; // 비트 연산을 통한 변형
             hashVal = Integer.rotateLeft( hashVal, 3 ); // 왼쪽으로 3비트 회전
             hashVal = Integer.rotateRight (hashVal, 2 ); // 오른쪽으로 2비트 회전
@@ -61,10 +61,10 @@ public class Hash {
      * @return 입력된 비밀번호가 올바른지 여부 (true: 일치, false: 불일치)
      */
     public static boolean MatchPwd( String inputPwd, String DBPwd ) {
-        String storedSalt = DBPwd.substring( 0, SALT_SIZE * 2 ); // 솔트 길이는 8바이트(16진수 변환 시 16자리)이며 이를 분리
-        String storedHash = DBPwd.substring(SALT_SIZE * 2) ; // 해시 값 부분을 분리
-        String newHash = customHash( inputPwd, storedSalt ); // 입력된 비밀번호와 저장된 솔트를 이용하여 새로운 해시 생성
-        return newHash.equals( storedHash ); // 새로 생성한 해시와 저장된 해시 값 비교하여 일치 여부 반환
+        String parseSalt = DBPwd.substring( 0, SALT_SIZE * 2 ); // 솔트 길이는 8바이트(16진수 변환 시 16자리)이며 이를 분리
+        String parseHash = DBPwd.substring(SALT_SIZE * 2) ; // 해시 값 부분을 분리
+        String newHash = customHash( inputPwd, parseSalt ); // 입력된 비밀번호와 저장된 솔트를 이용하여 새로운 해시 생성
+        return newHash.equals( parseHash ); // 새로 생성한 해시와 저장된 해시 값 비교하여 일치 여부 반환
     }
 
     public static void main(String[] args) {
