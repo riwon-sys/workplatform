@@ -27,8 +27,6 @@ public class TotalSocket extends TextWebSocketHandler {
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         totalClients.add(session);
-        System.out.println("Total client connected : " + totalClients.size());
-        System.out.println("전체 채팅 소켓 연결 성공");
         LogReader.readLastLog();
     }
 
@@ -59,8 +57,6 @@ public class TotalSocket extends TextWebSocketHandler {
 
     // 클라이언트로 리렌더링 요청 보내기
     private void broadcastToClients(String messageContent) {
-        System.out.println("보낼 메세지" + messageContent);
-        System.out.println("메세지를 보낼 소켓" + totalClients.toString());
         // 현재 소켓에 접속된 모든 소켓에 5 보내기(리렌더링 요청)
         if (totalClients != null) {
             for (WebSocketSession s : totalClients) {

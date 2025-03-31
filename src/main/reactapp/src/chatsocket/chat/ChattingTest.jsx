@@ -834,34 +834,42 @@ export default function ChatTeset() {
   // 엔터 인식 및 줄바꿈처리
   const formatMessage = (message) => {
     if (!message) return "";
-
-    // 사용자가 입력한 엔터("\n")를 유지하면서 줄 분할
-    let lines = message.split("\n");
-
-    // 결과를 저장할 배열
+  
+    let lines = message.split("\n"); // 사용자가 입력한 엔터("\n") 유지
     let formattedMessage = [];
-    let lineCount = 0; // 총 줄 수를 추적
-
+    let lineCount = 0;
+  
     for (let i = 0; i < lines.length; i++) {
-      let subLines = lines[i].match(/.{1,50}/g) || [""]; // 긴 문자열을 50글자씩 분할
-      subLines.forEach(subLine => {
-        formattedMessage.push(subLine);
-        lineCount++;
-
-        // 13줄마다 자동 줄바꿈 추가 (사용자가 엔터한 줄 포함)
-        if (lineCount % 13 === 0) {
+      let words = lines[i].split(" "); // 공백을 기준으로 단어 분할
+      let tempLine = "";
+  
+      words.forEach(word => {
+        if ((tempLine + word).length > 30) { 
+          formattedMessage.push(tempLine);
+          tempLine = word;
+          lineCount++;
+        } else {
+          tempLine += (tempLine ? " " : "") + word;
+        }
+  
+        // 13줄마다 자동 줄바꿈 추가
+        if (lineCount > 0 && lineCount % 13 === 0) {
           formattedMessage.push("<br/>");
         }
       });
-
-      // 사용자가 엔터한 곳에서 줄바꿈 유지
-      formattedMessage.push("<br/>");
-      lineCount = 0; // 엔터 기준으로 줄 수 초기화
+  
+      if (tempLine) {
+        formattedMessage.push(tempLine);
+        lineCount++;
+      }
+  
+      formattedMessage.push("<br/>"); // 사용자가 엔터한 곳에서 줄바꿈 유지
+      lineCount = 0;
     }
-
+  
     return formattedMessage.join(""); // `<br/>` 포함한 HTML 반환
   };
-
+  
   return (
     <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Grid container spacing={0} sx={{ height: '100%' }}>
