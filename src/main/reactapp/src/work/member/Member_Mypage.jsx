@@ -91,7 +91,7 @@ const Member_Myinfo = () => {
                 {!isVerified ? (
                     <>
                         <Typography variant="body1" gutterBottom>
-                            보안을 위해 비밀번호를 다시 입력해주세요.
+                            비밀번호를 입력해주세요.
                         </Typography>
                         <TextField
                             type="password"

@@ -1,6 +1,7 @@
 package work.controller.member;
 
 
+import com.github.pagehelper.PageInfo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -157,9 +158,10 @@ public class MemberController {
 
     // [8] 사원 전체 조회 http://localhost:8080/workplatform/infoall | rw 25-03-28 생성
     @GetMapping("/infoall")
-    public List<MemberDto> infoAll(){
+    public PageInfo<MemberDto> infoAll(@RequestParam(defaultValue = "1") int page,
+                                       @RequestParam(defaultValue = "10") int pageSize ){
         System.out.println("MemberController.infoAll");
-        return memberService.infoAll();
+        return memberService.infoAll( page, pageSize );
     } // f e
 
     // http://localhost:8080/workplatform/member/updateInfo

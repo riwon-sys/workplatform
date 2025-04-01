@@ -1,15 +1,11 @@
 package work.service.member;
 
-import jakarta.servlet.http.HttpServletRequest;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.multipart.MultipartFile;
 import work.model.dto.member.MemberDto;
 import work.model.dto.member.MemberUtils;
@@ -19,7 +15,6 @@ import work.service.message.FileService;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -202,9 +197,19 @@ public class MemberService {
     } // f end
 
     // [8] 사원 전체 조회 http://localhost:8080/workplatform/infoall | rw 25-03-28 생성
-    public List<MemberDto>infoAll(){
+    public PageInfo<MemberDto> infoAll(int page, int pageSize ){
         System.out.println("MemberService.infoAll");
-        return memberMapper.infoAll();
+
+        // PageHelper로 페이징 처리 적용
+        PageHelper.startPage( page, pageSize );
+        List<MemberDto> pagingResult = memberMapper.infoAll();
+
+        // PageInfo의 pageSize가 정상적인지 확인
+        PageInfo<MemberDto> pageInfo = new PageInfo<>(pagingResult);
+        System.out.println("pageInfo = " + pageInfo);
+        System.out.println("PageHelper 적용 후 pageSize: " + pageInfo.getPageSize());
+
+        return pageInfo;
     }
     // [9] 사원 정보 수정 및 비밀번호 초기화
     public int updateMemberInfo(String mno, String mname, String mrank, String mphone, int mtype, MultipartFile mprofile) {
