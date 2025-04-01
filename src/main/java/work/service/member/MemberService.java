@@ -212,34 +212,28 @@ public class MemberService {
         return pageInfo;
     }
     // [9] 사원 정보 수정 및 비밀번호 초기화
-    public int updateMemberInfo(String mno, String mname, String mrank, String mphone, int mtype, MultipartFile mprofile) {
+    public boolean updateMemberInfo( MemberDto memberDto ) {
 
         Hash hash = new Hash();
-        String mpwd = null;
-        String memail = null;
 
-        if (mtype == 3) { // 퇴사 처리
+        if ( memberDto.getMtype() == 3) { // 퇴사 처리
             String salt = hash.createSalt(); // 랜덤 솔트 생성
-            String hashedValue = hash.customHash( "1234" , salt); // 입력된 비밀번호 + 솔트를 해싱
+            String hashedValue = hash.customHash( "1234" , salt ); // 입력된 비밀번호 + 솔트를 해싱
             String hashedPassword = salt + hashedValue;
-            mpwd = hashedPassword; // 비밀번호 암호화
-            memail = null;                         // 이메일 null 처리
+            memberDto.setMpwd( hashedPassword ); // 비밀번호 암호화
+            memberDto.setMprofile( null );
         }
 
-        byte[] profileData = null;
-        String profileName = null;
-
-        if (mprofile != null && !mprofile.isEmpty()) {
-            try {
-                profileData = mprofile.getBytes();
-                profileName = mprofile.getOriginalFilename();
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new RuntimeException("파일 처리 중 오류 발생");
-            }
+        if( memberDto.getUploadFile() == null ){
+        } // 업로드가 X
+        else{ // 업로드 O
+            // (2) 파일 서비스 내에 업로드 함수를 이용하여 첨부파일 업로드하고 파일명 받기.
+            String filename = fileService.fileUpload(memberDto.getUploadFile());
+            // (3) 업로드된 파일명을 dto 저장
+            memberDto.setMprofile(filename);
         }
 
-        return memberMapper.updateMemberInfo(mno, mname, mrank, mphone, mtype, mpwd, memail, profileName, profileData);
+        return memberMapper.updateMemberInfo( memberDto );
     }
 
 }

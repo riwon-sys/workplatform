@@ -99,20 +99,9 @@ public interface MemberMapper {
 
 
     @Update("UPDATE member SET mname=#{mname}, mrank=#{mrank}, mphone=#{mphone}, "
-            + "mtype=#{mtype}, mpwd=#{mpwd}, memail=#{memail}, "
-            + "mprofile_name=#{profileName}, mprofile_data=#{profileData} "
+            + "mtype=#{mtype}, mpwd=#{mpwd}, mprofile=#{profile} "
             + "WHERE mno=#{mno}")
-    int updateMemberInfo(
-            @Param("mno") String mno,
-            @Param("mname") String mname,
-            @Param("mrank") String mrank,
-            @Param("mphone") String mphone,
-            @Param("mtype") int mtype,
-            @Param("mpwd") String mpwd,
-            @Param("memail") String memail,
-            @Param("profileName") String profileName,
-            @Param("profileData") byte[] profileData
-    );
+    public boolean updateMemberInfo( MemberDto memberDto );
 }
 
 

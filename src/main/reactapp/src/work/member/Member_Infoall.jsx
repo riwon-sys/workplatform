@@ -82,8 +82,9 @@ export default function Member_Infoall(props) {
         formData.append("mrank", selectedMember.mrank);
         formData.append("mphone", selectedMember.mphone);
         formData.append("mtype", selectedMember.mtype);
-        if (selectedMember.mprofileFile) {
-            formData.append("mprofile", selectedMember.mprofileFile);
+        formData.append("mpwd", Infoall.mpwd);
+        if (selectedMember.uploadFile) {
+            formData.append("uploadFile", selectedMember.uploadFile);
         }
 
         try {
@@ -108,7 +109,7 @@ export default function Member_Infoall(props) {
     const handleFileChange = (e) => {
         setSelectedMember({
             ...selectedMember,
-            mprofileFile: e.target.files[0]
+            uploadFile: e.target.files[0]
         });
     };
 

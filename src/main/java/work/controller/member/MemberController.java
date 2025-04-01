@@ -166,15 +166,9 @@ public class MemberController {
 
     // http://localhost:8080/workplatform/member/updateInfo
     @PostMapping("/member/updateInfo")
-    public int updateMemberInfo(
-            @RequestParam("mno") String mno,
-            @RequestParam("mname") String mname,
-            @RequestParam("mrank") String mrank,
-            @RequestParam("mphone") String mphone,
-            @RequestParam("mtype") int mtype,
-            @RequestParam(value = "mprofile", required = false) MultipartFile mprofile){
+    public boolean updateMemberInfo( MemberDto memberDto ){
         // 비밀번호 "1234" 암호화 & 이메일 null 처리 (mtype==3)
-        return memberService.updateMemberInfo(mno, mname, mrank, mphone, mtype, mprofile);
+        return memberService.updateMemberInfo( memberDto );
     }
 
 }
