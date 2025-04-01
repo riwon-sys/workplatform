@@ -151,26 +151,27 @@ export default function Member_Infoall(props) {
 
                         </>
                     ) : (<>
-                        <Table>
+                        <div style={{ height: "700px" }} >
+                        <Table sx={{ height: "100%" }} >
                             <TableHead sx={{ backgroundColor: '#eeeeee' }}>
                                 <TableRow sx={{ '& th': { fontWeight: "bold", fontSize: "17px", textAlign: "center" } }}>
-                                    <TableCell sx={{ width: "10%" }} >사번</TableCell>
+                                    <TableCell sx={{ width: "8%" }} >사번</TableCell>
                                     <TableCell sx={{ width: "10%" }} >이름</TableCell>
-                                    <TableCell sx={{ }} >이메일</TableCell>
+                                    <TableCell sx={{ width: "32%" }} >이메일</TableCell>
                                     <TableCell sx={{ width: "10%" }} >직급</TableCell>
                                     <TableCell sx={{ width: "15%" }} >연락처</TableCell>
                                     <TableCell sx={{ width: "10%" }} >상태</TableCell>
                                     <TableCell sx={{ width: "10%" }} >프로필</TableCell>
-                                    <TableCell sx={{ width: "15%" }} >수정</TableCell>
+                                    <TableCell sx={{ width: "10%" }} >수정</TableCell>
                                 </TableRow>
                             </TableHead>
 
                             <TableBody>
                                 {memberInfo.map((member, index) => (<>
-                                    <TableRow key={index} sx={{ '& td': { fontSize: "15px", textAlign: "center", padding: "10px 0px" } }}>
+                                    <TableRow key={index} sx={{ '& td': { fontSize: "15px", textAlign: "center", height: "9%", py: 0.5 } }}>
                                         <TableCell>{member.mno}</TableCell>
                                         <TableCell>{member.mname}</TableCell>
-                                        <TableCell sx={{ width: "30%", textOverflow: "ellipsis" }} >{member.memail || "없음"}</TableCell>
+                                        <TableCell sx={{ textAlign: "left" }} >{member.memail || "없음"}</TableCell>
                                         <TableCell>{member.mrank}</TableCell>
                                         <TableCell>{member.mphone}</TableCell>
                                         <TableCell>
@@ -180,8 +181,9 @@ export default function Member_Infoall(props) {
                                             <img
                                                 src={`http://localhost:8080/file/${member.mprofile}`}
                                                 alt="프로필사진"
-                                                width="50"
-                                                height="50"
+                                                width="40"
+                                                height="40"
+                                                style={{ marginTop: "5px" }}
                                             />
                                         </TableCell>
                                         <TableCell>
@@ -192,10 +194,17 @@ export default function Member_Infoall(props) {
                                         </TableCell>
                                     </TableRow>
                                 </>))}
+                                {/* 부족한 행 채우기 */}
+                                {Array.from({ length: 10 - memberInfo.length }).map((_, index) => (
+                                    <TableRow key={`empty-${index}`}>
+                                        <TableCell colSpan={8} sx={{ height: "9%" }} />
+                                    </TableRow>
+                                ))}
                             </TableBody>
                         </Table>
+                        </div>
                         
-                        <Stack spacing={2} mt={1}>
+                        <Stack spacing={2} mt={3} >
                             <Pagination
                                 color="primary"
                                 page={ page }
