@@ -71,7 +71,7 @@ const Member_Myinfo = () => {
                 headers: { "Content-Type": "multipart/form-data" }
             });
             if (res.data === true) {
-                alert("정보가 성공적으로 수정되었습니다.");
+                alert("사원정보 수정이 완료되었습니다.");
                 navigate('/');
             } else {
                 alert("수정 실패: 관리자에게 문의하세요.");
