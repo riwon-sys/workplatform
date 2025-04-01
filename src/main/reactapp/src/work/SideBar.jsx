@@ -292,7 +292,7 @@ const isLoggingOut = useRef(false);
                       <ListItemIcon sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}>
                         <PersonIcon />
                       </ListItemIcon>
-                      <ListItemText primary="사원 전체 조회" sx={{ opacity: open ? 1 : 0 }} />
+                      <ListItemText primary="사원 관리" sx={{ opacity: open ? 1 : 0 }} />
                     </ListItemButton>
                   </ListItem>
               )}
