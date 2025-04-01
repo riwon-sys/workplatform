@@ -6,7 +6,8 @@ import java.util.Scanner;
 
 public class Hash {
     private static final int SALT_SIZE = 8; // 솔트 크기 (8바이트)
-    private static final int HASH_LENGTH = 50; // 해시 값 길이 (출력될 해시의 길이)
+    private static final int HASH_LENGTH = 100; // 해시 값 길이 (출력될 해시의 길이)
+    private static final int COUNT = 1111111; // 반복 횟수
 
     public static String createSalt() {
         Random random = new Random( System.nanoTime() ); // 시스템 시간을 기반으로 랜덤 객체 생성
@@ -24,24 +25,29 @@ public class Hash {
 
     public static String customHash(String input, String salt) {
         byte[] bytes = (input + salt).getBytes(StandardCharsets.UTF_8); // 입력값과 솔트를 합쳐 바이트 배열로 변환
-        int hashVal = 7919; // 초기값 (낮은 소수)
+        int hashVal = 7919 * input.hashCode(); // 초기값 (낮은 소수)
         int decimal = 257; // 해싱에 사용할 작은 소수
+        long startTime = System.nanoTime(); // 시작 시간 측정
 
         StringBuilder st = new StringBuilder(); // 해시 값을 저장할 StringBuilder 객체 생성
-        for (byte b : bytes) { // 입력값의 각 바이트를 반복하여 해싱
-            int intVal = b & 0xFF; // 바이트 값을 정수로 변환
-            hashVal ^= intVal; // XOR 연산 수행
-            hashVal *= decimal; // 소수 곱셈 연산 적용
-            hashVal = ( hashVal << 5 ) + intVal; // 비트 연산을 통한 변형
-            hashVal = Integer.rotateLeft( hashVal, 3 ); // 왼쪽으로 3비트 회전
-            hashVal = Integer.rotateRight (hashVal, 2 ); // 오른쪽으로 2비트 회전
-            hashVal ^= ( hashVal >>> 3 ); // 비트 이동 후 XOR 연산 적용
+        for (int i = 0; i < COUNT; i++) {
+            for (byte b : bytes) { // 입력값의 각 바이트를 반복하여 해싱
+                int intVal = b & 0xFF; // 바이트 값을 정수로 변환
+                hashVal ^= intVal; // XOR 연산 수행
+                hashVal *= decimal; // 소수 곱셈 연산 적용
+                hashVal = ( hashVal >>> 2 ) ^ ( hashVal << 7 ); // XOR 연산 수행
+                hashVal = Integer.rotateLeft( hashVal, 5 ); // 왼쪽으로 5비트 회전
+                hashVal ^= ( hashVal >>> 3 ); // 비트 이동 후 XOR 연산 적용
 
-            st.append( String.format( "%02x", hashVal )); // 결과값을 16진수 문자열로 변환하여 추가
-            if ( st.length() >= HASH_LENGTH ) { break; } // 해시 길이가 50자리를 초과하면 중단
+                st.append(String.format( "%02x", hashVal ) ); // 결과값을 16진수 문자열로 변환하여 추가
+                if ( st.length() >= HASH_LENGTH ) { break; } // 해시 길이가 50자리를 초과하면 중단
+            }
         }
+        long endTime = System.nanoTime(); // 종료 시간 측정
+        long elapsedTime = (endTime - startTime) / 1000000; // 실행 시간(ms 단위 변환)
+        System.out.println("해시 연산 시간: " + elapsedTime + "ms"); // 실행 시간 출력
 
-        return st.substring( 0, HASH_LENGTH ); // 50자리 길이의 해시 값을 반환
+        return st.substring( 50, HASH_LENGTH ); // 50자리 길이의 해시 값을 반환
     }
 
     public static boolean MatchPwd( String inputPwd, String DBPwd ) {
