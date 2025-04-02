@@ -23,8 +23,8 @@ public class Hash {
         return st.toString(); // 생성된 솔트를 문자열로 반환
     }
 
-    public static String customHash(String input, String salt) {
-        byte[] bytes = (input + salt).getBytes(StandardCharsets.UTF_8); // 입력값과 솔트를 합쳐 바이트 배열로 변환
+    public static String customHash( String input, String salt ) {
+        byte[] bytes = (input + salt).getBytes( StandardCharsets.UTF_8 ); // 입력값과 솔트를 합쳐 바이트 배열로 변환
         int hashVal = 7919 * input.hashCode(); // 초기값 (낮은 소수)
         int decimal = 257; // 해싱에 사용할 작은 소수
         long startTime = System.nanoTime(); // 시작 시간 측정
@@ -52,7 +52,7 @@ public class Hash {
 
     public static boolean MatchPwd( String inputPwd, String DBPwd ) {
         String parseSalt = DBPwd.substring( 0, SALT_SIZE * 2 ); // 솔트 길이는 8바이트(16진수 변환 시 16자리)이며 이를 분리
-        String parseHash = DBPwd.substring(SALT_SIZE * 2) ; // 해시 값 부분을 분리
+        String parseHash = DBPwd.substring( SALT_SIZE * 2 ) ; // 해시 값 부분을 분리
         String newHash = customHash( inputPwd, parseSalt ); // 입력된 비밀번호와 저장된 솔트를 이용하여 새로운 해시 생성
         return newHash.equals( parseHash ); // 새로 생성한 해시와 저장된 해시 값 비교하여 일치 여부 반환
     }
