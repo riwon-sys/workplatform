@@ -16,31 +16,32 @@ CREATE TABLE member (
 );
 
 -- 부서별 직원 데이터 삽입
-INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd ) VALUES
+INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd, mprofile) VALUES
 -- 재직자
 -- 인사팀 (이메일 규칙 수정: 부서명_직급.사번@workplatform.com) | rw 25-03-29 수정
-(100001, '최민경', '010-1234-5678', 'hr_chief.100001@workplatform.com', 0, '부장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(100002, '조윤서', '010-2345-6789', 'hr_director.100002@workplatform.com', 0, '차장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(100003, '박예진', '010-3456-7890', 'hr_manager100003@workplatform.com', 0, '과장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(100004, '이민호', '010-4567-8901', 'hr_stafff.100004@workplatform.com', 0, '대리', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(100006, '이시훈', '010-6789-0123', 'hr_staff.100006@workplatform.com', 0, '대리', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(100007, '김은경', '010-7890-1234', 'hr_associate.100007@workplatform.com', 0, '사원', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(100008, '최진우', '010-8901-2345', 'hr_associate@workplatform.com', 0, '사원', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
+(100001, '최민경', '010-1234-5678', 'hr_chief.100001@workplatform.com', 0, '부장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자1.jpg'),
+(100002, '조윤서', '010-2345-6789', 'hr_director.100002@workplatform.com', 0, '차장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자2.jpg'),
+(100003, '박예진', '010-3456-7890', 'hr_manager100003@workplatform.com', 0, '과장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '여자1.jpg'),
+(100004, '이민호', '010-4567-8901', 'hr_stafff.100004@workplatform.com', 0, '대리', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자3.jpg'),
+(100006, '이시훈', '010-6789-0123', 'hr_staff.100006@workplatform.com', 0, '대리', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자4.jpg'),
+(100007, '김은경', '010-7890-1234', 'hr_associate.100007@workplatform.com', 0, '사원', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '여자2.jpg'),
+(100008, '최진우', '010-8901-2345', 'hr_associate@workplatform.com', 0, '사원', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자5.jpg'),
 -- 마케팅팀 (이메일 규칙 수정: marketing_직급.사번@workplatform.com)
-(200009, '윤지호', '010-1122-3344', 'marketing_chief.200009@workplatform.com', 0, '부장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(200010, '정지환', '010-2233-4455', 'marketing_director.200010@workplatform.com', 0, '차장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(200011, '이진아', '010-3344-5566', 'marketing_manager.200011@workplatform.com', 0, '과장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(200012, '박시연', '010-4455-6677', 'marketing_staff.200012@workplatform.com', 0, '대리', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(200013, '김도현', '010-5566-7788', 'marketing_staff.200013@workplatform.com', 0, '대리', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(200014, '전윤아', '010-6677-8899', 'marketing_associate.200014@workplatform.com', 0, '사원', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(200015, '송지훈', '010-7788-9900', 'marketing_associate.200015@workplatform.com', 0, '사원', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(200016, '김도하', '010-8899-0011', 'marketing_associate.200016@workplatform.com', 0, '사원', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
+(200009, '윤지호', '010-1122-3344', 'marketing_chief.200009@workplatform.com', 0, '부장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자6.jpg'),
+(200010, '정지환', '010-2233-4455', 'marketing_director.200010@workplatform.com', 0, '차장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자7.jpg'),
+(200011, '이진아', '010-3344-5566', 'marketing_manager.200011@workplatform.com', 0, '과장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '여자3.jpg'),
+(200012, '박시연', '010-4455-6677', 'marketing_staff.200012@workplatform.com', 0, '대리', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '여자4.jpg'),
+(200013, '김도현', '010-5566-7788', 'marketing_staff.200013@workplatform.com', 0, '대리', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자8.jpg'),
+(200014, '전윤아', '010-6677-8899', 'marketing_associate.200014@workplatform.com', 0, '사원', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '여자5.jpg'),
+(200015, '송지훈', '010-7788-9900', 'marketing_associate.200015@workplatform.com', 0, '사원', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자2.jpg'),
+(200016, '김도하', '010-8899-0011', 'marketing_associate.200016@workplatform.com', 0, '사원', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '여자6.jpg'),
 -- 영업팀 (sales)
-(300017, '김재영', '010-1001-1001', 'sales_chief.300017@workplatform.com', 0, '부장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(300018, '이서진', '010-2111-2111', 'sales_director.300018@workplatform.com', 0, '차장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(300021, '박희만', '010-5444-5444', 'sales_manager.300021@workplatform.com', 0, '과장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
-(300024, '박현수', '010-8777-8777', 'sales_staff.300024@workplatform.com', 0, '대리', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
+(300017, '김재영', '010-1001-1001', 'sales_chief.300017@workplatform.com', 0, '부장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자3.jpg'),
+(300018, '이서진', '010-2111-2111', 'sales_director.300018@workplatform.com', 0, '차장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자7.jpg'),
+(300021, '박희만', '010-5444-5444', 'sales_manager.300021@workplatform.com', 0, '과장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자2.jpg'),
+(300024, '박현수', '010-8777-8777', 'sales_staff.300024@workplatform.com', 0, '대리', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b', '남자5.jpg');
 
+INSERT INTO member (mno, mname, mphone, memail, mtype, mrank , mpwd) VALUES
 -- 운영팀 (operation)
 (400025, '차현수', '010-9888-9888', 'operation_chief.400025@workplatform.com', 0, '부장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
 (400026, '모현수', '010-9999-0001', 'operation_director.400026@workplatform.com', 0, '차장', 'd8bb6a281d1c9864ec2c09f4844a2c2434d0d6825da4041e18079342adc1e8758b'),
