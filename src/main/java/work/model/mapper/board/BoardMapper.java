@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     //1[게시물 전체조회]
-    @Select("select * from board b inner join category c on b.category_id=c.category_id")
+    @Select("select * from board b inner join category c on b.category_id=c.category_id order by b.pid DESC")
     public List<BoardDto>allView();
 
     //2[게시물등록]

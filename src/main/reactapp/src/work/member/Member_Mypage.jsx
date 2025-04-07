@@ -83,8 +83,8 @@ const Member_Myinfo = () => {
 
     return (
         <Box sx={{ flexGrow: 1, height: '100vh', display: 'flex', justifyContent: 'center', backgroundColor: '#eeeeee' }}>
-            <Item sx={{ minWidth: '800px', maxWidth: '1000px', width: '100%' }}>
-                <Typography variant="h4" sx={{ mb: 3, textAlign: 'center', fontWeight: "bold" }} paddingTop={!isVerified ? '300px' : '100px'}>
+            <Item sx={{ minWidth: '800px', maxWidth: '1000px', width: '100%', overflow: "auto", overflowX: "hidden" }}>
+                <Typography variant="h4" sx={{ mb: 3, textAlign: 'center', fontWeight: "bold" }} paddingTop={!isVerified ? '300px' : '50px'}>
                     내 정보
                 </Typography>
 
@@ -159,7 +159,7 @@ const Member_Myinfo = () => {
                         <Button variant="contained" fullWidth sx={{ mt: 3 }} onClick={onUpdate}>
                             정보 수정
                         </Button>
-                        <Typography variant="body2" align="center" sx={{ mt: 4, color: 'gray' }}>
+                        <Typography variant="body2" align="center" sx={{ my: 2, color: 'gray' }}>
                             문의: insateam_jang@example.com
                         </Typography>
                     </Box>

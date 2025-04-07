@@ -166,7 +166,7 @@ const Member_Input = () => {
                   ))}
                 </TextField>
                 <TextField label="사진 등록" type="file" inputProps={{ accept: 'image/*' }}
-                           onChange={onFileUpload} fullWidth margin="normal" />
+                           onChange={onFileUpload} fullWidth margin="normal" InputLabelProps={{ shrink: true }} />
                 {preview && (
                     <Box sx={{ mt: 2 }}>
                       <Typography variant="body2" gutterBottom>미리보기</Typography>
