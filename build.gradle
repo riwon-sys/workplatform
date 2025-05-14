@@ -45,8 +45,6 @@ dependencies {
     // [6] webSocket 관련 라이브러리
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
-
-
     // paging
     implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.6'
 
