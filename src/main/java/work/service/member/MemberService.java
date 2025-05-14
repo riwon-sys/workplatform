@@ -73,7 +73,7 @@ public class MemberService {
 
         // (1) 암호화된 진짜 비밀번호는 DB존재
         // (2) 로그인에서 입력받은 아이디의 암호화 비밀번호 갖고오기
-        String password = memberMapper.findPassword (memberDto.getMno() );
+        String password = memberMapper.findPassword ( memberDto.getMno() );
         if( password == null ) return null;
         // (3) 로그인에서 입력받은 비밀번호와 암호화된 비밀번호 검증하기
 //        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // 1. 비크립트 객체 생성
