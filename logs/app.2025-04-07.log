@@ -1,0 +1,369 @@
+2025-04-07 08:20:04 - Starting AppStart using Java 17.0.12 with PID 25124 (C:\Users\ppo37\IdeaProjects\workplatform\build\classes\java\main started by ppo37 in C:\Users\ppo37\IdeaProjects\workplatform)
+2025-04-07 08:20:04 - No active profile set, falling back to 1 default profile: "default"
+2025-04-07 08:20:05 - Tomcat initialized with port 8080 (http)
+2025-04-07 08:20:05 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-07 08:20:05 - Starting service [Tomcat]
+2025-04-07 08:20:05 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-07 08:20:06 - Initializing Spring embedded WebApplicationContext
+2025-04-07 08:20:06 - Root WebApplicationContext: initialization completed in 1025 ms
+2025-04-07 08:20:06 - HikariPool-1 - Starting...
+2025-04-07 08:20:06 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ce29a2d
+2025-04-07 08:20:06 - HikariPool-1 - Start completed.
+2025-04-07 08:20:06 - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-07 08:20:06 - Tomcat started on port 8080 (http) with context path '/'
+2025-04-07 08:20:06 - Started AppStart in 2.213 seconds (process running for 2.646)
+2025-04-07 08:21:48 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-07 08:21:48 - Initializing Servlet 'dispatcherServlet'
+2025-04-07 08:21:48 - Completed initialization in 1 ms
+2025-04-07 08:21:49 -  log info 
+2025-04-07 08:21:49 -  log info 
+2025-04-07 08:26:22 -  log info 
+2025-04-07 08:26:22 -  log info 
+2025-04-07 08:29:27 -  log info 
+2025-04-07 08:29:27 -  log info 
+2025-04-07 08:29:31 -  log info 
+2025-04-07 08:29:31 -  log info 
+2025-04-07 08:30:34 -  log info 
+2025-04-07 08:30:34 -  log info 
+2025-04-07 08:30:50 - Starting AppStart using Java 17.0.12 with PID 28488 (C:\Users\ppo37\IdeaProjects\workplatform\build\classes\java\main started by ppo37 in C:\Users\ppo37\IdeaProjects\workplatform)
+2025-04-07 08:30:50 - No active profile set, falling back to 1 default profile: "default"
+2025-04-07 08:30:51 - Tomcat initialized with port 8080 (http)
+2025-04-07 08:30:51 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-07 08:30:51 - Starting service [Tomcat]
+2025-04-07 08:30:51 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-07 08:30:51 - Initializing Spring embedded WebApplicationContext
+2025-04-07 08:30:51 - Root WebApplicationContext: initialization completed in 931 ms
+2025-04-07 08:30:51 - HikariPool-1 - Starting...
+2025-04-07 08:30:51 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@13866329
+2025-04-07 08:30:51 - HikariPool-1 - Start completed.
+2025-04-07 08:30:52 - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-07 08:30:52 - Tomcat started on port 8080 (http) with context path '/'
+2025-04-07 08:30:52 - Started AppStart in 2.002 seconds (process running for 2.419)
+2025-04-07 08:30:58 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-07 08:30:58 - Initializing Servlet 'dispatcherServlet'
+2025-04-07 08:30:58 - Completed initialization in 1 ms
+2025-04-07 08:30:58 -  log info 
+2025-04-07 08:30:58 -  log info 
+2025-04-07 08:31:06 -  log info 
+2025-04-07 08:31:06 -  log info 
+2025-04-07 10:05:31 - Starting AppStart using Java 17.0.12 with PID 23148 (C:\Users\ppo37\IdeaProjects\workplatform\build\classes\java\main started by ppo37 in C:\Users\ppo37\IdeaProjects\workplatform)
+2025-04-07 10:05:31 - No active profile set, falling back to 1 default profile: "default"
+2025-04-07 10:05:32 - Tomcat initialized with port 8080 (http)
+2025-04-07 10:05:32 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-07 10:05:32 - Starting service [Tomcat]
+2025-04-07 10:05:32 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-07 10:05:32 - Initializing Spring embedded WebApplicationContext
+2025-04-07 10:05:32 - Root WebApplicationContext: initialization completed in 1017 ms
+2025-04-07 10:05:32 - HikariPool-1 - Starting...
+2025-04-07 10:05:32 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@650aa077
+2025-04-07 10:05:32 - HikariPool-1 - Start completed.
+2025-04-07 10:05:33 - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-07 10:05:33 - Tomcat started on port 8080 (http) with context path '/'
+2025-04-07 10:05:33 - Started AppStart in 2.158 seconds (process running for 2.55)
+2025-04-07 10:05:50 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-07 10:05:50 - Initializing Servlet 'dispatcherServlet'
+2025-04-07 10:05:50 - Completed initialization in 1 ms
+2025-04-07 10:05:50 -  log info 
+2025-04-07 10:05:50 -  log info 
+2025-04-07 10:06:49 -  log info 
+2025-04-07 10:06:49 -  log info 
+2025-04-07 10:06:59 -  log info 
+2025-04-07 10:06:59 -  log info 
+2025-04-07 10:30:06 -  log info 
+2025-04-07 10:30:06 -  log info 
+2025-04-07 10:30:20 -  log info 
+2025-04-07 10:30:20 -  log info 
+2025-04-07 10:30:43 - 일반메세지 : ChattingDto(mstype=0, rno=10, msDate=null, loginMno=0, mname=이시훈, mscontent=null, mno=100006, msg=안녕하세요\n, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=남자4.jpg, showdate=2025-04-07 10:30:41)
+2025-04-07 10:31:02 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=이시훈, mscontent=null, mno=100006, msg=안녕하세요, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=남자4.jpg, showdate=2025-04-07 10:31:00)
+2025-04-07 10:31:48 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=이시훈, mscontent=null, mno=100006, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=9c5ae38f-d762-46fb-b2f2-bb20254d6f96_KakaoTalk_20211108_174650413_02.jpg, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=남자4.jpg, showdate=2025-04-07 10:31:40)
+2025-04-07 10:32:49 -  log info 
+2025-04-07 10:32:49 -  log info 
+2025-04-07 10:34:48 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=이시훈, mscontent=null, mno=100006, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=c254284c-75ee-4398-b91c-fd5c0ae4ec8f_20231101061449.3310116.jpg, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=남자4.jpg, showdate=2025-04-07 10:34:45)
+2025-04-07 11:01:47 -  log info 
+2025-04-07 11:01:47 -  log info 
+2025-04-07 11:15:42 -  log info 
+2025-04-07 11:15:42 -  log info 
+2025-04-07 11:15:46 -  log info 
+2025-04-07 11:15:46 -  log info 
+2025-04-07 11:15:49 -  log info 
+2025-04-07 11:15:49 -  log info 
+2025-04-07 11:16:01 -  log info 
+2025-04-07 11:16:01 -  log info 
+2025-04-07 11:17:57 -  log info 
+2025-04-07 11:17:57 -  log info 
+2025-04-07 11:18:11 -  log info 
+2025-04-07 11:18:11 -  log info 
+2025-04-07 11:18:15 -  log info 
+2025-04-07 11:18:15 -  log info 
+2025-04-07 11:30:17 -  log info 
+2025-04-07 11:30:17 -  log info 
+2025-04-07 11:35:39 -  log info 
+2025-04-07 11:35:39 -  log info 
+2025-04-07 11:39:07 -  log info 
+2025-04-07 11:39:07 -  log info 
+2025-04-07 11:39:12 -  log info 
+2025-04-07 11:39:12 -  log info 
+2025-04-07 11:40:05 -  log info 
+2025-04-07 11:40:05 -  log info 
+2025-04-07 11:40:14 -  log info 
+2025-04-07 11:40:14 -  log info 
+2025-04-07 11:40:36 -  log info 
+2025-04-07 11:40:36 -  log info 
+2025-04-07 11:40:46 -  log info 
+2025-04-07 11:40:46 -  log info 
+2025-04-07 11:41:33 -  log info 
+2025-04-07 11:41:33 -  log info 
+2025-04-07 11:42:03 -  log info 
+2025-04-07 11:42:03 -  log info 
+2025-04-07 11:43:02 -  log info 
+2025-04-07 11:43:02 -  log info 
+2025-04-07 12:22:33 -  log info 
+2025-04-07 12:22:33 -  log info 
+2025-04-07 12:22:42 -  log info 
+2025-04-07 12:22:42 -  log info 
+2025-04-07 12:22:56 -  log info 
+2025-04-07 12:22:56 -  log info 
+2025-04-07 14:03:53 -  log info 
+2025-04-07 14:03:53 -  log info 
+2025-04-07 14:05:12 -  log info 
+2025-04-07 14:05:12 -  log info 
+2025-04-07 14:05:32 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=메세지 테스트, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:05:30)
+2025-04-07 14:05:42 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=171fc013-08e5-49d7-aca5-44d5bacd8932_20231101061449.3310116.jpg, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:05:40)
+2025-04-07 14:06:07 -  log info 
+2025-04-07 14:06:07 -  log info 
+2025-04-07 14:13:52 -  log info 
+2025-04-07 14:13:52 -  log info 
+2025-04-07 14:14:04 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=안녕하세요, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:14:03)
+2025-04-07 14:14:16 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=7a46e105-5d56-4b3e-ad9c-9d87025f46a1_20231101061449.3310116.jpg, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:14:12)
+2025-04-07 14:15:30 -  log info 
+2025-04-07 14:15:30 -  log info 
+2025-04-07 14:15:38 -  log info 
+2025-04-07 14:15:38 -  log info 
+2025-04-07 14:15:55 -  log info 
+2025-04-07 14:15:55 -  log info 
+2025-04-07 14:16:11 -  log info 
+2025-04-07 14:16:11 -  log info 
+2025-04-07 14:16:47 -  log info 
+2025-04-07 14:16:47 -  log info 
+2025-04-07 14:17:08 -  log info 
+2025-04-07 14:17:08 -  log info 
+2025-04-07 14:17:17 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=안녕하세요, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:17:15)
+2025-04-07 14:17:36 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=0cfb7f01-50ff-47a5-972d-36a22305c163_테스트.pdf, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:17:34)
+2025-04-07 14:17:39 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=첨부파일입니다, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:17:36)
+2025-04-07 14:18:04 -  log info 
+2025-04-07 14:18:29 -  log info 
+2025-04-07 14:18:29 -  log info 
+2025-04-07 14:18:59 -  log info 
+2025-04-07 14:18:59 -  log info 
+2025-04-07 14:19:08 -  log info 
+2025-04-07 14:19:08 -  log info 
+2025-04-07 14:19:24 -  log info 
+2025-04-07 14:19:24 -  log info 
+2025-04-07 14:19:35 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=첨부파일입니다, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:19:33)
+2025-04-07 14:19:45 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=4e342d0d-79ff-49b7-be6a-f0ba9ec8dc81_테스트.pdf, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:19:42)
+2025-04-07 14:20:04 -  log info 
+2025-04-07 14:20:30 -  log info 
+2025-04-07 14:20:30 -  log info 
+2025-04-07 14:20:34 -  log info 
+2025-04-07 14:20:34 -  log info 
+2025-04-07 14:21:01 -  log info 
+2025-04-07 14:21:01 -  log info 
+2025-04-07 14:21:15 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=첨부파일입니다, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:21:14)
+2025-04-07 14:21:24 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=bad5f820-a88b-4b5c-8bee-5b062a0c1d57_테스트.pdf, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:21:22)
+2025-04-07 14:21:39 -  log info 
+2025-04-07 14:22:02 -  log info 
+2025-04-07 14:22:17 -  log info 
+2025-04-07 14:22:30 - 일반메세지 : ChattingDto(mstype=0, rno=99, msDate=null, loginMno=0, mname=박예진, mscontent=null, mno=100003, msg=안녕하세요\n, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자1.jpg, showdate=2025-04-07 14:22:26)
+2025-04-07 14:22:35 - 일반메세지 : ChattingDto(mstype=0, rno=99, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=안녕하세요, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:22:33)
+2025-04-07 14:23:03 -  log info 
+2025-04-07 14:23:03 -  log info 
+2025-04-07 14:23:22 -  log info 
+2025-04-07 14:23:22 -  log info 
+2025-04-07 14:23:55 -  log info 
+2025-04-07 14:23:55 -  log info 
+2025-04-07 14:24:36 -  log info 
+2025-04-07 14:24:36 -  log info 
+2025-04-07 14:24:48 -  log info 
+2025-04-07 14:24:48 -  log info 
+2025-04-07 14:24:58 -  log info 
+2025-04-07 14:24:58 -  log info 
+2025-04-07 14:25:09 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=첨부파일입니다, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:25:08)
+2025-04-07 14:25:16 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=aab37dc1-0ca2-42e8-8799-f20002e7208b_테스트.pdf, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:25:15)
+2025-04-07 14:25:32 -  log info 
+2025-04-07 14:26:26 -  log info 
+2025-04-07 14:26:26 -  log info 
+2025-04-07 14:27:02 -  log info 
+2025-04-07 14:27:02 -  log info 
+2025-04-07 14:27:19 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=c첨부파일입니다, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:27:13)
+2025-04-07 14:27:26 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=5ba872f2-d1f6-460e-a433-9c2b77584626_테스트.pdf, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:27:24)
+2025-04-07 14:27:52 -  log info 
+2025-04-07 14:28:09 -  log info 
+2025-04-07 14:28:20 - 일반메세지 : ChattingDto(mstype=0, rno=99, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=안녕하세요\n, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 14:28:19)
+2025-04-07 14:28:27 - 일반메세지 : ChattingDto(mstype=0, rno=99, msDate=null, loginMno=0, mname=박예진, mscontent=null, mno=100003, msg=안녕하세요, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자1.jpg, showdate=2025-04-07 14:28:23)
+2025-04-07 14:28:48 -  log info 
+2025-04-07 14:28:48 -  log info 
+2025-04-07 14:29:58 -  log info 
+2025-04-07 14:29:58 -  log info 
+2025-04-07 14:30:23 -  log info 
+2025-04-07 14:30:23 -  log info 
+2025-04-07 14:31:41 -  log info 
+2025-04-07 14:31:41 -  log info 
+2025-04-07 15:25:33 - Starting AppStart using Java 17.0.12 with PID 36104 (C:\Users\ppo37\IdeaProjects\workplatform\build\classes\java\main started by ppo37 in C:\Users\ppo37\IdeaProjects\workplatform)
+2025-04-07 15:25:33 - No active profile set, falling back to 1 default profile: "default"
+2025-04-07 15:25:34 - Tomcat initialized with port 8080 (http)
+2025-04-07 15:25:34 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-07 15:25:34 - Starting service [Tomcat]
+2025-04-07 15:25:34 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-07 15:25:34 - Initializing Spring embedded WebApplicationContext
+2025-04-07 15:25:34 - Root WebApplicationContext: initialization completed in 958 ms
+2025-04-07 15:25:35 - HikariPool-1 - Starting...
+2025-04-07 15:25:35 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1142d377
+2025-04-07 15:25:35 - HikariPool-1 - Start completed.
+2025-04-07 15:25:35 - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-07 15:25:35 - Tomcat started on port 8080 (http) with context path '/'
+2025-04-07 15:25:35 - Started AppStart in 2.091 seconds (process running for 2.497)
+2025-04-07 15:25:42 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-07 15:25:42 - Initializing Servlet 'dispatcherServlet'
+2025-04-07 15:25:42 - Completed initialization in 1 ms
+2025-04-07 15:26:36 - Starting AppStart using Java 17.0.12 with PID 23220 (C:\Users\ppo37\IdeaProjects\workplatform\build\classes\java\main started by ppo37 in C:\Users\ppo37\IdeaProjects\workplatform)
+2025-04-07 15:26:36 - No active profile set, falling back to 1 default profile: "default"
+2025-04-07 15:26:37 - Tomcat initialized with port 8080 (http)
+2025-04-07 15:26:37 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-04-07 15:26:37 - Starting service [Tomcat]
+2025-04-07 15:26:37 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-04-07 15:26:37 - Initializing Spring embedded WebApplicationContext
+2025-04-07 15:26:37 - Root WebApplicationContext: initialization completed in 942 ms
+2025-04-07 15:26:37 - HikariPool-1 - Starting...
+2025-04-07 15:26:38 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5a1dddba
+2025-04-07 15:26:38 - HikariPool-1 - Start completed.
+2025-04-07 15:26:38 - Starting ProtocolHandler ["http-nio-8080"]
+2025-04-07 15:26:38 - Tomcat started on port 8080 (http) with context path '/'
+2025-04-07 15:26:38 - Started AppStart in 2.077 seconds (process running for 2.481)
+2025-04-07 15:26:41 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-04-07 15:26:41 - Initializing Servlet 'dispatcherServlet'
+2025-04-07 15:26:41 - Completed initialization in 1 ms
+2025-04-07 15:26:41 -  log info 
+2025-04-07 15:26:41 -  log info 
+2025-04-07 15:32:56 -  log info 
+2025-04-07 15:32:56 -  log info 
+2025-04-07 16:59:15 -  log info 
+2025-04-07 16:59:15 -  log info 
+2025-04-07 16:59:19 -  log info 
+2025-04-07 16:59:19 -  log info 
+2025-04-07 16:59:31 -  log info 
+2025-04-07 16:59:31 -  log info 
+2025-04-07 16:59:44 -  log info 
+2025-04-07 16:59:44 -  log info 
+2025-04-07 16:59:58 -  log info 
+2025-04-07 16:59:58 -  log info 
+2025-04-07 17:00:04 -  log info 
+2025-04-07 17:00:04 -  log info 
+2025-04-07 17:01:05 -  log info 
+2025-04-07 17:01:05 -  log info 
+2025-04-07 17:01:29 -  log info 
+2025-04-07 17:01:29 -  log info 
+2025-04-07 17:01:45 -  log info 
+2025-04-07 17:01:45 -  log info 
+2025-04-07 17:02:31 -  log info 
+2025-04-07 17:02:31 -  log info 
+2025-04-07 17:02:58 -  log info 
+2025-04-07 17:02:58 -  log info 
+2025-04-07 17:03:08 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=첨부파일입니다, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:03:06)
+2025-04-07 17:03:15 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=961af840-94f2-445e-8325-fbb8939cafaf_테스트.pdf, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:03:14)
+2025-04-07 17:03:35 -  log info 
+2025-04-07 17:03:53 -  log info 
+2025-04-07 17:04:02 - 일반메세지 : ChattingDto(mstype=0, rno=100, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=안녕하세요\n, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:04:01)
+2025-04-07 17:04:09 - 일반메세지 : ChattingDto(mstype=0, rno=100, msDate=null, loginMno=0, mname=박예진, mscontent=null, mno=100003, msg=안녕하세요, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자1.jpg, showdate=2025-04-07 17:04:07)
+2025-04-07 17:04:28 -  log info 
+2025-04-07 17:04:28 -  log info 
+2025-04-07 17:05:05 -  log info 
+2025-04-07 17:05:05 -  log info 
+2025-04-07 17:05:41 -  log info 
+2025-04-07 17:05:41 -  log info 
+2025-04-07 17:05:47 -  log info 
+2025-04-07 17:05:47 -  log info 
+2025-04-07 17:06:06 -  log info 
+2025-04-07 17:06:06 -  log info 
+2025-04-07 17:06:16 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=첨부파일, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:06:15)
+2025-04-07 17:06:22 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=ca490def-20d4-4b02-a490-1998b9268ef1_테스트.pdf, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:06:21)
+2025-04-07 17:06:43 -  log info 
+2025-04-07 17:06:58 -  log info 
+2025-04-07 17:07:08 - 일반메세지 : ChattingDto(mstype=0, rno=99, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=안녕하세요\n, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:07:07)
+2025-04-07 17:07:14 - 일반메세지 : ChattingDto(mstype=0, rno=99, msDate=null, loginMno=0, mname=박예진, mscontent=null, mno=100003, msg=안녕하세요, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자1.jpg, showdate=2025-04-07 17:07:12)
+2025-04-07 17:07:33 -  log info 
+2025-04-07 17:07:33 -  log info 
+2025-04-07 17:08:52 -  log info 
+2025-04-07 17:08:52 -  log info 
+2025-04-07 17:10:22 -  log info 
+2025-04-07 17:10:22 -  log info 
+2025-04-07 17:11:27 -  log info 
+2025-04-07 17:11:27 -  log info 
+2025-04-07 17:11:37 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=첨부파일입니다\n, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:11:35)
+2025-04-07 17:12:21 -  log info 
+2025-04-07 17:12:21 -  log info 
+2025-04-07 17:13:20 -  log info 
+2025-04-07 17:13:20 -  log info 
+2025-04-07 17:15:15 -  log info 
+2025-04-07 17:15:15 -  log info 
+2025-04-07 17:15:19 -  log info 
+2025-04-07 17:15:19 -  log info 
+2025-04-07 17:15:54 -  log info 
+2025-04-07 17:15:54 -  log info 
+2025-04-07 17:16:08 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=첨부파일입니다, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:16:06)
+2025-04-07 17:16:14 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=b9edd059-48a9-4d05-b0fc-2a346a0c3760_테스트.pdf, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:16:12)
+2025-04-07 17:16:36 -  log info 
+2025-04-07 17:16:57 -  log info 
+2025-04-07 17:17:12 - 일반메세지 : ChattingDto(mstype=0, rno=99, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=안녕하세요, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:17:10)
+2025-04-07 17:17:20 - 일반메세지 : ChattingDto(mstype=0, rno=99, msDate=null, loginMno=0, mname=박예진, mscontent=null, mno=100003, msg=안녕하세요, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자1.jpg, showdate=2025-04-07 17:17:17)
+2025-04-07 17:17:34 -  log info 
+2025-04-07 17:17:34 -  log info 
+2025-04-07 17:18:56 -  log info 
+2025-04-07 17:18:56 -  log info 
+2025-04-07 17:19:06 -  log info 
+2025-04-07 17:19:06 -  log info 
+2025-04-07 17:19:44 -  log info 
+2025-04-07 17:19:44 -  log info 
+2025-04-07 17:21:11 -  log info 
+2025-04-07 17:21:11 -  log info 
+2025-04-07 17:32:35 -  log info 
+2025-04-07 17:32:35 -  log info 
+2025-04-07 17:33:00 -  log info 
+2025-04-07 17:33:00 -  log info 
+2025-04-07 17:33:13 -  log info 
+2025-04-07 17:33:13 -  log info 
+2025-04-07 17:33:40 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=박예진, mscontent=null, mno=100003, msg=테스트 결과 공유드립니다, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자1.jpg, showdate=2025-04-07 17:33:38)
+2025-04-07 17:33:52 -  log info 
+2025-04-07 17:33:52 -  log info 
+2025-04-07 17:34:31 -  log info 
+2025-04-07 17:34:31 -  log info 
+2025-04-07 17:34:43 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=첨부파일입니다, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:34:42)
+2025-04-07 17:35:04 -  log info 
+2025-04-07 17:35:04 -  log info 
+2025-04-07 17:35:27 -  log info 
+2025-04-07 17:35:27 -  log info 
+2025-04-07 17:35:45 -  log info 
+2025-04-07 17:35:45 -  log info 
+2025-04-07 17:36:31 -  log info 
+2025-04-07 17:36:31 -  log info 
+2025-04-07 17:36:48 -  log info 
+2025-04-07 17:36:48 -  log info 
+2025-04-07 17:36:56 -  log info 
+2025-04-07 17:36:56 -  log info 
+2025-04-07 17:38:06 -  log info 
+2025-04-07 17:38:06 -  log info 
+2025-04-07 17:38:15 - 일반메세지 : ChattingDto(mstype=0, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=첨부파일입니다, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:38:14)
+2025-04-07 17:38:20 - 파일메세지 : ChattingDto(mstype=1, rno=6, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=429a0e16-999b-4645-850f-204e795e48c6_테스트.pdf, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:38:19)
+2025-04-07 17:38:40 -  log info 
+2025-04-07 17:38:52 -  log info 
+2025-04-07 17:39:01 - 일반메세지 : ChattingDto(mstype=0, rno=100, msDate=null, loginMno=0, mname=김은경, mscontent=null, mno=100007, msg=안녕하세요\n, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자2.jpg, showdate=2025-04-07 17:39:00)
+2025-04-07 17:39:09 - 일반메세지 : ChattingDto(mstype=0, rno=100, msDate=null, loginMno=0, mname=박예진, mscontent=null, mno=100003, msg=안녕하세요, msno=0, msdate=null, pdate=null, rname=null, rtype=null, mnameList=null, msgList=null, fno=0, fname=null, flocation=null, fdate=null, type=null, message=null, rooms=null, action=null, mprofile=여자1.jpg, showdate=2025-04-07 17:39:07)
+2025-04-07 17:39:27 -  log info 
+2025-04-07 17:39:27 -  log info 
+2025-04-07 17:40:35 -  log info 
+2025-04-07 17:40:35 -  log info 
+2025-04-07 17:40:55 -  log info 
+2025-04-07 17:40:55 -  log info 
+2025-04-07 17:42:13 -  log info 
+2025-04-07 17:42:13 -  log info 
+2025-04-07 17:43:04 -  log info 
+2025-04-07 17:43:04 -  log info 
