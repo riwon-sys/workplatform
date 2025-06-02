@@ -17,11 +17,9 @@ public class Hash {
         }
 
         StringBuilder st = new StringBuilder(); // 문자열을 조합하기 위한 StringBuilder 객체 생성
-        for ( byte b : saltBytes ) { // 배열의 각 바이트를 16진수 문자열로 변환
-            st.append( String.format( "%02x", b ) ); // 각 바이트를 2자리 16진수로 변환하여 추가
-        }
+        for ( byte b : saltBytes ) { st.append( String.format( "%02x", b ) ); } // 각 바이트를 2자리 16진수로 변환하여 추가
 
-        // 끝에서 HASH_LENGTH만큼 자르기
+        // 끝에서 SALT_LENGTH만큼 자르기
         int totalLength = st.length();
         return st.substring(totalLength - SALT_LENGTH ); // 생성된 솔트를 문자열로 반환
     }
@@ -30,7 +28,6 @@ public class Hash {
         byte[] bytes = ( input + salt ).getBytes( StandardCharsets.UTF_8 ); // 입력값과 솔트를 합쳐 바이트 배열로 변환
         int hashVal = 7919 * input.hashCode(); // 초기값 (낮은 소수)
         int decimal = 257; // 해싱에 사용할 작은 소수
-        long startTime = System.nanoTime(); // 시작 시간 측정
 
         StringBuilder st = new StringBuilder(); // 해시 값을 저장할 StringBuilder 객체 생성
         for (int i = 0; i < COUNT; i++) {
@@ -45,10 +42,6 @@ public class Hash {
                 st.append( String.format( "%02x", hashVal ) ); // 결과값을 16진수 문자열로 변환하여 추가
             }
         }
-
-        long endTime = System.nanoTime(); // 종료 시간 측정
-        long runTime = ( endTime - startTime ) / 1000000; // 실행 시간(ms 단위 변환)
-        System.out.println("해시 연산 시간: " + runTime + "ms"); // 실행 시간 출력
 
         // 끝에서 HASH_LENGTH만큼 자르기
         int totalLength = st.length();
