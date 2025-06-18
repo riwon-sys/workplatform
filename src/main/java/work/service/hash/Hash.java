@@ -26,8 +26,9 @@ public class Hash {
 
     public static String customHash( String input, String salt ) {
         byte[] bytes = ( input + salt ).getBytes( StandardCharsets.UTF_8 ); // 입력값과 솔트를 합쳐 바이트 배열로 변환
-        int hashVal = 7919 * input.hashCode(); // 초기값 (낮은 소수)
+        int hashVal = 7919 * input.hashCode(); // 초기값
         int decimal = 257; // 해싱에 사용할 작은 소수
+        long startTime = System.nanoTime(); // 시작 시간 측정
 
         StringBuilder st = new StringBuilder(); // 해시 값을 저장할 StringBuilder 객체 생성
         for (int i = 0; i < COUNT; i++) {
@@ -43,6 +44,10 @@ public class Hash {
             }
         }
 
+        long endTime = System.nanoTime(); // 종료 시간 측정
+        long elapsedTime = (endTime - startTime) / 1000000; // 실행 시간(ms 단위 변환)
+        System.out.println("해시 연산 시간: " + elapsedTime + "ms"); // 실행 시간 출력
+
         // 끝에서 HASH_LENGTH만큼 자르기
         int totalLength = st.length();
         return st.substring(totalLength - HASH_LENGTH );
@@ -56,7 +61,7 @@ public class Hash {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in); // 사용자 입력을 받기 위한 Scanner 객체 생성
+        Scanner scanner = new Scanner(System.in);
         while ( true ) { // 무한 루프 실행
             System.out.print("해쉬함수 적용할 암호 입력 : "); // 사용자에게 비밀번호 입력 요청
             String input = scanner.nextLine(); // 입력값 읽기
@@ -69,7 +74,7 @@ public class Hash {
 
             String hashedPassword = salt + hashedValue; // 저장할 솔트 + 해시 값 조합
             System.out.println("hashedPassword = " + hashedPassword);
-            
+
             System.out.print("비밀번호 입력 : "); // 비밀번호 검증을 위해 사용자 입력 요청
             String verifyInput = scanner.nextLine(); // 입력값 읽기
             boolean isMatch = MatchPwd( verifyInput, hashedPassword ); // 입력된 비밀번호 검증
