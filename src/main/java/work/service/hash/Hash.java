@@ -1,15 +1,18 @@
 package work.service.hash;
 
+import org.springframework.stereotype.Component;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
 import java.util.Scanner;
 
+@Component
 public class Hash {
     private static final int SALT_LENGTH = 16; // 솔트 크기 (8바이트)
     private static final int HASH_LENGTH = 50; // 해시 값 길이 (출력될 해시의 길이)
     private static final int COUNT = 111111;
 
-    public static String createSalt() {
+    public String createSalt() {
         Random random = new Random( System.nanoTime() ); // 시스템 시간을 기반으로 랜덤 객체 생성
         byte[] saltBytes = new byte[ SALT_LENGTH ]; // 8바이트 크기의 배열 생성
         for ( int i = 0 ; i < SALT_LENGTH ; i++ ) {
@@ -24,7 +27,7 @@ public class Hash {
         return st.substring(totalLength - SALT_LENGTH ); // 생성된 솔트를 문자열로 반환
     }
 
-    public static String customHash( String input, String salt ) {
+    public String customHash( String input, String salt ) {
         byte[] bytes = ( input + salt ).getBytes( StandardCharsets.UTF_8 ); // 입력값과 솔트를 합쳐 바이트 배열로 변환
         int hashVal = 7919 * input.hashCode(); // 초기값
         int decimal = 257; // 해싱에 사용할 작은 소수
@@ -53,7 +56,7 @@ public class Hash {
         return st.substring(totalLength - HASH_LENGTH );
     }
 
-    public static boolean MatchPwd( String inputPwd, String DBPwd ) {
+    public boolean MatchPwd( String inputPwd, String DBPwd ) {
         String parseSalt = DBPwd.substring( 0, SALT_LENGTH ); // 솔트 크기는 8바이트(16진수 변환 시 16자리)이며 이를 분리
         String parseHash = DBPwd.substring( SALT_LENGTH ) ; // 해시 값 부분을 분리
         String newHash = customHash( inputPwd, parseSalt ); // 입력된 비밀번호와 저장된 솔트를 이용하여 새로운 해시 생성
@@ -61,13 +64,14 @@ public class Hash {
     }
 
     public static void main(String[] args) {
+        Hash hash = new Hash();
         Scanner scanner = new Scanner(System.in);
         while ( true ) { // 무한 루프 실행
             System.out.print("해쉬함수 적용할 암호 입력 : "); // 사용자에게 비밀번호 입력 요청
             String input = scanner.nextLine(); // 입력값 읽기
 
-            String salt = createSalt(); // 랜덤 솔트 생성
-            String hashedValue = customHash(input, salt); // 입력된 비밀번호 + 솔트를 해싱
+            String salt = hash.createSalt(); // 랜덤 솔트 생성
+            String hashedValue = hash.customHash(input, salt); // 입력된 비밀번호 + 솔트를 해싱
 
             System.out.println("SALT 생성 : " + salt); // 생성된 솔트 출력
             System.out.println("HASH 생성 : " + hashedValue); // 생성된 해시 출력
@@ -77,7 +81,7 @@ public class Hash {
 
             System.out.print("비밀번호 입력 : "); // 비밀번호 검증을 위해 사용자 입력 요청
             String verifyInput = scanner.nextLine(); // 입력값 읽기
-            boolean isMatch = MatchPwd( verifyInput, hashedPassword ); // 입력된 비밀번호 검증
+            boolean isMatch = hash.MatchPwd( verifyInput, hashedPassword ); // 입력된 비밀번호 검증
             System.out.println("로그인 여부 : " + isMatch); // 검증 결과 출력
         }
     }

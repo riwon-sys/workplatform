@@ -18,24 +18,25 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-
 public class MemberService {
 
     private final MemberMapper memberMapper;
     private final FileService fileService; // 파일 서비스 (업로드,다운로드,파일삭제) 기능 포함
+    private final Hash hash;
+
     // [1] 사원 등록
     public boolean signUp( MemberDto memberDto ){
         System.out.println("MemberService.signUp");
         System.out.println("memberDto = " + memberDto);
         try{
             // (1) 첨부파일 존재 여부
-            if(memberDto.getUploadFile()==null){
+            if( memberDto.getUploadFile() == null ){
             } // 업로드가 X
             else{ // 업로드 O
                 // (2) 파일 서비스 내에 업로드 함수를 이용하여 첨부파일 업로드하고 파일명 받기.
-                String filename = fileService.fileUpload(memberDto.getUploadFile());
+                String filename = fileService.fileUpload( memberDto.getUploadFile() );
                 // (3) 업로드된 파일명을 dto 저장
-                memberDto.setMprofile(filename);
+                memberDto.setMprofile( filename );
             }
 //            // (4) 비크립트 라이브러리 사용 | rw 25-03-21
 //                // (4-(1)) 비크립트 객체 생성 , new BCryptoPasswordEncoer();
@@ -46,7 +47,6 @@ public class MemberService {
 //                // (4-(3)) dto 에 encode 된 비밀번호 저장
 
             // 개인 해시함수 적용
-            Hash hash = new Hash();
             String salt = hash.createSalt(); // 랜덤 솔트 생성
             String hashedValue = hash.customHash( "1234" , salt); // 입력된 비밀번호 + 솔트를 해싱
             String hashedPassword = salt + hashedValue;
@@ -58,8 +58,8 @@ public class MemberService {
             boolean result=memberMapper.signUp(memberDto);
             System.out.println("result = " + result);
             return result;
-        } catch (Exception e) {
-            System.out.println(e); return false; }
+        } catch( Exception e ) {
+            System.out.println( e ); return false; }
     }
 
     // [2] 사원 로그인
@@ -78,7 +78,6 @@ public class MemberService {
         // (3) 로그인에서 입력받은 비밀번호와 암호화된 비밀번호 검증하기
 //        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // 1. 비크립트 객체 생성
 //        boolean result = passwordEncoder.matches( memberDto.getMpwd(), password ); // 2. 로그인에 입력받은 자료와 db에 가져온 해시 값 검증
-        Hash hash = new Hash();
         boolean result = hash.MatchPwd( memberDto.getMpwd(), password );
         if( result == false ) { return null; }
 
@@ -130,7 +129,6 @@ public class MemberService {
 //        memberDto.setMpwd(hashedPassword);
 
         // 개인 해시함수 적용
-        Hash hash = new Hash();
         String salt = hash.createSalt(); // 랜덤 솔트 생성
         String hashedValue = hash.customHash( "1234" , salt ); // 입력된 비밀번호 + 솔트를 해싱
         String hashedPassword = salt + hashedValue;
@@ -213,8 +211,6 @@ public class MemberService {
     }
     // [9] 사원 정보 수정 및 비밀번호 초기화
     public boolean updateMemberInfo( MemberDto memberDto ) {
-
-        Hash hash = new Hash();
 
         if ( memberDto.getMtype() == 3) { // 퇴사 처리
             String salt = hash.createSalt(); // 랜덤 솔트 생성
