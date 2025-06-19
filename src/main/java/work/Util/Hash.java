@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Hash {
     private static final int SALT_LENGTH = 16; // 솔트 크기 (16바이트)
     private static final int HASH_LENGTH = 50; // 해시 값 길이 (출력될 해시의 길이)
-    private static final int COUNT = 111111;
+    private static final int COUNT = 111111; // 반복 횟수
 
     public static String createSalt() {
         Random random = new Random( System.nanoTime() ); // 시스템 시간을 기반으로 랜덤 객체 생성
