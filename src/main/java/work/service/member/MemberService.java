@@ -23,6 +23,8 @@ public class MemberService {
 
     private final MemberMapper memberMapper;
     private final FileService fileService; // 파일 서비스 (업로드,다운로드,파일삭제) 기능 포함
+    private final Hash hash;
+
     // [1] 사원 등록
     public boolean signUp( MemberDto memberDto ){
         System.out.println("MemberService.signUp");
@@ -46,7 +48,6 @@ public class MemberService {
 //                // (4-(3)) dto 에 encode 된 비밀번호 저장
 
             // 개인 해시함수 적용
-            Hash hash = new Hash();
             String salt = hash.createSalt(); // 랜덤 솔트 생성
             String hashedValue = hash.customHash( "1234" , salt); // 입력된 비밀번호 + 솔트를 해싱
             String hashedPassword = salt + hashedValue;
@@ -130,7 +131,6 @@ public class MemberService {
 //        memberDto.setMpwd(hashedPassword);
 
         // 개인 해시함수 적용
-        Hash hash = new Hash();
         String salt = hash.createSalt(); // 랜덤 솔트 생성
         String hashedValue = hash.customHash( "1234" , salt ); // 입력된 비밀번호 + 솔트를 해싱
         String hashedPassword = salt + hashedValue;
@@ -213,8 +213,6 @@ public class MemberService {
     }
     // [9] 사원 정보 수정 및 비밀번호 초기화
     public boolean updateMemberInfo( MemberDto memberDto ) {
-
-        Hash hash = new Hash();
 
         if ( memberDto.getMtype() == 3) { // 퇴사 처리
             String salt = hash.createSalt(); // 랜덤 솔트 생성
