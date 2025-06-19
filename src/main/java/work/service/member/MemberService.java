@@ -47,9 +47,10 @@ public class MemberService {
 //                // (4-(3)) dto 에 encode 된 비밀번호 저장
 
             // 개인 해시함수 적용
-            String salt = hash.createSalt(); // 랜덤 솔트 생성
-            String hashedValue = hash.customHash( "1234" , salt); // 입력된 비밀번호 + 솔트를 해싱
-            String hashedPassword = salt + hashedValue;
+//            String salt = hash.createSalt(); // 랜덤 솔트 생성
+//            String hashedValue = hash.customHash( "1234" , salt); // 입력된 비밀번호 + 솔트를 해싱
+//            String hashedPassword = salt + hashedValue;
+            String hashedPassword = hash.createPwd( "1234" );
             memberDto.setMpwd( hashedPassword );
 
 
@@ -78,7 +79,7 @@ public class MemberService {
         // (3) 로그인에서 입력받은 비밀번호와 암호화된 비밀번호 검증하기
 //        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // 1. 비크립트 객체 생성
 //        boolean result = passwordEncoder.matches( memberDto.getMpwd(), password ); // 2. 로그인에 입력받은 자료와 db에 가져온 해시 값 검증
-        boolean result = hash.MatchPwd( memberDto.getMpwd(), password );
+        boolean result = hash.matchPwd( memberDto.getMpwd(), password );
         if( result == false ) { return null; }
 
         // (4) 로그인에서 입력한 아이디와 비밀번호가 모두 일치하면 회원정보 가져오기

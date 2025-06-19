@@ -8,13 +8,13 @@ import java.util.Scanner;
 
 @Component
 public class Hash {
-    private static final int SALT_LENGTH = 16; // 솔트 크기 (8바이트)
+    private static final int SALT_LENGTH = 16; // 솔트 크기 (16바이트)
     private static final int HASH_LENGTH = 50; // 해시 값 길이 (출력될 해시의 길이)
     private static final int COUNT = 111111;
 
     public String createSalt() {
         Random random = new Random( System.nanoTime() ); // 시스템 시간을 기반으로 랜덤 객체 생성
-        byte[] saltBytes = new byte[ SALT_LENGTH ]; // 8바이트 크기의 배열 생성
+        byte[] saltBytes = new byte[ SALT_LENGTH ]; // 16바이트 크기의 배열 생성
         for ( int i = 0 ; i < SALT_LENGTH ; i++ ) {
             saltBytes[i] = ( byte ) ( random.nextInt( 256 ) - 128 ); // 바이트 범위( -128 ~ 127 )의 랜덤 값 생성
         }
@@ -56,7 +56,12 @@ public class Hash {
         return st.substring(totalLength - HASH_LENGTH );
     }
 
-    public boolean MatchPwd( String inputPwd, String DBPwd ) {
+    public String createPwd( String inputPwd ){
+        String salt = createSalt();
+        return salt + customHash( inputPwd, salt );
+    }
+
+    public boolean matchPwd( String inputPwd, String DBPwd ) {
         String parseSalt = DBPwd.substring( 0, SALT_LENGTH ); // 솔트 크기는 8바이트(16진수 변환 시 16자리)이며 이를 분리
         String parseHash = DBPwd.substring( SALT_LENGTH ) ; // 해시 값 부분을 분리
         String newHash = customHash( inputPwd, parseSalt ); // 입력된 비밀번호와 저장된 솔트를 이용하여 새로운 해시 생성
@@ -81,7 +86,7 @@ public class Hash {
 
             System.out.print("비밀번호 입력 : "); // 비밀번호 검증을 위해 사용자 입력 요청
             String verifyInput = scanner.nextLine(); // 입력값 읽기
-            boolean isMatch = hash.MatchPwd( verifyInput, hashedPassword ); // 입력된 비밀번호 검증
+            boolean isMatch = hash.matchPwd( verifyInput, hashedPassword ); // 입력된 비밀번호 검증
             System.out.println("로그인 여부 : " + isMatch); // 검증 결과 출력
         }
     }

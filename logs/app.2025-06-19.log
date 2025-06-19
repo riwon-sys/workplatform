@@ -1,0 +1,61 @@
+2025-06-19 00:16:44 - Starting AppStart using Java 17.0.12 with PID 41572 (C:\Users\ppo37\IdeaProjects\workplatform\build\classes\java\main started by ppo37 in C:\Users\ppo37\IdeaProjects\workplatform)
+2025-06-19 00:16:44 - No active profile set, falling back to 1 default profile: "default"
+2025-06-19 00:16:45 - Tomcat initialized with port 8080 (http)
+2025-06-19 00:16:45 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-06-19 00:16:45 - Starting service [Tomcat]
+2025-06-19 00:16:45 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-06-19 00:16:45 - Initializing Spring embedded WebApplicationContext
+2025-06-19 00:16:45 - Root WebApplicationContext: initialization completed in 1146 ms
+2025-06-19 00:16:45 - HikariPool-1 - Starting...
+2025-06-19 00:16:46 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7d66e544
+2025-06-19 00:16:46 - HikariPool-1 - Start completed.
+2025-06-19 00:16:53 - HikariPool-1 - Shutdown initiated...
+2025-06-19 00:16:53 - HikariPool-1 - Shutdown completed.
+2025-06-19 00:16:53 - Stopping service [Tomcat]
+2025-06-19 00:16:53 - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-06-19 00:19:06 - Starting AppStart using Java 17.0.12 with PID 26024 (C:\Users\ppo37\IdeaProjects\workplatform\build\classes\java\main started by ppo37 in C:\Users\ppo37\IdeaProjects\workplatform)
+2025-06-19 00:19:06 - No active profile set, falling back to 1 default profile: "default"
+2025-06-19 00:19:07 - Tomcat initialized with port 8080 (http)
+2025-06-19 00:19:07 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-06-19 00:19:07 - Starting service [Tomcat]
+2025-06-19 00:19:07 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-06-19 00:19:07 - Initializing Spring embedded WebApplicationContext
+2025-06-19 00:19:07 - Root WebApplicationContext: initialization completed in 936 ms
+2025-06-19 00:19:08 - HikariPool-1 - Starting...
+2025-06-19 00:19:08 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@20cdb152
+2025-06-19 00:19:08 - HikariPool-1 - Start completed.
+2025-06-19 00:19:09 - Adding welcome page: class path resource [static/index.html]
+2025-06-19 00:19:09 - Starting ProtocolHandler ["http-nio-8080"]
+2025-06-19 00:19:09 - Tomcat started on port 8080 (http) with context path '/'
+2025-06-19 00:19:09 - Started AppStart in 2.602 seconds (process running for 2.99)
+2025-06-19 00:19:17 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-19 00:19:17 - Initializing Servlet 'dispatcherServlet'
+2025-06-19 00:19:17 - Completed initialization in 0 ms
+2025-06-19 00:19:49 -  log info 
+2025-06-19 00:19:49 -  log info 
+2025-06-19 00:21:33 - Starting AppStart using Java 17.0.12 with PID 42724 (C:\Users\ppo37\IdeaProjects\workplatform\build\classes\java\main started by ppo37 in C:\Users\ppo37\IdeaProjects\workplatform)
+2025-06-19 00:21:33 - No active profile set, falling back to 1 default profile: "default"
+2025-06-19 00:21:33 - Tomcat initialized with port 8080 (http)
+2025-06-19 00:21:33 - Initializing ProtocolHandler ["http-nio-8080"]
+2025-06-19 00:21:33 - Starting service [Tomcat]
+2025-06-19 00:21:33 - Starting Servlet engine: [Apache Tomcat/10.1.34]
+2025-06-19 00:21:34 - Initializing Spring embedded WebApplicationContext
+2025-06-19 00:21:34 - Root WebApplicationContext: initialization completed in 950 ms
+2025-06-19 00:21:34 - HikariPool-1 - Starting...
+2025-06-19 00:21:34 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5f6b53ed
+2025-06-19 00:21:34 - HikariPool-1 - Start completed.
+2025-06-19 00:21:35 - Adding welcome page: class path resource [static/index.html]
+2025-06-19 00:21:35 - Starting ProtocolHandler ["http-nio-8080"]
+2025-06-19 00:21:35 - Tomcat started on port 8080 (http) with context path '/'
+2025-06-19 00:21:35 - Started AppStart in 2.605 seconds (process running for 2.991)
+2025-06-19 00:21:40 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-06-19 00:21:40 - Initializing Servlet 'dispatcherServlet'
+2025-06-19 00:21:40 - Completed initialization in 0 ms
+2025-06-19 00:21:41 -  log info 
+2025-06-19 00:21:41 -  log info 
+2025-06-19 00:22:00 -  log info 
+2025-06-19 00:22:00 -  log info 
+2025-06-19 00:22:27 -  log info 
+2025-06-19 00:22:27 -  log info 
