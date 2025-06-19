@@ -6,14 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 import work.model.dto.member.MemberDto;
 import work.model.dto.member.MemberUtils;
 import work.model.mapper.member.MemberMapper;
-import work.service.hash.Hash;
+import work.Util.Hash;
 import work.service.message.FileService;
 
-import java.io.IOException;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,7 +20,6 @@ public class MemberService {
 
     private final MemberMapper memberMapper;
     private final FileService fileService; // 파일 서비스 (업로드,다운로드,파일삭제) 기능 포함
-    private final Hash hash;
 
     // [1] 사원 등록
     public boolean signUp( MemberDto memberDto ){
@@ -47,14 +44,8 @@ public class MemberService {
 //                // (4-(3)) dto 에 encode 된 비밀번호 저장
 
             // 개인 해시함수 적용
-//            String salt = hash.createSalt(); // 랜덤 솔트 생성
-//            String hashedValue = hash.customHash( "1234" , salt); // 입력된 비밀번호 + 솔트를 해싱
-//            String hashedPassword = salt + hashedValue;
-            String hashedPassword = hash.createPwd( "1234" );
+            String hashedPassword = Hash.createPwd( "1234" );
             memberDto.setMpwd( hashedPassword );
-
-
-
 
             boolean result=memberMapper.signUp(memberDto);
             System.out.println("result = " + result);
@@ -79,7 +70,7 @@ public class MemberService {
         // (3) 로그인에서 입력받은 비밀번호와 암호화된 비밀번호 검증하기
 //        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); // 1. 비크립트 객체 생성
 //        boolean result = passwordEncoder.matches( memberDto.getMpwd(), password ); // 2. 로그인에 입력받은 자료와 db에 가져온 해시 값 검증
-        boolean result = hash.matchPwd( memberDto.getMpwd(), password );
+        boolean result = Hash.matchPwd( memberDto.getMpwd(), password );
         if( result == false ) { return null; }
 
         // (4) 로그인에서 입력한 아이디와 비밀번호가 모두 일치하면 회원정보 가져오기
@@ -130,8 +121,8 @@ public class MemberService {
 //        memberDto.setMpwd(hashedPassword);
 
         // 개인 해시함수 적용
-        String salt = hash.createSalt(); // 랜덤 솔트 생성
-        String hashedValue = hash.customHash( "1234" , salt ); // 입력된 비밀번호 + 솔트를 해싱
+        String salt = Hash.createSalt(); // 랜덤 솔트 생성
+        String hashedValue = Hash.customHash( "1234" , salt ); // 입력된 비밀번호 + 솔트를 해싱
         String hashedPassword = salt + hashedValue;
         memberDto.setMpwd( hashedPassword );
 
@@ -214,8 +205,8 @@ public class MemberService {
     public boolean updateMemberInfo( MemberDto memberDto ) {
 
         if ( memberDto.getMtype() == 3) { // 퇴사 처리
-            String salt = hash.createSalt(); // 랜덤 솔트 생성
-            String hashedValue = hash.customHash( "1234" , salt ); // 입력된 비밀번호 + 솔트를 해싱
+            String salt = Hash.createSalt(); // 랜덤 솔트 생성
+            String hashedValue = Hash.customHash( "1234" , salt ); // 입력된 비밀번호 + 솔트를 해싱
             String hashedPassword = salt + hashedValue;
             memberDto.setMpwd( hashedPassword ); // 비밀번호 암호화
             memberDto.setMprofile( null );
