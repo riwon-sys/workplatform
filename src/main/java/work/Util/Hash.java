@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Hash {
-    private static final int SALT_LENGTH = 16; // 솔트 크기 (16바이트)
+    private static final int SALT_LENGTH = 16; // 솔트 값 길이
     private static final int HASH_LENGTH = 50; // 해시 값 길이
     private static final int COUNT = 111111; // 반복 횟수
 
