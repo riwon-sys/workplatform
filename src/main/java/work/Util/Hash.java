@@ -12,12 +12,12 @@ public class Hash {
     public static String createSalt() {
         Random random = new Random( System.nanoTime() ); // 시스템 시간을 기반으로 랜덤 객체 생성
         byte[] saltBytes = new byte[ SALT_LENGTH ]; // 16바이트 크기의 배열 생성
-        for ( int i = 0 ; i < SALT_LENGTH ; i++ ) {
+        for( int i = 0 ; i < SALT_LENGTH ; i++ ) {
             saltBytes[i] = ( byte ) ( random.nextInt( 256 ) - 128 ); // 바이트 범위( -128 ~ 127 )의 랜덤 값 생성
         }
 
         StringBuilder st = new StringBuilder(); // 문자열을 조합하기 위한 StringBuilder 객체 생성
-        for ( byte b : saltBytes ) { st.append( String.format( "%02x", b ) ); } // 각 바이트를 2자리 16진수로 변환하여 추가
+        for( byte b : saltBytes ) { st.append( String.format( "%02x", b ) ); } // 각 바이트를 2자리 16진수로 변환하여 추가
 
         // 끝에서 SALT_LENGTH만큼 자르기
         int totalLength = st.length();
@@ -31,7 +31,7 @@ public class Hash {
         long startTime = System.nanoTime(); // 시작 시간 측정
 
         StringBuilder st = new StringBuilder(); // 해시 값을 저장할 StringBuilder 객체 생성
-        for (int i = 0; i < COUNT; i++) {
+        for( int i = 0; i < COUNT; i++ ) {
             for( byte b : bytes ) { // 입력값의 각 바이트를 반복하여 해싱
                 int intVal = b & 0xFF; // 바이트 값을 정수로 변환
                 hashVal ^= intVal; // XOR 연산 수행
@@ -44,11 +44,11 @@ public class Hash {
             }
         }
 
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
+//        try{
+//            Thread.sleep(300);
+//        }catch( InterruptedException e ) {
+//            Thread.currentThread().interrupt();
+//        }
 
         long endTime = System.nanoTime(); // 종료 시간 측정
         long elapsedTime = (endTime - startTime) / 1000000; // 실행 시간(ms)
@@ -74,7 +74,7 @@ public class Hash {
     public static void main(String[] args) {
         Hash hash = new Hash();
         Scanner scanner = new Scanner(System.in);
-        while ( true ) { // 무한 루프 실행
+        while( true ) { // 무한 루프 실행
             System.out.print("해쉬함수 적용할 암호 입력 : "); // 사용자에게 비밀번호 입력 요청
             String input = scanner.nextLine(); // 입력값 읽기
 
