@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Hash {
     private static final int SALT_LENGTH = 16; // 솔트 크기 (16바이트)
-    private static final int HASH_LENGTH = 50; // 해시 값 길이 (출력될 해시의 길이)
+    private static final int HASH_LENGTH = 50; // 해시 값 길이
     private static final int COUNT = 111111; // 반복 횟수
 
     public static String createSalt() {
@@ -44,9 +44,15 @@ public class Hash {
             }
         }
 
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
         long endTime = System.nanoTime(); // 종료 시간 측정
-        long elapsedTime = (endTime - startTime) / 1000000; // 실행 시간(ms 단위 변환)
-        System.out.println("해시 연산 시간: " + elapsedTime + "ms"); // 실행 시간 출력
+        long elapsedTime = (endTime - startTime) / 1000000; // 실행 시간(ms)
+        System.out.println("해시 연산 시간: " + elapsedTime + "ms");
 
         // 끝에서 HASH_LENGTH만큼 자르기
         int totalLength = st.length();
@@ -59,7 +65,7 @@ public class Hash {
     }
 
     public static boolean matchPwd( String inputPwd, String DBPwd ) {
-        String parseSalt = DBPwd.substring( 0, SALT_LENGTH ); // 솔트 크기는 8바이트(16진수 변환 시 16자리)이며 이를 분리
+        String parseSalt = DBPwd.substring( 0, SALT_LENGTH ); // 솔트 크기는 16바이트(16진수 변환 시 32자리)이며 이를 분리
         String parseHash = DBPwd.substring( SALT_LENGTH ) ; // 해시 값 부분을 분리
         String newHash = customHash( inputPwd, parseSalt ); // 입력된 비밀번호와 저장된 솔트를 이용하여 새로운 해시 생성
         return newHash.equals( parseHash ); // 새로 생성한 해시와 저장된 해시 값 비교하여 일치 여부 반환

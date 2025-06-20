@@ -56,7 +56,7 @@ public class MemberService {
 
     // [2] 사원 로그인
     // 로그인 세션 처리 기능 추가
-    public MemberDto onLogIn(MemberDto memberDto ){
+    public MemberDto onLogIn( MemberDto memberDto ){
         System.out.println("MemberService.onLogIn");
         System.out.println("memberDto = " + memberDto);
         // return false;
@@ -72,6 +72,10 @@ public class MemberService {
 //        boolean result = passwordEncoder.matches( memberDto.getMpwd(), password ); // 2. 로그인에 입력받은 자료와 db에 가져온 해시 값 검증
         boolean result = Hash.matchPwd( memberDto.getMpwd(), password );
         if( result == false ) { return null; }
+//        else{
+//            long delay = Math.min(1000, attempt * 200); // 시도마다 200ms씩 증가
+//
+//            Thread.sleep(delay); }
 
         // (4) 로그인에서 입력한 아이디와 비밀번호가 모두 일치하면 회원정보 가져오기
 
